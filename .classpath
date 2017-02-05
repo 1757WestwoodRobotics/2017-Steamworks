@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="var" path="wpilib" sourcepath="wpilib.sources"/>
+	<classpathentry kind="var" path="networktables" sourcepath="networktables.sources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="libs/CTRLib.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/Steamworks2017/libs/CTRLib-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="libs/navx_frc.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
