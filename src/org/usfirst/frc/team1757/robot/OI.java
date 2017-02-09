@@ -3,7 +3,6 @@ package org.usfirst.frc.team1757.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -70,10 +69,6 @@ public class OI {
     	} else {
     		output = 0.0;
     	}
-    	SmartDashboard.putNumber("Output", output);
-    	SmartDashboard.putNumber("Axis", axis);
     	return output;
-    	
-    	
     }
 }

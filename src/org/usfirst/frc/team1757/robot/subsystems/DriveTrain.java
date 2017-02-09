@@ -17,24 +17,38 @@ public class DriveTrain extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
+	//TODO negative setpoint and edge case of 359 don't work as intended
+	
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final RobotDrive driveTrainMecanumDrive = RobotMap.driveTrainMecanumDrive;
+	private double targetAngle;
 
     public void initDefaultCommand() {
         setDefaultCommand(new ManualDrive());
     }
     
+    /**
+     * Motor
+     */
+    
     public void manualDrive(double translateX, double translateY, double rotate) {
     	driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, rotate, 0);
     }
     
-    public void enablePID() {
-    	gyroController.enable();
+    public void moveToTargetAngle() {
+    	driveTrainMecanumDrive.mecanumDrive_Cartesian(0, 0, gyroController.get(), 0);
     }
     
-    public void disablePID() {
-    	gyroController.disable();
+    public void stop() {
+    	driveTrainMecanumDrive.stopMotor();
+    }
+    
+    /** 
+     * Gyro
+     */
+    public void resetGyro() {
+    	driveTrainNavX.reset();
     }
     
     public double getCurrentBoundedAngle() {
@@ -45,17 +59,29 @@ public class DriveTrain extends Subsystem {
     	return driveTrainNavX.getAngle();
     }
     
+    /** 
+     * Gyro PID Controller
+     */
+    
+    public void enableGyroPID() {
+    	gyroController.enable();
+    }
+    
+    public void disableGyroPID() {
+    	gyroController.disable();
+    }
+    
     public double getTargetAngle() {
-    	return gyroController.getSetpoint();
+    	return targetAngle;
+    }
+    
+    public boolean reachedSetpoint() {
+    	return (Math.abs(gyroController.getError()) <= .3);
     }
     
     public void setTargetAngle(double angle) {
-    	gyroController.setSetpoint(angle);
-    	driveTrainMecanumDrive.mecanumDrive_Cartesian(0, 0, gyroController.get(), 0);
-    }
-    
-    public void stop() {
-    	driveTrainMecanumDrive.stopMotor();
+    	targetAngle = angle % 360;
+    	gyroController.setSetpoint(targetAngle);
     }
 }
 

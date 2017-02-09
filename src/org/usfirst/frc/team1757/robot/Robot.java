@@ -8,6 +8,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1757.robot.commands.GyroPIDClear;
+import org.usfirst.frc.team1757.robot.commands.ResetGyro;
+import org.usfirst.frc.team1757.robot.commands.RotateDegrees;
+import org.usfirst.frc.team1757.robot.commands.RotateToAngle;
 import org.usfirst.frc.team1757.robot.subsystems.DriveTrain;
 
 /**
@@ -23,7 +27,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Command> chooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -31,12 +35,26 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		// Initialize hardware
 		RobotMap.init();
 		
+		// Initialize subsystems and default ManualDrive
 		oi = new OI();
 		driveTrain = new DriveTrain();
-			
 		
+		// Initial other commands
+		SmartDashboard.putData(new RotateToAngle());
+		SmartDashboard.putData(new RotateDegrees());
+		SmartDashboard.putData(new GyroPIDClear());
+		SmartDashboard.putData(new ResetGyro());
+		
+		// Configure LiveWindow 
+		SmartDashboard.putNumber("targetAngle", 0.0);
+		SmartDashboard.putNumber("angularDelta", 0.0);		
+		
+		// TODO Add a continuous, persistent "Status Command" for vitals
+		
+		chooser = new SendableChooser<>();
 		// TODO chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);

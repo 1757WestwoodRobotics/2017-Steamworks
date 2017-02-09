@@ -95,7 +95,7 @@ public class RobotMap {
         SmartDashboard.putData("RotateController", gyroController);
         gyroController.setOutputRange(-1.0, 1.0);
         gyroController.setAbsoluteTolerance(2.0f);
-        gyroController.setContinuous(true);
+        gyroController.setContinuous(false);
     	driveTrainNavX.reset();
     	    
         // Initialize PIDController (Accel)
