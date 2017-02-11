@@ -28,13 +28,9 @@ public class NavXGyroWrapper extends VariablePIDInput {
 		return m_navxSource.getAngle();
 	}
 	
-	public double getBoundedAngle() {
-		return m_navxSource.getAngle() % 360;
-	}
-	
 	 @Override
 	public double pidGet() {
-		return getBoundedAngle();
+		return getContinuousAngle();
 	 }
 
 }

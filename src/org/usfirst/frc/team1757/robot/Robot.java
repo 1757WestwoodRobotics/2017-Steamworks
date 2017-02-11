@@ -8,9 +8,11 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1757.robot.commands.GetStatus;
 import org.usfirst.frc.team1757.robot.commands.GyroPIDClear;
 import org.usfirst.frc.team1757.robot.commands.ResetGyro;
 import org.usfirst.frc.team1757.robot.commands.RotateDegrees;
+import org.usfirst.frc.team1757.robot.commands.RotateDegreesShortest;
 import org.usfirst.frc.team1757.robot.commands.RotateToAngle;
 import org.usfirst.frc.team1757.robot.subsystems.DriveTrain;
 
@@ -27,6 +29,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
 	Command autonomousCommand;
+	Command getStatus;
 	SendableChooser<Command> chooser;
 
 	/**
@@ -47,12 +50,17 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new RotateDegrees());
 		SmartDashboard.putData(new GyroPIDClear());
 		SmartDashboard.putData(new ResetGyro());
+		SmartDashboard.putData(new RotateDegreesShortest());
 		
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);
-		SmartDashboard.putNumber("angularDelta", 0.0);		
+		SmartDashboard.putNumber("angularDelta", 0.0);
+		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
 		
 		// TODO Add a continuous, persistent "Status Command" for vitals
+		getStatus = new GetStatus();
+		getStatus.setRunWhenDisabled(true);
+		
 		
 		chooser = new SendableChooser<>();
 		// TODO chooser.addDefault("Default Auto", new ExampleCommand());
@@ -67,7 +75,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
 	}
 
 	@Override
@@ -118,6 +125,8 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
+		getStatus.start();
 	}
 
 	/**

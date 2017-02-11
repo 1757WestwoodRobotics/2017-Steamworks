@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * @author ACabey
- * 
  * Rotate an angular delta from the current reading
  */
 public class RotateDegrees extends Command {
@@ -20,7 +18,7 @@ public class RotateDegrees extends Command {
     protected void initialize() {
     	Robot.driveTrain.enableGyroPID();
     	// TODO Change the default angle to something more reasonable
-    	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + SmartDashboard.getNumber("angularDelta", 0));
+    	Robot.driveTrain.changeAngleBy(SmartDashboard.getNumber("angularDelta", 0));
     }
 
     // Called repeatedly when this Command is scheduled to run

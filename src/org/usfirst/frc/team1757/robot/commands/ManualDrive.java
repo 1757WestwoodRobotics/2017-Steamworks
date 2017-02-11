@@ -4,7 +4,7 @@ import org.usfirst.frc.team1757.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * @author ACabey
+ * Control the robot manually using input from OI (controller)
  */
 public class ManualDrive extends Command {
 
