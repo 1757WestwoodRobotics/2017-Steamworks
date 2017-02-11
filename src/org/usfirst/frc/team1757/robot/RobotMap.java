@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1757.robot;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.utils.IllegalSourceException;
 import com.team1757.utils.NavXGyroWrapper;
@@ -56,8 +57,14 @@ public class RobotMap {
         LiveWindow.addActuator("Drive Train", "Right Back", driveTrainRightBack);
         
         // Configure Talons
+        //Invert talons to correct driving
         driveTrainLeftFront.setInverted(true);
         driveTrainLeftBack.setInverted(true);
+        //Change to brake mode tighter steering and autonomous stopping 
+        driveTrainLeftFront.enableBrakeMode(true);
+        driveTrainLeftBack.enableBrakeMode(true);
+        driveTrainRightFront.enableBrakeMode(true);
+        driveTrainRightBack.enableBrakeMode(true);
         
         // Initialize RobotDrive
         driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack,

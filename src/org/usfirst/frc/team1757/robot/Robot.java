@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1757.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -8,6 +7,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1757.robot.commands.DriveStraight;
 import org.usfirst.frc.team1757.robot.commands.GetStatus;
 import org.usfirst.frc.team1757.robot.commands.GyroPIDClear;
 import org.usfirst.frc.team1757.robot.commands.ResetGyro;
@@ -51,6 +51,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new GyroPIDClear());
 		SmartDashboard.putData(new ResetGyro());
 		SmartDashboard.putData(new RotateDegreesShortest());
+		SmartDashboard.putData(new DriveStraight(5));
 		
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);

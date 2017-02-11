@@ -11,11 +11,6 @@ import edu.wpi.first.wpilibj.PIDController;
 
 public class DriveTrain extends Subsystem {
 
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
-
-	// TODO negative setpoint and edge case of 359 don't work as intended
-
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final RobotDrive driveTrainMecanumDrive = RobotMap.driveTrainMecanumDrive;
@@ -25,9 +20,7 @@ public class DriveTrain extends Subsystem {
 		setDefaultCommand(new ManualDrive());
 	}
 
-	/**
-	 * Motor
-	 */
+	// Motor
 
 	public void manualDrive(double translateX, double translateY, double rotate) {
 		driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, rotate, 0);
@@ -36,14 +29,16 @@ public class DriveTrain extends Subsystem {
 	public void moveToTargetAngle() {
 		driveTrainMecanumDrive.mecanumDrive_Cartesian(0, 0, gyroController.get(), 0);
 	}
+	
+	public void moveWithGyroPID(double translateX, double translateY) {
+		driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, gyroController.get(), 0);
+	}
 
 	public void stop() {
 		driveTrainMecanumDrive.stopMotor();
 	}
 
-	/**
-	 * Gyro
-	 */
+	// Gyro
 	public void resetGyro() {
 		driveTrainNavX.reset();
 	}
@@ -61,9 +56,7 @@ public class DriveTrain extends Subsystem {
 		return driveTrainNavX.getAngle();
 	}
 
-	/**
-	 * Gyro PID Controller
-	 */
+	// Gyro PID Controller
 
 	public void enableGyroPID() {
 		gyroController.enable();
@@ -89,7 +82,6 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void setTargetAngle(double targetAngle) {
 		double currentBoundedAngle = getCurrentBoundedAngle();
-		double currentRawAngle = getCurrentRawAngle();
 		// For idiots
 		targetAngle = Math.abs(targetAngle % 360);
 

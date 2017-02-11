@@ -24,6 +24,7 @@ public class RotateDegrees extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// Update motor output
+    	Robot.driveTrain.moveWithGyroPID(.5,0);
     	Robot.driveTrain.moveToTargetAngle();
     }
 
