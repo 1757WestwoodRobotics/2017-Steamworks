@@ -24,6 +24,21 @@ public class NavXGyroWrapper extends VariablePIDInput {
 		}
 	}
 	
+	/**
+	 * Get gyroscope bounded angular reading in range [0,360)
+	 * 
+	 * @return double angle in range [0,360)
+	 */
+	public double getCurrentBoundedAngle() {
+		return (360 + (getContinuousAngle() % 360)) % 360;
+	}
+	
+	/**
+	 * Get gyroscope continuous (unbounded) angular reading in range
+	 * (-MAX_DOUBLE, MAX_DOUBLE)
+	 * 
+	 * @return double angle in range (-MAX_DOUBLE, MAX_DOUBLE)
+	 */
 	public double getContinuousAngle() {
 		return m_navxSource.getAngle();
 	}

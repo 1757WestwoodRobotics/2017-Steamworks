@@ -9,12 +9,15 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDController;
 
-public class DriveTrain extends Subsystem {
+/**
+ * @author ACabey
+ */
 
+public class DriveTrain extends Subsystem {
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final RobotDrive driveTrainMecanumDrive = RobotMap.driveTrainMecanumDrive;
-	private double targetAngle;
+	private final double GYRO_PID_TOLERANCE = .3;
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new ManualDrive());
@@ -22,68 +25,136 @@ public class DriveTrain extends Subsystem {
 
 	// Motor
 
+	/**
+	 * Manual Cartesian Drive
+	 * 
+	 * @param translateX
+	 *            Generally the (normalized) X input of a gamepad, [-1, 1]
+	 *            Positive values correspond to translation to the right
+	 * @param translateY
+	 *            Generally the (normalized) Y input of a gamepad, [-1, 1]
+	 *            Negative values correspond to translation forward
+	 * @param rotate
+	 *            Generally the (normalized) X input of a gamepad (right stick),
+	 *            [-1, 1] Positive values correspond to rotation to the right
+	 */
 	public void manualDrive(double translateX, double translateY, double rotate) {
 		driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, rotate, 0);
 	}
 
+	/**
+	 * Motor update based on gyroscope PID output
+	 * 
+	 * Updates motors solely based off of gyroscope PID Controller in order to
+	 * reach an angular setpoint
+	 */
 	public void moveToTargetAngle() {
 		driveTrainMecanumDrive.mecanumDrive_Cartesian(0, 0, gyroController.get(), 0);
 	}
-	
+
+	/**
+	 * PID Assisted Drive
+	 * 
+	 * Updates motors using provided translation input and gyroscope PID
+	 * Controller to maintain an angular position while translating.
+	 * 
+	 * @param translateX
+	 *            Generally the (normalized) X input of a gamepad, [-1, 1]
+	 *            Positive values correspond to translation to the right
+	 * @param translateY
+	 *            Generally the (normalized) Y input of a gamepad, [-1, 1]
+	 *            Negative values correspond to translation forward
+	 */
 	public void moveWithGyroPID(double translateX, double translateY) {
 		driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, gyroController.get(), 0);
 	}
 
+	/**
+	 * Stop motors
+	 * 
+	 * Sets all motor controllers to 0
+	 */
 	public void stop() {
 		driveTrainMecanumDrive.stopMotor();
 	}
 
 	// Gyro
+
+	/**
+	 * Reset gyroscope
+	 * 
+	 * Reset gyroscope angular reading to 0
+	 */
 	public void resetGyro() {
 		driveTrainNavX.reset();
 	}
 
 	/**
-	 * Returns a 0-360 angle based off of the raw angle
+	 * Get gyroscope bounded angular reading in range [0,360)
 	 * 
-	 * @return
+	 * @return double angle in range [0,360)
 	 */
 	public double getCurrentBoundedAngle() {
 		return (360 + (getCurrentRawAngle() % 360)) % 360;
 	}
 
+	/**
+	 * Get gyroscope continuous (unbounded) angular reading in range
+	 * (-MAX_DOUBLE, MAX_DOUBLE)
+	 * 
+	 * @return double angle in range (-MAX_DOUBLE, MAX_DOUBLE)
+	 */
 	public double getCurrentRawAngle() {
 		return driveTrainNavX.getAngle();
 	}
 
 	// Gyro PID Controller
-
+	/**
+	 * Enable gyroscope PID Controller
+	 */
 	public void enableGyroPID() {
 		gyroController.enable();
 	}
 
+	/**
+	 * Disable gyroscope PID Controller
+	 */
 	public void disableGyroPID() {
 		gyroController.disable();
 	}
 
+	/**
+	 * Get gyroscope PID Controller target angle (setpoint)
+	 * 
+	 * @return double angle in range (-MAX_DOUBLE, MAX_DOUBLE)
+	 */
 	public double getTargetAngle() {
-		return targetAngle;
-
-	}
-
-	public boolean reachedSetpoint() {
-		return (Math.abs(gyroController.getError()) <= .3);
+		return gyroController.getSetpoint();
 	}
 
 	/**
-	 * Precondition targetAngle is positive and between 0 - 360
+	 * Get gyroscope PID Controller reached setpoint within tolerance
+	 * 
+	 * @return boolean gyroscope error within constant tolerance
+	 */
+	public boolean reachedGyroSetpoint() {
+		return (Math.abs(gyroController.getError()) <= GYRO_PID_TOLERANCE);
+	}
+
+	/**
+	 * Set gyroscope PID Controller target angle (setpoint) to a given angle
+	 * Calculates the shortest required travek distance for a desired angle
 	 * 
 	 * @param targetAngle
+	 *            Double angle in range [0, 360)
 	 */
 	public void setTargetAngle(double targetAngle) {
 		double currentBoundedAngle = getCurrentBoundedAngle();
-		// For idiots
-		targetAngle = Math.abs(targetAngle % 360);
+
+		// Filter input if precondition not met
+		if ((targetAngle < 0) || (targetAngle > 360)) {
+			targetAngle = (360 + (targetAngle % 360)) % 360;
+		}
 
 		// Finds the bigger and smaller angles in terms of 0-360
 		double bigger;
@@ -111,11 +182,17 @@ public class DriveTrain extends Subsystem {
 			deltaAngle = distanceB;
 		}
 
-		// rotates the robot to the shorter distance
+		// Rotate by the shorter distance
 		changeAngleBy(deltaAngle);
 
 	}
 
+	/**
+	 * Rotate by angular delta
+	 * 
+	 * @param deltaAngle
+	 *            Double angle representing target delta
+	 */
 	public void changeAngleBy(double deltaAngle) {
 		gyroController.setSetpoint(deltaAngle + getCurrentRawAngle());
 	}
