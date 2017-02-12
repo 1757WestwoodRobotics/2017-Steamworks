@@ -61,8 +61,8 @@ public class RobotMap {
         
         // Configure Talons
         //Invert talons to correct driving
-        driveTrainRightFront.setInverted(true);
-        driveTrainRightBack.setInverted(true);
+        driveTrainLeftFront.setInverted(true);
+        driveTrainLeftBack.setInverted(true);
         //Change to brake mode tighter steering and autonomous stopping 
         driveTrainLeftFront.enableBrakeMode(true);
         driveTrainLeftBack.enableBrakeMode(true);
