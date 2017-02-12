@@ -44,10 +44,6 @@ public class RobotMap {
 	public static PIDController accelControllerY;
 	private static NavXGyroWrapper gyroInput;
 	private static VariablePIDOutput gyroOutput;
-	private static NavXAccelWrapper accelInputX;
-	private static NavXAccelWrapper accelInputY;
-	private static VariablePIDOutput accelOutputX;
-	private static VariablePIDOutput accelOutputY;
 	
     public static void init() {
     	// Initialize Talons
@@ -101,22 +97,7 @@ public class RobotMap {
 			DriverStation.reportError("Error instantiating NavXWGyroWrapper: " + e.getMessage(), true);
 		}
         gyroOutput = new VariablePIDOutput();
-        
-        try {
-			accelInputX = new NavXAccelWrapper(driveTrainNavX, Axis.axisX);
-		} catch (IllegalSourceException e) {
-			DriverStation.reportError("Error instantiating NavXWAccelWrapperX: " + e.getMessage(), true);
-		}
-        
-        try {
-			accelInputY = new NavXAccelWrapper(driveTrainNavX, Axis.axisY);
-		} catch (IllegalSourceException e) {
-			DriverStation.reportError("Error instantiating NavXWAccelWrapperY: " + e.getMessage(), true);
-		}
-        
-        accelOutputX = new VariablePIDOutput();
-        accelOutputY = new VariablePIDOutput();
-        
+                
         // Initialize PIDController (gyroscope)
         gyroController = new PIDController(0.034, 0.0, 0.04, gyroInput, gyroOutput);
         
@@ -127,18 +108,5 @@ public class RobotMap {
         gyroController.setContinuous(true);
     	driveTrainNavX.reset();
     	    
-        // Initialize PIDController (accelerometer)
-    	accelControllerX = new PIDController(.01,0.0,0.0, accelInputX, accelOutputX);
-    	accelControllerY = new PIDController(.01,0.0,0.0, accelInputY, accelOutputY);
-        
-        // Configure PIDController (accelerometer)
-        SmartDashboard.putData("DisplacementControllerX", accelControllerX);
-        gyroController.setOutputRange(-1.0, 1.0);
-        gyroController.setAbsoluteTolerance(2.0f);
-        gyroController.setContinuous(false);
-        SmartDashboard.putData("DisplacementControllerY", accelControllerY);
-        gyroController.setOutputRange(-1.0, 1.0);
-        gyroController.setAbsoluteTolerance(2.0f);
-        gyroController.setContinuous(false);
     }
 }

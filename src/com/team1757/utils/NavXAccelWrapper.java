@@ -8,7 +8,8 @@ import com.team1757.utils.IllegalSourceException;
 /**
  * @author ACabey
  * 
- * Supply the Y displacement reading to PIDController rather than the yaw that is provided by default
+ * Supply the displacement reading to PIDController rather than the yaw that is provided by default
+ * @warning NavX displacement is incredibly inaccurate and "experimental"
  */
 public class NavXAccelWrapper extends VariablePIDInput {
 

@@ -7,8 +7,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1757.robot.commands.DriveDistanceAccelX;
-import org.usfirst.frc.team1757.robot.commands.DriveDistanceAccelY;
 import org.usfirst.frc.team1757.robot.commands.DriveStraight;
 import org.usfirst.frc.team1757.robot.commands.GetStatus;
 import org.usfirst.frc.team1757.robot.commands.GyroPIDClear;
@@ -54,15 +52,11 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new ResetGyro());
 		SmartDashboard.putData(new RotateDegreesShortest());
 		SmartDashboard.putData(new DriveStraight(.5));
-		SmartDashboard.putData(new DriveDistanceAccelX());
-		SmartDashboard.putData(new DriveDistanceAccelY());
 		
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);
 		SmartDashboard.putNumber("angularDelta", 0.0);
 		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
-		SmartDashboard.putNumber("distanceDeltaX", 0.0);
-		SmartDashboard.putNumber("distanceDeltaY", 0.0);
 		
 		// TODO Add a continuous, persistent "Status Command" for vitals
 		getStatus = new GetStatus();

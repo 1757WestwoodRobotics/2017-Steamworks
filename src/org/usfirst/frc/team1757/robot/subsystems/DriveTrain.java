@@ -20,7 +20,7 @@ public class DriveTrain extends Subsystem {
 	private final PIDController accelControllerY = RobotMap.accelControllerY;
 	private final RobotDrive driveTrainMecanumDrive = RobotMap.driveTrainMecanumDrive;
 	private final double GYRO_PID_TOLERANCE = .3;
-	private final double ACCEL_PID_TOLERANCE = 2;
+	private final double ACCEL_PID_TOLERANCE = .05;
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new ManualDrive());
@@ -78,7 +78,7 @@ public class DriveTrain extends Subsystem {
 	 * Updates motors with accelerometer PID controller output
 	 */
 	public void moveWithAccelPID() {
-		driveTrainMecanumDrive.mecanumDrive_Cartesian(accelControllerX.get(), accelControllerY.get(), 0, 0);
+		driveTrainMecanumDrive.mecanumDrive_Cartesian(accelControllerX.get(), -accelControllerY.get(), 0, 0);
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class DriveTrain extends Subsystem {
 		driveTrainMecanumDrive.stopMotor();
 	}
 
-	// Gyro
+	// Gyroscope
 
 	/**
 	 * Reset gyroscope
@@ -139,8 +139,21 @@ public class DriveTrain extends Subsystem {
 	public double getCurrentDisplacementY() {
 		return driveTrainNavX.getDisplacementY();
 	}
+	
+	/**
+	 * Get accelerometer X axis displacement (meters) in range (-MAX_DOUBLE,
+	 * MAX_DOUBLE)
+	 * 
+	 * @return double distance in range (-MAX_DOUBLE, MAX_DOUBLE) measured in
+	 *         meters
+	 */
+	public double getCurrentDisplacementX() {
+		return driveTrainNavX.getDisplacementX();
+	}
+	
 
-	// Gyro PID Controller
+	// Gyroscope PID
+	
 	/**
 	 * Enable gyroscope PID Controller
 	 */
@@ -229,7 +242,8 @@ public class DriveTrain extends Subsystem {
 		gyroController.setSetpoint(deltaAngle + getCurrentRawAngle());
 	}
 
-	// Accel PID Controller Y
+	
+	//Accelerometer PID Y
 
 	/**
 	 * Enable accelerometer Y axis PID controller
@@ -276,7 +290,7 @@ public class DriveTrain extends Subsystem {
 		return (Math.abs(accelControllerY.getError()) <= ACCEL_PID_TOLERANCE);
 	}
 
-	// Accel PID Controller X
+	// Accelerometer PID X
 
 	/**
 	 * Enable accelerometer X axis PID controller
