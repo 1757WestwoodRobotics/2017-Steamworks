@@ -2,6 +2,7 @@ package org.usfirst.frc.team1757.robot;
 
 import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
+import com.team1757.utils.Axis;
 import com.team1757.utils.IllegalSourceException;
 import com.team1757.utils.NavXAccelWrapper;
 import com.team1757.utils.NavXGyroWrapper;
@@ -39,12 +40,15 @@ public class RobotMap {
     public static AHRS driveTrainNavX;
     
 	public static PIDController gyroController;
-	public static PIDController accelController;
+	public static PIDController accelControllerX;
+	public static PIDController accelControllerY;
 	private static NavXGyroWrapper gyroInput;
 	private static VariablePIDOutput gyroOutput;
-	private static NavXAccelWrapper accelInput;
-	private static VariablePIDOutput accelOutput;
-    
+	private static NavXAccelWrapper accelInputX;
+	private static NavXAccelWrapper accelInputY;
+	private static VariablePIDOutput accelOutputX;
+	private static VariablePIDOutput accelOutputY;
+	
     public static void init() {
     	// Initialize Talons
         driveTrainLeftFront = new CANTalon(driveTrainLeftFrontPort);
@@ -99,11 +103,19 @@ public class RobotMap {
         gyroOutput = new VariablePIDOutput();
         
         try {
-			accelInput = new NavXAccelWrapper(driveTrainNavX);
+			accelInputX = new NavXAccelWrapper(driveTrainNavX, Axis.axisX);
 		} catch (IllegalSourceException e) {
-			DriverStation.reportError("Error instantiating NavXWAccelWrapper: " + e.getMessage(), true);
+			DriverStation.reportError("Error instantiating NavXWAccelWrapperX: " + e.getMessage(), true);
 		}
-        accelOutput = new VariablePIDOutput();
+        
+        try {
+			accelInputY = new NavXAccelWrapper(driveTrainNavX, Axis.axisY);
+		} catch (IllegalSourceException e) {
+			DriverStation.reportError("Error instantiating NavXWAccelWrapperY: " + e.getMessage(), true);
+		}
+        
+        accelOutputX = new VariablePIDOutput();
+        accelOutputY = new VariablePIDOutput();
         
         // Initialize PIDController (gyroscope)
         gyroController = new PIDController(0.034, 0.0, 0.04, gyroInput, gyroOutput);
@@ -116,10 +128,15 @@ public class RobotMap {
     	driveTrainNavX.reset();
     	    
         // Initialize PIDController (accelerometer)
-        accelController = new PIDController(.01,0.0,0.0, accelInput, accelOutput);
+    	accelControllerX = new PIDController(.01,0.0,0.0, accelInputX, accelOutputX);
+    	accelControllerY = new PIDController(.01,0.0,0.0, accelInputY, accelOutputY);
         
         // Configure PIDController (accelerometer)
-        SmartDashboard.putData("DisplacementController", accelController);
+        SmartDashboard.putData("DisplacementControllerX", accelControllerX);
+        gyroController.setOutputRange(-1.0, 1.0);
+        gyroController.setAbsoluteTolerance(2.0f);
+        gyroController.setContinuous(false);
+        SmartDashboard.putData("DisplacementControllerY", accelControllerY);
         gyroController.setOutputRange(-1.0, 1.0);
         gyroController.setAbsoluteTolerance(2.0f);
         gyroController.setContinuous(false);

@@ -16,8 +16,11 @@ import edu.wpi.first.wpilibj.PIDController;
 public class DriveTrain extends Subsystem {
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
 	private final PIDController gyroController = RobotMap.gyroController;
+	private final PIDController accelControllerX = RobotMap.accelControllerX;
+	private final PIDController accelControllerY = RobotMap.accelControllerY;
 	private final RobotDrive driveTrainMecanumDrive = RobotMap.driveTrainMecanumDrive;
 	private final double GYRO_PID_TOLERANCE = .3;
+	private final double ACCEL_PID_TOLERANCE = 2;
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new ManualDrive());
@@ -53,7 +56,7 @@ public class DriveTrain extends Subsystem {
 	}
 
 	/**
-	 * PID Assisted Drive
+	 * Gyroscope PID Assisted Drive
 	 * 
 	 * Updates motors using provided translation input and gyroscope PID
 	 * Controller to maintain an angular position while translating.
@@ -67,6 +70,15 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void moveWithGyroPID(double translateX, double translateY) {
 		driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, gyroController.get(), 0);
+	}
+
+	/**
+	 * Accelerometer PID Drive
+	 * 
+	 * Updates motors with accelerometer PID controller output
+	 */
+	public void moveWithAccelPID() {
+		driveTrainMecanumDrive.mecanumDrive_Cartesian(accelControllerX.get(), accelControllerY.get(), 0, 0);
 	}
 
 	/**
@@ -108,6 +120,26 @@ public class DriveTrain extends Subsystem {
 		return driveTrainNavX.getAngle();
 	}
 
+	// Accelerometer
+
+	/**
+	 * Reset accelerometer displacement
+	 */
+	public void resetAccel() {
+		driveTrainNavX.resetDisplacement();
+	}
+
+	/**
+	 * Get accelerometer Y axis displacement (meters) in range (-MAX_DOUBLE,
+	 * MAX_DOUBLE)
+	 * 
+	 * @return double distance in range (-MAX_DOUBLE, MAX_DOUBLE) measured in
+	 *         meters
+	 */
+	public double getCurrentDisplacementY() {
+		return driveTrainNavX.getDisplacementY();
+	}
+
 	// Gyro PID Controller
 	/**
 	 * Enable gyroscope PID Controller
@@ -135,7 +167,7 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * Get gyroscope PID Controller reached setpoint within tolerance
 	 * 
-	 * @return boolean gyroscope error within constant tolerance
+	 * @return boolean gyroscope PID controller error within constant tolerance
 	 */
 	public boolean reachedGyroSetpoint() {
 		return (Math.abs(gyroController.getError()) <= GYRO_PID_TOLERANCE);
@@ -195,5 +227,99 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void changeAngleBy(double deltaAngle) {
 		gyroController.setSetpoint(deltaAngle + getCurrentRawAngle());
+	}
+
+	// Accel PID Controller Y
+
+	/**
+	 * Enable accelerometer Y axis PID controller
+	 */
+	public void enableAccelPIDY() {
+		accelControllerY.enable();
+	}
+
+	/**
+	 * Disable accelerometer Y axis PID controller
+	 */
+	public void disableAccelPIDY() {
+		accelControllerY.disable();
+	}
+
+	/**
+	 * Get accelerometer Y axis PID controller target angle (setpoint)
+	 * 
+	 * @return double distance in range (-MAX_DOUBLE, MAX_DOUBLE)
+	 */
+	public double getTargetDistanceY() {
+		return accelControllerY.getSetpoint();
+	}
+
+	/**
+	 * Set accelerometer Y axis PID Controller target distance (setpoint) to a
+	 * given distance (meters)
+	 * 
+	 * @param distanceY
+	 *            Double distance in range (-MAX_DOUBLE, MAX_DOUBLE) measured in
+	 *            meters
+	 */
+	public void setTargetDistanceY(double distanceY) {
+		accelControllerY.setSetpoint(distanceY);
+	}
+
+	/**
+	 * Get accelerometer Y axis PID Controller reached setpoint within tolerance
+	 * 
+	 * @return boolean accelerometer PID controller error within constant
+	 *         tolerance
+	 */
+	public boolean reachedAccelSetpointY() {
+		return (Math.abs(accelControllerY.getError()) <= ACCEL_PID_TOLERANCE);
+	}
+
+	// Accel PID Controller X
+
+	/**
+	 * Enable accelerometer X axis PID controller
+	 */
+	public void enableAccelPIDX() {
+		accelControllerX.enable();
+	}
+
+	/**
+	 * Disable accelerometer X axis PID controller
+	 */
+	public void disableAccelPIDX() {
+		accelControllerX.disable();
+	}
+
+	/**
+	 * Get accelerometer X axis PID controller target angle (setpoint)
+	 * 
+	 * @return double distance in range (-MAX_DOUBLE, MAX_DOUBLE)
+	 */
+	public double getTargetDistanceX() {
+		return accelControllerX.getSetpoint();
+	}
+
+	/**
+	 * Set accelerometer X axis PID Controller target distance (setpoint) to a
+	 * given distance (meters)
+	 * 
+	 * @param distanceX
+	 *            Double distance in range (-MAX_DOUBLE, MAX_DOUBLE) measured in
+	 *            meters
+	 */
+	public void setTargetDistanceX(double distanceX) {
+		accelControllerY.setSetpoint(distanceX);
+	}
+
+	/**
+	 * Get accelerometer X axis PID Controller reached setpoint within tolerance
+	 * 
+	 * @return boolean accelerometer PID controller error within constant
+	 *         tolerance
+	 */
+	public boolean reachedAccelSetpointX() {
+		return (Math.abs(accelControllerX.getError()) <= ACCEL_PID_TOLERANCE);
 	}
 }

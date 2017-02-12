@@ -6,36 +6,39 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Rotate an angular delta from the current reading
+ * @author ACabey
+ * 
+ * Drive a given distance in the Y direction using the accelerometer and PID controller
  */
-public class RotateDegrees extends Command {
-	
-    public RotateDegrees() {
+public class DriveDistanceAccelY extends Command {
+
+    public DriveDistanceAccelY() {
     	requires(Robot.driveTrain);
     }
 
-    // Called once before execute
+    // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.enableGyroPID();
-    	Robot.driveTrain.changeAngleBy(SmartDashboard.getNumber("angularDelta", 0));
+    	// Reset for delta displacement
+    	Robot.driveTrain.resetAccel();
+    	
+    	Robot.driveTrain.enableAccelPIDY();
+    	Robot.driveTrain.setTargetDistanceY(SmartDashboard.getNumber("distanceDeltaY", 0));
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	// Update motor output
-    	Robot.driveTrain.moveWithGyroPID(.5,0);
-    	Robot.driveTrain.moveToTargetAngle();
+    	Robot.driveTrain.moveWithAccelPID();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.driveTrain.reachedGyroSetpoint();
+        return Robot.driveTrain.reachedAccelSetpointY();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
-    	Robot.driveTrain.disableGyroPID();
+    	Robot.driveTrain.disableAccelPIDY();
+    	Robot.driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
