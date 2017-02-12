@@ -1,43 +1,37 @@
-package org.usfirst.frc.team1757.robot.commands;
+package com.team1757.commands;
 
-import org.usfirst.frc.team1757.robot.Robot;
+import com.team1757.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * @author ACabey
- * 
- * Drive a given distance in the Y direction using the accelerometer and PID controller
+ * Control the robot manually using input from OI (controller)
  */
-public class DriveDistanceAccelY extends Command {
+public class ManualDrive extends Command {
 
-    public DriveDistanceAccelY() {
+    public ManualDrive() {
     	requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	// Reset for delta displacement
-    	Robot.driveTrain.resetAccel();
-    	
-    	Robot.driveTrain.enableAccelPIDY();
-    	Robot.driveTrain.setTargetDistanceY(SmartDashboard.getNumber("distanceDeltaY", 0));
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.moveWithAccelPID();
+    	Robot.driveTrain.manualDrive(
+    			Robot.oi.getTranslateX(), 
+    			Robot.oi.getTranslateY(), 
+    			Robot.oi.getRotate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.driveTrain.reachedAccelSetpointY();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveTrain.disableAccelPIDY();
     	Robot.driveTrain.stop();
     }
 

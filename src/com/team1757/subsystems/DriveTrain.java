@@ -1,9 +1,8 @@
-package org.usfirst.frc.team1757.robot.subsystems;
-
-import org.usfirst.frc.team1757.robot.RobotMap;
-import org.usfirst.frc.team1757.robot.commands.ManualDrive;
+package com.team1757.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.team1757.commands.ManualDrive;
+import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;

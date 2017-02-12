@@ -1,16 +1,16 @@
-package org.usfirst.frc.team1757.robot.commands;
+package com.team1757.commands;
 
-import org.usfirst.frc.team1757.robot.Robot;
+import com.team1757.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Rotate directly to a given angle
+ * Rotate the shortest direction relative to current angular position 
  */
-public class RotateToAngle extends Command {
-
-    public RotateToAngle() {
+public class RotateDegreesShortest extends Command {
+	
+    public RotateDegreesShortest() {
     	requires(Robot.driveTrain);
     }
 
@@ -18,7 +18,7 @@ public class RotateToAngle extends Command {
     protected void initialize() {
     	Robot.driveTrain.enableGyroPID();
     	// TODO Change the default angle to something more reasonable
-    	Robot.driveTrain.setTargetAngle(SmartDashboard.getNumber("targetAngle", Robot.driveTrain.getCurrentBoundedAngle()));
+    	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + SmartDashboard.getNumber("angularDeltaShortest", 0));
     }
 
     // Called repeatedly when this Command is scheduled to run

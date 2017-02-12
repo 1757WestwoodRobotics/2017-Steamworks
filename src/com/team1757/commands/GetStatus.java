@@ -1,7 +1,7 @@
-package org.usfirst.frc.team1757.robot.commands;
+package com.team1757.commands;
 
-import org.usfirst.frc.team1757.robot.Robot;
-import org.usfirst.frc.team1757.robot.RobotMap;
+import com.team1757.robot.Robot;
+import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

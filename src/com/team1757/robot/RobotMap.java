@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1757.robot;
+package com.team1757.robot;
 
 import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;

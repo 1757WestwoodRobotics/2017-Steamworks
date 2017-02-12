@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1757.robot;
+package com.team1757.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1757.robot.commands.DriveStraight;
-import org.usfirst.frc.team1757.robot.commands.GetStatus;
-import org.usfirst.frc.team1757.robot.commands.GyroPIDClear;
-import org.usfirst.frc.team1757.robot.commands.ResetGyro;
-import org.usfirst.frc.team1757.robot.commands.RotateDegrees;
-import org.usfirst.frc.team1757.robot.commands.RotateDegreesShortest;
-import org.usfirst.frc.team1757.robot.commands.RotateToAngle;
-import org.usfirst.frc.team1757.robot.subsystems.DriveTrain;
+import com.team1757.commands.DriveStraight;
+import com.team1757.commands.GetStatus;
+import com.team1757.commands.GyroPIDClear;
+import com.team1757.commands.ResetGyro;
+import com.team1757.commands.RotateDegrees;
+import com.team1757.commands.RotateDegreesShortest;
+import com.team1757.commands.RotateToAngle;
+import com.team1757.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the

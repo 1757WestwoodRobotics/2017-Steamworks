@@ -1,29 +1,29 @@
-package org.usfirst.frc.team1757.robot.commands;
+package com.team1757.commands;
 
-import org.usfirst.frc.team1757.robot.Robot;
+import com.team1757.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Rotate the shortest direction relative to current angular position 
+ * Rotate an angular delta from the current reading
  */
-public class RotateDegreesShortest extends Command {
+public class RotateDegrees extends Command {
 	
-    public RotateDegreesShortest() {
+    public RotateDegrees() {
     	requires(Robot.driveTrain);
     }
 
     // Called once before execute
     protected void initialize() {
     	Robot.driveTrain.enableGyroPID();
-    	// TODO Change the default angle to something more reasonable
-    	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + SmartDashboard.getNumber("angularDeltaShortest", 0));
+    	Robot.driveTrain.changeAngleBy(SmartDashboard.getNumber("angularDelta", 0));
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	// Update motor output
+    	Robot.driveTrain.moveWithGyroPID(.5,0);
     	Robot.driveTrain.moveToTargetAngle();
     }
 
@@ -34,7 +34,6 @@ public class RotateDegreesShortest extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	// TODO Default to something reasonable
     	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
     	Robot.driveTrain.disableGyroPID();
     }
