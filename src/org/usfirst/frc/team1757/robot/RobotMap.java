@@ -1,12 +1,13 @@
 package org.usfirst.frc.team1757.robot;
 
 import com.ctre.CANTalon;
-import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.utils.IllegalSourceException;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -41,6 +42,8 @@ public class RobotMap {
 	public static PIDController gyroController;
 	private static NavXGyroWrapper gyroInput;
 	private static VariablePIDOutput gyroOutput;
+	
+	public static UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
     
     public static void init() {
     	// Initialize Talons
@@ -65,6 +68,10 @@ public class RobotMap {
         driveTrainLeftBack.enableBrakeMode(true);
         driveTrainRightFront.enableBrakeMode(true);
         driveTrainRightBack.enableBrakeMode(true);
+        
+        //Configure Camera
+        camera.setResolution(640, 480);
+		camera.setFPS(30);
         
         // Initialize RobotDrive
         driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack,
@@ -104,9 +111,6 @@ public class RobotMap {
         gyroController.setAbsoluteTolerance(2.0f);
         gyroController.setContinuous(false);
     	driveTrainNavX.reset();
-    	    
-        // Initialize PIDController (Accel)
-    	// TODO
         
     }
 }

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1757.robot.commands.DriveStraight;
+import org.usfirst.frc.team1757.robot.commands.FollowReflectiveTape;
 import org.usfirst.frc.team1757.robot.commands.GetStatus;
 import org.usfirst.frc.team1757.robot.commands.GyroPIDClear;
 import org.usfirst.frc.team1757.robot.commands.ResetGyro;
@@ -15,6 +16,7 @@ import org.usfirst.frc.team1757.robot.commands.RotateDegrees;
 import org.usfirst.frc.team1757.robot.commands.RotateDegreesShortest;
 import org.usfirst.frc.team1757.robot.commands.RotateToAngle;
 import org.usfirst.frc.team1757.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1757.robot.subsystems.Vision;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,6 +29,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
 	public static OI oi;
+	public static Vision vision;
 
 	Command autonomousCommand;
 	Command getStatus;
@@ -44,6 +47,7 @@ public class Robot extends IterativeRobot {
 		// Initialize subsystems and default ManualDrive
 		oi = new OI();
 		driveTrain = new DriveTrain();
+		vision = new Vision();
 		
 		// Initial other commands
 		SmartDashboard.putData(new RotateToAngle());
@@ -52,6 +56,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new ResetGyro());
 		SmartDashboard.putData(new RotateDegreesShortest());
 		SmartDashboard.putData(new DriveStraight(5));
+		SmartDashboard.putData(new FollowReflectiveTape());
 		
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);
