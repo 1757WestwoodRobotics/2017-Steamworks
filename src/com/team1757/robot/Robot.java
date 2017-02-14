@@ -15,6 +15,7 @@ import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
 import com.team1757.subsystems.DriveTrain;
+import com.team1757.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,6 +27,7 @@ import com.team1757.subsystems.DriveTrain;
 public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
+	public static Shooter shooter;
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -44,6 +46,7 @@ public class Robot extends IterativeRobot {
 		// Initialize subsystems and default ManualDrive
 		oi = new OI();
 		driveTrain = new DriveTrain();
+		shooter = new Shooter();
 		
 		// Initial other commands
 		SmartDashboard.putData(new RotateToAngle());
@@ -57,6 +60,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("targetAngle", 0.0);
 		SmartDashboard.putNumber("angularDelta", 0.0);
 		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
+		SmartDashboard.putNumber("FlyWheelpGain", 0.0);
+		SmartDashboard.putNumber("FlyWheeliGain", 0.0001);
+		SmartDashboard.putNumber("FlyWheeldGain", 0.0);
 		
 		// TODO Add a continuous, persistent "Status Command" for vitals
 		getStatus = new GetStatus();

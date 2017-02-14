@@ -2,9 +2,7 @@ package com.team1757.robot;
 
 import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
-import com.team1757.utils.Axis;
 import com.team1757.utils.IllegalSourceException;
-import com.team1757.utils.NavXAccelWrapper;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
 
@@ -27,13 +25,16 @@ public class RobotMap {
 	private static int driveTrainLeftBackPort = 2;
 	private static int driveTrainRightFrontPort = 3;
 	private static int driveTrainRightBackPort = 4;
-    
+	
+	// TODO Verify port
+	private static int shooterFlyWheelPort = 7;
 	
 	public static CANTalon driveTrainLeftFront;
     public static CANTalon driveTrainLeftBack;
     public static CANTalon driveTrainRightFront;
     public static CANTalon driveTrainRightBack;
     
+    public static CANTalon shooterFlyWheel;
     
     public static RobotDrive driveTrainMecanumDrive;
 
@@ -42,6 +43,7 @@ public class RobotMap {
 	public static PIDController gyroController;
 	public static PIDController accelControllerX;
 	public static PIDController accelControllerY;
+	
 	private static NavXGyroWrapper gyroInput;
 	private static VariablePIDOutput gyroOutput;
 	
@@ -58,6 +60,9 @@ public class RobotMap {
         
         driveTrainRightBack = new CANTalon(driveTrainRightBackPort);
         LiveWindow.addActuator("Drive Train", "Right Back", driveTrainRightBack);
+        
+        shooterFlyWheel = new CANTalon(shooterFlyWheelPort);
+        LiveWindow.addActuator("Shooter", "FlyWheel", shooterFlyWheel);
         
         // Configure Talons
         //Invert talons to correct driving
