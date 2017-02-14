@@ -14,6 +14,7 @@ import com.team1757.commands.ResetGyro;
 import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
+import com.team1757.commands.ShootWithSpeed;
 import com.team1757.subsystems.DriveTrain;
 import com.team1757.subsystems.Shooter;
 
@@ -55,6 +56,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new ResetGyro());
 		SmartDashboard.putData(new RotateDegreesShortest());
 		SmartDashboard.putData(new DriveStraight(.5));
+		SmartDashboard.putData(new ShootWithSpeed());
 		
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);
