@@ -1,29 +1,29 @@
 package com.team1757.commands;
 
-import com.team1757.robot.Robot;
-import com.team1757.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.team1757.robot.Robot;
 
 /**
  *
  */
-public class GetStatus extends Command {
+public class CollectWithSpeed extends Command {
 
-    public GetStatus() {
+    public CollectWithSpeed() {
+        requires(Robot.ballCollector);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.ballCollector.setModeSpeed();
+    	Robot.ballCollector.enableFlyWheel();
+    	Robot.ballCollector.enableFlyWheelControl();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("GyroAngle", RobotMap.driveTrainNavX.getAngle());
-    	SmartDashboard.putNumber("BoundedGyroAngle", Robot.driveTrain.getCurrentBoundedAngle());
-    	SmartDashboard.putNumber("DisplacementX", Robot.driveTrain.getCurrentDisplacementX());
-    	SmartDashboard.putNumber("DisplacementY",  Robot.driveTrain.getCurrentDisplacementY());
+    	// TODO Give a real target speed
+    	Robot.ballCollector.setFlyWheelTarget(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,10 +33,13 @@ public class GetStatus extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ballCollector.disableFlyWheelControl();
+    	Robot.ballCollector.disableFlyWheel();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

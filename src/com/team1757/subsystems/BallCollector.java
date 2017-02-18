@@ -3,7 +3,7 @@ package com.team1757.subsystems;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-import com.team1757.commands.StopFlyWheel;
+import com.team1757.commands.StopCollector;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,54 +12,54 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * @author ACabey
  */
-public class Shooter extends Subsystem {
+public class BallCollector extends Subsystem {
 	
-	private final CANTalon shooterFlyWheel = RobotMap.shooterFlyWheel;
+	private final CANTalon collectorFlyWheel = RobotMap.collectorFlyWheel;
 
     public void initDefaultCommand() {
-        setDefaultCommand(new StopFlyWheel());
+        setDefaultCommand(new StopCollector());
     }
     
     public void initializeFlyWheelPID() {
     	// TODO Hardcode constants
-		double pGain = SmartDashboard.getNumber("FlyWheelpGain", 1);
-		double iGain = SmartDashboard.getNumber("FlyWheeliGain", 0);
-		double dGain = SmartDashboard.getNumber("FlyWheeldGain", 0);
+		double pGain = SmartDashboard.getNumber("CollectorpGain", 1);
+		double iGain = SmartDashboard.getNumber("CollectoriGain", 0);
+		double dGain = SmartDashboard.getNumber("CollectordGain", 0);
 		
 		RobotMap.shooterFlyWheel.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-    	shooterFlyWheel.setPID(pGain, iGain, dGain);
+    	collectorFlyWheel.setPID(pGain, iGain, dGain);
     }
     
     public void enableFlyWheel() {
-    	shooterFlyWheel.enable();
+    	collectorFlyWheel.enable();
     }
     
     public void disableFlyWheel() {
-    	shooterFlyWheel.disable();
+    	collectorFlyWheel.disable();
     }
     
     public void enableFlyWheelControl() {
-    	shooterFlyWheel.enableControl();
+    	collectorFlyWheel.enableControl();
     }
     
     public void disableFlyWheelControl() {
-    	shooterFlyWheel.disableControl();
+    	collectorFlyWheel.disableControl();
     }
     
     public void stopFlyWheel() {
-    	shooterFlyWheel.disableControl();
+    	collectorFlyWheel.disableControl();
     }
     
     public void setModeSpeed() {
-		shooterFlyWheel.changeControlMode(TalonControlMode.Speed);
+    	collectorFlyWheel.changeControlMode(TalonControlMode.Speed);
     }
     
-    public void setModeVoltage() {
-		shooterFlyWheel.changeControlMode(TalonControlMode.Voltage);
+    public void setModePercentVoltage() {
+    	collectorFlyWheel.changeControlMode(TalonControlMode.PercentVbus);
     }
     
     public void setFlyWheelTarget(double target) {
-    	shooterFlyWheel.set(target);
+    	collectorFlyWheel.set(target);
     }
 }
 

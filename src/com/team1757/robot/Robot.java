@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import com.team1757.commands.CollectReverseWithPercentVoltage;
+import com.team1757.commands.CollectWithPercentVoltage;
 import com.team1757.commands.DriveStraight;
 import com.team1757.commands.GetStatus;
 import com.team1757.commands.GyroPIDClear;
@@ -15,6 +17,7 @@ import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
 import com.team1757.commands.ShootWithSpeed;
+import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.DriveTrain;
 import com.team1757.subsystems.Shooter;
 
@@ -29,6 +32,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
 	public static Shooter shooter;
+	public static BallCollector ballCollector;
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -48,6 +52,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		driveTrain = new DriveTrain();
 		shooter = new Shooter();
+		ballCollector = new BallCollector();
 		
 		// Initial other commands
 		SmartDashboard.putData(new RotateToAngle());
@@ -57,6 +62,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new RotateDegreesShortest());
 		SmartDashboard.putData(new DriveStraight(.5));
 		SmartDashboard.putData(new ShootWithSpeed());
+		SmartDashboard.putData(new CollectWithPercentVoltage());
+		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
 		
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);

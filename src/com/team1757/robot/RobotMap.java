@@ -26,15 +26,20 @@ public class RobotMap {
 	private static int driveTrainRightFrontPort = 3;
 	private static int driveTrainRightBackPort = 4;
 	
-	// TODO Verify port
-	private static int shooterFlyWheelPort = 7;
+	// TODO Change port
+	private static int shooterFlyWheelPort = 5; // Should be 5, 7 is the gear loader
+	private static int shooterIndexerPort = 9;
 	
+	private static int collectorFlyWheelPort = 6;
+		
 	public static CANTalon driveTrainLeftFront;
     public static CANTalon driveTrainLeftBack;
     public static CANTalon driveTrainRightFront;
     public static CANTalon driveTrainRightBack;
     
     public static CANTalon shooterFlyWheel;
+    
+    public static CANTalon collectorFlyWheel;
     
     public static RobotDrive driveTrainMecanumDrive;
 
@@ -63,6 +68,9 @@ public class RobotMap {
         
         shooterFlyWheel = new CANTalon(shooterFlyWheelPort);
         LiveWindow.addActuator("Shooter", "FlyWheel", shooterFlyWheel);
+        
+        collectorFlyWheel = new CANTalon(collectorFlyWheelPort);
+        LiveWindow.addActuator("Collector", "FlyWheel", collectorFlyWheel);
         
         // Configure Talons
         //Invert talons to correct driving
