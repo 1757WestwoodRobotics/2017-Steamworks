@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 /**
  * @author ACabey
  * 
- * Force WPIlib PIDController to write to an acessible instance variable rather than directly to a SpeedController
+ * Force WPIlib PIDController to write to an accessible instance variable rather than directly to a SpeedController
  */
 public class VariablePIDOutput implements PIDOutput {
 

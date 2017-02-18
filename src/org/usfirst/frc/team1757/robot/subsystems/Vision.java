@@ -1,6 +1,5 @@
 package org.usfirst.frc.team1757.robot.subsystems;
 
-
 import org.usfirst.frc.team1757.robot.RobotMap;
 
 import edu.wpi.cscore.UsbCamera;
@@ -26,40 +25,40 @@ public class Vision extends Subsystem {
 	}
 
 	// PID
-	
-	public void enableCenterPID(){
+
+	public void enableCenterPID() {
 		visionCenterPID.enable();
 	}
-	
-	public void disableCenterPID(){
+
+	public void disableCenterPID() {
 		visionCenterPID.disable();
 	}
-	
-	public boolean reachedSetPoint(){
+
+	public boolean reachedSetPoint() {
 		return visionCenterPID.onTarget();
 	}
 
-	public double getCenterPID(){
+	public double getCenterPID() {
 		return visionCenterPID.get();
 	}
 
 	// Math operations
 
 	public double normalizePixelsX(double coordinateX) {
-		return coordinateX * (2 / xResolution) - 1;
+		return coordinateX * (2.0f / xResolution) - 1;
 	}
 
 	public double normalizePixelsY(double coordinateY) {
-		return coordinateY * (2 / yResolution) - 1;
+		return coordinateY * (2.0f / yResolution) - 1;
 	}
 
 	// Camera configuration
-	
+
 	public void init() {
 		camera.setFPS(fps);
 		camera.setResolution(xResolution, yResolution);
 	}
-	
+
 	public void setResolution(int x, int y) {
 		xResolution = x;
 		yResolution = y;
@@ -85,11 +84,17 @@ public class Vision extends Subsystem {
 
 	// Contours
 
+	public double getTargetCenterContour() {
+		updateContoursReport();
+		if (getContoursCount() != 0) {
+			return normalizePixelsX(getContourCenterX(0));
+		}
+		return 0;
+	}
+
 	/**
 	 * Updates the local contoursReport table.
-	 * 
-	 * NEED to call this, other contours methods do not update the local table
-	 * so that index errors don't arise
+	 *
 	 */
 	public void updateContoursReport() {
 		// A contours report contains centerX[], centerY[], solidity[],
@@ -200,8 +205,6 @@ public class Vision extends Subsystem {
 	/**
 	 * Updates the local blobsReport table.
 	 * 
-	 * NEED to call this, other blobs methods do not update the local table so
-	 * that index errors don't arise
 	 */
 	public void updateBlobsReport() {
 		// A blobs report contains x[], y[], and size[]
@@ -268,8 +271,6 @@ public class Vision extends Subsystem {
 	/**
 	 * Updates the local linesReport table.
 	 * 
-	 * NEED to call this, other lines methods do not update the local table so
-	 * that index errors don't arise
 	 */
 	public void updateLinesReport() {
 		// A contours report contains x1[], y1[], x2[], y2[], length[], angle[]

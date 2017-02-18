@@ -17,14 +17,13 @@ public class FollowReflectiveTape extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		Robot.vision.enableCenterPID();
-		Robot.driveTrain.enableGyroPID();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		// Update motor output
-		Robot.driveTrain.manualDrive(0, 0, Robot.vision.getCenterPID());
-		SmartDashboard.putNumber("visionPIDOutput", Robot.vision.getCenterPID());
+		Robot.driveTrain.manualDrive(0, 0, -Robot.vision.getCenterPID());
+		SmartDashboard.putNumber("visionPIDOutput", -Robot.vision.getCenterPID());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
