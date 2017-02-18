@@ -7,7 +7,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.team1757.utils.IllegalSourceException;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
-import com.team1757.utils.VisionCenterPID;
+import com.team1757.utils.VisionCenterPIDSource;
 import com.team1757.utils.VisionDetectionType;
 
 import edu.wpi.cscore.UsbCamera;
@@ -46,8 +46,9 @@ public class RobotMap {
 	private static VariablePIDOutput gyroOutput;
 
 	public static PIDController visionCenterController;
-	private static VisionCenterPID visionCenterInput;
-	private static VariablePIDOutput visionCenterOutput;
+	// TODO change back to private
+	public static VisionCenterPIDSource visionCenterInput;
+	public static VariablePIDOutput visionCenterOutput;
 
 	public static Vision vision;
 
@@ -117,8 +118,8 @@ public class RobotMap {
 		driveTrainNavX.reset();
 
 		// Initialize PID Input/ Output
-		visionCenterInput = new VisionCenterPID();
-		visionCenterInput.setVisionDetectionType(VisionDetectionType.ContourCenterX );
+		visionCenterInput = new VisionCenterPIDSource();
+		visionCenterInput.setVisionDetectionType(VisionDetectionType.ContourCenterX);
 		visionCenterOutput = new VariablePIDOutput();
 
 		// Initialize PIDController (VisionCenter)
@@ -128,7 +129,6 @@ public class RobotMap {
 		SmartDashboard.putData("VisionCenterController", visionCenterController);
 		visionCenterController.setOutputRange(-45, 45);
 		visionCenterController.setInputRange(-1.0, 1.0);
-		visionCenterController.setAbsoluteTolerance(.002f);
 
 	}
 }
