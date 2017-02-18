@@ -43,12 +43,14 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		// Initialize hardware
 		RobotMap.init();
-		
+
 		// Initialize subsystems and default ManualDrive
 		oi = new OI();
 		driveTrain = new DriveTrain();
+
 		vision = new Vision();
-		
+		vision.init();
+
 		// Initial other commands
 		SmartDashboard.putData(new RotateToAngle());
 		SmartDashboard.putData(new RotateDegrees());
@@ -57,17 +59,16 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new RotateDegreesShortest());
 		SmartDashboard.putData(new DriveStraight(5));
 		SmartDashboard.putData(new FollowReflectiveTape());
-		
-		// Configure LiveWindow 
+
+		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);
 		SmartDashboard.putNumber("angularDelta", 0.0);
 		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
-		
+
 		// TODO Add a continuous, persistent "Status Command" for vitals
 		getStatus = new GetStatus();
 		getStatus.setRunWhenDisabled(true);
-		
-		
+
 		chooser = new SendableChooser<>();
 		// TODO chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -131,7 +132,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		
+
 		getStatus.start();
 	}
 

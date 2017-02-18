@@ -1,13 +1,12 @@
 package org.usfirst.frc.team1757.robot.subsystems;
 
-import java.util.Arrays;
 
 import org.usfirst.frc.team1757.robot.RobotMap;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,22 +14,73 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Vision extends Subsystem {
 
 	private final UsbCamera camera = RobotMap.camera;
+	private final PIDController visionCenterPID = RobotMap.visionCenterController;
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
 	private NetworkTable linesReport;
+	private int xResolution = 640;
+	private int yResolution = 480;
+	private int fps = 30;
 
 	public void initDefaultCommand() {
+	}
 
+	// PID
+	
+	public void enableCenterPID(){
+		visionCenterPID.enable();
+	}
+	
+	public void disableCenterPID(){
+		visionCenterPID.disable();
+	}
+	
+	public boolean reachedSetPoint(){
+		return visionCenterPID.onTarget();
+	}
+
+	public double getCenterPID(){
+		return visionCenterPID.get();
 	}
 
 	// Math operations
 
-	public double normalizePixelsX(double resolutionX, double coordinateX) {
-		return (coordinateX - resolutionX/2) / (resolutionX/2);
- 	}
+	public double normalizePixelsX(double coordinateX) {
+		return coordinateX * (2 / xResolution) - 1;
+	}
 
-	public double normalizePixelsY(double resolutionY, double coordinateY) {
-		return (coordinateY - resolutionY/2) / (resolutionY/2);
+	public double normalizePixelsY(double coordinateY) {
+		return coordinateY * (2 / yResolution) - 1;
+	}
+
+	// Camera configuration
+	
+	public void init() {
+		camera.setFPS(fps);
+		camera.setResolution(xResolution, yResolution);
+	}
+	
+	public void setResolution(int x, int y) {
+		xResolution = x;
+		yResolution = y;
+		camera.setResolution(x, y);
+	}
+
+	public int getResolutionX() {
+		return xResolution;
+	}
+
+	public int getResolutionY() {
+		return yResolution;
+	}
+
+	public void setFPS(int fps) {
+		this.fps = fps;
+		camera.setFPS(fps);
+	}
+
+	public int getFPS() {
+		return fps;
 	}
 
 	// Contours
@@ -155,7 +205,7 @@ public class Vision extends Subsystem {
 	 */
 	public void updateBlobsReport() {
 		// A blobs report contains x[], y[], and size[]
-		contoursReport = NetworkTable.getTable("GRIP/myBlobsReport");
+		blobsReport = NetworkTable.getTable("GRIP/myBlobsReport");
 	}
 
 	/**
@@ -167,7 +217,7 @@ public class Vision extends Subsystem {
 	 */
 	public int getBlobsCount() {
 		double[] defaultValue = new double[0];
-		double[] xCenters = contoursReport.getNumberArray("centerX", defaultValue);
+		double[] xCenters = blobsReport.getNumberArray("centerX", defaultValue);
 		return xCenters.length;
 	}
 
@@ -181,7 +231,7 @@ public class Vision extends Subsystem {
 	 */
 	public double getBlobCenterX(int blobIndex) {
 		double[] defaultValue = new double[0];
-		double[] xCenters = contoursReport.getNumberArray("x", defaultValue);
+		double[] xCenters = blobsReport.getNumberArray("x", defaultValue);
 		return xCenters[blobIndex];
 	}
 
@@ -195,7 +245,7 @@ public class Vision extends Subsystem {
 	 */
 	public double getBlobCenterY(int blobIndex) {
 		double[] defaultValue = new double[0];
-		double[] yCenters = contoursReport.getNumberArray("y", defaultValue);
+		double[] yCenters = blobsReport.getNumberArray("y", defaultValue);
 		return yCenters[blobIndex];
 	}
 
@@ -209,7 +259,7 @@ public class Vision extends Subsystem {
 	 */
 	public double getBlobArea(int blobIndex) {
 		double[] defaultValue = new double[0];
-		double[] areas = contoursReport.getNumberArray("size", defaultValue);
+		double[] areas = blobsReport.getNumberArray("size", defaultValue);
 		return areas[blobIndex];
 	}
 
@@ -236,7 +286,7 @@ public class Vision extends Subsystem {
 	 */
 	public int getLinesCount() {
 		double[] defaultValue = new double[0];
-		double[] xCenters = contoursReport.getNumberArray("centerX", defaultValue);
+		double[] xCenters = linesReport.getNumberArray("centerX", defaultValue);
 		return xCenters.length;
 	}
 
@@ -251,7 +301,7 @@ public class Vision extends Subsystem {
 	 */
 	public double getLineX1(int lineIndex) {
 		double[] defaultValue = new double[0];
-		double[] x1s = contoursReport.getNumberArray("x1", defaultValue);
+		double[] x1s = linesReport.getNumberArray("x1", defaultValue);
 		return x1s[lineIndex];
 	}
 
@@ -266,7 +316,7 @@ public class Vision extends Subsystem {
 	 */
 	public double getLineY1(int lineIndex) {
 		double[] defaultValue = new double[0];
-		double[] y1s = contoursReport.getNumberArray("y1", defaultValue);
+		double[] y1s = linesReport.getNumberArray("y1", defaultValue);
 		return y1s[lineIndex];
 	}
 
@@ -281,7 +331,7 @@ public class Vision extends Subsystem {
 	 */
 	public double getLineX2(int lineIndex) {
 		double[] defaultValue = new double[0];
-		double[] x2s = contoursReport.getNumberArray("x2", defaultValue);
+		double[] x2s = linesReport.getNumberArray("x2", defaultValue);
 		return x2s[lineIndex];
 	}
 
@@ -296,7 +346,7 @@ public class Vision extends Subsystem {
 	 */
 	public double getLineY2(int lineIndex) {
 		double[] defaultValue = new double[0];
-		double[] y2s = contoursReport.getNumberArray("y2", defaultValue);
+		double[] y2s = linesReport.getNumberArray("y2", defaultValue);
 		return y2s[lineIndex];
 	}
 

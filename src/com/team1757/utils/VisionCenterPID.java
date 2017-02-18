@@ -1,16 +1,14 @@
 package com.team1757.utils;
 
-import org.usfirst.frc.team1757.robot.subsystems.Vision;
+import org.usfirst.frc.team1757.robot.Robot;
 
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class VisionCenterPID implements PIDSource {
-	private Vision m_vision;
 	private VisionDetectionType m_visionDetectionType;
 
-	public VisionCenterPID(Vision vision) {
-		m_vision = vision;
+	public VisionCenterPID() {
 	}
 
 	@Override
@@ -36,17 +34,17 @@ public class VisionCenterPID implements PIDSource {
 	@Override
 	public double pidGet() {
 		if (m_visionDetectionType == VisionDetectionType.ContourCenterX) {
-			m_vision.updateContoursReport();
-			return m_vision.getContourCenterX(0);
+			Robot.vision.updateContoursReport();
+			return Robot.vision.normalizePixelsX(Robot.vision.getContourCenterX(0));
 		} else if (m_visionDetectionType == VisionDetectionType.ContourCenterY) {
-			m_vision.updateContoursReport();
-			return m_vision.getContourCenterX(0);
+			Robot.vision.updateContoursReport();
+			return Robot.vision.normalizePixelsX(Robot.vision.getContourCenterX(0));
 		} else if (m_visionDetectionType == VisionDetectionType.BlobCenterY) {
-			m_vision.updateBlobsReport();
-			return m_vision.getBlobCenterX(0);
+			Robot.vision.updateBlobsReport();
+			return Robot.vision.normalizePixelsX(Robot.vision.getBlobCenterX(0));
 		} else if (m_visionDetectionType == VisionDetectionType.BlobCenterY) {
-			m_vision.updateBlobsReport();
-			return m_vision.getBlobCenterY(0);
+			Robot.vision.updateBlobsReport();
+			return Robot.vision.normalizePixelsX(Robot.vision.getBlobCenterY(0));
 		}
 		return 0;
 	}

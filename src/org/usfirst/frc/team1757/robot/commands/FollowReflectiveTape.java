@@ -3,6 +3,7 @@ package org.usfirst.frc.team1757.robot.commands;
 import org.usfirst.frc.team1757.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Turn towards 3M reflective tape so it is centered in the camera field of view
@@ -15,19 +16,15 @@ public class FollowReflectiveTape extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.vision.enableCenterPID();
 		Robot.driveTrain.enableGyroPID();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		// Update vision target
-		Robot.vision.updateContoursReport();
-		
-		double targetX = Robot.vision.getContourCenterX(0);
-
 		// Update motor output
-		Robot.driveTrain.setTargetAngle(0);
-		Robot.driveTrain.moveToTargetAngle();
+		Robot.driveTrain.manualDrive(0, 0, Robot.vision.getCenterPID());
+		SmartDashboard.putNumber("visionPIDOutput", Robot.vision.getCenterPID());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -38,8 +35,7 @@ public class FollowReflectiveTape extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		// TODO Default to something reasonable
-		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
-		Robot.driveTrain.disableGyroPID();
+		Robot.vision.disableCenterPID();
 	}
 
 	// Called when another command which requires one or more of the same
