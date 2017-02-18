@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Shooter extends Subsystem {
 	
 	private final CANTalon shooterFlyWheel = RobotMap.shooterFlyWheel;
+	private final CANTalon indexerFlyWheel = RobotMap.indexerFlyWheel;
 
     public void initDefaultCommand() {
         setDefaultCommand(new StopFlyWheel());
@@ -28,6 +29,26 @@ public class Shooter extends Subsystem {
 		
 		RobotMap.shooterFlyWheel.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
     	shooterFlyWheel.setPID(pGain, iGain, dGain);
+    }
+    
+    public void enableIndexer() {
+    	indexerFlyWheel.enable();
+    }
+    
+    public void disableIndexer() {
+    	indexerFlyWheel.disable();
+    }
+    
+    public void setIndexerModeSpeed() {
+    	indexerFlyWheel.changeControlMode(TalonControlMode.Speed);
+    }
+    
+    public void setIndexerModePercentVoltage() {
+    	indexerFlyWheel.changeControlMode(TalonControlMode.PercentVbus);
+    }
+    
+    public void setIndexerTarget(double target) {
+    	indexerFlyWheel.set(target);
     }
     
     public void enableFlyWheel() {
@@ -50,12 +71,12 @@ public class Shooter extends Subsystem {
     	shooterFlyWheel.disableControl();
     }
     
-    public void setModeSpeed() {
+    public void setFlyWheelModeSpeed() {
 		shooterFlyWheel.changeControlMode(TalonControlMode.Speed);
     }
     
-    public void setModeVoltage() {
-		shooterFlyWheel.changeControlMode(TalonControlMode.Voltage);
+    public void setFlyWheelModePercentVoltage() {
+		shooterFlyWheel.changeControlMode(TalonControlMode.PercentVbus);
     }
     
     public void setFlyWheelTarget(double target) {

@@ -26,11 +26,12 @@ public class RobotMap {
 	private static int driveTrainRightFrontPort = 3;
 	private static int driveTrainRightBackPort = 4;
 	
-	// TODO Change port
-	private static int shooterFlyWheelPort = 5; // Should be 5, 7 is the gear loader
+	private static int shooterFlyWheelPort = 5; 
 	private static int shooterIndexerPort = 9;
 	
 	private static int collectorFlyWheelPort = 6;
+	
+	private static int gearLoaderTalonPort = 7;
 		
 	public static CANTalon driveTrainLeftFront;
     public static CANTalon driveTrainLeftBack;
@@ -38,8 +39,11 @@ public class RobotMap {
     public static CANTalon driveTrainRightBack;
     
     public static CANTalon shooterFlyWheel;
+    public static CANTalon indexerFlyWheel;
     
     public static CANTalon collectorFlyWheel;
+    
+    public static CANTalon gearLoaderTalon;
     
     public static RobotDrive driveTrainMecanumDrive;
 
@@ -67,10 +71,16 @@ public class RobotMap {
         LiveWindow.addActuator("Drive Train", "Right Back", driveTrainRightBack);
         
         shooterFlyWheel = new CANTalon(shooterFlyWheelPort);
-        LiveWindow.addActuator("Shooter", "FlyWheel", shooterFlyWheel);
+        LiveWindow.addActuator("Shooter", "Shooter FlyWheel", shooterFlyWheel);
         
         collectorFlyWheel = new CANTalon(collectorFlyWheelPort);
-        LiveWindow.addActuator("Collector", "FlyWheel", collectorFlyWheel);
+        LiveWindow.addActuator("Collector", "Collector FlyWheel", collectorFlyWheel);
+        
+        indexerFlyWheel = new CANTalon(shooterIndexerPort);
+        LiveWindow.addActuator("Collector", "Indexer FlyWheel", indexerFlyWheel);
+        
+        gearLoaderTalon = new CANTalon(gearLoaderTalonPort);
+        LiveWindow.addActuator("GearLoader", "GearLoader Talon", gearLoaderTalon);
         
         // Configure Talons
         //Invert talons to correct driving
@@ -81,6 +91,12 @@ public class RobotMap {
         driveTrainLeftBack.enableBrakeMode(true);
         driveTrainRightFront.enableBrakeMode(true);
         driveTrainRightBack.enableBrakeMode(true);
+        
+        gearLoaderTalon.enableBrakeMode(true);
+        gearLoaderTalon.setReverseSoftLimit(4247);
+        gearLoaderTalon.enableReverseSoftLimit(true);
+        gearLoaderTalon.setForwardSoftLimit(5526);
+        gearLoaderTalon.enableForwardSoftLimit(true);
         
         // Initialize RobotDrive
         driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack,

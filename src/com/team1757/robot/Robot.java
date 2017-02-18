@@ -10,15 +10,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.team1757.commands.CollectReverseWithPercentVoltage;
 import com.team1757.commands.CollectWithPercentVoltage;
 import com.team1757.commands.DriveStraight;
+import com.team1757.commands.GearManualInput;
+import com.team1757.commands.GearMatchStart;
+import com.team1757.commands.GearReceive;
+import com.team1757.commands.GearScore;
 import com.team1757.commands.GetStatus;
 import com.team1757.commands.GyroPIDClear;
 import com.team1757.commands.ResetGyro;
 import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
+import com.team1757.commands.RunIndexer;
 import com.team1757.commands.ShootWithSpeed;
+import com.team1757.commands.StopIndexer;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.DriveTrain;
+import com.team1757.subsystems.GearLoader;
 import com.team1757.subsystems.Shooter;
 
 /**
@@ -33,6 +40,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static Shooter shooter;
 	public static BallCollector ballCollector;
+	public static GearLoader gearLoader;
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -53,17 +61,32 @@ public class Robot extends IterativeRobot {
 		driveTrain = new DriveTrain();
 		shooter = new Shooter();
 		ballCollector = new BallCollector();
+		//TODO Test gearloader
+		//gearLoader = new GearLoader();
 		
 		// Initial other commands
+		SmartDashboard.putData(new ResetGyro());
+		SmartDashboard.putData(new GyroPIDClear());
+		
 		SmartDashboard.putData(new RotateToAngle());
 		SmartDashboard.putData(new RotateDegrees());
-		SmartDashboard.putData(new GyroPIDClear());
-		SmartDashboard.putData(new ResetGyro());
+
 		SmartDashboard.putData(new RotateDegreesShortest());
 		SmartDashboard.putData(new DriveStraight(.5));
+		
 		SmartDashboard.putData(new ShootWithSpeed());
+		
 		SmartDashboard.putData(new CollectWithPercentVoltage());
 		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
+
+		SmartDashboard.putData(new GearManualInput());
+		SmartDashboard.putData(new GearMatchStart());
+		SmartDashboard.putData(new GearReceive());
+		SmartDashboard.putData(new GearScore());
+		
+		SmartDashboard.putData(new RunIndexer());
+		SmartDashboard.putData(new StopIndexer());
+		
 		
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);
@@ -73,7 +96,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("FlyWheeliGain", 0.0001);
 		SmartDashboard.putNumber("FlyWheeldGain", 0.0);
 		
-		// TODO Add a continuous, persistent "Status Command" for vitals
 		getStatus = new GetStatus();
 		getStatus.setRunWhenDisabled(true);
 		

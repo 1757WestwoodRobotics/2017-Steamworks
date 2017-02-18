@@ -55,7 +55,7 @@ public class OI {
 	}
 
 	public double getRotate() {
-		// Use inputControlY because that model works for rotatation
+		// Use inputControlY because that model works for rotation
 		return inputControlY(xbox360.getRawAxis(rightStickX));
 	}
 

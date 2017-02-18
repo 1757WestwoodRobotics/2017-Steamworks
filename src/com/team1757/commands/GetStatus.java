@@ -24,6 +24,15 @@ public class GetStatus extends Command {
     	SmartDashboard.putNumber("BoundedGyroAngle", Robot.driveTrain.getCurrentBoundedAngle());
     	SmartDashboard.putNumber("DisplacementX", Robot.driveTrain.getCurrentDisplacementX());
     	SmartDashboard.putNumber("DisplacementY",  Robot.driveTrain.getCurrentDisplacementY());
+    	
+    	try {
+    		if (Robot.gearLoader.isSensorPresent()) {
+    			SmartDashboard.putNumber("Gear - ActualPosition", Robot.gearLoader.getPulseWidthPosition());
+    		}
+    		
+    	} catch (Exception e) {
+    		System.out.println("Error with gear subsystem: " + e.getMessage());
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
