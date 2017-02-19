@@ -23,6 +23,7 @@ import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
 import com.team1757.commands.RunIndexer;
 import com.team1757.commands.ShootWithSpeed;
+import com.team1757.commands.ShootWithVoltage;
 import com.team1757.commands.StopIndexer;
 import com.team1757.commands.StopLifter;
 import com.team1757.subsystems.BallCollector;
@@ -79,6 +80,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new DriveStraight(.5));
 		
 		SmartDashboard.putData(new ShootWithSpeed());
+		SmartDashboard.putData(new ShootWithVoltage());
 		
 		SmartDashboard.putData(new CollectWithPercentVoltage());
 		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
