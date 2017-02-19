@@ -22,7 +22,7 @@ public class FollowReflectiveTape extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		// Update motor output
-		Robot.driveTrain.manualDrive(0, 0, -Robot.vision.getCenterPID());
+		Robot.driveTrain.manualDrive(Robot.oi.getTranslateX(), Robot.oi.getTranslateY(), -Robot.vision.getCenterPID());
 		SmartDashboard.putNumber("visionPIDOutput", -Robot.vision.getCenterPID());
 	}
 
