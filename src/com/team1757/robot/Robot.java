@@ -59,16 +59,20 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
 		// Initialize hardware
 		RobotMap.init();
+		
 		// Initialize subsystems and default ManualDrive
-		oi = new OI();
 		driveTrain = new DriveTrain();
 		shooter = new Shooter();
 		ballCollector = new BallCollector();
 		gearLoader = new GearLoader();
 		lifter = new Lifter();
 		
+		// Initialize OI
+		oi = new OI();
+
 		// Initial other commands
 		SmartDashboard.putData(new ResetGyro());
 		SmartDashboard.putData(new GyroPIDClear());
