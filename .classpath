@@ -12,6 +12,5 @@
 	<classpathentry exported="true" kind="lib" path="libs/navx_frc.jar"/>
 	<classpathentry exported="true" kind="var" path="opencv" sourcepath="opencv.sources"/>
 	<classpathentry exported="true" kind="var" path="cscore" sourcepath="cscore.sources"/>
-	<classpathentry kind="var" path="USERLIBS_DIR/TalonSRXLibJava.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

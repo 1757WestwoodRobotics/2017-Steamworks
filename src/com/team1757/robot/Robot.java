@@ -95,6 +95,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("FlyWheelpGain", 0.0);
 		SmartDashboard.putNumber("FlyWheeliGain", 0.0001);
 		SmartDashboard.putNumber("FlyWheeldGain", 0.0);
+		SmartDashboard.putNumber("Gear Manual Target Position", 4247.0);
 		
 		getStatus = new GetStatus();
 		getStatus.setRunWhenDisabled(true);
