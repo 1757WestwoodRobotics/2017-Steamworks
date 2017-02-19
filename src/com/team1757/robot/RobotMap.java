@@ -86,8 +86,8 @@ public class RobotMap {
         gearLoaderTalon = new CANTalon(gearLoaderTalonPort);
         LiveWindow.addActuator("GearLoader", "GearLoader Talon", gearLoaderTalon);
         
-        liftTalon = new CANTalon(liftTalonPort);
-        LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
+//        liftTalon = new CANTalon(liftTalonPort);
+//        LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
         
         // Configure Talons
         //Invert talons to correct driving
@@ -107,7 +107,7 @@ public class RobotMap {
         gearLoaderTalon.configMaxOutputVoltage(4.8);
         gearLoaderTalon.configNominalOutputVoltage(4.8, 4.8);
         
-        liftTalon.enableBrakeMode(true);
+        //liftTalon.enableBrakeMode(true);
         
         // Initialize RobotDrive
         driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack,

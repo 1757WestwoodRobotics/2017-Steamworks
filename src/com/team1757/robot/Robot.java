@@ -66,7 +66,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		ballCollector = new BallCollector();
 		gearLoader = new GearLoader();
-		lifter = new Lifter();
+		//lifter = new Lifter();
 		
 		// Initial other commands
 		SmartDashboard.putData(new ResetGyro());
@@ -91,8 +91,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new RunIndexer());
 		SmartDashboard.putData(new StopIndexer());
 		
-		SmartDashboard.putData(new LiftUp());
-		SmartDashboard.putData(new StopLifter());
+		//SmartDashboard.putData(new LiftUp());
+		//SmartDashboard.putData(new StopLifter());
 		
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);
