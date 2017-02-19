@@ -7,26 +7,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.team1757.commands.CollectReverseWithPercentVoltage;
-import com.team1757.commands.CollectWithPercentVoltage;
-import com.team1757.commands.DriveStraight;
-import com.team1757.commands.GearManualInput;
-import com.team1757.commands.GearMatchStart;
-import com.team1757.commands.GearReceive;
-import com.team1757.commands.GearScore;
 import com.team1757.commands.GetStatus;
-import com.team1757.commands.GyroPIDClear;
-import com.team1757.commands.LiftUp;
-import com.team1757.commands.ResetGyro;
-import com.team1757.commands.RotateDegrees;
-import com.team1757.commands.RotateDegreesShortest;
-import com.team1757.commands.RotateToAngle;
-import com.team1757.commands.RunIndexer;
-import com.team1757.commands.ShootWithSpeed;
-import com.team1757.commands.ShootWithVoltage;
-import com.team1757.commands.StopIndexer;
-import com.team1757.commands.StopLifter;
-import com.team1757.commands.StopShooter;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.DriveTrain;
 import com.team1757.subsystems.GearLoader;
@@ -72,40 +53,6 @@ public class Robot extends IterativeRobot {
 		
 		// Initialize OI
 		oi = new OI();
-
-		// Initial other commands
-		SmartDashboard.putData(new ResetGyro());
-		SmartDashboard.putData(new GyroPIDClear());
-		
-		SmartDashboard.putData(new RotateToAngle());
-		SmartDashboard.putData(new RotateDegrees());
-
-		SmartDashboard.putData(new RotateDegreesShortest());
-		SmartDashboard.putData(new DriveStraight(.5));
-		
-		SmartDashboard.putData(new ShootWithSpeed());
-		SmartDashboard.putData(new ShootWithVoltage());
-		SmartDashboard.putData(new StopShooter());
-		
-		SmartDashboard.putData(new CollectWithPercentVoltage());
-		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
-
-		SmartDashboard.putData(new GearManualInput());
-		SmartDashboard.putData(new GearMatchStart());
-		SmartDashboard.putData(new GearReceive());
-		SmartDashboard.putData(new GearScore());
-		
-		SmartDashboard.putData(new RunIndexer());
-		SmartDashboard.putData(new StopIndexer());
-		
-		SmartDashboard.putData(new LiftUp());
-		SmartDashboard.putData(new StopLifter());
-		
-		// Configure LiveWindow 
-		SmartDashboard.putNumber("targetAngle", 0.0);
-		SmartDashboard.putNumber("angularDelta", 0.0);
-		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
-		SmartDashboard.putNumber("Gear Manual Target Position", 618.0);
 		
 		getStatus = new GetStatus();
 		getStatus.setRunWhenDisabled(true);

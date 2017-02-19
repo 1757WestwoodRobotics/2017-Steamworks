@@ -1,8 +1,29 @@
 package com.team1757.robot;
 
+import com.team1757.commands.CollectReverseWithPercentVoltage;
+import com.team1757.commands.CollectWithPercentVoltage;
+import com.team1757.commands.DriveStraight;
+import com.team1757.commands.GearManualInput;
+import com.team1757.commands.GearMatchStart;
+import com.team1757.commands.GearReceive;
+import com.team1757.commands.GearScore;
+import com.team1757.commands.GyroPIDClear;
+import com.team1757.commands.LiftUp;
+import com.team1757.commands.ResetGyro;
+import com.team1757.commands.RotateDegrees;
+import com.team1757.commands.RotateDegreesShortest;
+import com.team1757.commands.RotateToAngle;
+import com.team1757.commands.RunIndexer;
+import com.team1757.commands.ShootWithSpeed;
+import com.team1757.commands.ShootWithVoltage;
+import com.team1757.commands.StopIndexer;
+import com.team1757.commands.StopLifter;
+import com.team1757.commands.StopShooter;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -24,6 +45,41 @@ public class OI {
 	public OI() {
 		xbox360 = new Joystick(gamepadPort);
 		buttonA = new JoystickButton(xbox360, 1);
+		
+		// Initialize other commands
+		SmartDashboard.putData(new ResetGyro());
+		SmartDashboard.putData(new GyroPIDClear());
+
+		SmartDashboard.putData(new RotateToAngle());
+		SmartDashboard.putData(new RotateDegrees());
+
+		SmartDashboard.putData(new RotateDegreesShortest());
+		SmartDashboard.putData(new DriveStraight(.5));
+
+		SmartDashboard.putData(new ShootWithSpeed());
+		SmartDashboard.putData(new ShootWithVoltage());
+		SmartDashboard.putData(new StopShooter());
+
+		SmartDashboard.putData(new CollectWithPercentVoltage());
+		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
+
+		SmartDashboard.putData(new GearManualInput());
+		SmartDashboard.putData(new GearMatchStart());
+		SmartDashboard.putData(new GearReceive());
+		SmartDashboard.putData(new GearScore());
+
+		SmartDashboard.putData(new RunIndexer());
+		SmartDashboard.putData(new StopIndexer());
+
+		SmartDashboard.putData(new LiftUp());
+		SmartDashboard.putData(new StopLifter());
+
+		// Configure LiveWindow 
+		SmartDashboard.putNumber("targetAngle", 0.0);
+		SmartDashboard.putNumber("angularDelta", 0.0);
+		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
+		SmartDashboard.putNumber("Gear Manual Target Position", 618.0);
+		
 	}
 
 	public Joystick getXbox360() {

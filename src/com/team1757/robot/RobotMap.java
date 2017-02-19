@@ -21,6 +21,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * floating around.
  */
 public class RobotMap {
+	
+	// Talon ids
 	private static final int driveTrainLeftFrontPort = 1;
 	private static final int driveTrainLeftBackPort = 2;
 	private static final int driveTrainRightFrontPort = 3;
@@ -34,7 +36,8 @@ public class RobotMap {
 	private static final int gearLoaderTalonPort = 7;
 	
 	private static final int liftTalonPort = 8;
-		
+	
+	// Talon objects
 	public static CANTalon driveTrainLeftFront;
     public static CANTalon driveTrainLeftBack;
     public static CANTalon driveTrainRightFront;
@@ -49,6 +52,7 @@ public class RobotMap {
     
     public static CANTalon liftTalon;
     
+    //Robot objects
     public static RobotDrive driveTrainMecanumDrive;
 
     public static AHRS driveTrainNavX;
