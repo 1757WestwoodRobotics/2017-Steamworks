@@ -86,8 +86,8 @@ public class RobotMap {
         gearLoaderTalon = new CANTalon(gearLoaderTalonPort);
         LiveWindow.addActuator("GearLoader", "GearLoader Talon", gearLoaderTalon);
         
-//        liftTalon = new CANTalon(liftTalonPort);
-//        LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
+        liftTalon = new CANTalon(liftTalonPort);
+        LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
         
         // Configure Talons
         //Invert talons to correct driving

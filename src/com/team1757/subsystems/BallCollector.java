@@ -7,8 +7,6 @@ import com.team1757.commands.StopCollector;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * @author ACabey
  */
@@ -21,13 +19,9 @@ public class BallCollector extends Subsystem {
     }
     
     public void initializeFlyWheelPID() {
-    	// TODO Hardcode constants
-		double pGain = SmartDashboard.getNumber("CollectorpGain", 1);
-		double iGain = SmartDashboard.getNumber("CollectoriGain", 0);
-		double dGain = SmartDashboard.getNumber("CollectordGain", 0);
-		
 		RobotMap.shooterFlyWheel.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-    	collectorFlyWheel.setPID(pGain, iGain, dGain);
+    	// TODO Tune collector PID if we want to use speed
+		collectorFlyWheel.setPID(0.0, 0.0001, 0.0);
     }
     
     public void enableFlyWheel() {

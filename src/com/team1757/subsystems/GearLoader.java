@@ -9,8 +9,6 @@ import com.ctre.CANTalon.FeedbackDeviceStatus;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  *
  */
@@ -46,18 +44,13 @@ public class GearLoader extends Subsystem {
 //
 //    	pGain 0.64
 //    	iGain 1.0E-4
-//    	dGain 60
-//    	fGain 0
+//    	dGain 60.0
+//    	fGain 0.0
 //    	iZone 100
-    	
-		double pGain = SmartDashboard.getNumber("pGain", 0.64);
-		double iGain = SmartDashboard.getNumber("iGain", 0.0001);
-		double dGain = SmartDashboard.getNumber("dGain", 60.0);
-		double fGain = SmartDashboard.getNumber("fGain", 0.0);
-		double closeLoopRampRate = 36.0;
-		int izone = (int) SmartDashboard.getNumber("iZone", 100);
-		int profile = 0;
-		gearTalon.setPID(pGain, iGain, dGain, fGain, izone, closeLoopRampRate, profile);
+//		closeLoopRampRate 36.0
+//		profile 0
+
+    	gearTalon.setPID(0.64, 0.0001, 60.0, 0.0, 100, 36.0, 0);
     }
     
     public void setTargetPosition(double targetPosition) {

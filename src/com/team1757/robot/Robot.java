@@ -26,6 +26,7 @@ import com.team1757.commands.ShootWithSpeed;
 import com.team1757.commands.ShootWithVoltage;
 import com.team1757.commands.StopIndexer;
 import com.team1757.commands.StopLifter;
+import com.team1757.commands.StopShooter;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.DriveTrain;
 import com.team1757.subsystems.GearLoader;
@@ -60,14 +61,13 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		// Initialize hardware
 		RobotMap.init();
-		
 		// Initialize subsystems and default ManualDrive
 		oi = new OI();
 		driveTrain = new DriveTrain();
 		shooter = new Shooter();
 		ballCollector = new BallCollector();
 		gearLoader = new GearLoader();
-		//lifter = new Lifter();
+		lifter = new Lifter();
 		
 		// Initial other commands
 		SmartDashboard.putData(new ResetGyro());
@@ -81,6 +81,7 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putData(new ShootWithSpeed());
 		SmartDashboard.putData(new ShootWithVoltage());
+		SmartDashboard.putData(new StopShooter());
 		
 		SmartDashboard.putData(new CollectWithPercentVoltage());
 		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
@@ -93,8 +94,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new RunIndexer());
 		SmartDashboard.putData(new StopIndexer());
 		
-		//SmartDashboard.putData(new LiftUp());
-		//SmartDashboard.putData(new StopLifter());
+		SmartDashboard.putData(new LiftUp());
+		SmartDashboard.putData(new StopLifter());
 		
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);

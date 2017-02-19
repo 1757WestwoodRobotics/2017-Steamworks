@@ -7,9 +7,9 @@ import com.team1757.robot.Robot;
 /**
  *
  */
-public class StopFlyWheel extends Command {
+public class StopShooter extends Command {
 
-    public StopFlyWheel() {
+    public StopShooter() {
         requires(Robot.shooter);
     }
 
