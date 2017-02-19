@@ -1,6 +1,6 @@
 package com.team1757.subsystems;
 
-import com.team1757.commands.GearMatchStart;
+import com.team1757.commands.GearRun;
 import com.team1757.robot.RobotMap;
 
 import com.ctre.CANTalon;
@@ -20,7 +20,7 @@ public class GearLoader extends Subsystem {
 	FeedbackDeviceStatus gearEncoderStatus = gearTalon.isSensorPresent(FeedbackDevice.CtreMagEncoder_Absolute);
 
     public void initDefaultCommand() {
-    	setDefaultCommand(new GearMatchStart());
+    	setDefaultCommand(new GearRun());
     }
     
     public void initEncoder() {
@@ -76,6 +76,10 @@ public class GearLoader extends Subsystem {
     
     public boolean reachedSetpoint() {
     	return (Math.abs(gearTalon.getClosedLoopError()) < GEAR_PID_TOLERANCE);
+    }
+    
+    public void runGearTalon() {
+    	gearTalon.set(gearTalon.getSetpoint());
     }
 }
 
