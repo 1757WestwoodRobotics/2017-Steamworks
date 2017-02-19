@@ -47,30 +47,36 @@ public class OI {
 		buttonA = new JoystickButton(xbox360, 1);
 		
 		// Initialize other commands
+		// Gyro Systems
 		SmartDashboard.putData(new ResetGyro());
 		SmartDashboard.putData(new GyroPIDClear());
 
+		// Gyro Functions
 		SmartDashboard.putData(new RotateToAngle());
 		SmartDashboard.putData(new RotateDegrees());
-
 		SmartDashboard.putData(new RotateDegreesShortest());
 		SmartDashboard.putData(new DriveStraight(.5));
 
+		// Shooter Functions
 		SmartDashboard.putData(new ShootWithSpeed());
 		SmartDashboard.putData(new ShootWithVoltage());
 		SmartDashboard.putData(new StopShooter());
 
+		// Indexer Functions
+		SmartDashboard.putData(new RunIndexer());
+		SmartDashboard.putData(new StopIndexer());
+		
+		// Collector Functions
 		SmartDashboard.putData(new CollectWithPercentVoltage());
 		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
 
+		// GearLoader Functions
 		SmartDashboard.putData(new GearManualInput());
 		SmartDashboard.putData(new GearMatchStart());
 		SmartDashboard.putData(new GearReceive());
 		SmartDashboard.putData(new GearScore());
 
-		SmartDashboard.putData(new RunIndexer());
-		SmartDashboard.putData(new StopIndexer());
-
+		// Lifter Functions
 		SmartDashboard.putData(new LiftUp());
 		SmartDashboard.putData(new StopLifter());
 

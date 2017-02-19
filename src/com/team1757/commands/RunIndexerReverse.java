@@ -7,36 +7,31 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GearMatchStart extends Command {
-	
-	private double targetPosition = 210.0;
+public class RunIndexerReverse extends Command {
 
-    public GearMatchStart() {
-    	requires(Robot.gearLoader);
+    public RunIndexerReverse() {
+    	requires(Robot.indexer);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gearLoader.setTalonPID();
-    	Robot.gearLoader.initEncoder();
-    	Robot.gearLoader.enableGearTalon();
-    	Robot.gearLoader.enableGearPIDControl();
+    	Robot.indexer.setIndexerModePercentVoltage();
+    	Robot.indexer.enableIndexer();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearLoader.setTargetPosition(targetPosition);
+    	Robot.indexer.setIndexerTarget(-.30);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.gearLoader.reachedSetpoint();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.gearLoader.disableGearPIDControl();
-    	Robot.gearLoader.disableGearTalon();
+    	Robot.indexer.disableIndexer();
     }
 
     // Called when another command which requires one or more of the same

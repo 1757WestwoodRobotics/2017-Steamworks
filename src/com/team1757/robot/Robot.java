@@ -11,6 +11,7 @@ import com.team1757.commands.GetStatus;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.DriveTrain;
 import com.team1757.subsystems.GearLoader;
+import com.team1757.subsystems.Indexer;
 import com.team1757.subsystems.Lifter;
 import com.team1757.subsystems.Shooter;
 
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 
 	public static DriveTrain driveTrain;
 	public static Shooter shooter;
+	public static Indexer indexer;
 	public static BallCollector ballCollector;
 	public static GearLoader gearLoader;
 	public static Lifter lifter;
@@ -47,6 +49,7 @@ public class Robot extends IterativeRobot {
 		// Initialize subsystems and default ManualDrive
 		driveTrain = new DriveTrain();
 		shooter = new Shooter();
+		indexer = new Indexer();
 		ballCollector = new BallCollector();
 		gearLoader = new GearLoader();
 		lifter = new Lifter();

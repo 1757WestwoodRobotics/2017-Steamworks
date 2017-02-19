@@ -29,7 +29,7 @@ public class RobotMap {
 	private static final int driveTrainRightBackPort = 4;
 	
 	private static final int shooterFlyWheelPort = 5; 
-	private static final int shooterIndexerPort = 9;
+	private static final int indexerTalonPort = 9;
 	
 	private static final int collectorFlyWheelPort = 6;
 	
@@ -44,7 +44,7 @@ public class RobotMap {
     public static CANTalon driveTrainRightBack;
     
     public static CANTalon shooterFlyWheel;
-    public static CANTalon indexerFlyWheel;
+    public static CANTalon indexerTalon;
     
     public static CANTalon collectorFlyWheel;
     
@@ -84,8 +84,8 @@ public class RobotMap {
         collectorFlyWheel = new CANTalon(collectorFlyWheelPort);
         LiveWindow.addActuator("Collector", "Collector FlyWheel", collectorFlyWheel);
         
-        indexerFlyWheel = new CANTalon(shooterIndexerPort);
-        LiveWindow.addActuator("Collector", "Indexer FlyWheel", indexerFlyWheel);
+        indexerTalon = new CANTalon(indexerTalonPort);
+        LiveWindow.addActuator("Indexer", "Indexer FlyWheel", indexerTalon);
         
         gearLoaderTalon = new CANTalon(gearLoaderTalonPort);
         LiveWindow.addActuator("GearLoader", "GearLoader Talon", gearLoaderTalon);
@@ -111,7 +111,7 @@ public class RobotMap {
         gearLoaderTalon.configMaxOutputVoltage(4.8);
         gearLoaderTalon.configNominalOutputVoltage(4.8, 4.8);
         
-        //liftTalon.enableBrakeMode(true);
+        liftTalon.enableBrakeMode(false);
         
         // Initialize RobotDrive
         driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack,

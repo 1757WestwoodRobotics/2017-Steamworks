@@ -30,8 +30,7 @@ public class GearReceive extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
-        //return Robot.gearSubsystem.getPulseWidthPosition() == targetPosition;
+    	return Robot.gearLoader.reachedSetpoint();
     }
 
     // Called once after isFinished returns true
