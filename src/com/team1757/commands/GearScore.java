@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class GearScore extends Command {
 	
-    private double targetPosition = 5526.0;
+    private double targetPosition = 1430.0;
 
     public GearScore() {
     	requires(Robot.gearLoader);

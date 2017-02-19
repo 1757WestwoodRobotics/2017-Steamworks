@@ -21,17 +21,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * floating around.
  */
 public class RobotMap {
-	private static int driveTrainLeftFrontPort = 1;
-	private static int driveTrainLeftBackPort = 2;
-	private static int driveTrainRightFrontPort = 3;
-	private static int driveTrainRightBackPort = 4;
+	private static final int driveTrainLeftFrontPort = 1;
+	private static final int driveTrainLeftBackPort = 2;
+	private static final int driveTrainRightFrontPort = 3;
+	private static final int driveTrainRightBackPort = 4;
 	
-	private static int shooterFlyWheelPort = 5; 
-	private static int shooterIndexerPort = 9;
+	private static final int shooterFlyWheelPort = 5; 
+	private static final int shooterIndexerPort = 9;
 	
-	private static int collectorFlyWheelPort = 6;
+	private static final int collectorFlyWheelPort = 6;
 	
-	private static int gearLoaderTalonPort = 7;
+	private static final int gearLoaderTalonPort = 7;
 		
 	public static CANTalon driveTrainLeftFront;
     public static CANTalon driveTrainLeftBack;
@@ -93,10 +93,12 @@ public class RobotMap {
         driveTrainRightBack.enableBrakeMode(true);
         
         gearLoaderTalon.enableBrakeMode(true);
-        gearLoaderTalon.setReverseSoftLimit(4247);
+        gearLoaderTalon.setReverseSoftLimit(210);
         gearLoaderTalon.enableReverseSoftLimit(true);
-        gearLoaderTalon.setForwardSoftLimit(5526);
+        gearLoaderTalon.setForwardSoftLimit(1430);
         gearLoaderTalon.enableForwardSoftLimit(true);
+        gearLoaderTalon.configMaxOutputVoltage(4.8);
+        gearLoaderTalon.configNominalOutputVoltage(4.8, 4.8);
         
         // Initialize RobotDrive
         driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack,

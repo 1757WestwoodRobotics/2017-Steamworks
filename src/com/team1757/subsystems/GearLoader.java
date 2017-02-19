@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class GearLoader extends Subsystem {
 
 	private static CANTalon gearTalon = RobotMap.gearLoaderTalon;
-	private final double GEAR_PID_TOLERANCE = 20;
+	private final double GEAR_PID_TOLERANCE = 50;
 	
 	FeedbackDeviceStatus gearEncoderStatus = gearTalon.isSensorPresent(FeedbackDevice.CtreMagEncoder_Absolute);
 
@@ -51,11 +51,11 @@ public class GearLoader extends Subsystem {
 //    	iZone 100
     	
 		double pGain = SmartDashboard.getNumber("pGain", 0.64);
-		double iGain = SmartDashboard.getNumber("iGain", 0.0004);
+		double iGain = SmartDashboard.getNumber("iGain", 0.0001);
 		double dGain = SmartDashboard.getNumber("dGain", 60.0);
 		double fGain = SmartDashboard.getNumber("fGain", 0.0);
 		double closeLoopRampRate = 36.0;
-		int izone = (int) SmartDashboard.getNumber("iZone", 0);
+		int izone = (int) SmartDashboard.getNumber("iZone", 100);
 		int profile = 0;
 		gearTalon.setPID(pGain, iGain, dGain, fGain, izone, closeLoopRampRate, profile);
     }
