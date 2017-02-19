@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.team1757.commands.GetStatus;
+import com.team1757.commands.FollowReflectiveTape;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.DriveTrain;
 import com.team1757.subsystems.GearLoader;
 import com.team1757.subsystems.Indexer;
 import com.team1757.subsystems.Lifter;
 import com.team1757.subsystems.Shooter;
-import com.team1757.robot.commands.FollowReflectiveTape;
-import org.usfirst.frc.team1757.robot.subsystems.Vision;
+import com.team1757.subsystems.Vision;
 
 /**
  * The VM is configured to automatically run this class, and to call the

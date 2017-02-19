@@ -1,9 +1,8 @@
 package com.team1757.robot;
 
-import org.usfirst.frc.team1757.robot.subsystems.Vision;
-
 import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
+import com.team1757.subsystems.Vision;
 import com.team1757.utils.IllegalSourceException;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
