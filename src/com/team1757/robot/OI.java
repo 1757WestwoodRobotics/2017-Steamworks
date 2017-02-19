@@ -55,7 +55,7 @@ public class OI {
 	}
 
 	public double getRotate() {
-		// Use inputControlY because that model works for rotatation
+		// Use inputControlY because that model works for rotation
 		return inputControlY(xbox360.getRawAxis(rightStickX));
 	}
 
@@ -63,9 +63,9 @@ public class OI {
 		// Model by G(X-D)^3 + GX
 		double output = 0;
 		if (axis > OI.DEADBAND) {
-			output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis - DEADBAND) * GAIN);
+			output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis - DEADBAND) * 0.802);
 		} else if (axis < -OI.DEADBAND) {
-			output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis + DEADBAND) * GAIN);
+			output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis + DEADBAND) * 0.802);
 		} else {
 			output = 0.0;
 		}
