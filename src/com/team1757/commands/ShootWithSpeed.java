@@ -16,7 +16,7 @@ public class ShootWithSpeed extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.shooter.initializeFlyWheelPID();
-    	Robot.shooter.setModeSpeed();
+    	Robot.shooter.setFlyWheelModeSpeed();
     	Robot.shooter.enableFlyWheel();
     	Robot.shooter.enableFlyWheelControl();
     }

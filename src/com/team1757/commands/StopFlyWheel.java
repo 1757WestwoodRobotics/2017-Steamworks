@@ -16,7 +16,7 @@ public class StopFlyWheel extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.shooter.initializeFlyWheelPID();
-    	Robot.shooter.setModeSpeed();
+    	Robot.shooter.setFlyWheelModeSpeed();
     	Robot.shooter.enableFlyWheel();
     	Robot.shooter.enableFlyWheelControl();
     	Robot.shooter.setFlyWheelTarget(0);
