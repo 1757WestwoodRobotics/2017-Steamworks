@@ -16,6 +16,7 @@ import com.team1757.commands.GearReceive;
 import com.team1757.commands.GearScore;
 import com.team1757.commands.GetStatus;
 import com.team1757.commands.GyroPIDClear;
+import com.team1757.commands.LiftUp;
 import com.team1757.commands.ResetGyro;
 import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateDegreesShortest;
@@ -23,9 +24,11 @@ import com.team1757.commands.RotateToAngle;
 import com.team1757.commands.RunIndexer;
 import com.team1757.commands.ShootWithSpeed;
 import com.team1757.commands.StopIndexer;
+import com.team1757.commands.StopLifter;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.DriveTrain;
 import com.team1757.subsystems.GearLoader;
+import com.team1757.subsystems.Lifter;
 import com.team1757.subsystems.Shooter;
 
 /**
@@ -41,6 +44,7 @@ public class Robot extends IterativeRobot {
 	public static Shooter shooter;
 	public static BallCollector ballCollector;
 	public static GearLoader gearLoader;
+	public static Lifter lifter;
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -61,8 +65,8 @@ public class Robot extends IterativeRobot {
 		driveTrain = new DriveTrain();
 		shooter = new Shooter();
 		ballCollector = new BallCollector();
-		//TODO Test gearloader
-		//gearLoader = new GearLoader();
+		gearLoader = new GearLoader();
+		lifter = new Lifter();
 		
 		// Initial other commands
 		SmartDashboard.putData(new ResetGyro());
@@ -87,15 +91,14 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData(new RunIndexer());
 		SmartDashboard.putData(new StopIndexer());
 		
+		SmartDashboard.putData(new LiftUp());
+		SmartDashboard.putData(new StopLifter());
 		
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);
 		SmartDashboard.putNumber("angularDelta", 0.0);
 		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
-		SmartDashboard.putNumber("FlyWheelpGain", 0.0);
-		SmartDashboard.putNumber("FlyWheeliGain", 0.0001);
-		SmartDashboard.putNumber("FlyWheeldGain", 0.0);
-		SmartDashboard.putNumber("Gear Manual Target Position", 4247.0);
+		SmartDashboard.putNumber("Gear Manual Target Position", 618.0);
 		
 		getStatus = new GetStatus();
 		getStatus.setRunWhenDisabled(true);

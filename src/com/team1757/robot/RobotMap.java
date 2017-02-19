@@ -32,6 +32,8 @@ public class RobotMap {
 	private static final int collectorFlyWheelPort = 6;
 	
 	private static final int gearLoaderTalonPort = 7;
+	
+	private static final int liftTalonPort = 8;
 		
 	public static CANTalon driveTrainLeftFront;
     public static CANTalon driveTrainLeftBack;
@@ -44,6 +46,8 @@ public class RobotMap {
     public static CANTalon collectorFlyWheel;
     
     public static CANTalon gearLoaderTalon;
+    
+    public static CANTalon liftTalon;
     
     public static RobotDrive driveTrainMecanumDrive;
 
@@ -82,6 +86,9 @@ public class RobotMap {
         gearLoaderTalon = new CANTalon(gearLoaderTalonPort);
         LiveWindow.addActuator("GearLoader", "GearLoader Talon", gearLoaderTalon);
         
+        liftTalon = new CANTalon(liftTalonPort);
+        LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
+        
         // Configure Talons
         //Invert talons to correct driving
         driveTrainLeftFront.setInverted(true);
@@ -99,6 +106,8 @@ public class RobotMap {
         gearLoaderTalon.enableForwardSoftLimit(true);
         gearLoaderTalon.configMaxOutputVoltage(4.8);
         gearLoaderTalon.configNominalOutputVoltage(4.8, 4.8);
+        
+        liftTalon.enableBrakeMode(true);
         
         // Initialize RobotDrive
         driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack,

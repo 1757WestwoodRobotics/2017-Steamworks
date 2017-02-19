@@ -7,7 +7,6 @@ import com.team1757.commands.StopFlyWheel;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @author ACabey
@@ -22,13 +21,8 @@ public class Shooter extends Subsystem {
     }
     
     public void initializeFlyWheelPID() {
-    	// TODO Hardcode constants
-		double pGain = SmartDashboard.getNumber("FlyWheelpGain", 1);
-		double iGain = SmartDashboard.getNumber("FlyWheeliGain", 0);
-		double dGain = SmartDashboard.getNumber("FlyWheeldGain", 0);
-		
 		RobotMap.shooterFlyWheel.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-    	shooterFlyWheel.setPID(pGain, iGain, dGain);
+    	shooterFlyWheel.setPID(0.0, 0.0001, 0.0);
     }
     
     public void enableIndexer() {
