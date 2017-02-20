@@ -69,7 +69,7 @@ public class RobotMap {
 	private static NavXGyroWrapper gyroInput;
 	private static VariablePIDOutput gyroOutput;
 
-	public static PIDController visionCenterController;
+	public static PIDController visionTranslationController;
 	// TODO change back to private
 	public static VisionCenterPIDSource visionCenterInput;
 	public static VariablePIDOutput visionCenterOutput;
@@ -172,12 +172,11 @@ public class RobotMap {
 		visionCenterOutput = new VariablePIDOutput();
 
 		// Initialize PIDController (VisionCenter)
-		visionCenterController = new PIDController(.05, 0.0, 0.04, visionCenterInput, visionCenterOutput);
+		visionTranslationController = new PIDController(.05, 0.0, 0.04, visionCenterInput, visionCenterOutput);
 
 		// Configure PIDController (VisionCenter)
-		SmartDashboard.putData("VisionCenterController", visionCenterController);
-		visionCenterController.setOutputRange(-45, 45);
-		visionCenterController.setInputRange(-1.0, 1.0);
-
+		SmartDashboard.putData("VisionCenterController", visionTranslationController);
+		visionTranslationController.setInputRange(-1.0, 1.0);
+		visionTranslationController.setOutputRange(-1, 1);
 	}
 }

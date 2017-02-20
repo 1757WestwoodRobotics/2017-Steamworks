@@ -3,7 +3,7 @@ package com.team1757.subsystems;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-import com.team1757.commands.StopShooter;
+import com.team1757.commands.ShooterStop;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,7 +16,7 @@ public class Shooter extends Subsystem {
 	private final CANTalon shooterFlyWheel = RobotMap.shooterFlyWheel;
 
     public void initDefaultCommand() {
-        setDefaultCommand(new StopShooter());
+        setDefaultCommand(new ShooterStop());
     }
     
     public void initializeFlyWheelPID() {

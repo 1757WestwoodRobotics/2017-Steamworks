@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Turn towards 3M reflective tape so it is centered in the camera field of view
  */
-public class FaceReflectiveTape extends Command {
+public class VisionFollowReflectiveTape extends Command {
 
-	public FaceReflectiveTape() {
+	public VisionFollowReflectiveTape() {
 		requires(Robot.driveTrain);
 	}
 
@@ -21,6 +21,9 @@ public class FaceReflectiveTape extends Command {
 		// Using GyroPID with camera
 		Robot.driveTrain.enableGyroPID();
 		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getTargetCenterContour() * 19.82));
+//		SmartDashboard.putNumber("Vision center contour", Robot.vision.getTargetCenterContour());
+//		SmartDashboard.putNumber("Vision angular center contour", Robot.vision.getTargetCenterContour() * 19.82);
+//		SmartDashboard.putNumber("Vision target angle", Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getTargetCenterContour() * 18.55));
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -34,12 +37,14 @@ public class FaceReflectiveTape extends Command {
 		// -Robot.vision.getCenterPID());
 
 		// Using gyroPID with scaled camera
-		Robot.driveTrain.moveToTargetAngle();
+		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getTargetCenterContour() * 19.82));
+		
+		Robot.driveTrain.moveWithGyroPID(Robot.oi.getTranslateX(), Robot.oi.getTranslateY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return Robot.driveTrain.reachedGyroSetpoint();
+		return false;
 	}
 
 	// Called once after isFinished returns true

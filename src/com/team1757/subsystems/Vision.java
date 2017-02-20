@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class Vision extends Subsystem {
 
 	private final UsbCamera camera = RobotMap.camera;
-	private final PIDController visionCenterPID = RobotMap.visionCenterController;
+	private final PIDController visionTranslationController = RobotMap.visionTranslationController;
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
 	private NetworkTable linesReport;
@@ -26,20 +26,20 @@ public class Vision extends Subsystem {
 
 	// PID
 
-	public void enableCenterPID() {
-		visionCenterPID.enable();
+	public void enableTranslationPID() {
+		visionTranslationController.enable();
 	}
 
 	public void disableCenterPID() {
-		visionCenterPID.disable();
+		visionTranslationController.disable();
 	}
 
 	public boolean reachedSetPoint() {
-		return visionCenterPID.onTarget();
+		return visionTranslationController.onTarget();
 	}
 
-	public double getCenterPID() {
-		return visionCenterPID.get();
+	public double getTranslationPID() {
+		return visionTranslationController.get();
 	}
 
 	// Math operations
@@ -214,7 +214,6 @@ public class Vision extends Subsystem {
 	/**
 	 * Returns the number of blobs found in the report. Use to ensure index is
 	 * range for accessing blob properties
-	 * 
 	 * 
 	 * @return integer blobs detected
 	 */

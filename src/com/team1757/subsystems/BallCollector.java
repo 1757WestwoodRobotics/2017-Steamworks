@@ -3,7 +3,7 @@ package com.team1757.subsystems;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-import com.team1757.commands.StopCollector;
+import com.team1757.commands.CollectorStop;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,7 +15,7 @@ public class BallCollector extends Subsystem {
 	private final CANTalon collectorFlyWheel = RobotMap.collectorFlyWheel;
 
     public void initDefaultCommand() {
-        setDefaultCommand(new StopCollector());
+        setDefaultCommand(new CollectorStop());
     }
     
     public void initializeFlyWheelPID() {

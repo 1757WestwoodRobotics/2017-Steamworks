@@ -3,24 +3,24 @@ package com.team1757.robot;
 import com.team1757.commands.CollectReverseWithPercentVoltage;
 import com.team1757.commands.CollectWithPercentVoltage;
 import com.team1757.commands.DriveStraight;
-import com.team1757.commands.FaceReflectiveTape;
-import com.team1757.commands.FollowReflectiveTape;
+import com.team1757.commands.VisionFaceReflectiveTape;
+import com.team1757.commands.VisionFollowReflectiveTape;
 import com.team1757.commands.GearManualInput;
 import com.team1757.commands.GearMatchStart;
 import com.team1757.commands.GearReceive;
 import com.team1757.commands.GearScore;
-import com.team1757.commands.GyroPIDClear;
+import com.team1757.commands.DriveGyroPIDClear;
 import com.team1757.commands.LiftUp;
-import com.team1757.commands.ResetGyro;
+import com.team1757.commands.DriveResetGyro;
 import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
-import com.team1757.commands.RunIndexer;
+import com.team1757.commands.IndexerRun;
 import com.team1757.commands.ShootWithSpeed;
 import com.team1757.commands.ShootWithVoltage;
-import com.team1757.commands.StopIndexer;
-import com.team1757.commands.StopLifter;
-import com.team1757.commands.StopShooter;
+import com.team1757.commands.IndexerStop;
+import com.team1757.commands.LifterStop;
+import com.team1757.commands.ShooterStop;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -116,8 +116,8 @@ public class OI {
 		
 		// Initialize commands
 		// Gyro Systems
-		SmartDashboard.putData(new ResetGyro());
-		SmartDashboard.putData(new GyroPIDClear());
+		SmartDashboard.putData(new DriveResetGyro());
+		SmartDashboard.putData(new DriveGyroPIDClear());
 
 		// Gyro Functions
 		SmartDashboard.putData(new RotateToAngle());
@@ -128,11 +128,11 @@ public class OI {
 		// Shooter Functions
 		SmartDashboard.putData(new ShootWithSpeed());
 		SmartDashboard.putData(new ShootWithVoltage());
-		SmartDashboard.putData(new StopShooter());
+		SmartDashboard.putData(new ShooterStop());
 
 		// Indexer Functions
-		SmartDashboard.putData(new RunIndexer());
-		SmartDashboard.putData(new StopIndexer());
+		SmartDashboard.putData(new IndexerRun());
+		SmartDashboard.putData(new IndexerStop());
 		
 		// Collector Functions
 		SmartDashboard.putData(new CollectWithPercentVoltage());
@@ -146,11 +146,11 @@ public class OI {
 
 		// Lifter Functions
 		SmartDashboard.putData(new LiftUp());
-		SmartDashboard.putData(new StopLifter());
+		SmartDashboard.putData(new LifterStop());
 		
 		// Vision Functions
-		SmartDashboard.putData(new FollowReflectiveTape());
-		SmartDashboard.putData(new FaceReflectiveTape());
+		SmartDashboard.putData(new VisionFollowReflectiveTape());
+		SmartDashboard.putData(new VisionFaceReflectiveTape());
 
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);

@@ -2,7 +2,7 @@ package com.team1757.subsystems;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
-import com.team1757.commands.StopLifter;
+import com.team1757.commands.LifterStop;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,7 +15,7 @@ public class Lifter extends Subsystem {
 	private final CANTalon liftTalon = RobotMap.liftTalon;
 
     public void initDefaultCommand() {
-        setDefaultCommand(new StopLifter());
+        setDefaultCommand(new LifterStop());
     }
     
     public void enableLifter() {
