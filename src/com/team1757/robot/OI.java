@@ -3,6 +3,7 @@ package com.team1757.robot;
 import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.CollectReverseWithPercentVoltage;
 import com.team1757.commands.CollectWithPercentVoltage;
+import com.team1757.commands.DriveGyroAssisted;
 import com.team1757.commands.DriveStraight;
 import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
@@ -22,6 +23,7 @@ import com.team1757.commands.ShootWithVoltage;
 import com.team1757.commands.IndexerStop;
 import com.team1757.commands.LifterStop;
 import com.team1757.commands.ShooterStop;
+import com.team1757.commands.VisionCenterTranslationX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -116,6 +118,11 @@ public class OI {
 		buttonBoxButton6 = new JoystickButton(buttonBox, buttonBoxButton6Port);
 		
 		// Initialize commands
+		
+		// Drive functions
+		SmartDashboard.putData(new DriveStraight(.5));
+		SmartDashboard.putData(new DriveGyroAssisted());
+		
 		// Gyro Systems
 		SmartDashboard.putData(new DriveResetGyro());
 		SmartDashboard.putData(new DriveGyroPIDClear());
@@ -124,7 +131,6 @@ public class OI {
 		SmartDashboard.putData(new RotateToAngle());
 		SmartDashboard.putData(new RotateDegrees());
 		SmartDashboard.putData(new RotateDegreesShortest());
-		SmartDashboard.putData(new DriveStraight(.5));
 
 		// Shooter Functions
 		SmartDashboard.putData(new ShootWithSpeed());
@@ -152,10 +158,10 @@ public class OI {
 		// Vision Functions
 		SmartDashboard.putData(new VisionFollowReflectiveTape());
 		SmartDashboard.putData(new VisionFaceReflectiveTape());
+		SmartDashboard.putData(new VisionCenterTranslationX());
 		
 		//CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
-
 
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);
