@@ -33,14 +33,14 @@ public class RobotMap {
 	private static final int driveTrainRightFrontPort = 3;
 	private static final int driveTrainRightBackPort = 4;
 	
-	private static final int shooterFlyWheelPort = 5; 
+	private static final int shooterFlyWheelPort = 8; 
 	private static final int indexerTalonPort = 9;
 	
-	private static final int collectorFlyWheelPort = 6;
+	private static final int collectorFlyWheelPort = 7;
 	
-	private static final int gearLoaderTalonPort = 7;
+	private static final int gearLoaderTalonPort = 6;
 	
-	private static final int liftTalonPort = 8;
+	private static final int liftTalonPort = 5;
 	
 	// Talon objects
 	public static CANTalon driveTrainLeftFront;
@@ -118,12 +118,12 @@ public class RobotMap {
 		driveTrainRightBack.enableBrakeMode(true);
 
         gearLoaderTalon.enableBrakeMode(true);
-        gearLoaderTalon.setReverseSoftLimit(210);
+        gearLoaderTalon.setReverseSoftLimit(270);
         gearLoaderTalon.enableReverseSoftLimit(true);
-        gearLoaderTalon.setForwardSoftLimit(1430);
+        gearLoaderTalon.setForwardSoftLimit(1300);
         gearLoaderTalon.enableForwardSoftLimit(true);
-        gearLoaderTalon.configMaxOutputVoltage(4.8);
-        gearLoaderTalon.configNominalOutputVoltage(4.8, 4.8);
+        gearLoaderTalon.configMaxOutputVoltage(0.8);
+        gearLoaderTalon.configNominalOutputVoltage(0.8, 0.8);
         
         liftTalon.enableBrakeMode(false);
         
