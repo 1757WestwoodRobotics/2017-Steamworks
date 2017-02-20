@@ -31,22 +31,66 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OI {
 
+	//Joystick Objects
 	private Joystick xbox360;
-	private Button buttonA;
+	private Joystick buttonBox;
 
-	private final int leftStickX = 0;
-	private final int leftStickY = 1;
-	private final int rightStickX = 4;
-	private final int gamepadPort = 0;
-
+	//Xbox360 Button Objects
+	private JoystickButton xboxButtonA;
+	private JoystickButton xboxButtonB;
+	private JoystickButton xboxButtonX;
+	private JoystickButton xboxButtonY;
+	
+	//ButtonBox Button Objects
+	private JoystickButton buttonBoxButton1;
+	private JoystickButton buttonBoxButton2;
+	private JoystickButton buttonBoxButton3;
+	private JoystickButton buttonBoxButton4;
+	private JoystickButton buttonBoxButton5;
+	private JoystickButton buttonBoxButton6;
+	
+	//Joystick Ports
+	private final int xbox360Port = 0;
+	private final int buttonBoxPort = 0;
+	
+	//Xbox360 Axis Ports
+	private final int xboxLeftStickX = 0;
+	private final int xboxLeftStickY = 1;
+	//
+	private final int xboxRightStickX = 4;
+	private final int xboxRightStickY = 5;
+	
+	//Xbox360 Button Ports
+	private final int xboxButtonAPort = 1;
+	private final int xboxButtonBPort = 2;
+	
+	//ButtonBox Button Ports
+	private final int buttonBoxButton1Port = 1;
+	private final int buttonBoxButton2Port = 2;
+	private final int buttonBoxButton3Port = 3;
+	private final int buttonBoxButton4Port = 4;
+	private final int buttonBoxButton5Port = 5;
+	private final int buttonBoxButton6Port = 6;
+	
+	//Input Control Constants
 	private final static double DEADBAND = 0.2;
 	private final static double GAIN = 0.7;
 
+	//OI Constructor
 	public OI() {
-		xbox360 = new Joystick(gamepadPort);
-		buttonA = new JoystickButton(xbox360, 1);
 		
-		// Initialize other commands
+		//Initialize Joysticks
+		xbox360 = new Joystick(xbox360Port);
+		buttonBox = new Joystick(buttonBoxPort);
+		
+		//Initialize Xbox360 Buttons
+		xboxButtonA = new JoystickButton(xbox360, xboxButtonAPort);
+		xboxButtonB = new JoystickButton(xbox360, xboxButtonBPort);
+		
+		//Initialize ButtonBox Buttons
+		buttonBoxButton1 = new JoystickButton(buttonBox, buttonBoxButton1Port);
+		
+		// Initialize commands
 		// Gyro Systems
 		SmartDashboard.putData(new ResetGyro());
 		SmartDashboard.putData(new GyroPIDClear());
