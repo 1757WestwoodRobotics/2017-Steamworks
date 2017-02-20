@@ -172,11 +172,12 @@ public class RobotMap {
 		visionCenterOutput = new VariablePIDOutput();
 
 		// Initialize PIDController (VisionCenter)
-		visionTranslationController = new PIDController(.05, 0.0, 0.04, visionCenterInput, visionCenterOutput);
+		visionTranslationController = new PIDController(1.0, 0.0, 0.04, visionCenterInput, visionCenterOutput);
 
 		// Configure PIDController (VisionCenter)
-		SmartDashboard.putData("VisionCenterController", visionTranslationController);
+		SmartDashboard.putData("visionTranslationController", visionTranslationController);
 		visionTranslationController.setInputRange(-1.0, 1.0);
 		visionTranslationController.setOutputRange(-1, 1);
+		visionTranslationController.setAbsoluteTolerance(.005);
 	}
 }
