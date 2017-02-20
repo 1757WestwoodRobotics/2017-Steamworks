@@ -3,6 +3,8 @@ package com.team1757.robot;
 import com.team1757.commands.CollectReverseWithPercentVoltage;
 import com.team1757.commands.CollectWithPercentVoltage;
 import com.team1757.commands.DriveStraight;
+import com.team1757.commands.FaceReflectiveTape;
+import com.team1757.commands.FollowReflectiveTape;
 import com.team1757.commands.GearManualInput;
 import com.team1757.commands.GearMatchStart;
 import com.team1757.commands.GearReceive;
@@ -79,6 +81,10 @@ public class OI {
 		// Lifter Functions
 		SmartDashboard.putData(new LiftUp());
 		SmartDashboard.putData(new StopLifter());
+		
+		// Vision Functions
+		SmartDashboard.putData(new FollowReflectiveTape());
+		SmartDashboard.putData(new FaceReflectiveTape());
 
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);

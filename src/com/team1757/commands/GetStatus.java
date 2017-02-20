@@ -23,8 +23,6 @@ public class GetStatus extends Command {
 		SmartDashboard.putNumber("visionPIDInput", RobotMap.visionCenterInput.pidGet());
 		SmartDashboard.putNumber("GyroAngle", RobotMap.driveTrainNavX.getAngle());
 		SmartDashboard.putNumber("BoundedGyroAngle", Robot.driveTrain.getCurrentBoundedAngle());
-    	SmartDashboard.putNumber("DisplacementX", Robot.driveTrain.getCurrentDisplacementX());
-    	SmartDashboard.putNumber("DisplacementY",  Robot.driveTrain.getCurrentDisplacementY());
     	
     	try {
     		if (Robot.gearLoader.isSensorPresent()) {
