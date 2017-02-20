@@ -1,5 +1,6 @@
 package com.team1757.robot;
 
+import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.CollectReverseWithPercentVoltage;
 import com.team1757.commands.CollectWithPercentVoltage;
 import com.team1757.commands.DriveStraight;
@@ -151,6 +152,10 @@ public class OI {
 		// Vision Functions
 		SmartDashboard.putData(new VisionFollowReflectiveTape());
 		SmartDashboard.putData(new VisionFaceReflectiveTape());
+		
+		//CommandGroup Functions
+		SmartDashboard.putData(new CGShootandIndex());
+
 
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);
