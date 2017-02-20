@@ -21,7 +21,7 @@ public class GetStatus extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		SmartDashboard.putNumber("visionPIDInput", RobotMap.visionCenterInput.pidGet());
-		SmartDashboard.putNumber("GyroAngle", RobotMap.driveTrainNavX.getAngle());
+		SmartDashboard.putNumber("GyroAngle", Robot.driveTrain.getCurrentRawAngle());
 		SmartDashboard.putNumber("BoundedGyroAngle", Robot.driveTrain.getCurrentBoundedAngle());
     	
     	try {
