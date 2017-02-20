@@ -35,7 +35,9 @@ public class VisionCenterPIDSource implements PIDSource {
 	@Override
 	public double pidGet() {
 		if (m_visionDetectionType == VisionDetectionType.ContourCenterX) {
-			return Robot.vision.getTargetCenterContour();
+			double test = Robot.vision.getTargetCenterContour();
+			System.out.println(test);
+			return test;
 		} else if (m_visionDetectionType == VisionDetectionType.ContourCenterY) {
 			
 		} else if (m_visionDetectionType == VisionDetectionType.BlobCenterY) {

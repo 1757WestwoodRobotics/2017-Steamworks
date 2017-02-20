@@ -17,8 +17,8 @@ public class Vision extends Subsystem {
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
 	private NetworkTable linesReport;
-	private int xResolution = 640;
-	private int yResolution = 480;
+	private int xResolution = 160;
+	private int yResolution = 120;
 	private int fps = 30;
 
 	public void initDefaultCommand() {

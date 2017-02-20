@@ -40,7 +40,7 @@ public class OI {
 	private final int gamepadPort = 0;
 
 	private final static double DEADBAND = 0.2;
-	//private final static double GAIN = 0.7;
+	private final static double GAIN = 0.7;
 
 	public OI() {
 		xbox360 = new Joystick(gamepadPort);
@@ -131,7 +131,21 @@ public class OI {
 		} else if (axis < -OI.DEADBAND) {
 			//output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis + DEADBAND) * 0.802);
 			//NEEDS TESTING
+			axis = -axis;
 			output = -(-4.59*(Math.pow(axis, 4)) + 10.027*(Math.pow(axis, 3)) - 6.322*(Math.pow(axis, 2)) + 1.909*axis - 0.0002595);
+		} else {
+			output = 0.0;
+		}
+		return output;
+	}
+	
+	public static double inputControlYOld(double axis) {
+		// Model by G(X-D)^3 + GX
+		double output = 0;
+		if (axis > OI.DEADBAND) {
+			output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis - DEADBAND) * GAIN);
+		} else if (axis < -OI.DEADBAND) {
+			output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis + DEADBAND) * GAIN);
 		} else {
 			output = 0.0;
 		}
