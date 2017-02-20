@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.team1757.commands.GetStatus;
-import com.team1757.commands.FollowReflectiveTape;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.DriveTrain;
 import com.team1757.subsystems.GearLoader;
@@ -62,7 +61,6 @@ public class Robot extends IterativeRobot {
 		
 		// Initialize OI
 		oi = new OI();
-		SmartDashboard.putData(new FollowReflectiveTape());
 		getStatus = new GetStatus();
 		getStatus.setRunWhenDisabled(true);
 
