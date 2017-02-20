@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * Control the robot manually using input from OI (controller)
  */
-public class ManualDrive extends Command {
+public class DriveManual extends Command {
 
-    public ManualDrive() {
+    public DriveManual() {
     	requires(Robot.driveTrain);
     }
 

@@ -42,6 +42,10 @@ public class OI {
 	private JoystickButton xboxButtonB;
 	private JoystickButton xboxButtonX;
 	private JoystickButton xboxButtonY;
+	private JoystickButton xboxButtonLB;
+	private JoystickButton xboxButtonRB;
+	private JoystickButton xboxButtonBack;
+	private JoystickButton xboxButtonStart;
 	
 	//ButtonBox Button Objects
 	private JoystickButton buttonBoxButton1;
@@ -58,13 +62,20 @@ public class OI {
 	//Xbox360 Axis Ports
 	private final int xboxLeftStickX = 0;
 	private final int xboxLeftStickY = 1;
-	//
+	private final int xboxLeftTrigger = 2;
+	private final int xboxRightTrigger = 3;
 	private final int xboxRightStickX = 4;
 	private final int xboxRightStickY = 5;
-	
+
 	//Xbox360 Button Ports
 	private final int xboxButtonAPort = 1;
 	private final int xboxButtonBPort = 2;
+	private final int xboxButtonXPort = 3;
+	private final int xboxButtonYPort = 4;
+	private final int xboxButtonLBPort = 5;
+	private final int xboxButtonRBPort = 6;
+	private final int xboxButtonBackPort = 7;
+	private final int xboxButtonStartPort = 8;
 	
 	//ButtonBox Button Ports
 	private final int buttonBoxButton1Port = 1;
@@ -88,9 +99,20 @@ public class OI {
 		//Initialize Xbox360 Buttons
 		xboxButtonA = new JoystickButton(xbox360, xboxButtonAPort);
 		xboxButtonB = new JoystickButton(xbox360, xboxButtonBPort);
+		xboxButtonX = new JoystickButton(xbox360, xboxButtonXPort);
+		xboxButtonY = new JoystickButton(xbox360, xboxButtonYPort);
+		xboxButtonLB = new JoystickButton(xbox360, xboxButtonLBPort);
+		xboxButtonRB = new JoystickButton(xbox360, xboxButtonRBPort);
+		xboxButtonBack = new JoystickButton(xbox360, xboxButtonBackPort);
+		xboxButtonStart = new JoystickButton(xbox360, xboxButtonStartPort);
 		
 		//Initialize ButtonBox Buttons
 		buttonBoxButton1 = new JoystickButton(buttonBox, buttonBoxButton1Port);
+		buttonBoxButton2 = new JoystickButton(buttonBox, buttonBoxButton2Port);
+		buttonBoxButton3 = new JoystickButton(buttonBox, buttonBoxButton3Port);
+		buttonBoxButton4 = new JoystickButton(buttonBox, buttonBoxButton4Port);
+		buttonBoxButton5 = new JoystickButton(buttonBox, buttonBoxButton5Port);
+		buttonBoxButton6 = new JoystickButton(buttonBox, buttonBoxButton6Port);
 		
 		// Initialize commands
 		// Gyro Systems
@@ -141,34 +163,34 @@ public class OI {
 	public Joystick getXbox360() {
 		return xbox360;
 	}
-
-	public Button getButtonA() {
-		return buttonA;
+	
+	public Joystick getButtonBox() {
+		return buttonBox;
+	}
+	
+	public int getXboxAxisLeftStickX() {
+		return xboxLeftStickX;
 	}
 
-	public int getAxisLeftStickX() {
-		return leftStickX;
+	public int getXboxAxisLeftStickY() {
+		return xboxLeftStickY;
 	}
 
-	public int getAxisLeftStickY() {
-		return leftStickY;
-	}
-
-	public int getxisRightStickX() {
-		return rightStickX;
+	public int getAxisRightStickX() {
+		return xboxRightStickX;
 	}
 
 	public double getTranslateX() {
-		return inputControlY(xbox360.getRawAxis(leftStickX));
+		return inputControlY(xbox360.getRawAxis(xboxLeftStickX));
 	}
 
 	public double getTranslateY() {
-		return inputControlX(xbox360.getRawAxis(leftStickY));
+		return inputControlX(xbox360.getRawAxis(xboxLeftStickY));
 	}
 
 	public double getRotate() {
 		// Use inputControlY because that model works for rotation
-		return inputControlY(xbox360.getRawAxis(rightStickX));
+		return inputControlY(xbox360.getRawAxis(xboxRightStickX));
 	}
 
 	public static double inputControlY(double axis) {

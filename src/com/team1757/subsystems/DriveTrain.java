@@ -1,7 +1,7 @@
 package com.team1757.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.team1757.commands.ManualDrive;
+import com.team1757.commands.DriveManual;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -22,7 +22,7 @@ public class DriveTrain extends Subsystem {
 	private final double ACCEL_PID_TOLERANCE = .05;
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new ManualDrive());
+		setDefaultCommand(new DriveManual());
 	}
 
 	// Motor
