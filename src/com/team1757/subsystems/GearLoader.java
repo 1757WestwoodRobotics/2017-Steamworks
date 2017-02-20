@@ -54,7 +54,6 @@ public class GearLoader extends Subsystem {
     }
     
     public void setTargetPosition(double targetPosition) {
-    	System.out.println(targetPosition + " " + getPulseWidthPosition());
     	gearTalon.set(targetPosition/4096.0);
     }
     

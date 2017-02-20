@@ -19,6 +19,8 @@ public class GearRun extends Command {
     	Robot.gearLoader.initEncoder();
     	Robot.gearLoader.enableGearTalon();
     	Robot.gearLoader.enableGearPIDControl();
+    	
+    	Robot.gearLoader.setTargetPosition(Robot.gearLoader.getPulseWidthPosition());
     }
 
     // Called repeatedly when this Command is scheduled to run
