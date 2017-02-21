@@ -1,5 +1,6 @@
 package com.team1757.robot;
 
+import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.CollectReverseWithPercentVoltage;
 import com.team1757.commands.CollectWithPercentVoltage;
 import com.team1757.commands.DriveGyroAssisted;
@@ -164,6 +165,9 @@ public class OI {
 		SmartDashboard.putData(new VisionGetReadyToScoreGear());
 		SmartDashboard.putData(new VisionFaceGearTarget());
 		SmartDashboard.putData(new VisionCenterOnGearTranslationX());
+		
+		//CommandGroup Functions
+		SmartDashboard.putData(new CGShootandIndex());
 
 		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);
