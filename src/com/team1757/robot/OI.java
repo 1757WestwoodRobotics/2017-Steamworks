@@ -67,8 +67,8 @@ public class OI {
 
 	// Joystick Ports
 	private final int xbox360Port = 0;
-	private final int buttonBoxPort = 0;
-
+	private final int buttonBoxPort = 1;
+	
 	// Xbox360 Axis Ports
 	private final int xboxLeftStickX = 0;
 	private final int xboxLeftStickY = 1;

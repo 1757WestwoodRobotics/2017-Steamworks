@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class RobotMap {
 
-	// Talon ids
+	//Talon ids
 	private static final int driveTrainLeftFrontPort = 1;
 	private static final int driveTrainLeftBackPort = 2;
 	private static final int driveTrainRightFrontPort = 3;
@@ -44,7 +44,7 @@ public class RobotMap {
 	//Spike ids
 	private static final int ringLightPort = 0;
 	
-	// Talon objects
+	//Talon objects
 	public static CANTalon driveTrainLeftFront;
 	public static CANTalon driveTrainLeftBack;
 	public static CANTalon driveTrainRightFront;
@@ -62,7 +62,7 @@ public class RobotMap {
 	//Spike objects
 	public static Relay ringLight;
 
-	// Robot objects
+	//Robot objects
 	public static RobotDrive driveTrainMecanumDrive;
 
 	public static AHRS driveTrainNavX;
@@ -88,7 +88,7 @@ public class RobotMap {
 	public static UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 
 	public static void init() {
-		// Initialize Talons
+		//Initialize Talons
 		driveTrainLeftFront = new CANTalon(driveTrainLeftFrontPort);
 		LiveWindow.addActuator("Drive Train", "Left Front", driveTrainLeftFront);
 
@@ -139,7 +139,7 @@ public class RobotMap {
         
         liftTalon.enableBrakeMode(false);
         
-		// Initialize RobotDrive
+		//Initialize RobotDrive
 		driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack, driveTrainRightFront,
 				driveTrainRightBack);
 
@@ -192,7 +192,7 @@ public class RobotMap {
 		visionTranslationController.setOutputRange(-1, 1);
 		visionTranslationController.setAbsoluteTolerance(.0005);
 
-		// Initalize PID Input / Output (Gear)
+		// Initialize PID Input / Output (Gear)
 		visionCenterGearInput = new VisionCenterGearPIDSource();
 		visionCenterGearInput.setVisionDetectionType(VisionDetectionType.ContourCenterX);
 		visionCenterGearOutput = new VariablePIDOutput();
@@ -207,7 +207,7 @@ public class RobotMap {
 		visionGearTranslationController.setAbsoluteTolerance(8);
 		
 		//Initialize RingLight
-		ringLight = new Relay(0, Relay.Direction.kForward);
+		ringLight = new Relay(ringLightPort, Relay.Direction.kForward);
 		
 	}
 }
