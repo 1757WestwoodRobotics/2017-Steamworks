@@ -126,10 +126,10 @@ public class OI {
 
 		// Bind Commands to Buttons
 		buttonBoxButton1.whenPressed(new GearReceive());
-		buttonBoxButton2.whenPressed(new GearScore());
-		buttonBoxButton3.whenPressed(new CollectWithPercentVoltage());
-		buttonBoxButton4.whenPressed(new CollectorStop());
-		buttonBoxButton5.whenPressed(new CGShootandIndex());
+		buttonBoxButton4.whenPressed(new GearScore());
+		buttonBoxButton2.whenPressed(new CollectWithPercentVoltage());
+		buttonBoxButton5.whenPressed(new CollectorStop());
+		buttonBoxButton3.whenPressed(new CGShootandIndex());
 		buttonBoxButton6.whenPressed(new CGShootandIndexStop());
 
 		// Put Commands on SmartDashboard
