@@ -3,27 +3,34 @@ package com.team1757.commands;
 import com.team1757.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @author ACabey
  */
-public class VisionCenterTranslationX extends Command {
+public class VisionCenterOnGearTranslationX extends Command {
 
-	public VisionCenterTranslationX() {
+	public VisionCenterOnGearTranslationX() {
 		requires(Robot.vision);
 		requires(Robot.driveTrain);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.vision.enableTranslationPID();
+		Robot.vision.enableGearTranslationPID();
 		Robot.driveTrain.enableGyroPID();
 		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.moveWithGyroPID(-Robot.vision.getTranslationPID(), 0.0);
+//		if(Robot.vision.reachedVisionGearTranslationSetpoint()){
+//			Robot.driveTrain.moveWithGyroPID(0, Robot.oi.getTranslateY());
+//		}else {
+//			Robot.driveTrain.moveWithGyroPID(-Robot.vision.getGearTranslationPID(), Robot.oi.getTranslateY());
+//		}
+		
+		Robot.driveTrain.moveWithGyroPID(-Robot.vision.getGearTranslationPID(), Robot.oi.getTranslateY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -34,7 +41,7 @@ public class VisionCenterTranslationX extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.vision.disableTranslationPID();
+		Robot.vision.disableGearTranslationPID();
 		Robot.driveTrain.disableGyroPID();
 	}
 

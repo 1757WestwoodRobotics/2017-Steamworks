@@ -14,6 +14,7 @@ public class Vision extends Subsystem {
 
 	private final UsbCamera camera = RobotMap.camera;
 	private final PIDController visionTranslationController = RobotMap.visionTranslationController;
+	private final PIDController visionGearTranslationController = RobotMap.visionGearTranslationController;
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
 	private NetworkTable linesReport;
@@ -24,22 +25,39 @@ public class Vision extends Subsystem {
 	public void initDefaultCommand() {
 	}
 
-	// PID
+	// PID Translation Controllers
 
 	public void enableTranslationPID() {
 		visionTranslationController.enable();
 	}
 
-	public void disableCenterPID() {
+	public void disableTranslationPID() {
 		visionTranslationController.disable();
 	}
 
-	public boolean reachedSetPoint() {
+	public boolean reachedVisionTranslationSetPoint() {
 		return visionTranslationController.onTarget();
 	}
 
 	public double getTranslationPID() {
 		return visionTranslationController.get();
+	}
+
+	public void enableGearTranslationPID() {
+		visionGearTranslationController.enable();
+	}
+
+	public void disableGearTranslationPID() {
+		visionGearTranslationController.disable();
+	}
+
+	public boolean reachedVisionGearTranslationSetpoint() {
+		return visionGearTranslationController.onTarget();
+	}
+
+	public double getGearTranslationPID() {
+//		System.out.println(visionGearTranslationController.get());
+		return visionGearTranslationController.get();
 	}
 
 	// Math operations
@@ -84,6 +102,39 @@ public class Vision extends Subsystem {
 
 	// Contours
 
+	public double getDifferenceInGearTargetAreas() {
+		// TODO Can do something smart with finding similar targets to use for
+		// this math when false targets like lights are published and can't be
+		// done with grip contours filter
+
+		updateContoursReport();
+		if (getContoursCount() == 2) {
+
+			// Left rectangle minus right rectangle
+			if (getContourCenterX(0) < getContourCenterX(1)) {
+				return getContourArea(0) - getContourArea(1);
+			} else {
+				return getContourArea(1) - getContourArea(0);
+			}
+
+		}
+		return 0;
+	}
+
+	public double getGearTargetCenter() {
+		// DOESN'T UPDATE because this only runs when the PIDcontroller using
+		// getDifferenceInAreas is running
+		// And arrayIndexOutofBounds errors arise when multiple things are
+		// updating tables so the index checking doesn't do its job
+		if (getContoursCount() == 2) {
+
+			// Center between the two targets
+			return normalizePixelsX((getContourCenterX(0) + getContourCenterX(1)) / 2);
+
+		}
+		return 0;
+	}
+
 	public double getTargetCenterContour() {
 		updateContoursReport();
 		if (getContoursCount() != 0) {
@@ -99,6 +150,9 @@ public class Vision extends Subsystem {
 	public void updateContoursReport() {
 		// A contours report contains centerX[], centerY[], solidity[],
 		// height[], area[], and width[]
+
+		// I think that it publishes the contours with the smallest area first
+		// in the array
 		contoursReport = NetworkTable.getTable("GRIP/myContoursReport");
 	}
 

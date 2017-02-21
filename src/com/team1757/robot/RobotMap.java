@@ -6,6 +6,7 @@ import com.team1757.subsystems.Vision;
 import com.team1757.utils.IllegalSourceException;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
+import com.team1757.utils.VisionCenterGearPIDSource;
 import com.team1757.utils.VisionCenterPIDSource;
 import com.team1757.utils.VisionDetectionType;
 
@@ -26,38 +27,35 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * floating around.
  */
 public class RobotMap {
-	
+
 	// Talon ids
 	private static final int driveTrainLeftFrontPort = 1;
 	private static final int driveTrainLeftBackPort = 2;
 	private static final int driveTrainRightFrontPort = 3;
 	private static final int driveTrainRightBackPort = 4;
 	
-	private static final int shooterFlyWheelPort = 5; 
+	private static final int shooterFlyWheelPort = 8; 
 	private static final int indexerTalonPort = 9;
-	
-	private static final int collectorFlyWheelPort = 6;
-	
-	private static final int gearLoaderTalonPort = 7;
-	
-	private static final int liftTalonPort = 8;
+	private static final int collectorFlyWheelPort = 7;
+	private static final int gearLoaderTalonPort = 6;
+	private static final int liftTalonPort = 5;
 	
 	// Talon objects
 	public static CANTalon driveTrainLeftFront;
 	public static CANTalon driveTrainLeftBack;
 	public static CANTalon driveTrainRightFront;
 	public static CANTalon driveTrainRightBack;
-    
-    public static CANTalon shooterFlyWheel;
-    public static CANTalon indexerTalon;
-    
-    public static CANTalon collectorFlyWheel;
-    
-    public static CANTalon gearLoaderTalon;
-    
-    public static CANTalon liftTalon;
-    
-    //Robot objects
+
+	public static CANTalon shooterFlyWheel;
+	public static CANTalon indexerTalon;
+
+	public static CANTalon collectorFlyWheel;
+
+	public static CANTalon gearLoaderTalon;
+
+	public static CANTalon liftTalon;
+
+	// Robot objects
 	public static RobotDrive driveTrainMecanumDrive;
 
 	public static AHRS driveTrainNavX;
@@ -65,7 +63,8 @@ public class RobotMap {
 	public static PIDController gyroController;
 	public static PIDController accelControllerX;
 	public static PIDController accelControllerY;
-	
+	public static PIDController visionGearTranslationController;
+
 	private static NavXGyroWrapper gyroInput;
 	private static VariablePIDOutput gyroOutput;
 
@@ -73,6 +72,9 @@ public class RobotMap {
 	// TODO change back to private
 	public static VisionCenterPIDSource visionCenterInput;
 	public static VariablePIDOutput visionCenterOutput;
+
+	private static VisionCenterGearPIDSource visionCenterGearInput;
+	public static VariablePIDOutput visionCenterGearOutput;
 
 	public static Vision vision;
 
@@ -92,21 +94,21 @@ public class RobotMap {
 		driveTrainRightBack = new CANTalon(driveTrainRightBackPort);
 		LiveWindow.addActuator("Drive Train", "Right Back", driveTrainRightBack);
 
-        shooterFlyWheel = new CANTalon(shooterFlyWheelPort);
-        LiveWindow.addActuator("Shooter", "Shooter FlyWheel", shooterFlyWheel);
-        
-        collectorFlyWheel = new CANTalon(collectorFlyWheelPort);
-        LiveWindow.addActuator("Collector", "Collector FlyWheel", collectorFlyWheel);
-        
-        indexerTalon = new CANTalon(indexerTalonPort);
-        LiveWindow.addActuator("Indexer", "Indexer FlyWheel", indexerTalon);
-        
-        gearLoaderTalon = new CANTalon(gearLoaderTalonPort);
-        LiveWindow.addActuator("GearLoader", "GearLoader Talon", gearLoaderTalon);
-        
-        liftTalon = new CANTalon(liftTalonPort);
-        LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
-        
+		shooterFlyWheel = new CANTalon(shooterFlyWheelPort);
+		LiveWindow.addActuator("Shooter", "Shooter FlyWheel", shooterFlyWheel);
+
+		collectorFlyWheel = new CANTalon(collectorFlyWheelPort);
+		LiveWindow.addActuator("Collector", "Collector FlyWheel", collectorFlyWheel);
+
+		indexerTalon = new CANTalon(indexerTalonPort);
+		LiveWindow.addActuator("Indexer", "Indexer FlyWheel", indexerTalon);
+
+		gearLoaderTalon = new CANTalon(gearLoaderTalonPort);
+		LiveWindow.addActuator("GearLoader", "GearLoader Talon", gearLoaderTalon);
+
+		liftTalon = new CANTalon(liftTalonPort);
+		LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
+
 		// Configure Talons
 		// Invert talons to correct driving
 		driveTrainLeftFront.setInverted(true);
@@ -118,12 +120,12 @@ public class RobotMap {
 		driveTrainRightBack.enableBrakeMode(true);
 
         gearLoaderTalon.enableBrakeMode(true);
-        gearLoaderTalon.setReverseSoftLimit(210);
+        gearLoaderTalon.setReverseSoftLimit(270);
         gearLoaderTalon.enableReverseSoftLimit(true);
-        gearLoaderTalon.setForwardSoftLimit(1430);
+        gearLoaderTalon.setForwardSoftLimit(1300);
         gearLoaderTalon.enableForwardSoftLimit(true);
-        gearLoaderTalon.configMaxOutputVoltage(4.8);
-        gearLoaderTalon.configNominalOutputVoltage(4.8, 4.8);
+        gearLoaderTalon.configMaxOutputVoltage(0.8);
+        gearLoaderTalon.configNominalOutputVoltage(0.8, 0.8);
         
         liftTalon.enableBrakeMode(false);
         
@@ -148,7 +150,7 @@ public class RobotMap {
 		driveTrainNavX.setPIDSourceType(PIDSourceType.kDisplacement);
 		driveTrainNavX.reset();
 
-        // Initialize PID Input/ Output (gyroscope)
+		// Initialize PID Input/ Output (gyroscope)
 		try {
 			gyroInput = new NavXGyroWrapper(driveTrainNavX);
 		} catch (IllegalSourceException e) {
@@ -156,17 +158,17 @@ public class RobotMap {
 		}
 		gyroOutput = new VariablePIDOutput();
 
-        // Initialize PIDController (gyroscope)
+		// Initialize PIDController (gyroscope)
 		gyroController = new PIDController(0.034, 0.0, 0.04, gyroInput, gyroOutput);
 
-        // Configure PIDController (gyroscope)
+		// Configure PIDController (gyroscope)
 		SmartDashboard.putData("RotateController", gyroController);
 		gyroController.setOutputRange(-1.0, 1.0);
 		gyroController.setAbsoluteTolerance(2.0f);
-        gyroController.setContinuous(true);
+		gyroController.setContinuous(true);
 		driveTrainNavX.reset();
 
-		// Initialize PID Input/ Output
+		// Initialize PID Input/ Output (VisionCenter)
 		visionCenterInput = new VisionCenterPIDSource();
 		visionCenterInput.setVisionDetectionType(VisionDetectionType.ContourCenterX);
 		visionCenterOutput = new VariablePIDOutput();
@@ -178,6 +180,20 @@ public class RobotMap {
 		SmartDashboard.putData("visionTranslationController", visionTranslationController);
 		visionTranslationController.setInputRange(-1.0, 1.0);
 		visionTranslationController.setOutputRange(-1, 1);
-		visionTranslationController.setAbsoluteTolerance(.005);
+		visionTranslationController.setAbsoluteTolerance(.0005);
+
+		// Initalize PID Input / Output (Gear)
+		visionCenterGearInput = new VisionCenterGearPIDSource();
+		visionCenterGearInput.setVisionDetectionType(VisionDetectionType.ContourCenterX);
+		visionCenterGearOutput = new VariablePIDOutput();
+
+		// Initialize PIDController (Gear)
+		visionGearTranslationController = new PIDController(.03, 0.0002, .04, visionCenterGearInput,
+				visionCenterGearOutput);
+
+		// Configure PIDController (Gear)
+		SmartDashboard.putData("visionGearTranslationController", visionGearTranslationController);
+		visionGearTranslationController.setOutputRange(-.5, .5);
+		visionGearTranslationController.setAbsoluteTolerance(8);
 	}
 }

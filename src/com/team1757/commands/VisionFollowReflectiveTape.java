@@ -20,7 +20,8 @@ public class VisionFollowReflectiveTape extends Command {
 
 		// Using GyroPID with camera
 		Robot.driveTrain.enableGyroPID();
-		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getTargetCenterContour() * 19.82));
+		Robot.driveTrain.setTargetAngle(
+				Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getTargetCenterContour() * 19.82));
 //		SmartDashboard.putNumber("Vision center contour", Robot.vision.getTargetCenterContour());
 //		SmartDashboard.putNumber("Vision angular center contour", Robot.vision.getTargetCenterContour() * 19.82);
 //		SmartDashboard.putNumber("Vision target angle", Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getTargetCenterContour() * 18.55));

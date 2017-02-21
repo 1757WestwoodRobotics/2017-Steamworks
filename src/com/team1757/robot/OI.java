@@ -25,10 +25,12 @@ import com.team1757.commands.ShootWithVoltage;
 import com.team1757.commands.IndexerStop;
 import com.team1757.commands.LifterStop;
 import com.team1757.commands.ShooterStop;
+import com.team1757.commands.VisionCenterOnGearTranslationX;
+import com.team1757.commands.VisionGetReadyToScoreGear;
 import com.team1757.commands.VisionCenterTranslationX;
+import com.team1757.commands.VisionFaceGearTarget;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -169,12 +171,15 @@ public class OI {
 		SmartDashboard.putData(new VisionFollowReflectiveTape());
 		SmartDashboard.putData(new VisionFaceReflectiveTape());
 		SmartDashboard.putData(new VisionCenterTranslationX());
+		SmartDashboard.putData(new VisionGetReadyToScoreGear());
+		SmartDashboard.putData(new VisionFaceGearTarget());
+		SmartDashboard.putData(new VisionCenterOnGearTranslationX());
 		
 		//CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
 		SmartDashboard.putData(new CGShootandIndexStop());
 
-		// Configure LiveWindow 
+		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);
 		SmartDashboard.putNumber("angularDelta", 0.0);
 		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
