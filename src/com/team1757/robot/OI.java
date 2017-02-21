@@ -1,8 +1,10 @@
 package com.team1757.robot;
 
 import com.team1757.commands.CGShootandIndex;
+import com.team1757.commands.CGShootandIndexStop;
 import com.team1757.commands.CollectReverseWithPercentVoltage;
 import com.team1757.commands.CollectWithPercentVoltage;
+import com.team1757.commands.CollectorStop;
 import com.team1757.commands.DriveGyroAssisted;
 import com.team1757.commands.DriveStraight;
 import com.team1757.commands.VisionFaceReflectiveTape;
@@ -117,8 +119,15 @@ public class OI {
 		buttonBoxButton5 = new JoystickButton(buttonBox, buttonBoxButton5Port);
 		buttonBoxButton6 = new JoystickButton(buttonBox, buttonBoxButton6Port);
 		
-		// Initialize commands
+		//Bind Commands to Buttons
+		buttonBoxButton1.whenPressed(new GearReceive());
+		buttonBoxButton2.whenPressed(new GearScore());
+		buttonBoxButton3.whenPressed(new CollectWithPercentVoltage());
+		buttonBoxButton4.whenPressed(new CollectorStop());
+		buttonBoxButton5.whenPressed(new CGShootandIndex());
+		buttonBoxButton6.whenPressed(new CGShootandIndexStop());
 		
+		//Put Commands on SmartDashboard
 		// Drive functions
 		SmartDashboard.putData(new DriveStraight(.5));
 		SmartDashboard.putData(new DriveGyroAssisted());
@@ -144,6 +153,7 @@ public class OI {
 		// Collector Functions
 		SmartDashboard.putData(new CollectWithPercentVoltage());
 		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
+		SmartDashboard.putData(new CollectorStop());
 
 		// GearLoader Functions
 		SmartDashboard.putData(new GearManualInput());
@@ -162,6 +172,7 @@ public class OI {
 		
 		//CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
+		SmartDashboard.putData(new CGShootandIndexStop());
 
 		// Configure LiveWindow 
 		SmartDashboard.putNumber("targetAngle", 0.0);
