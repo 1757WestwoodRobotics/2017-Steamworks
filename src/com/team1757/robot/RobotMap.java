@@ -197,6 +197,6 @@ public class RobotMap {
 		// Configure PIDController (Gear)
 		SmartDashboard.putData("visionGearTranslationController", visionGearTranslationController);
 		visionGearTranslationController.setOutputRange(-.5, .5);
-		visionTranslationController.setAbsoluteTolerance(3);
+		visionGearTranslationController.setAbsoluteTolerance(8);
 	}
 }
