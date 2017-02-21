@@ -27,6 +27,8 @@ import com.team1757.commands.LifterStop;
 import com.team1757.commands.ShooterStop;
 import com.team1757.commands.VisionCenterOnGearTranslationX;
 import com.team1757.commands.VisionGetReadyToScoreGear;
+import com.team1757.commands.VisionRingLightOff;
+import com.team1757.commands.VisionRingLightOn;
 import com.team1757.commands.VisionCenterTranslationX;
 import com.team1757.commands.VisionFaceGearTarget;
 
@@ -174,6 +176,10 @@ public class OI {
 		SmartDashboard.putData(new VisionGetReadyToScoreGear());
 		SmartDashboard.putData(new VisionFaceGearTarget());
 		SmartDashboard.putData(new VisionCenterOnGearTranslationX());
+		
+		//RingLight Functions
+		SmartDashboard.putData(new VisionRingLightOn());
+		SmartDashboard.putData(new VisionRingLightOff());
 		
 		//CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());

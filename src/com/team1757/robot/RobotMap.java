@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -40,6 +41,9 @@ public class RobotMap {
 	private static final int gearLoaderTalonPort = 6;
 	private static final int liftTalonPort = 5;
 	
+	//Spike ids
+	private static final int ringLightPort = 0;
+	
 	// Talon objects
 	public static CANTalon driveTrainLeftFront;
 	public static CANTalon driveTrainLeftBack;
@@ -54,6 +58,9 @@ public class RobotMap {
 	public static CANTalon gearLoaderTalon;
 
 	public static CANTalon liftTalon;
+	
+	//Spike objects
+	public static Relay ringLight;
 
 	// Robot objects
 	public static RobotDrive driveTrainMecanumDrive;
@@ -195,5 +202,9 @@ public class RobotMap {
 		SmartDashboard.putData("visionGearTranslationController", visionGearTranslationController);
 		visionGearTranslationController.setOutputRange(-.5, .5);
 		visionGearTranslationController.setAbsoluteTolerance(8);
+		
+		//Initialize RingLight
+		ringLight = new Relay(0, Relay.Direction.kForward);
+		
 	}
 }

@@ -4,6 +4,7 @@ import com.team1757.robot.RobotMap;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -15,9 +16,12 @@ public class Vision extends Subsystem {
 	private final UsbCamera camera = RobotMap.camera;
 	private final PIDController visionTranslationController = RobotMap.visionTranslationController;
 	private final PIDController visionGearTranslationController = RobotMap.visionGearTranslationController;
+	private static Relay ringLight = RobotMap.ringLight;
+	
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
 	private NetworkTable linesReport;
+	
 	private int xResolution = 160;
 	private int yResolution = 120;
 	private int fps = 30;
@@ -402,6 +406,15 @@ public class Vision extends Subsystem {
 		double[] defaultValue = new double[0];
 		double[] y2s = linesReport.getNumberArray("y2", defaultValue);
 		return y2s[lineIndex];
+	}
+	
+	//Ring Light Methods
+	public void turnOnRingLight() {
+		ringLight.set(Relay.Value.kOn);
+	}
+	
+	public void turnOffRingLight() {
+		ringLight.set(Relay.Value.kOff);
 	}
 
 }
