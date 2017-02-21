@@ -187,16 +187,16 @@ public class RobotMap {
 
 		// Initalize PID Input / Output (Gear)
 		visionCenterGearInput = new VisionCenterGearPIDSource();
-		visionCenterInput.setVisionDetectionType(VisionDetectionType.ContourCenterX);
+		visionCenterGearInput.setVisionDetectionType(VisionDetectionType.ContourCenterX);
 		visionCenterGearOutput = new VariablePIDOutput();
 
 		// Initialize PIDController (Gear)
-		visionGearTranslationController = new PIDController(1.0, 0.0, .04, visionCenterGearInput,
+		visionGearTranslationController = new PIDController(.03, 0.0002, .04, visionCenterGearInput,
 				visionCenterGearOutput);
 
 		// Configure PIDController (Gear)
 		SmartDashboard.putData("visionGearTranslationController", visionGearTranslationController);
-		visionGearTranslationController.setOutputRange(-1, 1);
+		visionGearTranslationController.setOutputRange(-.5, .5);
 		visionTranslationController.setAbsoluteTolerance(3);
 	}
 }

@@ -56,6 +56,7 @@ public class Vision extends Subsystem {
 	}
 
 	public double getGearTranslationPID() {
+//		System.out.println(visionGearTranslationController.get());
 		return visionGearTranslationController.get();
 	}
 
