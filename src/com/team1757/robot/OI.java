@@ -7,6 +7,7 @@ import com.team1757.commands.CollectWithPercentVoltage;
 import com.team1757.commands.CollectorStop;
 import com.team1757.commands.DriveGyroAssisted;
 import com.team1757.commands.DriveStraight;
+import com.team1757.commands.DriveToggleDirection;
 import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
 import com.team1757.commands.GearManualInput;
@@ -42,11 +43,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OI {
 
-	//Joystick Objects
+	// Joystick Objects
 	private Joystick xbox360;
 	private Joystick buttonBox;
 
-	//Xbox360 Button Objects
+	// Xbox360 Button Objects
 	private JoystickButton xboxButtonA;
 	private JoystickButton xboxButtonB;
 	private JoystickButton xboxButtonX;
@@ -55,20 +56,20 @@ public class OI {
 	private JoystickButton xboxButtonRB;
 	private JoystickButton xboxButtonBack;
 	private JoystickButton xboxButtonStart;
-	
-	//ButtonBox Button Objects
+
+	// ButtonBox Button Objects
 	private JoystickButton buttonBoxButton1;
 	private JoystickButton buttonBoxButton2;
 	private JoystickButton buttonBoxButton3;
 	private JoystickButton buttonBoxButton4;
 	private JoystickButton buttonBoxButton5;
 	private JoystickButton buttonBoxButton6;
-	
-	//Joystick Ports
+
+	// Joystick Ports
 	private final int xbox360Port = 0;
 	private final int buttonBoxPort = 0;
-	
-	//Xbox360 Axis Ports
+
+	// Xbox360 Axis Ports
 	private final int xboxLeftStickX = 0;
 	private final int xboxLeftStickY = 1;
 	private final int xboxLeftTrigger = 2;
@@ -76,7 +77,7 @@ public class OI {
 	private final int xboxRightStickX = 4;
 	private final int xboxRightStickY = 5;
 
-	//Xbox360 Button Ports
+	// Xbox360 Button Ports
 	private final int xboxButtonAPort = 1;
 	private final int xboxButtonBPort = 2;
 	private final int xboxButtonXPort = 3;
@@ -85,27 +86,27 @@ public class OI {
 	private final int xboxButtonRBPort = 6;
 	private final int xboxButtonBackPort = 7;
 	private final int xboxButtonStartPort = 8;
-	
-	//ButtonBox Button Ports
+
+	// ButtonBox Button Ports
 	private final int buttonBoxButton1Port = 1;
 	private final int buttonBoxButton2Port = 2;
 	private final int buttonBoxButton3Port = 3;
 	private final int buttonBoxButton4Port = 4;
 	private final int buttonBoxButton5Port = 5;
 	private final int buttonBoxButton6Port = 6;
-	
-	//Input Control Constants
+
+	// Input Control Constants
 	private final static double DEADBAND = 0.2;
 	private final static double GAIN = 0.7;
 
-	//OI Constructor
+	// OI Constructor
 	public OI() {
-		
-		//Initialize Joysticks
+
+		// Initialize Joysticks
 		xbox360 = new Joystick(xbox360Port);
 		buttonBox = new Joystick(buttonBoxPort);
-		
-		//Initialize Xbox360 Buttons
+
+		// Initialize Xbox360 Buttons
 		xboxButtonA = new JoystickButton(xbox360, xboxButtonAPort);
 		xboxButtonB = new JoystickButton(xbox360, xboxButtonBPort);
 		xboxButtonX = new JoystickButton(xbox360, xboxButtonXPort);
@@ -114,28 +115,29 @@ public class OI {
 		xboxButtonRB = new JoystickButton(xbox360, xboxButtonRBPort);
 		xboxButtonBack = new JoystickButton(xbox360, xboxButtonBackPort);
 		xboxButtonStart = new JoystickButton(xbox360, xboxButtonStartPort);
-		
-		//Initialize ButtonBox Buttons
+
+		// Initialize ButtonBox Buttons
 		buttonBoxButton1 = new JoystickButton(buttonBox, buttonBoxButton1Port);
 		buttonBoxButton2 = new JoystickButton(buttonBox, buttonBoxButton2Port);
 		buttonBoxButton3 = new JoystickButton(buttonBox, buttonBoxButton3Port);
 		buttonBoxButton4 = new JoystickButton(buttonBox, buttonBoxButton4Port);
 		buttonBoxButton5 = new JoystickButton(buttonBox, buttonBoxButton5Port);
 		buttonBoxButton6 = new JoystickButton(buttonBox, buttonBoxButton6Port);
-		
-		//Bind Commands to Buttons
+
+		// Bind Commands to Buttons
 		buttonBoxButton1.whenPressed(new GearReceive());
 		buttonBoxButton2.whenPressed(new GearScore());
 		buttonBoxButton3.whenPressed(new CollectWithPercentVoltage());
 		buttonBoxButton4.whenPressed(new CollectorStop());
 		buttonBoxButton5.whenPressed(new CGShootandIndex());
 		buttonBoxButton6.whenPressed(new CGShootandIndexStop());
-		
-		//Put Commands on SmartDashboard
+
+		// Put Commands on SmartDashboard
 		// Drive functions
 		SmartDashboard.putData(new DriveStraight(.5));
 		SmartDashboard.putData(new DriveGyroAssisted());
-		
+		SmartDashboard.putData(new DriveToggleDirection());
+
 		// Gyro Systems
 		SmartDashboard.putData(new DriveResetGyro());
 		SmartDashboard.putData(new DriveGyroPIDClear());
@@ -153,7 +155,7 @@ public class OI {
 		// Indexer Functions
 		SmartDashboard.putData(new IndexerRun());
 		SmartDashboard.putData(new IndexerStop());
-		
+
 		// Collector Functions
 		SmartDashboard.putData(new CollectWithPercentVoltage());
 		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
@@ -168,7 +170,7 @@ public class OI {
 		// Lifter Functions
 		SmartDashboard.putData(new LiftUp());
 		SmartDashboard.putData(new LifterStop());
-		
+
 		// Vision Functions
 		SmartDashboard.putData(new VisionFollowReflectiveTape());
 		SmartDashboard.putData(new VisionFaceReflectiveTape());
@@ -176,12 +178,12 @@ public class OI {
 		SmartDashboard.putData(new VisionGetReadyToScoreGear());
 		SmartDashboard.putData(new VisionFaceGearTarget());
 		SmartDashboard.putData(new VisionCenterOnGearTranslationX());
-		
-		//RingLight Functions
+
+		// RingLight Functions
 		SmartDashboard.putData(new VisionRingLightOn());
 		SmartDashboard.putData(new VisionRingLightOff());
-		
-		//CommandGroup Functions
+
+		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
 		SmartDashboard.putData(new CGShootandIndexStop());
 
@@ -190,17 +192,17 @@ public class OI {
 		SmartDashboard.putNumber("angularDelta", 0.0);
 		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
 		SmartDashboard.putNumber("Gear Manual Target Position", 618.0);
-		
+
 	}
 
 	public Joystick getXbox360() {
 		return xbox360;
 	}
-	
+
 	public Joystick getButtonBox() {
 		return buttonBox;
 	}
-	
+
 	public int getXboxAxisLeftStickX() {
 		return xboxLeftStickX;
 	}
@@ -230,20 +232,24 @@ public class OI {
 		// Modeled by -4.59x^4+10.027x^3-6.344x^2+1.909x-0.0002595
 		double output = 0;
 		if (axis > OI.DEADBAND) {
-			//output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis - DEADBAND) * 0.802);
-			//NEEDS TESTING!!!
-			output = -4.59*(Math.pow(axis, 4)) + 10.027*(Math.pow(axis, 3)) - 6.322*(Math.pow(axis, 2)) + 1.909*axis - 0.0002595;
+			// output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis -
+			// DEADBAND) * 0.802);
+			// NEEDS TESTING!!!
+			output = -4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) - 6.322 * (Math.pow(axis, 2))
+					+ 1.909 * axis - 0.0002595;
 		} else if (axis < -OI.DEADBAND) {
-			//output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis + DEADBAND) * 0.802);
-			//NEEDS TESTING
+			// output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis +
+			// DEADBAND) * 0.802);
+			// NEEDS TESTING
 			axis = -axis;
-			output = -(-4.59*(Math.pow(axis, 4)) + 10.027*(Math.pow(axis, 3)) - 6.322*(Math.pow(axis, 2)) + 1.909*axis - 0.0002595);
+			output = -(-4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) - 6.322 * (Math.pow(axis, 2))
+					+ 1.909 * axis - 0.0002595);
 		} else {
 			output = 0.0;
 		}
 		return output;
 	}
-	
+
 	public static double inputControlYOld(double axis) {
 		// Model by G(X-D)^3 + GX
 		double output = 0;

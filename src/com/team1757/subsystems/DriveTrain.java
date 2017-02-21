@@ -26,6 +26,22 @@ public class DriveTrain extends Subsystem {
 	}
 
 	// Motor
+	
+	public void toggleMotorsDirection(){
+		if(RobotMap.driveTrainLeftBack.getInverted()){
+			RobotMap.driveTrainLeftFront.setInverted(false);
+			RobotMap.driveTrainLeftBack.setInverted(false);
+			RobotMap.driveTrainRightFront.setInverted(true);
+			RobotMap.driveTrainRightBack.setInverted(true);
+		}
+		else {
+			RobotMap.driveTrainLeftFront.setInverted(true);
+			RobotMap.driveTrainLeftBack.setInverted(true);
+			RobotMap.driveTrainRightFront.setInverted(false);
+			RobotMap.driveTrainRightBack.setInverted(false);
+		}
+	}
+	
 
 	/**
 	 * Manual Cartesian Drive

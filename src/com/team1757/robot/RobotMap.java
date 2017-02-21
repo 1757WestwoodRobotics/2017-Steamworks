@@ -127,12 +127,15 @@ public class RobotMap {
 		driveTrainRightBack.enableBrakeMode(true);
 
         gearLoaderTalon.enableBrakeMode(true);
-        gearLoaderTalon.setReverseSoftLimit(270);
-        gearLoaderTalon.enableReverseSoftLimit(true);
-        gearLoaderTalon.setForwardSoftLimit(1300);
-        gearLoaderTalon.enableForwardSoftLimit(true);
-        gearLoaderTalon.configMaxOutputVoltage(0.8);
-        gearLoaderTalon.configNominalOutputVoltage(0.8, 0.8);
+        
+        // Soft Limits
+        gearLoaderTalon.setReverseSoftLimit(270/4096.0);
+        gearLoaderTalon.enableReverseSoftLimit(false);
+        gearLoaderTalon.setForwardSoftLimit(1300/4096.0);
+        gearLoaderTalon.enableForwardSoftLimit(false);
+        
+        gearLoaderTalon.configMaxOutputVoltage(4.2);
+        gearLoaderTalon.configNominalOutputVoltage(4.2, 4.2);
         
         liftTalon.enableBrakeMode(false);
         

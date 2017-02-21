@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class GearLoader extends Subsystem {
 
 	private static CANTalon gearTalon = RobotMap.gearLoaderTalon;
-	private final double GEAR_PID_TOLERANCE = 30;
+	private final double GEAR_PID_TOLERANCE = 80;
 	
 	FeedbackDeviceStatus gearEncoderStatus = gearTalon.isSensorPresent(FeedbackDevice.CtreMagEncoder_Absolute);
 
@@ -74,7 +74,7 @@ public class GearLoader extends Subsystem {
     }
     
     public boolean reachedSetpoint() {
-    	return (Math.abs(gearTalon.getClosedLoopError()) < GEAR_PID_TOLERANCE);
+    	return (Math.abs(gearTalon.getSetpoint()*4096.0 - getPulseWidthPosition()) < GEAR_PID_TOLERANCE);
     }
     
     public void runGearTalon() {
