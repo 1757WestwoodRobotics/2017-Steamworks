@@ -18,11 +18,12 @@ public class VisionGetReadyToScoreGear extends Command {
 	protected void initialize() {
 		// Using GyroPID with camera
 		Robot.driveTrain.enableGyroPID();
-		Robot.driveTrain.setTargetAngle(
-				Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getGearTargetCenter() * 19.82));
-
+		
 		// Using TranslationGearPID with Camera
 		Robot.vision.enableGearTranslationPID();
+		
+		Robot.driveTrain.setTargetAngle(
+				Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getGearTargetCenter() * 19.82));
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -36,6 +37,7 @@ public class VisionGetReadyToScoreGear extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
+		//return Robot.vision.reachedVisionGearTranslationSetpoint() && Robot.driveTrain.reachedGyroSetpoint();
 		return false;
 	}
 

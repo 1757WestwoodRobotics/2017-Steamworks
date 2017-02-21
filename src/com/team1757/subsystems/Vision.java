@@ -56,7 +56,7 @@ public class Vision extends Subsystem {
 	}
 
 	public boolean reachedVisionGearTranslationSetpoint() {
-		return visionGearTranslationController.onTarget();
+		return Math.abs(visionGearTranslationController.getError()) < 1;
 	}
 
 	public double getGearTranslationPID() {
@@ -79,6 +79,7 @@ public class Vision extends Subsystem {
 	public void init() {
 		camera.setFPS(fps);
 		camera.setResolution(xResolution, yResolution);
+		camera.setExposureManual(0);
 	}
 
 	public void setResolution(int x, int y) {
@@ -126,10 +127,8 @@ public class Vision extends Subsystem {
 	}
 
 	public double getGearTargetCenter() {
-		// DOESN'T UPDATE because this only runs when the PIDcontroller using
-		// getDifferenceInAreas is running
-		// And arrayIndexOutofBounds errors arise when multiple things are
-		// updating tables so the index checking doesn't do its job
+		//TODO updating table when other thing is updating is no good
+		updateContoursReport();
 		if (getContoursCount() == 2) {
 
 			// Center between the two targets
@@ -408,7 +407,7 @@ public class Vision extends Subsystem {
 		return y2s[lineIndex];
 	}
 	
-	//Ring Light Methods
+	// Ring Light
 	public void turnOnRingLight() {
 		ringLight.set(Relay.Value.kOn);
 	}

@@ -15,7 +15,7 @@ public class DriveToggleDirection extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.driveTrain.toggleMotorsDirection();
+		Robot.driveTrain.toggleInversion();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

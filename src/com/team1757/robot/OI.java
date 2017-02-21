@@ -1,5 +1,6 @@
 package com.team1757.robot;
 
+import com.team1757.commands.CGCenterAndScoreGear;
 import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.CGShootandIndexStop;
 import com.team1757.commands.CollectReverseWithPercentVoltage;
@@ -15,6 +16,7 @@ import com.team1757.commands.GearMatchStart;
 import com.team1757.commands.GearReceive;
 import com.team1757.commands.GearScore;
 import com.team1757.commands.DriveGyroPIDClear;
+import com.team1757.commands.DriveManual;
 import com.team1757.commands.LiftUp;
 import com.team1757.commands.DriveResetGyro;
 import com.team1757.commands.RotateDegrees;
@@ -30,6 +32,7 @@ import com.team1757.commands.VisionCenterOnGearTranslationX;
 import com.team1757.commands.VisionGetReadyToScoreGear;
 import com.team1757.commands.VisionRingLightOff;
 import com.team1757.commands.VisionRingLightOn;
+import com.team1757.commands.VisionToggleCamera;
 import com.team1757.commands.VisionCenterTranslationX;
 import com.team1757.commands.VisionFaceGearTarget;
 
@@ -68,7 +71,7 @@ public class OI {
 	// Joystick Ports
 	private final int xbox360Port = 0;
 	private final int buttonBoxPort = 1;
-	
+
 	// Xbox360 Axis Ports
 	private final int xboxLeftStickX = 0;
 	private final int xboxLeftStickY = 1;
@@ -124,13 +127,17 @@ public class OI {
 		buttonBoxButton5 = new JoystickButton(buttonBox, buttonBoxButton5Port);
 		buttonBoxButton6 = new JoystickButton(buttonBox, buttonBoxButton6Port);
 
-		// Bind Commands to Buttons
+		// Bind Commands to ButtonBox
 		buttonBoxButton1.whenPressed(new GearReceive());
 		buttonBoxButton4.whenPressed(new GearScore());
-		buttonBoxButton2.whenPressed(new CollectWithPercentVoltage());
-		buttonBoxButton5.whenPressed(new CollectorStop());
-		buttonBoxButton3.whenPressed(new CGShootandIndex());
-		buttonBoxButton6.whenPressed(new CGShootandIndexStop());
+		buttonBoxButton2.toggleWhenPressed(new CollectWithPercentVoltage());
+		buttonBoxButton5.toggleWhenPressed(new VisionToggleCamera());
+		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
+		buttonBoxButton6.toggleWhenPressed(new CGCenterAndScoreGear());
+
+		// Bind Commands to Xbox Controller
+		xboxButtonY.whenPressed(new DriveToggleDirection());
+		xboxButtonA.whenPressed(new DriveManual());
 
 		// Put Commands on SmartDashboard
 		// Drive functions

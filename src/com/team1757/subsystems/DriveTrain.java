@@ -20,6 +20,7 @@ public class DriveTrain extends Subsystem {
 	private final RobotDrive driveTrainMecanumDrive = RobotMap.driveTrainMecanumDrive;
 	private final double GYRO_PID_TOLERANCE = .3;
 	private final double ACCEL_PID_TOLERANCE = .05;
+	private boolean isInverted = false;
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new DriveManual());
@@ -27,7 +28,12 @@ public class DriveTrain extends Subsystem {
 
 	// Motor
 	
-	public void toggleMotorsDirection(){
+	/**
+	 * TODO javadoc
+	 */
+	public void toggleInversion(){
+		isInverted = !isInverted;
+		
 		if(RobotMap.driveTrainLeftBack.getInverted()){
 			RobotMap.driveTrainLeftFront.setInverted(false);
 			RobotMap.driveTrainLeftBack.setInverted(false);
@@ -40,6 +46,14 @@ public class DriveTrain extends Subsystem {
 			RobotMap.driveTrainRightFront.setInverted(false);
 			RobotMap.driveTrainRightBack.setInverted(false);
 		}
+	}
+	
+	/**
+	 * TODO javadoc
+	 * @return
+	 */
+	public boolean getInverted() {
+		return isInverted;
 	}
 	
 
@@ -57,7 +71,13 @@ public class DriveTrain extends Subsystem {
 	 *            [-1, 1] Positive values correspond to rotation to the right
 	 */
 	public void manualDrive(double translateX, double translateY, double rotate) {
-		driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, rotate, 0);
+		if (isInverted) {
+			driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, -rotate, 0);
+		}
+		else {
+			driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, rotate, 0);
+		}
+		
 	}
 
 	/**
@@ -67,7 +87,7 @@ public class DriveTrain extends Subsystem {
 	 * reach an angular setpoint
 	 */
 	public void moveToTargetAngle() {
-		driveTrainMecanumDrive.mecanumDrive_Cartesian(0, 0, gyroController.get(), 0);
+		manualDrive(0, 0, gyroController.get());
 	}
 
 	/**
@@ -84,7 +104,7 @@ public class DriveTrain extends Subsystem {
 	 *            Negative values correspond to translation forward
 	 */
 	public void moveWithGyroPID(double translateX, double translateY) {
-		driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, gyroController.get(), 0);
+		manualDrive(translateX, translateY, gyroController.get());
 	}
 
 	/**
@@ -93,7 +113,7 @@ public class DriveTrain extends Subsystem {
 	 * Updates motors with accelerometer PID controller output
 	 */
 	public void moveWithAccelPID() {
-		driveTrainMecanumDrive.mecanumDrive_Cartesian(accelControllerX.get(), -accelControllerY.get(), 0, 0);
+		manualDrive(accelControllerX.get(), -accelControllerY.get(), 0);
 	}
 
 	/**
@@ -351,4 +371,6 @@ public class DriveTrain extends Subsystem {
 	public boolean reachedAccelSetpointX() {
 		return (Math.abs(accelControllerX.getError()) <= ACCEL_PID_TOLERANCE);
 	}
+	
+	
 }

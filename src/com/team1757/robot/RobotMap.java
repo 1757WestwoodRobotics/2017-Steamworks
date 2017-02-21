@@ -86,6 +86,8 @@ public class RobotMap {
 	public static Vision vision;
 
 	public static UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+	public static UsbCamera gearCam = new UsbCamera("cam0", 0);
+	public static UsbCamera shooterCam = new UsbCamera("cam1", 0);
 
 	public static void init() {
 		//Initialize Talons
