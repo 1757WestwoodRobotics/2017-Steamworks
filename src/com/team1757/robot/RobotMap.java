@@ -204,7 +204,7 @@ public class RobotMap {
 		visionGearTranslationController.setAbsoluteTolerance(8);
 		
 		//Initialize RingLight
-		ringLight = new Relay(0, Relay.Direction.kForward);
+		ringLight = new Relay(ringLightPort, Relay.Direction.kForward);
 		
 	}
 }
