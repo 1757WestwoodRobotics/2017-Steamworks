@@ -27,6 +27,7 @@ import com.team1757.commands.ShootWithSpeed;
 import com.team1757.commands.ShootWithVoltage;
 import com.team1757.commands.IndexerStop;
 import com.team1757.commands.LifterStop;
+import com.team1757.commands.OIVibrateXboxController;
 import com.team1757.commands.ShooterStop;
 import com.team1757.commands.VisionCenterOnGearTranslationX;
 import com.team1757.commands.VisionGetReadyToScoreGear;
@@ -38,6 +39,7 @@ import com.team1757.commands.VisionToggleCamera;
 import com.team1757.commands.VisionCenterTranslationX;
 import com.team1757.commands.VisionFaceGearTarget;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -151,36 +153,36 @@ public class OI {
 		SmartDashboard.putData(new DriveResetGyro());
 		SmartDashboard.putData(new DriveGyroPIDClear());
 
-		// Gyro Functions
+		// Gyro Commands
 		SmartDashboard.putData(new RotateToAngle());
 		SmartDashboard.putData(new RotateDegrees());
 		SmartDashboard.putData(new RotateDegreesShortest());
 
-		// Shooter Functions
+		// Shooter Commands
 		SmartDashboard.putData(new ShootWithSpeed());
 		SmartDashboard.putData(new ShootWithVoltage());
 		SmartDashboard.putData(new ShooterStop());
 
-		// Indexer Functions
+		// Indexer Commands
 		SmartDashboard.putData(new IndexerRun());
 		SmartDashboard.putData(new IndexerStop());
 
-		// Collector Functions
+		// Collector Commands
 		SmartDashboard.putData(new CollectWithPercentVoltage());
 		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
 		SmartDashboard.putData(new CollectorStop());
 
-		// GearLoader Functions
+		// GearLoader Commands
 		SmartDashboard.putData(new GearManualInput());
 		SmartDashboard.putData(new GearMatchStart());
 		SmartDashboard.putData(new GearReceive());
 		SmartDashboard.putData(new GearScore());
 
-		// Lifter Functions
+		// Lifter Commands
 		SmartDashboard.putData(new LiftUp());
 		SmartDashboard.putData(new LifterStop());
 
-		// Vision Functions
+		// Vision Commands
 		SmartDashboard.putData(new VisionFollowReflectiveTape());
 		SmartDashboard.putData(new VisionFaceReflectiveTape());
 		SmartDashboard.putData(new VisionCenterTranslationX());
@@ -188,7 +190,7 @@ public class OI {
 		SmartDashboard.putData(new VisionFaceGearTarget());
 		SmartDashboard.putData(new VisionCenterOnGearTranslationX());
 
-		// RingLight Functions
+		// RingLight Commands
 		SmartDashboard.putData(new VisionGearRingLightOn());
 		SmartDashboard.putData(new VisionGearRingLightOff());
 		SmartDashboard.putData(new VisionShooterRingLightOn());
@@ -197,6 +199,12 @@ public class OI {
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
 		SmartDashboard.putData(new CGShootandIndexStop());
+		
+		//Xbox Controller Vibration
+		SmartDashboard.putData(new OIVibrateXboxController(RumbleType.kLeftRumble, 0));		//Rough Motor Off
+		SmartDashboard.putData(new OIVibrateXboxController(RumbleType.kLeftRumble, 1));		//Rough Motor On
+		SmartDashboard.putData(new OIVibrateXboxController(RumbleType.kRightRumble, 0));	//Smooth Motor Off
+		SmartDashboard.putData(new OIVibrateXboxController(RumbleType.kRightRumble, 1));	//Smooth Motor On
 
 		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);
@@ -237,6 +245,16 @@ public class OI {
 	public double getRotate() {
 		// Use inputControlY because that model works for rotation
 		return inputControlY(xbox360.getRawAxis(xboxRightStickX));
+	}
+	
+	/**
+	 * Sets the vibration motors of the Xbox 360 gamepad controller.
+	 * 
+	 * @param type		Pick a motor to vibrate. Left motor is rougher than right motor. ex.) RumbleType.kLeftMotor
+	 * @param value		The strength at which the motor vibrates. Values from 0 to 1.
+	 */
+	public void vibrateXboxController(RumbleType type, double value) {
+		xbox360.setRumble(type, value);
 	}
 
 	public static double inputControlY(double axis) {
