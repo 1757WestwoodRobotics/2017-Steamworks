@@ -42,7 +42,8 @@ public class RobotMap {
 	private static final int liftTalonPort = 5;
 	
 	//Spike ids
-	private static final int ringLightPort = 0;
+	private static final int gearRingLightPort = 0;
+	private static final int shooterRingLightPort = 1;
 	
 	//Talon objects
 	public static CANTalon driveTrainLeftFront;
@@ -60,7 +61,8 @@ public class RobotMap {
 	public static CANTalon liftTalon;
 	
 	//Spike objects
-	public static Relay ringLight;
+	public static Relay gearRingLight;
+	public static Relay shooterRingLight;
 
 	//Robot objects
 	public static RobotDrive driveTrainMecanumDrive;
@@ -209,7 +211,8 @@ public class RobotMap {
 		visionGearTranslationController.setAbsoluteTolerance(8);
 		
 		//Initialize RingLight
-		ringLight = new Relay(ringLightPort, Relay.Direction.kForward);
+		gearRingLight = new Relay(gearRingLightPort, Relay.Direction.kForward);
+		shooterRingLight = new Relay(shooterRingLightPort, Relay.Direction.kForward);
 		
 	}
 }

@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class VisionRingLightOff extends Command {
+public class VisionGearRingLightOn extends Command {
 
-    public VisionRingLightOff() {
+    public VisionGearRingLightOn() {
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.vision.turnOffRingLight();
+    	Robot.vision.turnOnGearRingLight();
     }
 
     // Called repeatedly when this Command is scheduled to run
