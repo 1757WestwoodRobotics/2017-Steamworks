@@ -10,19 +10,19 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class OIVibrateXboxController extends Command {
 	
-	private RumbleType m_type;
-	private double m_value;
+	private RumbleType type;
+	private double value;
 
     public OIVibrateXboxController(RumbleType type, double value) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this.m_type = type;
-    	this.m_value = value;
+    	this.type = type;
+    	this.value = value;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.oi.vibrateXboxController(m_type, m_value);
+    	Robot.oi.vibrateXboxController(type, value);
     }
 
     // Called repeatedly when this Command is scheduled to run
