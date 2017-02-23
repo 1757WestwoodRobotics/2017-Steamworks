@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LiftUp extends Command {
+	
+	private static double targetLifterPVbus = 0.75; 
 
     public LiftUp() {
         requires(Robot.lifter);
@@ -21,7 +23,13 @@ public class LiftUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lifter.setLiftTarget(.75);
+    	if (Robot.oi.getXbox360().getRawAxis(Robot.oi.getXboxAxisLeftTrigger()) > 0.0) {
+    		targetLifterPVbus--;
+    	} else if (Robot.oi.getXbox360().getRawAxis(Robot.oi.getXboxAxisRightTrigger()) > 0.0) {
+    		targetLifterPVbus++;
+    	}
+    	
+    	Robot.lifter.setLiftTarget(targetLifterPVbus);
     }
 
     // Make this return true when this Command no longer needs to run execute()

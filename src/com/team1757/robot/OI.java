@@ -222,8 +222,16 @@ public class OI {
 		return xboxLeftStickY;
 	}
 
-	public int getAxisRightStickX() {
+	public int getXboxAxisRightStickX() {
 		return xboxRightStickX;
+	}
+	
+	public int getXboxAxisLeftTrigger() {
+		return xboxLeftTrigger;
+	}
+	
+	public int getXboxAxisRightTrigger() {
+		return xboxRightTrigger;
 	}
 
 	public double getTranslateX() {

@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LifterStop extends Command {
+	
+	private static double targetLifterPVbus; 
 
     public LifterStop() {
         requires(Robot.lifter);

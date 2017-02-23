@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LiftDown extends Command {
+	
+	private static double targetLifterPVbus; 
 
     public LiftDown() {
         requires(Robot.lifter);
