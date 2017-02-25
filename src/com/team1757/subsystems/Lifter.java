@@ -37,4 +37,8 @@ public class Lifter extends Subsystem {
     public void setLiftTarget(double target) {
     	liftTalon.set(target);
     }
+    
+    public double getLiftCurrent() {
+    	return liftTalon.getOutputCurrent();
+    }
 }

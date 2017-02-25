@@ -26,9 +26,27 @@ public class GetStatus extends Command {
 			if (Robot.gearLoader.isSensorPresent()) {
 				SmartDashboard.putNumber("Gear - ActualPosition", Robot.gearLoader.getPulseWidthPosition());
 			}
-
+			
 		} catch (Exception e) {
 			System.out.println("Error with gear subsystem: " + e.getMessage());
+		}
+		
+		try {
+			
+			SmartDashboard.putNumber("Drive-LF-Current", Robot.driveTrain.getDriveTrainLeftFrontCurrent());
+			SmartDashboard.putNumber("Drive-LB-Current", Robot.driveTrain.getDriveTrainLeftBackCurrent());
+			SmartDashboard.putNumber("Drive-RF-Current", Robot.driveTrain.getDriveTrainRightFrontCurrent());
+			SmartDashboard.putNumber("Drive-RB-Current", Robot.driveTrain.getDriveTrainRightBackCurrent());
+			
+			SmartDashboard.putNumber("Collector-Current", Robot.ballCollector.getCollectorFlyWheelCurrent());
+			SmartDashboard.putNumber("GearLoader-Current", Robot.gearLoader.getGearLoaderCurrent());
+			SmartDashboard.putNumber("Lifter-Current", Robot.lifter.getLiftCurrent());
+			SmartDashboard.putNumber("Shooter-Current", Robot.shooter.getShooterFlyWheelCurrent());
+			
+			SmartDashboard.putNumber("Indexer-Current", Robot.indexer.getIndexerCurrent());
+			
+		} catch (Exception e) {
+			System.out.println("Error with CANTalons: " + e.getMessage());
 		}
 	}
 

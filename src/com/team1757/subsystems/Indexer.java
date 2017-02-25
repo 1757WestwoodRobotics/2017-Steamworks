@@ -37,5 +37,10 @@ public class Indexer extends Subsystem {
     public void setIndexerTarget(double target) {
     	indexerTalon.set(target);
     }
+    
+    public double getIndexerCurrent() {
+    	return indexerTalon.getOutputCurrent();
+    }
+    
 }
 

@@ -55,5 +55,10 @@ public class Shooter extends Subsystem {
     public void setFlyWheelTarget(double target) {
     	shooterFlyWheel.set(target);
     }
+    
+    public double getShooterFlyWheelCurrent() {
+    	return shooterFlyWheel.getOutputCurrent();
+    }
+    
 }
 

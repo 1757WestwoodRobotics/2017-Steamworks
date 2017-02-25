@@ -80,5 +80,10 @@ public class GearLoader extends Subsystem {
     public void runGearTalon() {
     	gearTalon.set(gearTalon.getSetpoint());
     }
+    
+    public double getGearLoaderCurrent() {
+    	return gearTalon.getOutputCurrent();
+    }
+    
 }
 

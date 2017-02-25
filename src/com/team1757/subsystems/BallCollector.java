@@ -55,5 +55,10 @@ public class BallCollector extends Subsystem {
     public void setFlyWheelTarget(double target) {
     	collectorFlyWheel.set(target);
     }
+    
+    public double getCollectorFlyWheelCurrent() {
+    	return collectorFlyWheel.getOutputCurrent();
+    }
+    
 }
 

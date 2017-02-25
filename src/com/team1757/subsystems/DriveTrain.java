@@ -1,5 +1,6 @@
 package com.team1757.subsystems;
 
+import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.commands.DriveManual;
 import com.team1757.robot.RobotMap;
@@ -13,11 +14,19 @@ import edu.wpi.first.wpilibj.PIDController;
  */
 
 public class DriveTrain extends Subsystem {
+	
+	private final CANTalon driveTrainLeftFront = RobotMap.driveTrainLeftFront;
+	private final CANTalon driveTrainLeftBack = RobotMap.driveTrainLeftBack;
+	private final CANTalon driveTrainRightFront = RobotMap.driveTrainRightFront;
+	private final CANTalon driveTrainRightBack = RobotMap.driveTrainRightBack;
+	
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final PIDController accelControllerX = RobotMap.accelControllerX;
 	private final PIDController accelControllerY = RobotMap.accelControllerY;
+	
 	private final RobotDrive driveTrainMecanumDrive = RobotMap.driveTrainMecanumDrive;
+	
 	private final double GYRO_PID_TOLERANCE = .3;
 	private final double ACCEL_PID_TOLERANCE = .05;
 	private boolean isInverted = false;
@@ -56,6 +65,24 @@ public class DriveTrain extends Subsystem {
 		return isInverted;
 	}
 	
+	/**
+	 * Get Current draw of each Talon
+	 */
+	public double getDriveTrainLeftFrontCurrent() {
+		return driveTrainLeftFront.getOutputCurrent();
+	}
+	
+	public double getDriveTrainLeftBackCurrent() {
+		return driveTrainLeftBack.getOutputCurrent();
+	}
+	
+	public double getDriveTrainRightFrontCurrent() {
+		return driveTrainRightFront.getOutputCurrent();
+	}
+	
+	public double getDriveTrainRightBackCurrent() {
+		return driveTrainRightBack.getOutputCurrent();
+	}
 
 	/**
 	 * Manual Cartesian Drive
