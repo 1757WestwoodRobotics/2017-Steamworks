@@ -3,6 +3,7 @@ package com.team1757.subsystems;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -13,15 +14,19 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  */
 public class Vision extends Subsystem {
 
-	private final UsbCamera camera = RobotMap.camera;
+	private final UsbCamera gearCam = RobotMap.gearCam;
+	private final UsbCamera shooterCam = RobotMap.shooterCam;
+
 	private final PIDController visionTranslationController = RobotMap.visionTranslationController;
 	private final PIDController visionGearTranslationController = RobotMap.visionGearTranslationController;
 	private static Relay ringLight = RobotMap.ringLight;
-	
+
+	private static boolean isGearCamActive = true;
+
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
 	private NetworkTable linesReport;
-	
+
 	private int xResolution = 160;
 	private int yResolution = 120;
 	private int fps = 30;
@@ -60,7 +65,7 @@ public class Vision extends Subsystem {
 	}
 
 	public double getGearTranslationPID() {
-//		System.out.println(visionGearTranslationController.get());
+		// System.out.println(visionGearTranslationController.get());
 		return visionGearTranslationController.get();
 	}
 
@@ -77,15 +82,27 @@ public class Vision extends Subsystem {
 	// Camera configuration
 
 	public void init() {
-		camera.setFPS(fps);
-		camera.setResolution(xResolution, yResolution);
-		camera.setExposureManual(0);
+		gearCam.setFPS(fps);
+		gearCam.setResolution(xResolution, yResolution);
+		gearCam.setExposureManual(0);
+
+		shooterCam.setFPS(fps);
+		shooterCam.setResolution(xResolution, yResolution);
+		shooterCam.setExposureManual(0);
+
+		CameraServer.getInstance().addCamera(gearCam);
+
+		CameraServer.getInstance().addCamera(shooterCam);
+
+		CameraServer.getInstance().startAutomaticCapture(gearCam);
+
 	}
 
-	public void setResolution(int x, int y) {
+	public void camerasSetResolution(int x, int y) {
 		xResolution = x;
 		yResolution = y;
-		camera.setResolution(x, y);
+		gearCam.setResolution(x, y);
+		shooterCam.setResolution(x, y);
 	}
 
 	public int getResolutionX() {
@@ -96,13 +113,25 @@ public class Vision extends Subsystem {
 		return yResolution;
 	}
 
-	public void setFPS(int fps) {
+	public void camerasSetFPS(int fps) {
 		this.fps = fps;
-		camera.setFPS(fps);
+		gearCam.setFPS(fps);
+		shooterCam.setFPS(fps);
 	}
 
 	public int getFPS() {
 		return fps;
+	}
+
+	public void toggleVisionCamera() {
+		if (isGearCamActive) {
+			CameraServer.getInstance().getServer().setSource(shooterCam);
+			isGearCamActive = false;
+		} else {
+			CameraServer.getInstance().getServer().setSource(gearCam);
+			isGearCamActive = true;
+		}
+
 	}
 
 	// Contours
@@ -127,7 +156,7 @@ public class Vision extends Subsystem {
 	}
 
 	public double getGearTargetCenter() {
-		//TODO updating table when other thing is updating is no good
+		// TODO updating table when other thing is updating is no good
 		updateContoursReport();
 		if (getContoursCount() == 2) {
 
@@ -406,12 +435,12 @@ public class Vision extends Subsystem {
 		double[] y2s = linesReport.getNumberArray("y2", defaultValue);
 		return y2s[lineIndex];
 	}
-	
+
 	// Ring Light
 	public void turnOnRingLight() {
 		ringLight.set(Relay.Value.kOn);
 	}
-	
+
 	public void turnOffRingLight() {
 		ringLight.set(Relay.Value.kOff);
 	}

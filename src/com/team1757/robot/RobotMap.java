@@ -10,7 +10,10 @@ import com.team1757.utils.VisionCenterGearPIDSource;
 import com.team1757.utils.VisionCenterPIDSource;
 import com.team1757.utils.VisionDetectionType;
 
+import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSink;
+import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
@@ -85,9 +88,14 @@ public class RobotMap {
 
 	public static Vision vision;
 
-	public static UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-	public static UsbCamera gearCam = new UsbCamera("cam0", 0);
-	public static UsbCamera shooterCam = new UsbCamera("cam1", 0);
+	public static UsbCamera gearCam = new UsbCamera("gearCam", 0);
+	public static UsbCamera shooterCam = new UsbCamera("shooterCam", 1);
+	 
+
+	
+//  This will allow you to stream both at the same time...
+//	public static UsbCamera gearCam = CameraServer.getInstance().startAutomaticCapture(0);
+//	public static UsbCamera shooterCam = CameraServer.getInstance().startAutomaticCapture(1);
 
 	public static void init() {
 		//Initialize Talons

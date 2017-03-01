@@ -185,6 +185,7 @@ public class OI {
 		SmartDashboard.putData(new VisionGetReadyToScoreGear());
 		SmartDashboard.putData(new VisionFaceGearTarget());
 		SmartDashboard.putData(new VisionCenterOnGearTranslationX());
+		SmartDashboard.putData(new VisionToggleCamera());
 
 		// RingLight Functions
 		SmartDashboard.putData(new VisionRingLightOn());
