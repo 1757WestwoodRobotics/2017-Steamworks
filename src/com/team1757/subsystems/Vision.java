@@ -19,10 +19,13 @@ public class Vision extends Subsystem {
 
 	private final PIDController visionTranslationController = RobotMap.visionTranslationController;
 	private final PIDController visionGearTranslationController = RobotMap.visionGearTranslationController;
-	private static Relay ringLight = RobotMap.ringLight;
 
 	private static boolean isGearCamActive = true;
 
+
+	
+	private static Relay gearRingLight = RobotMap.gearRingLight;
+	private static Relay shooterRingLight = RobotMap.shooterRingLight;
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
 	private NetworkTable linesReport;
@@ -436,13 +439,24 @@ public class Vision extends Subsystem {
 		return y2s[lineIndex];
 	}
 
-	// Ring Light
-	public void turnOnRingLight() {
-		ringLight.set(Relay.Value.kOn);
+	// Gear Ring Light
+	public void turnOnGearRingLight() {
+		gearRingLight.set(Relay.Value.kOn);
+
 	}
 
-	public void turnOffRingLight() {
-		ringLight.set(Relay.Value.kOff);
+	
+	public void turnOffGearRingLight() {
+		gearRingLight.set(Relay.Value.kOff);
 	}
-
+	
+	// Shooter Ring Light
+	public void turnOnShooterRingLight() {
+		shooterRingLight.set(Relay.Value.kOn);
+	}
+	
+	public void turnOffShooterRingLight() {
+		shooterRingLight.set(Relay.Value.kOff);
+	}
+	
 }
