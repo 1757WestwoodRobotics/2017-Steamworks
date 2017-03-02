@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Turn towards 3M reflective tape so it is centered in the camera field of view
+ * 
+ * @author Ryan Marten
  */
 public class VisionFollowReflectiveTape extends Command {
 

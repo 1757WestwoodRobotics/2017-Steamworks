@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Aligns the robot perpendicularly to the gear target using vision processing
  */
 public class VisionGetReadyToScoreGear extends Command {
 
@@ -18,17 +18,21 @@ public class VisionGetReadyToScoreGear extends Command {
 	protected void initialize() {
 		// Using GyroPID with camera
 		Robot.driveTrain.enableGyroPID();
-		
+
 		// Using TranslationGearPID with Camera
 		Robot.vision.enableGearTranslationPID();
-		
+
+		// TODO: Change the constant of 19.82 so it works on the competition
+		// bot...
 		Robot.driveTrain.setTargetAngle(
 				Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getGearTargetCenter() * 19.82));
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		// Using gyroPID with scaled camera
+		// Uses gyroPID to keep the target centered in the cameras view while
+		// the robot strafes around the target so it is perpendicular (when the
+		// areas of the two targets are equal)
 		Robot.driveTrain.setTargetAngle(
 				Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getGearTargetCenter() * 19.82));
 		SmartDashboard.putNumber("TranslationWithTrackingGear", -Robot.vision.getGearTranslationPID());
@@ -37,7 +41,8 @@ public class VisionGetReadyToScoreGear extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		//return Robot.vision.reachedVisionGearTranslationSetpoint() && Robot.driveTrain.reachedGyroSetpoint();
+		// return Robot.vision.reachedVisionGearTranslationSetpoint() &&
+		// Robot.driveTrain.reachedGyroSetpoint();
 		return false;
 	}
 

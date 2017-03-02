@@ -5,7 +5,9 @@ import com.team1757.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * @author ACabey
+ * Translates the robot in X so the two 3M reflective target on the gear scoring structure are centered in the camera's field of view
+ * 
+ * @author Ryan Marten
  */
 public class VisionCenterOnGearTranslationX extends Command {
 

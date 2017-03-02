@@ -5,7 +5,9 @@ import com.team1757.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Turns off the shooter camera's ring light
+ * 
+ * @author Ryan Marten
  */
 public class VisionShooterRingLightOff extends Command {
 

@@ -5,7 +5,9 @@ import com.team1757.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Turns on the shooter camera's ring light
+ * 
+ * @author Ryan Marten
  */
 public class VisionShooterRingLightOn extends Command {
 
@@ -14,7 +16,7 @@ public class VisionShooterRingLightOn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.vision.turnOffShooterRingLight();
+    	Robot.vision.turnOnShooterRingLight();
     }
 
     // Called repeatedly when this Command is scheduled to run

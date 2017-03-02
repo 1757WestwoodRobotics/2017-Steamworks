@@ -5,7 +5,9 @@ import com.team1757.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Turns the gear cammer's ring light on
+ * 
+ * @author Ryan Marten
  */
 public class VisionGearRingLightOn extends Command {
 

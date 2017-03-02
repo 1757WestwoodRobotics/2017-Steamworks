@@ -2,6 +2,12 @@ package com.team1757.utils;
 
 import com.team1757.robot.Robot;
 
+/**
+ * A PID source for gear target using difference in the two areas of 3M tape
+ * 
+ * @author Ryan Marten
+ *
+ */
 public class VisionCenterGearPIDSource extends VisionCenterPIDSource {
 	@Override
 	public double pidGet() {

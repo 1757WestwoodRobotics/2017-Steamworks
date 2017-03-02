@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Turn towards 3M reflective tape so it is centered in the camera field of view
+ * 
+ * @author Ryan Marten
  */
 public class VisionFaceGearTarget extends Command {
 
@@ -20,7 +22,8 @@ public class VisionFaceGearTarget extends Command {
 
 		// Using GyroPID with camera
 		Robot.driveTrain.enableGyroPID();
-		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getGearTargetCenter() * 19.82));
+		Robot.driveTrain.setTargetAngle(
+				Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getGearTargetCenter() * 19.82));
 	}
 
 	// Called repeatedly when this Command is scheduled to run

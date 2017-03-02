@@ -5,6 +5,8 @@ import com.team1757.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * Centers a 3M reflective target using x translation of the robot
+ * 
  * @author ACabey
  */
 public class VisionCenterTranslationX extends Command {

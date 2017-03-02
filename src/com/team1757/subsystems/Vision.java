@@ -10,7 +10,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
- *
+ * Subsystem that contains cameras and ring lights. Interacts with GRIP for
+ * vision processing via NetworkTables and has several methods for computing
+ * different responses to the GRIP output
+ * 
+ * @author Ryan Marten
  */
 public class Vision extends Subsystem {
 
@@ -22,10 +26,9 @@ public class Vision extends Subsystem {
 
 	private static boolean isGearCamActive = true;
 
-
-	
 	private static Relay gearRingLight = RobotMap.gearRingLight;
 	private static Relay shooterRingLight = RobotMap.shooterRingLight;
+
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
 	private NetworkTable linesReport;
@@ -37,53 +40,12 @@ public class Vision extends Subsystem {
 	public void initDefaultCommand() {
 	}
 
-	// PID Translation Controllers
+	// Cameras
 
-	public void enableTranslationPID() {
-		visionTranslationController.enable();
-	}
-
-	public void disableTranslationPID() {
-		visionTranslationController.disable();
-	}
-
-	public boolean reachedVisionTranslationSetPoint() {
-		return visionTranslationController.onTarget();
-	}
-
-	public double getTranslationPID() {
-		return visionTranslationController.get();
-	}
-
-	public void enableGearTranslationPID() {
-		visionGearTranslationController.enable();
-	}
-
-	public void disableGearTranslationPID() {
-		visionGearTranslationController.disable();
-	}
-
-	public boolean reachedVisionGearTranslationSetpoint() {
-		return Math.abs(visionGearTranslationController.getError()) < 1;
-	}
-
-	public double getGearTranslationPID() {
-		// System.out.println(visionGearTranslationController.get());
-		return visionGearTranslationController.get();
-	}
-
-	// Math operations
-
-	public double normalizePixelsX(double coordinateX) {
-		return coordinateX * (2.0f / xResolution) - 1;
-	}
-
-	public double normalizePixelsY(double coordinateY) {
-		return coordinateY * (2.0f / yResolution) - 1;
-	}
-
-	// Camera configuration
-
+	/**
+	 * Initializes the cameras and starts the CameraServer to stream to GRIP /
+	 * SmartDashboard
+	 */
 	public void init() {
 		gearCam.setFPS(fps);
 		gearCam.setResolution(xResolution, yResolution);
@@ -101,6 +63,14 @@ public class Vision extends Subsystem {
 
 	}
 
+	/**
+	 * Sets the resolution of both cameras on the robot
+	 * 
+	 * @param x
+	 *            x dimension of the camera's image
+	 * @param y
+	 *            y dimension of the camera's image
+	 */
 	public void camerasSetResolution(int x, int y) {
 		xResolution = x;
 		yResolution = y;
@@ -108,24 +78,49 @@ public class Vision extends Subsystem {
 		shooterCam.setResolution(x, y);
 	}
 
+	/**
+	 * Accessor for the X resolution used by both cameras on the robot
+	 * 
+	 * @return x dimension of the camera's image
+	 */
 	public int getResolutionX() {
 		return xResolution;
 	}
 
+	/**
+	 * Accessor for the Y resolution used by both cameras on the robot
+	 * 
+	 * @return y dimension of the camera's image
+	 */
 	public int getResolutionY() {
 		return yResolution;
 	}
 
+	/**
+	 * Sets the frame rate for both cameras on the robot. Streaming to the
+	 * CameraServer will not necessarily reach set FPS.
+	 * 
+	 * @param fps
+	 */
 	public void camerasSetFPS(int fps) {
 		this.fps = fps;
 		gearCam.setFPS(fps);
 		shooterCam.setFPS(fps);
 	}
 
+	/**
+	 * Accessor for the frame rate used by both cameras on the robot
+	 * 
+	 * @return fps
+	 */
 	public int getFPS() {
 		return fps;
 	}
 
+	/**
+	 * Swaps the current camera streaming to GRIP / SmartDashboard with the one
+	 * not streaming (and not capturing)
+	 */
 	public void toggleVisionCamera() {
 		if (isGearCamActive) {
 			CameraServer.getInstance().getServer().setSource(shooterCam);
@@ -137,8 +132,144 @@ public class Vision extends Subsystem {
 
 	}
 
-	// Contours
+	// Ring Lights
 
+	/**
+	 * Activates the relay connected to the gear camera's ring light
+	 */
+	public void turnOnGearRingLight() {
+		gearRingLight.set(Relay.Value.kOn);
+
+	}
+
+	/**
+	 * Deactivates the relay connected to the gear camera's ring light
+	 */
+	public void turnOffGearRingLight() {
+		gearRingLight.set(Relay.Value.kOff);
+	}
+
+	/**
+	 * Activates the relay connected to the shooter camera's ring light
+	 */
+	public void turnOnShooterRingLight() {
+		shooterRingLight.set(Relay.Value.kOn);
+	}
+
+	/**
+	 * Deactivates the relay connected to the shooter camera's ring light
+	 */
+	public void turnOffShooterRingLight() {
+		shooterRingLight.set(Relay.Value.kOff);
+	}
+
+	// PID Translation Controllers
+
+	/**
+	 * Enables the PID controller for using X translation of the robot to center
+	 * a single target
+	 */
+	public void enableTranslationPID() {
+		visionTranslationController.enable();
+	}
+
+	/**
+	 * Disable the PID controller for using X translation of the robot to center
+	 * a single target
+	 */
+	public void disableTranslationPID() {
+		visionTranslationController.disable();
+	}
+
+	/**
+	 * Returns whether the robot has centered itself on the single vision target
+	 * with a tolerance of .001
+	 * 
+	 * @return isSetPointedReached
+	 */
+	public boolean reachedVisionTranslationSetPoint() {
+		return Math.abs(visionTranslationController.getError()) < .001;
+	}
+
+	/**
+	 * Returns the output of the PID controller for translation to center a
+	 * single vision target
+	 * 
+	 * @return PIDOutput
+	 */
+	public double getTranslationPID() {
+		return visionTranslationController.get();
+	}
+
+	/**
+	 * Enables the PID controller for using X translation of the robot to center
+	 * the gear's double vision targets
+	 */
+	public void enableGearTranslationPID() {
+		visionGearTranslationController.enable();
+	}
+
+	/**
+	 * Disables the PID controller for using X translation of the robot to
+	 * center the gear's double vision targets
+	 */
+	public void disableGearTranslationPID() {
+		visionGearTranslationController.disable();
+	}
+
+	/**
+	 * Returns whether the robot has centered itself on the gear's double vision
+	 * targets with a tolerance of .001
+	 * 
+	 * @return isSetPointedReached
+	 */
+	public boolean reachedVisionGearTranslationSetpoint() {
+		return Math.abs(visionGearTranslationController.getError()) < .001;
+	}
+
+	/**
+	 * Returns the output of the PID controller for translation to center a the
+	 * gear's double vision targets
+	 * 
+	 * @return PIDOutput
+	 */
+	public double getGearTranslationPID() {
+		// System.out.println(visionGearTranslationController.get());
+		return visionGearTranslationController.get();
+	}
+
+	// Math operations
+
+	/**
+	 * Converts an x coordinate received from a camera to a value between [-1,1]
+	 * using the resolution set for the vision subsystem
+	 * 
+	 * @param coordinateX
+	 * @return normalizedX
+	 */
+	public double normalizePixelsX(double coordinateX) {
+		return coordinateX * (2.0f / xResolution) - 1;
+	}
+
+	/**
+	 * Converts an Y coordinate received from a camera to a value between [-1,1]
+	 * using the resolution set for the vision subsystem
+	 * 
+	 * @param coordinateY
+	 * @return normalizedY
+	 */
+	public double normalizePixelsY(double coordinateY) {
+		return coordinateY * (2.0f / yResolution) - 1;
+	}
+
+	// Contour Vision Processing
+
+	/**
+	 * When two targets are detected, this will return the difference in those
+	 * targets' areas, otherwise, 0.
+	 * 
+	 * @return differenceInGearTargetAreas
+	 */
 	public double getDifferenceInGearTargetAreas() {
 		// TODO Can do something smart with finding similar targets to use for
 		// this math when false targets like lights are published and can't be
@@ -158,8 +289,12 @@ public class Vision extends Subsystem {
 		return 0;
 	}
 
+	/**
+	 * Returns the center of two targets if they are detected, otherwise, 0.
+	 * 
+	 * @return gearTargetCenter in the image from [-1,1]
+	 */
 	public double getGearTargetCenter() {
-		// TODO updating table when other thing is updating is no good
 		updateContoursReport();
 		if (getContoursCount() == 2) {
 
@@ -170,6 +305,11 @@ public class Vision extends Subsystem {
 		return 0;
 	}
 
+	/**
+	 * Returns the center of a target if it is detected, otherwise, 0.
+	 * 
+	 * @return targetCenter in the image from [-1,1]
+	 */
 	public double getTargetCenterContour() {
 		updateContoursReport();
 		if (getContoursCount() != 0) {
@@ -179,7 +319,9 @@ public class Vision extends Subsystem {
 	}
 
 	/**
-	 * Updates the local contoursReport table.
+	 * Updates the local contoursReport table. WARNING, this has to be somewhat
+	 * syncrhonized so one thing doesn't update the table while another tries to
+	 * access an element that might not exist in the updated table
 	 *
 	 */
 	public void updateContoursReport() {
@@ -292,7 +434,10 @@ public class Vision extends Subsystem {
 	// Blobs
 
 	/**
-	 * Updates the local blobsReport table.
+	 * Updates the local blobsReport table. WARNING, this has to be somewhat
+	 * syncrhonized so one thing doesn't update the table while another tries to
+	 * access an element that might not exist in the updated table
+	 * 
 	 * 
 	 */
 	public void updateBlobsReport() {
@@ -357,7 +502,10 @@ public class Vision extends Subsystem {
 	// Lines
 
 	/**
-	 * Updates the local linesReport table.
+	 * Updates the local linesReport table. WARNING, this has to be somewhat
+	 * syncrhonized so one thing doesn't update the table while another tries to
+	 * access an element that might not exist in the updated table
+	 * 
 	 * 
 	 */
 	public void updateLinesReport() {
@@ -379,9 +527,10 @@ public class Vision extends Subsystem {
 		return xCenters.length;
 	}
 
-	// TODO Check if it is the left point always
+	// Not sure if grip always returns point 1 as the right or left one...
+
 	/**
-	 * Returns the x coordinate of the ?left? point of line chosen by index
+	 * Returns the x coordinate of the ???? point of line chosen by index
 	 * 
 	 * Precondition: lineIndex is not out of range
 	 * 
@@ -394,9 +543,8 @@ public class Vision extends Subsystem {
 		return x1s[lineIndex];
 	}
 
-	// TODO Check if it is the left point always
 	/**
-	 * Returns the y coordinate of the ?left? point of line chosen by index
+	 * Returns the y coordinate of the ???? point of line chosen by index
 	 * 
 	 * Precondition: lineIndex is not out of range
 	 * 
@@ -409,9 +557,8 @@ public class Vision extends Subsystem {
 		return y1s[lineIndex];
 	}
 
-	// TODO Check if it is the right point always
 	/**
-	 * Returns the x coordinate of the ?right? point of line chosen by index
+	 * Returns the x coordinate of the ???? point of line chosen by index
 	 * 
 	 * Precondition: lineIndex is not out of range
 	 * 
@@ -424,9 +571,8 @@ public class Vision extends Subsystem {
 		return x2s[lineIndex];
 	}
 
-	// TODO Check if it is the left point always
 	/**
-	 * Returns the y coordinate of the ?right? point of line chosen by index
+	 * Returns the y coordinate of the ???? point of line chosen by index
 	 * 
 	 * Precondition: lineIndex is not out of range
 	 * 
@@ -439,24 +585,4 @@ public class Vision extends Subsystem {
 		return y2s[lineIndex];
 	}
 
-	// Gear Ring Light
-	public void turnOnGearRingLight() {
-		gearRingLight.set(Relay.Value.kOn);
-
-	}
-
-	
-	public void turnOffGearRingLight() {
-		gearRingLight.set(Relay.Value.kOff);
-	}
-	
-	// Shooter Ring Light
-	public void turnOnShooterRingLight() {
-		shooterRingLight.set(Relay.Value.kOn);
-	}
-	
-	public void turnOffShooterRingLight() {
-		shooterRingLight.set(Relay.Value.kOff);
-	}
-	
 }

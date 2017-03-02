@@ -2,10 +2,15 @@ package com.team1757.utils;
 
 import com.team1757.robot.Robot;
 
-
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
+/**
+ * A PID source for a single vision target using the center of the target
+ * 
+ * @author Ryan Marten
+ *
+ */
 public class VisionCenterPIDSource implements PIDSource {
 	private VisionDetectionType m_visionDetectionType;
 
@@ -37,11 +42,11 @@ public class VisionCenterPIDSource implements PIDSource {
 		if (m_visionDetectionType == VisionDetectionType.ContourCenterX) {
 			return Robot.vision.getTargetCenterContour();
 		} else if (m_visionDetectionType == VisionDetectionType.ContourCenterY) {
-			
+
 		} else if (m_visionDetectionType == VisionDetectionType.BlobCenterY) {
-			
+
 		} else if (m_visionDetectionType == VisionDetectionType.BlobCenterY) {
-			
+
 		}
 		return 0;
 	}
