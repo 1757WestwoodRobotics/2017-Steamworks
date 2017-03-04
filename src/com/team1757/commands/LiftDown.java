@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LiftDown extends Command {
 	
-	private static double targetLifterPVbus; 
+	private static double targetLifterPVbus = 0.5; 
 
     public LiftDown() {
         requires(Robot.lifter);
@@ -23,7 +23,7 @@ public class LiftDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lifter.setLiftTarget(-1);
+    	Robot.lifter.setLiftTarget(targetLifterPVbus);
     }
 
     // Make this return true when this Command no longer needs to run execute()
