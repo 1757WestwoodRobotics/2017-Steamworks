@@ -135,7 +135,8 @@ public class OI {
 		buttonBoxButton2.toggleWhenPressed(new CollectWithPercentVoltage());
 		buttonBoxButton5.toggleWhenPressed(new VisionToggleCamera());
 		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
-		buttonBoxButton6.toggleWhenPressed(new CGCenterAndScoreGear());
+		//buttonBoxButton6.toggleWhenPressed(new CGCenterAndScoreGear());
+		buttonBoxButton6.whileHeld(new LiftUp());
 
 		// Bind Commands to Xbox Controller
 		xboxButtonY.whenPressed(new DriveToggleDirection());
