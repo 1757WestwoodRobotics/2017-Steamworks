@@ -228,16 +228,16 @@ public class OI {
 	}
 
 	public double getTranslateX() {
-		return inputControlY(xbox360.getRawAxis(xboxLeftStickX));
+		return inputControlX(xbox360.getRawAxis(xboxLeftStickX));
 	}
 
 	public double getTranslateY() {
-		return inputControlX(xbox360.getRawAxis(xboxLeftStickY));
+		return inputControlY(xbox360.getRawAxis(xboxLeftStickY));
 	}
 
 	public double getRotate() {
 		// Use inputControlY because that model works for rotation
-		return inputControlY(xbox360.getRawAxis(xboxRightStickX));
+		return inputControlX(xbox360.getRawAxis(xboxRightStickX));
 	}
 
 	public static double inputControlY(double axis) {
