@@ -3,11 +3,14 @@ package com.team1757.commands;
 import com.team1757.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class LiftUp extends Command {
+	
+	private static double targetLifterPVbus = 0.75; 
 
     public LiftUp() {
         requires(Robot.lifter);
@@ -21,7 +24,18 @@ public class LiftUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lifter.setLiftTarget(.75);
+    	if (Robot.oi.getXbox360().getRawAxis(Robot.oi.getXboxAxisLeftTrigger()) > 0.2) {
+    		if (targetLifterPVbus > 0) {
+    			targetLifterPVbus = targetLifterPVbus - 0.01;
+    		}
+    	} else if (Robot.oi.getXbox360().getRawAxis(Robot.oi.getXboxAxisRightTrigger()) > 0.2) {
+    		if (targetLifterPVbus < 1) {
+    			targetLifterPVbus = targetLifterPVbus + 0.01;
+    		}
+    	}
+    	
+    	SmartDashboard.putNumber("targetLifterPVbus", targetLifterPVbus);
+    	Robot.lifter.setLiftTarget(targetLifterPVbus);
     }
 
     // Make this return true when this Command no longer needs to run execute()
