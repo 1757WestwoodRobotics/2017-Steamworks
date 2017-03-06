@@ -103,6 +103,7 @@ public class OI {
 
 	// Input Control Constants
 	private final static double DEADBAND = 0.2;
+	private final static double DEADBAND_NEW = 0.1;
 	private final static double GAIN = 0.7;
 
 	// OI Constructor
@@ -228,11 +229,11 @@ public class OI {
 	}
 
 	public double getTranslateX() {
-		return inputControlY(xbox360.getRawAxis(xboxLeftStickX));
+		return inputControlX(xbox360.getRawAxis(xboxLeftStickX));
 	}
 
 	public double getTranslateY() {
-		return inputControlX(xbox360.getRawAxis(xboxLeftStickY));
+		return inputControlY(xbox360.getRawAxis(xboxLeftStickY));
 	}
 
 	public double getRotate() {
@@ -249,8 +250,22 @@ public class OI {
 	public void vibrateXboxController(RumbleType type, double value) {
 		xbox360.setRumble(type, value);
 	}
-
+	
 	public static double inputControlY(double axis) {
+		// Modeled by y=0.9x^3 + 0.1
+		double output = 0.0;
+		if (axis > DEADBAND_NEW) {
+			output = (0.9 * Math.pow(axis, 3)) + (0.1);
+		} else if (axis < -DEADBAND_NEW) {
+			axis = -axis;
+			output = -(0.9 * Math.pow(axis, 3)) - (0.1);
+		} else {
+			output = 0.0;
+		}
+		return output;
+	}
+
+	public static double inputControlYOld2(double axis) {
 		// Modeled by -4.59x^4+10.027x^3-6.344x^2+1.909x-0.0002595
 		double output = 0;
 		if (axis > OI.DEADBAND) {
