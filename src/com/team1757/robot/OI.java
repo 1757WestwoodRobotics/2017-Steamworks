@@ -27,7 +27,6 @@ import com.team1757.commands.ShootWithSpeed;
 import com.team1757.commands.ShootWithVoltage;
 import com.team1757.commands.IndexerStop;
 import com.team1757.commands.LifterStop;
-import com.team1757.commands.OIVibrateXboxController;
 import com.team1757.commands.ShooterStop;
 import com.team1757.commands.VisionCenterOnGearTranslationX;
 import com.team1757.commands.VisionGetReadyToScoreGear;
@@ -200,12 +199,6 @@ public class OI {
 		SmartDashboard.putData(new CGShootandIndex());
 		SmartDashboard.putData(new CGShootandIndexStop());
 		
-		//Xbox Controller Vibration
-		SmartDashboard.putData(new OIVibrateXboxController(RumbleType.kLeftRumble, 0));		//Rough Motor Off
-		SmartDashboard.putData(new OIVibrateXboxController(RumbleType.kLeftRumble, 1));		//Rough Motor On
-		SmartDashboard.putData(new OIVibrateXboxController(RumbleType.kRightRumble, 0));	//Smooth Motor Off
-		SmartDashboard.putData(new OIVibrateXboxController(RumbleType.kRightRumble, 1));	//Smooth Motor On
-
 		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);
 		SmartDashboard.putNumber("angularDelta", 0.0);
