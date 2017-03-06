@@ -1,5 +1,6 @@
 package com.team1757.robot;
 
+import com.team1757.commands.CGAutoRedBlue2;
 import com.team1757.commands.CGCenterAndScoreGear;
 import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.CGShootandIndexStop;
@@ -144,7 +145,7 @@ public class OI {
 
 		// Put Commands on SmartDashboard
 		// Drive functions
-		SmartDashboard.putData(new DriveStraight(.5));
+		SmartDashboard.putData(new DriveStraight(1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
 		SmartDashboard.putData(new DriveToggleDirection());
 
@@ -199,6 +200,7 @@ public class OI {
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
 		SmartDashboard.putData(new CGShootandIndexStop());
+		SmartDashboard.putData(new CGAutoRedBlue2());
 
 		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);

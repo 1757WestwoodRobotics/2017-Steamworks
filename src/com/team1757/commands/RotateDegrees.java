@@ -13,6 +13,11 @@ public class RotateDegrees extends Command {
     public RotateDegrees() {
     	requires(Robot.driveTrain);
     }
+    
+    public RotateDegrees(double deltaDegrees) {
+    	requires(Robot.driveTrain);
+    	SmartDashboard.putNumber("angularDeltaShortest", deltaDegrees);
+    }
 
     // Called once before execute
     protected void initialize() {
