@@ -25,6 +25,6 @@ public class CGAutoRedBlue2 extends CommandGroup {
 //    	Drive backwards ~100"
     	addSequential(new DriveStraight(1.65));
 //    	Rotate left 90
-    	addSequential(new RotateToAngle(-90));
+    	addSequential(new RotateToAngle());
     }
 }

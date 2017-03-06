@@ -18,7 +18,7 @@ public class DriveTrain extends Subsystem {
 	private final PIDController accelControllerX = RobotMap.accelControllerX;
 	private final PIDController accelControllerY = RobotMap.accelControllerY;
 	private final RobotDrive driveTrainMecanumDrive = RobotMap.driveTrainMecanumDrive;
-	private final double GYRO_PID_TOLERANCE = .3;
+	private final double GYRO_PID_TOLERANCE = .5;
 	private final double ACCEL_PID_TOLERANCE = .05;
 	private boolean isInverted = false;
 
