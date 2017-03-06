@@ -30,8 +30,6 @@ import com.team1757.commands.LifterStop;
 import com.team1757.commands.ShooterStop;
 import com.team1757.commands.VisionCenterOnGearTranslationX;
 import com.team1757.commands.VisionGetReadyToScoreGear;
-import com.team1757.commands.VisionShooterRingLightOff;
-import com.team1757.commands.VisionShooterRingLightOn;
 import com.team1757.commands.VisionGearRingLightOff;
 import com.team1757.commands.VisionGearRingLightOn;
 import com.team1757.commands.VisionToggleCamera;
@@ -193,8 +191,6 @@ public class OI {
 		// RingLight Functions
 		SmartDashboard.putData(new VisionGearRingLightOn());
 		SmartDashboard.putData(new VisionGearRingLightOff());
-		SmartDashboard.putData(new VisionShooterRingLightOn());
-		SmartDashboard.putData(new VisionShooterRingLightOff());
 
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());

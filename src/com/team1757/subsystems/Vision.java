@@ -27,7 +27,6 @@ public class Vision extends Subsystem {
 	private static boolean isGearCamActive = true;
 
 	private static Relay gearRingLight = RobotMap.gearRingLight;
-	private static Relay shooterRingLight = RobotMap.shooterRingLight;
 
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
@@ -147,20 +146,6 @@ public class Vision extends Subsystem {
 	 */
 	public void turnOffGearRingLight() {
 		gearRingLight.set(Relay.Value.kOff);
-	}
-
-	/**
-	 * Activates the relay connected to the shooter camera's ring light
-	 */
-	public void turnOnShooterRingLight() {
-		shooterRingLight.set(Relay.Value.kOn);
-	}
-
-	/**
-	 * Deactivates the relay connected to the shooter camera's ring light
-	 */
-	public void turnOffShooterRingLight() {
-		shooterRingLight.set(Relay.Value.kOff);
 	}
 
 	// PID Translation Controllers

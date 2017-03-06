@@ -46,7 +46,6 @@ public class RobotMap {
 	
 	//Spike ids
 	private static final int gearRingLightPort = 0;
-	private static final int shooterRingLightPort = 1;
 	
 	//Talon objects
 	public static CANTalon driveTrainLeftFront;
@@ -65,7 +64,6 @@ public class RobotMap {
 	
 	//Spike objects
 	public static Relay gearRingLight;
-	public static Relay shooterRingLight;
 
 	//Robot objects
 	public static RobotDrive driveTrainMecanumDrive;
@@ -220,7 +218,6 @@ public class RobotMap {
 		
 		//Initialize RingLight
 		gearRingLight = new Relay(gearRingLightPort, Relay.Direction.kForward);
-		shooterRingLight = new Relay(shooterRingLightPort, Relay.Direction.kForward);
 		
 	}
 }
