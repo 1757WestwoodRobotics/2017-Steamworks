@@ -36,6 +36,7 @@ import com.team1757.commands.VisionToggleCamera;
 import com.team1757.commands.VisionCenterTranslationX;
 import com.team1757.commands.VisionFaceGearTarget;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -99,8 +100,10 @@ public class OI {
 	private final int buttonBoxButton6Port = 6;
 
 	// Input Control Constants
-	private final static double DEADBAND = 0.2;
-	private final static double GAIN = 0.7;
+	private final static double DEADBAND = 0.1;
+	private final static double GAIN = 0.9;
+//	private final static double DEADBAND_OLD = 0.2;
+//	private final static double GAIN_OLD = 0.7;
 
 	// OI Constructor
 	public OI() {
@@ -150,36 +153,36 @@ public class OI {
 		SmartDashboard.putData(new DriveResetGyro());
 		SmartDashboard.putData(new DriveGyroPIDClear());
 
-		// Gyro Functions
+		// Gyro Commands
 		SmartDashboard.putData(new RotateToAngle());
 		SmartDashboard.putData(new RotateDegrees());
 		SmartDashboard.putData(new RotateDegreesShortest());
 
-		// Shooter Functions
+		// Shooter Commands
 		SmartDashboard.putData(new ShootWithSpeed());
 		SmartDashboard.putData(new ShootWithVoltage());
 		SmartDashboard.putData(new ShooterStop());
 
-		// Indexer Functions
+		// Indexer Commands
 		SmartDashboard.putData(new IndexerRun());
 		SmartDashboard.putData(new IndexerStop());
 
-		// Collector Functions
+		// Collector Commands
 		SmartDashboard.putData(new CollectWithPercentVoltage());
 		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
 		SmartDashboard.putData(new CollectorStop());
 
-		// GearLoader Functions
+		// GearLoader Commands
 		SmartDashboard.putData(new GearManualInput());
 		SmartDashboard.putData(new GearMatchStart());
 		SmartDashboard.putData(new GearReceive());
 		SmartDashboard.putData(new GearScore());
 
-		// Lifter Functions
+		// Lifter Commands
 		SmartDashboard.putData(new LiftUp());
 		SmartDashboard.putData(new LifterStop());
 
-		// Vision Functions
+		// Vision Commands
 		SmartDashboard.putData(new VisionFollowReflectiveTape());
 		SmartDashboard.putData(new VisionFaceReflectiveTape());
 		SmartDashboard.putData(new VisionCenterTranslationX());
@@ -188,14 +191,14 @@ public class OI {
 		SmartDashboard.putData(new VisionCenterOnGearTranslationX());
 		SmartDashboard.putData(new VisionToggleCamera());
 
-		// RingLight Functions
+		// RingLight Commands
 		SmartDashboard.putData(new VisionGearRingLightOn());
 		SmartDashboard.putData(new VisionGearRingLightOff());
 
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
 		SmartDashboard.putData(new CGShootandIndexStop());
-
+		
 		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);
 		SmartDashboard.putNumber("angularDelta", 0.0);
@@ -244,53 +247,91 @@ public class OI {
 		// Use inputControlY because that model works for rotation
 		return inputControlX(xbox360.getRawAxis(xboxRightStickX));
 	}
-
+	
+	/**
+	 * Sets the vibration motors of the Xbox 360 gamepad controller.
+	 * 
+	 * @param type		Pick a motor to vibrate. Left motor is rougher than right motor. ex.) RumbleType.kLeftMotor
+	 * @param value		The strength at which the motor vibrates. Values from 0 to 1.
+	 */
+	public void vibrateXboxController(RumbleType type, double value) {
+		xbox360.setRumble(type, value);
+	}
+	
 	public static double inputControlY(double axis) {
-		// Modeled by -4.59x^4+10.027x^3-6.344x^2+1.909x-0.0002595
-		double output = 0;
-		if (axis > OI.DEADBAND) {
-			// output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis -
-			// DEADBAND) * 0.802);
-			// NEEDS TESTING!!!
-			output = -4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) - 6.322 * (Math.pow(axis, 2))
-					+ 1.909 * axis - 0.0002595;
-		} else if (axis < -OI.DEADBAND) {
-			// output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis +
-			// DEADBAND) * 0.802);
-			// NEEDS TESTING
+		// Modeled by y=0.9x^3 + 0.1
+		double output = 0.0;
+		if (axis > DEADBAND) {
+			output = (Math.pow(axis, 3) * GAIN) + DEADBAND;
+		} else if (axis < -DEADBAND) {
 			axis = -axis;
-			output = -(-4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) - 6.322 * (Math.pow(axis, 2))
-					+ 1.909 * axis - 0.0002595);
+			output = -(Math.pow(axis, 3) * GAIN) - DEADBAND;
 		} else {
 			output = 0.0;
 		}
 		return output;
 	}
-
-	public static double inputControlYOld(double axis) {
-		// Model by G(X-D)^3 + GX
-		double output = 0;
-		if (axis > OI.DEADBAND) {
-			output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis - DEADBAND) * GAIN);
-		} else if (axis < -OI.DEADBAND) {
-			output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis + DEADBAND) * GAIN);
-		} else {
-			output = 0.0;
-		}
-		return output;
-	}
-
+	
 	public static double inputControlX(double axis) {
-		// Model by 1.5X + .2
-		double output = 0;
-		if (axis > OI.DEADBAND) {
-			output = 1.5 * (axis - DEADBAND) + .2;
-		} else if (axis < -OI.DEADBAND) {
-			output = 1.5 * (axis + DEADBAND) - .2;
+		// Modeled by y=0.9x^2 + 0.1
+		double output = 0.0;
+		if (axis > DEADBAND) {
+			output = (Math.pow(axis, 2) * GAIN) + DEADBAND;
+		} else if (axis < -DEADBAND) {
+			axis = -axis;
+			output = -(Math.pow(axis, 2) * GAIN) - DEADBAND;
 		} else {
 			output = 0.0;
 		}
 		return output;
 	}
+
+//	public static double inputControlYOld2(double axis) {
+//		// Modeled by -4.59x^4+10.027x^3-6.344x^2+1.909x-0.0002595
+//		double output = 0;
+//		if (axis > OI.DEADBAND) {
+//			// output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis -
+//			// DEADBAND) * 0.802);
+//			// NEEDS TESTING!!!
+//			output = -4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) - 6.322 * (Math.pow(axis, 2))
+//					+ 1.909 * axis - 0.0002595;
+//		} else if (axis < -OI.DEADBAND) {
+//			// output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis +
+//			// DEADBAND) * 0.802);
+//			// NEEDS TESTING
+//			axis = -axis;
+//			output = -(-4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) - 6.322 * (Math.pow(axis, 2))
+//					+ 1.909 * axis - 0.0002595);
+//		} else {
+//			output = 0.0;
+//		}
+//		return output;
+//	}
+//
+//	public static double inputControlYOld(double axis) {
+//		// Model by G(X-D)^3 + GX
+//		double output = 0;
+//		if (axis > OI.DEADBAND) {
+//			output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis - DEADBAND) * GAIN);
+//		} else if (axis < -OI.DEADBAND) {
+//			output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis + DEADBAND) * GAIN);
+//		} else {
+//			output = 0.0;
+//		}
+//		return output;
+//	}
+//
+//	public static double inputControlXOld(double axis) {
+//		// Model by 1.5X + .2
+//		double output = 0;
+//		if (axis > OI.DEADBAND) {
+//			output = 1.5 * (axis - DEADBAND) + .2;
+//		} else if (axis < -OI.DEADBAND) {
+//			output = 1.5 * (axis + DEADBAND) - .2;
+//		} else {
+//			output = 0.0;
+//		}
+//		return output;
+//	}
 
 }
