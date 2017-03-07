@@ -102,9 +102,9 @@ public class OI {
 	private final int buttonBoxButton6Port = 6;
 
 	// Input Control Constants
-	private final static double DEADBAND = 0.2;
-	private final static double DEADBAND_NEW = 0.1;
-	private final static double GAIN = 0.7;
+	private final static double DEADBAND = 0.1;
+//	private final static double DEADBAND_OLD = 0.2;
+//	private final static double GAIN = 0.7;
 
 	// OI Constructor
 	public OI() {
@@ -254,11 +254,25 @@ public class OI {
 	public static double inputControlY(double axis) {
 		// Modeled by y=0.9x^3 + 0.1
 		double output = 0.0;
-		if (axis > DEADBAND_NEW) {
+		if (axis > DEADBAND) {
 			output = (0.9 * Math.pow(axis, 3)) + (0.1);
-		} else if (axis < -DEADBAND_NEW) {
+		} else if (axis < -DEADBAND) {
 			axis = -axis;
 			output = -(0.9 * Math.pow(axis, 3)) - (0.1);
+		} else {
+			output = 0.0;
+		}
+		return output;
+	}
+	
+	public static double inputControlX(double axis) {
+		// Modeled by y=0.9x^2 + 0.1
+		double output = 0.0;
+		if (axis > DEADBAND) {
+			output = (0.9 * Math.pow(axis, 2)) + (0.1);
+		} else if (axis < -DEADBAND) {
+			axis = -axis;
+			output = -(0.9 * Math.pow(axis, 2)) - (0.1);
 		} else {
 			output = 0.0;
 		}
@@ -299,18 +313,18 @@ public class OI {
 //		}
 //		return output;
 //	}
-
-	public static double inputControlX(double axis) {
-		// Model by 1.5X + .2
-		double output = 0;
-		if (axis > OI.DEADBAND) {
-			output = 1.5 * (axis - DEADBAND) + .2;
-		} else if (axis < -OI.DEADBAND) {
-			output = 1.5 * (axis + DEADBAND) - .2;
-		} else {
-			output = 0.0;
-		}
-		return output;
-	}
+//
+//	public static double inputControlXOld(double axis) {
+//		// Model by 1.5X + .2
+//		double output = 0;
+//		if (axis > OI.DEADBAND) {
+//			output = 1.5 * (axis - DEADBAND) + .2;
+//		} else if (axis < -OI.DEADBAND) {
+//			output = 1.5 * (axis + DEADBAND) - .2;
+//		} else {
+//			output = 0.0;
+//		}
+//		return output;
+//	}
 
 }
