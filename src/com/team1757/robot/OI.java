@@ -103,8 +103,9 @@ public class OI {
 
 	// Input Control Constants
 	private final static double DEADBAND = 0.1;
+	private final static double GAIN = 0.9;
 //	private final static double DEADBAND_OLD = 0.2;
-//	private final static double GAIN = 0.7;
+//	private final static double GAIN_OLD = 0.7;
 
 	// OI Constructor
 	public OI() {
@@ -255,10 +256,10 @@ public class OI {
 		// Modeled by y=0.9x^3 + 0.1
 		double output = 0.0;
 		if (axis > DEADBAND) {
-			output = (0.9 * Math.pow(axis, 3)) + (0.1);
+			output = (Math.pow(axis, 3) * GAIN) + DEADBAND;
 		} else if (axis < -DEADBAND) {
 			axis = -axis;
-			output = -(0.9 * Math.pow(axis, 3)) - (0.1);
+			output = -(Math.pow(axis, 3) * GAIN) - DEADBAND;
 		} else {
 			output = 0.0;
 		}
@@ -269,10 +270,10 @@ public class OI {
 		// Modeled by y=0.9x^2 + 0.1
 		double output = 0.0;
 		if (axis > DEADBAND) {
-			output = (0.9 * Math.pow(axis, 2)) + (0.1);
+			output = (Math.pow(axis, 2) * GAIN) + DEADBAND;
 		} else if (axis < -DEADBAND) {
 			axis = -axis;
-			output = -(0.9 * Math.pow(axis, 2)) - (0.1);
+			output = -(Math.pow(axis, 2) * GAIN) - DEADBAND;
 		} else {
 			output = 0.0;
 		}
