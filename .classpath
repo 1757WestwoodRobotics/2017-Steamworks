@@ -12,6 +12,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/opencv.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/navx_frc.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/CTRLib-javadoc.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/CTRLib.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/CTRLib.jar" sourcepath="libs/WPILib-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
