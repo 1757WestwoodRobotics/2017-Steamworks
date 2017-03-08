@@ -32,22 +32,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class RobotMap {
 
-	//Talon ids
+	// Talon ids
 	private static final int driveTrainLeftFrontPort = 1;
 	private static final int driveTrainLeftBackPort = 2;
 	private static final int driveTrainRightFrontPort = 3;
 	private static final int driveTrainRightBackPort = 4;
-	
-	private static final int shooterFlyWheelPort = 8; 
+
+	private static final int shooterFlyWheelPort = 8;
 	private static final int indexerTalonPort = 9;
 	private static final int collectorFlyWheelPort = 7;
 	private static final int gearLoaderTalonPort = 6;
 	private static final int liftTalonPort = 5;
-	
-	//Spike ids
+
+	// Spike ids
 	private static final int gearRingLightPort = 0;
-	
-	//Talon objects
+
+	// Talon objects
 	public static CANTalon driveTrainLeftFront;
 	public static CANTalon driveTrainLeftBack;
 	public static CANTalon driveTrainRightFront;
@@ -61,11 +61,11 @@ public class RobotMap {
 	public static CANTalon gearLoaderTalon;
 
 	public static CANTalon liftTalon;
-	
-	//Spike objects
+
+	// Spike objects
 	public static Relay gearRingLight;
 
-	//Robot objects
+	// Robot objects
 	public static RobotDrive driveTrainMecanumDrive;
 
 	public static AHRS driveTrainNavX;
@@ -90,15 +90,15 @@ public class RobotMap {
 
 	public static UsbCamera gearCam = new UsbCamera("gearCam", 0);
 	public static UsbCamera shooterCam = new UsbCamera("shooterCam", 1);
-	 
 
-	
-//  This will allow you to stream both at the same time...
-//	public static UsbCamera gearCam = CameraServer.getInstance().startAutomaticCapture(0);
-//	public static UsbCamera shooterCam = CameraServer.getInstance().startAutomaticCapture(1);
+	// This will allow you to stream both at the same time...
+	// public static UsbCamera gearCam =
+	// CameraServer.getInstance().startAutomaticCapture(0);
+	// public static UsbCamera shooterCam =
+	// CameraServer.getInstance().startAutomaticCapture(1);
 
 	public static void init() {
-		//Initialize Talons
+		// Initialize Talons
 		driveTrainLeftFront = new CANTalon(driveTrainLeftFrontPort);
 		LiveWindow.addActuator("Drive Train", "Left Front", driveTrainLeftFront);
 
@@ -136,20 +136,20 @@ public class RobotMap {
 		driveTrainRightFront.enableBrakeMode(true);
 		driveTrainRightBack.enableBrakeMode(true);
 
-        gearLoaderTalon.enableBrakeMode(true);
-        
-        // Soft Limits
-        gearLoaderTalon.setReverseSoftLimit(270/4096.0);
-        gearLoaderTalon.enableReverseSoftLimit(false);
-        gearLoaderTalon.setForwardSoftLimit(1300/4096.0);
-        gearLoaderTalon.enableForwardSoftLimit(false);
-        
-        gearLoaderTalon.configMaxOutputVoltage(4.2);
-        gearLoaderTalon.configNominalOutputVoltage(4.2, 4.2);
-        
-        liftTalon.enableBrakeMode(false);
-        
-		//Initialize RobotDrive
+		gearLoaderTalon.enableBrakeMode(true);
+
+		// Soft Limits
+		gearLoaderTalon.setReverseSoftLimit(270 / 4096.0);
+		gearLoaderTalon.enableReverseSoftLimit(false);
+		gearLoaderTalon.setForwardSoftLimit(1300 / 4096.0);
+		gearLoaderTalon.enableForwardSoftLimit(false);
+
+		gearLoaderTalon.configMaxOutputVoltage(4.2);
+		gearLoaderTalon.configNominalOutputVoltage(4.2, 4.2);
+
+		liftTalon.enableBrakeMode(false);
+
+		// Initialize RobotDrive
 		driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack, driveTrainRightFront,
 				driveTrainRightBack);
 
@@ -215,9 +215,9 @@ public class RobotMap {
 		SmartDashboard.putData("visionGearTranslationController", visionGearTranslationController);
 		visionGearTranslationController.setOutputRange(-.5, .5);
 		visionGearTranslationController.setAbsoluteTolerance(8);
-		
-		//Initialize RingLight
+
+		// Initialize RingLight
 		gearRingLight = new Relay(gearRingLightPort, Relay.Direction.kForward);
-		
+
 	}
 }
