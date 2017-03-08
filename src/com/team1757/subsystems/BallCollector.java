@@ -21,6 +21,8 @@ public class BallCollector extends Subsystem {
 
 	/**
 	 * Initialize PID feedback and constants for flywheel
+	 * 
+	 * pGain 0.0 iGain 0.0001 dGain 0.0
 	 */
 	public void initializeFlyWheelPID() {
 		RobotMap.shooterFlyWheel.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);

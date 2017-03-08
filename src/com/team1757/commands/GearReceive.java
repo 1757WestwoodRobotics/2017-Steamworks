@@ -17,7 +17,7 @@ public class GearReceive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gearLoader.setTalonPID();
+    	Robot.gearLoader.initializeGearPID();
     	Robot.gearLoader.initEncoder();
     	Robot.gearLoader.enableGearTalon();
     	Robot.gearLoader.enableGearPIDControl();
