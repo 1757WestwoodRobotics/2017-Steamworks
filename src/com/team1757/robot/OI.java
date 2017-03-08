@@ -31,14 +31,13 @@ import com.team1757.commands.LifterStop;
 import com.team1757.commands.ShooterStop;
 import com.team1757.commands.VisionCenterOnGearTranslationX;
 import com.team1757.commands.VisionGetReadyToScoreGear;
-import com.team1757.commands.VisionShooterRingLightOff;
-import com.team1757.commands.VisionShooterRingLightOn;
 import com.team1757.commands.VisionGearRingLightOff;
 import com.team1757.commands.VisionGearRingLightOn;
 import com.team1757.commands.VisionToggleCamera;
 import com.team1757.commands.VisionCenterTranslationX;
 import com.team1757.commands.VisionFaceGearTarget;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -102,8 +101,10 @@ public class OI {
 	private final int buttonBoxButton6Port = 6;
 
 	// Input Control Constants
-	private final static double DEADBAND = 0.2;
-	private final static double GAIN = 0.7;
+	private final static double DEADBAND = 0.1;
+	private final static double GAIN = 0.9;
+	// private final static double DEADBAND_OLD = 0.2;
+	// private final static double GAIN_OLD = 0.7;
 
 	// OI Constructor
 	public OI() {
@@ -136,7 +137,7 @@ public class OI {
 		buttonBoxButton2.toggleWhenPressed(new CollectWithPercentVoltage());
 		buttonBoxButton5.toggleWhenPressed(new VisionToggleCamera());
 		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
-		//buttonBoxButton6.toggleWhenPressed(new CGCenterAndScoreGear());
+		// buttonBoxButton6.toggleWhenPressed(new CGCenterAndScoreGear());
 		buttonBoxButton6.whileHeld(new LiftUp());
 
 		// Bind Commands to Xbox Controller
@@ -153,36 +154,36 @@ public class OI {
 		SmartDashboard.putData(new DriveResetGyro());
 		SmartDashboard.putData(new DriveGyroPIDClear());
 
-		// Gyro Functions
+		// Gyro Commands
 		SmartDashboard.putData(new RotateToAngle());
 		SmartDashboard.putData(new RotateDegrees());
 		SmartDashboard.putData(new RotateDegreesShortest());
 
-		// Shooter Functions
+		// Shooter Commands
 		SmartDashboard.putData(new ShootWithSpeed());
 		SmartDashboard.putData(new ShootWithVoltage());
 		SmartDashboard.putData(new ShooterStop());
 
-		// Indexer Functions
+		// Indexer Commands
 		SmartDashboard.putData(new IndexerRun());
 		SmartDashboard.putData(new IndexerStop());
 
-		// Collector Functions
+		// Collector Commands
 		SmartDashboard.putData(new CollectWithPercentVoltage());
 		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
 		SmartDashboard.putData(new CollectorStop());
 
-		// GearLoader Functions
+		// GearLoader Commands
 		SmartDashboard.putData(new GearManualInput());
 		SmartDashboard.putData(new GearMatchStart());
 		SmartDashboard.putData(new GearReceive());
 		SmartDashboard.putData(new GearScore());
 
-		// Lifter Functions
+		// Lifter Commands
 		SmartDashboard.putData(new LiftUp());
 		SmartDashboard.putData(new LifterStop());
 
-		// Vision Functions
+		// Vision Commands
 		SmartDashboard.putData(new VisionFollowReflectiveTape());
 		SmartDashboard.putData(new VisionFaceReflectiveTape());
 		SmartDashboard.putData(new VisionCenterTranslationX());
@@ -191,11 +192,9 @@ public class OI {
 		SmartDashboard.putData(new VisionCenterOnGearTranslationX());
 		SmartDashboard.putData(new VisionToggleCamera());
 
-		// RingLight Functions
+		// RingLight Commands
 		SmartDashboard.putData(new VisionGearRingLightOn());
 		SmartDashboard.putData(new VisionGearRingLightOff());
-		SmartDashboard.putData(new VisionShooterRingLightOn());
-		SmartDashboard.putData(new VisionShooterRingLightOff());
 
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
@@ -210,93 +209,180 @@ public class OI {
 
 	}
 
+	/**
+	 * Get Xbox 360 gamepad object
+	 * 
+	 * @return Joystick xbox360 object representing Xbox 360 gamepad
+	 */
 	public Joystick getXbox360() {
 		return xbox360;
 	}
 
+	/**
+	 * Get Button Box gamepad object
+	 * 
+	 * @return Joystick buttonBox object representing Button Box gamepad
+	 */
 	public Joystick getButtonBox() {
 		return buttonBox;
 	}
 
-	public int getXboxAxisLeftStickX() {
-		return xboxLeftStickX;
-	}
-
-	public int getXboxAxisLeftStickY() {
-		return xboxLeftStickY;
-	}
-
-	public int getXboxAxisRightStickX() {
-		return xboxRightStickX;
-	}
-	
-	public int getXboxAxisLeftTrigger() {
-		return xboxLeftTrigger;
-	}
-	
-	public int getXboxAxisRightTrigger() {
-		return xboxRightTrigger;
-	}
-
+	/**
+	 * Get X translation operator operatorinput
+	 * 
+	 * @return double Normalized input from X axis of Xbox 360 gamepad's left
+	 *         stick in range [-1, 1]
+	 */
 	public double getTranslateX() {
 		return inputControlX(xbox360.getRawAxis(xboxLeftStickX));
 	}
 
+	/**
+	 * Get Y translation operator input
+	 * 
+	 * @return double Normalized input from Y axis of Xbox 360 gamepad's left
+	 *         stick in range [-1, 1]
+	 */
 	public double getTranslateY() {
 		return inputControlY(xbox360.getRawAxis(xboxLeftStickY));
 	}
 
+	/**
+	 * Get rotation operator input
+	 * 
+	 * @return double Normalized input from X axis of Xbox 360 gamepad's right
+	 *         stick in range [-1, 1]
+	 */
 	public double getRotate() {
 		// Use inputControlY because that model works for rotation
 		return inputControlX(xbox360.getRawAxis(xboxRightStickX));
 	}
 
+	/**
+	 * Get right trigger
+	 * 
+	 * @return double Raw analog reading from Xbox 360 gamepad's right trigger
+	 *         in range [-1, 1]
+	 */
+	public double getRightTrigger() {
+		return xbox360.getRawAxis(xboxRightTrigger);
+	}
+
+	/**
+	 * Get left trigger
+	 * 
+	 * @return double Raw analog reading from Xbox 360 gamepad's left trigger in
+	 *         range [-1, 1]
+	 */
+	public double getLeftTrigger() {
+		return xbox360.getRawAxis(xboxLeftTrigger);
+	}
+
+	/**
+	 * Sets the vibration motors of the Xbox 360 gamepad controller.
+	 * 
+	 * @param RumbleType
+	 *            The motor to vibrate. Left motor is rougher than right motor.
+	 *            ex. RumbleType.kLeftMotor
+	 * @param double
+	 *            value The strength at which the motor vibrates in range [0, 1]
+	 */
+	public void vibrateXboxController(RumbleType type, double value) {
+		xbox360.setRumble(type, value);
+	}
+
+	/**
+	 * Y axis input normalization modeled by y=0.9x^3 + 0.1
+	 * 
+	 * @param double
+	 *            axis Raw operator input from Y axis in range [-1, 1]
+	 * @return double Normalized output in range [-1, 1]
+	 */
 	public static double inputControlY(double axis) {
-		// Modeled by -4.59x^4+10.027x^3-6.344x^2+1.909x-0.0002595
-		double output = 0;
-		if (axis > OI.DEADBAND) {
-			// output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis -
-			// DEADBAND) * 0.802);
-			// NEEDS TESTING!!!
-			output = -4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) - 6.322 * (Math.pow(axis, 2))
-					+ 1.909 * axis - 0.0002595;
-		} else if (axis < -OI.DEADBAND) {
-			// output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis +
-			// DEADBAND) * 0.802);
-			// NEEDS TESTING
+		// Modeled by y=0.9x^3 + 0.1
+		double output = 0.0;
+		if (axis > DEADBAND) {
+			output = (Math.pow(axis, 3) * GAIN) + DEADBAND;
+		} else if (axis < -DEADBAND) {
 			axis = -axis;
-			output = -(-4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) - 6.322 * (Math.pow(axis, 2))
-					+ 1.909 * axis - 0.0002595);
+			output = -(Math.pow(axis, 3) * GAIN) - DEADBAND;
 		} else {
 			output = 0.0;
 		}
 		return output;
 	}
 
-	public static double inputControlYOld(double axis) {
-		// Model by G(X-D)^3 + GX
-		double output = 0;
-		if (axis > OI.DEADBAND) {
-			output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis - DEADBAND) * GAIN);
-		} else if (axis < -OI.DEADBAND) {
-			output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis + DEADBAND) * GAIN);
-		} else {
-			output = 0.0;
-		}
-		return output;
-	}
-
+	/**
+	 * X axis normalization modeled by y=0.9x^2 + 0.1
+	 * 
+	 * @param axis
+	 *            Raw operator input from X axis in range [-1, 1]
+	 * @return double Normalized output in range [-1, 1]
+	 */
 	public static double inputControlX(double axis) {
-		// Model by 1.5X + .2
-		double output = 0;
-		if (axis > OI.DEADBAND) {
-			output = 1.5 * (axis - DEADBAND) + .2;
-		} else if (axis < -OI.DEADBAND) {
-			output = 1.5 * (axis + DEADBAND) - .2;
+		// Modeled by y=0.9x^2 + 0.1
+		double output = 0.0;
+		if (axis > DEADBAND) {
+			output = (Math.pow(axis, 2) * GAIN) + DEADBAND;
+		} else if (axis < -DEADBAND) {
+			axis = -axis;
+			output = -(Math.pow(axis, 2) * GAIN) - DEADBAND;
 		} else {
 			output = 0.0;
 		}
 		return output;
 	}
+
+	// public static double inputControlYOld2(double axis) {
+	// // Modeled by -4.59x^4+10.027x^3-6.344x^2+1.909x-0.0002595
+	// double output = 0;
+	// if (axis > OI.DEADBAND) {
+	// // output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis -
+	// // DEADBAND) * 0.802);
+	// // NEEDS TESTING!!!
+	// output = -4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) -
+	// 6.322 * (Math.pow(axis, 2))
+	// + 1.909 * axis - 0.0002595;
+	// } else if (axis < -OI.DEADBAND) {
+	// // output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis +
+	// // DEADBAND) * 0.802);
+	// // NEEDS TESTING
+	// axis = -axis;
+	// output = -(-4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) -
+	// 6.322 * (Math.pow(axis, 2))
+	// + 1.909 * axis - 0.0002595);
+	// } else {
+	// output = 0.0;
+	// }
+	// return output;
+	// }
+	//
+	// public static double inputControlYOld(double axis) {
+	// // Model by G(X-D)^3 + GX
+	// double output = 0;
+	// if (axis > OI.DEADBAND) {
+	// output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis - DEADBAND) *
+	// GAIN);
+	// } else if (axis < -OI.DEADBAND) {
+	// output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis + DEADBAND) *
+	// GAIN);
+	// } else {
+	// output = 0.0;
+	// }
+	// return output;
+	// }
+	//
+	// public static double inputControlXOld(double axis) {
+	// // Model by 1.5X + .2
+	// double output = 0;
+	// if (axis > OI.DEADBAND) {
+	// output = 1.5 * (axis - DEADBAND) + .2;
+	// } else if (axis < -OI.DEADBAND) {
+	// output = 1.5 * (axis + DEADBAND) - .2;
+	// } else {
+	// output = 0.0;
+	// }
+	// return output;
+	// }
 
 }
