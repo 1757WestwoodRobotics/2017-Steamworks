@@ -254,6 +254,24 @@ public class OI {
 	}
 	
 	/**
+	 * Get right trigger
+	 * 
+	 * @return double			Raw analog reading from Xbox 360 gamepad's right trigger in range [-1, 1]
+	 */
+	public double getRightTrigger() {
+		return xbox360.getRawAxis(xboxRightTrigger);
+	}
+	
+	/**
+	 * Get left trigger
+	 * 
+	 * @return double			Raw analog reading from Xbox 360 gamepad's left trigger in range [-1, 1]
+	 */
+	public double getLeftTrigger() {
+		return xbox360.getRawAxis(xboxLeftTrigger);
+	}
+	
+	/**
 	 * Sets the vibration motors of the Xbox 360 gamepad controller.
 	 * 
 	 * @param RumbleType		The motor to vibrate. Left motor is rougher than right motor. ex. RumbleType.kLeftMotor
