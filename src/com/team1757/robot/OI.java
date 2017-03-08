@@ -207,42 +207,47 @@ public class OI {
 
 	}
 
+	/**
+	 * Get Xbox 360 gamepad object
+	 * 
+	 * @return Joystick 		xbox360 object representing Xbox 360 gamepad
+	 */
 	public Joystick getXbox360() {
 		return xbox360;
 	}
 
+	/**
+	 * Get Button Box gamepad object
+	 * 
+	 * @return Joystick 		buttonBox object representing Button Box gamepad
+	 */
 	public Joystick getButtonBox() {
 		return buttonBox;
 	}
-
-	public int getXboxAxisLeftStickX() {
-		return xboxLeftStickX;
-	}
-
-	public int getXboxAxisLeftStickY() {
-		return xboxLeftStickY;
-	}
-
-	public int getXboxAxisRightStickX() {
-		return xboxRightStickX;
-	}
 	
-	public int getXboxAxisLeftTrigger() {
-		return xboxLeftTrigger;
-	}
-	
-	public int getXboxAxisRightTrigger() {
-		return xboxRightTrigger;
-	}
-
+	/**
+	 * Get X translation operator operatorinput
+	 * 
+	 * @return double 			Normalized input from X axis of Xbox 360 gamepad's left stick in range [-1, 1]
+	 */
 	public double getTranslateX() {
 		return inputControlX(xbox360.getRawAxis(xboxLeftStickX));
 	}
 
+	/**
+	 * Get Y translation operator input
+	 * 
+	 * @return double 			Normalized input from Y axis of Xbox 360 gamepad's left stick in range [-1, 1]
+	 */
 	public double getTranslateY() {
 		return inputControlY(xbox360.getRawAxis(xboxLeftStickY));
 	}
 
+	/**
+	 * Get rotation operator input
+	 * 
+	 * @return double 			Normalized input from X axis of Xbox 360 gamepad's right stick in range [-1, 1]
+	 */
 	public double getRotate() {
 		// Use inputControlY because that model works for rotation
 		return inputControlX(xbox360.getRawAxis(xboxRightStickX));
@@ -251,13 +256,19 @@ public class OI {
 	/**
 	 * Sets the vibration motors of the Xbox 360 gamepad controller.
 	 * 
-	 * @param type		Pick a motor to vibrate. Left motor is rougher than right motor. ex.) RumbleType.kLeftMotor
-	 * @param value		The strength at which the motor vibrates. Values from 0 to 1.
+	 * @param RumbleType		The motor to vibrate. Left motor is rougher than right motor. ex. RumbleType.kLeftMotor
+	 * @param double value		The strength at which the motor vibrates in range [0, 1]
 	 */
 	public void vibrateXboxController(RumbleType type, double value) {
 		xbox360.setRumble(type, value);
 	}
 	
+	/**
+	 * Y axis input normalization modeled by y=0.9x^3 + 0.1
+	 * 
+	 * @param double axis		Raw operator input from Y axis in range [-1, 1]
+	 * @return double 			Normalized output in range [-1, 1]
+	 */
 	public static double inputControlY(double axis) {
 		// Modeled by y=0.9x^3 + 0.1
 		double output = 0.0;
@@ -272,6 +283,12 @@ public class OI {
 		return output;
 	}
 	
+	/**
+	 * X axis normalization modeled by y=0.9x^2 + 0.1
+	 * 
+	 * @param axis				Raw operator input from X axis in range [-1, 1]
+	 * @return double 			Normalized output in range [-1, 1]
+	 */
 	public static double inputControlX(double axis) {
 		// Modeled by y=0.9x^2 + 0.1
 		double output = 0.0;
