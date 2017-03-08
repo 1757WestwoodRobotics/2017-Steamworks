@@ -27,35 +27,37 @@ public class DriveTrain extends Subsystem {
 	}
 
 	// Motor
-	
+
 	/**
-	 * TODO javadoc
+	 * Toggle direction of robot drive by inverting motor directions
+	 * 
+	 * Left side inverted (default) is Collector forward Right side inverted is
+	 * Gear Loader forward
 	 */
-	public void toggleInversion(){
+	public void toggleInversion() {
 		isInverted = !isInverted;
-		
-		if(RobotMap.driveTrainLeftBack.getInverted()){
+
+		if (RobotMap.driveTrainLeftBack.getInverted()) {
 			RobotMap.driveTrainLeftFront.setInverted(false);
 			RobotMap.driveTrainLeftBack.setInverted(false);
 			RobotMap.driveTrainRightFront.setInverted(true);
 			RobotMap.driveTrainRightBack.setInverted(true);
-		}
-		else {
+		} else {
 			RobotMap.driveTrainLeftFront.setInverted(true);
 			RobotMap.driveTrainLeftBack.setInverted(true);
 			RobotMap.driveTrainRightFront.setInverted(false);
 			RobotMap.driveTrainRightBack.setInverted(false);
 		}
 	}
-	
+
 	/**
-	 * TODO javadoc
-	 * @return
+	 * Get drivetrain is inverted (Gear Loader forward)
+	 * 
+	 * @return isInverted
 	 */
 	public boolean getInverted() {
 		return isInverted;
 	}
-	
 
 	/**
 	 * Manual Cartesian Drive
@@ -73,11 +75,10 @@ public class DriveTrain extends Subsystem {
 	public void manualDrive(double translateX, double translateY, double rotate) {
 		if (isInverted) {
 			driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, -rotate, 0);
-		}
-		else {
+		} else {
 			driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, rotate, 0);
 		}
-		
+
 	}
 
 	/**
@@ -174,7 +175,7 @@ public class DriveTrain extends Subsystem {
 	public double getCurrentDisplacementY() {
 		return driveTrainNavX.getDisplacementY();
 	}
-	
+
 	/**
 	 * Get accelerometer X axis displacement (meters) in range (-MAX_DOUBLE,
 	 * MAX_DOUBLE)
@@ -185,10 +186,9 @@ public class DriveTrain extends Subsystem {
 	public double getCurrentDisplacementX() {
 		return driveTrainNavX.getDisplacementX();
 	}
-	
 
 	// Gyroscope PID
-	
+
 	/**
 	 * Enable gyroscope PID Controller
 	 */
@@ -277,8 +277,7 @@ public class DriveTrain extends Subsystem {
 		gyroController.setSetpoint(deltaAngle + getCurrentRawAngle());
 	}
 
-	
-	//Accelerometer PID Y
+	// Accelerometer PID Y
 
 	/**
 	 * Enable accelerometer Y axis PID controller
@@ -371,6 +370,5 @@ public class DriveTrain extends Subsystem {
 	public boolean reachedAccelSetpointX() {
 		return (Math.abs(accelControllerX.getError()) <= ACCEL_PID_TOLERANCE);
 	}
-	
-	
+
 }
