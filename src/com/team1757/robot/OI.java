@@ -210,7 +210,7 @@ public class OI {
 	/**
 	 * Get Xbox 360 gamepad object
 	 * 
-	 * @return Joystick xbox360 object representing Xbox 360 gamepad
+	 * @return Joystick Xbox 360 object representing Xbox 360 gamepad
 	 */
 	public Joystick getXbox360() {
 		return xbox360;
@@ -226,10 +226,9 @@ public class OI {
 	}
 
 	/**
-	 * Get X translation operator operatorinput
+	 * Get X translation operator operator input
 	 * 
-	 * @return double Normalized input from X axis of Xbox 360 gamepad's left
-	 *         stick in range [-1, 1]
+	 * @return Normalized input from X axis of Xbox 360 gamepad's left stick in range [-1, 1]
 	 */
 	public double getTranslateX() {
 		return inputControlX(xbox360.getRawAxis(xboxLeftStickX));
@@ -238,8 +237,7 @@ public class OI {
 	/**
 	 * Get Y translation operator input
 	 * 
-	 * @return double Normalized input from Y axis of Xbox 360 gamepad's left
-	 *         stick in range [-1, 1]
+	 * @return Normalized input from Y axis of Xbox 360 gamepad's left stick in range [-1, 1]
 	 */
 	public double getTranslateY() {
 		return inputControlY(xbox360.getRawAxis(xboxLeftStickY));
@@ -248,8 +246,7 @@ public class OI {
 	/**
 	 * Get rotation operator input
 	 * 
-	 * @return double Normalized input from X axis of Xbox 360 gamepad's right
-	 *         stick in range [-1, 1]
+	 * @return Normalized input from X axis of Xbox 360 gamepad's right stick in range [-1, 1]
 	 */
 	public double getRotate() {
 		// Use inputControlY because that model works for rotation
@@ -259,8 +256,7 @@ public class OI {
 	/**
 	 * Get right trigger
 	 * 
-	 * @return double Raw analog reading from Xbox 360 gamepad's right trigger
-	 *         in range [-1, 1]
+	 * @return Raw analog reading from Xbox 360 gamepad's right trigger in range [-1, 1]
 	 */
 	public double getRightTrigger() {
 		return xbox360.getRawAxis(xboxRightTrigger);
@@ -269,21 +265,17 @@ public class OI {
 	/**
 	 * Get left trigger
 	 * 
-	 * @return double Raw analog reading from Xbox 360 gamepad's left trigger in
-	 *         range [-1, 1]
+	 * @return Raw analog reading from Xbox 360 gamepad's left trigger in range [-1, 1]
 	 */
 	public double getLeftTrigger() {
 		return xbox360.getRawAxis(xboxLeftTrigger);
 	}
 
 	/**
-	 * Sets the vibration motors of the Xbox 360 gamepad controller.
+	 * Sets the vibration motors of the Xbox 360 gamepad controller
 	 * 
-	 * @param RumbleType
-	 *            The motor to vibrate. Left motor is rougher than right motor.
-	 *            ex. RumbleType.kLeftMotor
-	 * @param double
-	 *            value The strength at which the motor vibrates in range [0, 1]
+	 * @param type	The motor to vibrate. Left motor is rougher than right motor. Uses a RumbleType constant.
+	 * @param value	The strength at which the motor vibrates in range [0, 1]
 	 */
 	public void vibrateXboxController(RumbleType type, double value) {
 		xbox360.setRumble(type, value);
@@ -292,9 +284,8 @@ public class OI {
 	/**
 	 * Y axis input normalization modeled by y=0.9x^3 + 0.1
 	 * 
-	 * @param double
-	 *            axis Raw operator input from Y axis in range [-1, 1]
-	 * @return double Normalized output in range [-1, 1]
+	 * @param axis	Raw operator input from Y axis in range [-1, 1] 
+	 * @return Normalized output in range [-1, 1]
 	 */
 	public static double inputControlY(double axis) {
 		// Modeled by y=0.9x^3 + 0.1
@@ -311,11 +302,10 @@ public class OI {
 	}
 
 	/**
-	 * X axis normalization modeled by y=0.9x^2 + 0.1
+	 * X axis input normalization modeled by y=0.9x^2 + 0.1
 	 * 
-	 * @param axis
-	 *            Raw operator input from X axis in range [-1, 1]
-	 * @return double Normalized output in range [-1, 1]
+	 * @param axis	Raw operator input from X axis in range [-1, 1]
+	 * @return Normalized output in range [-1, 1]
 	 */
 	public static double inputControlX(double axis) {
 		// Modeled by y=0.9x^2 + 0.1
