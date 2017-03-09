@@ -49,6 +49,32 @@ public class DriveTrain extends Subsystem {
 			RobotMap.driveTrainRightBack.setInverted(false);
 		}
 	}
+	
+	/**
+	 * Set direction to forward (left inverted)
+	 * 
+	 * Left side inverted (default) is Collector forward Right side inverted is
+	 * Gear Loader forward
+	 */
+	public void setInversionForward() {
+		RobotMap.driveTrainLeftFront.setInverted(true);
+		RobotMap.driveTrainLeftBack.setInverted(true);
+		RobotMap.driveTrainRightFront.setInverted(false);
+		RobotMap.driveTrainRightBack.setInverted(false);
+	}
+	
+	/**
+	 * Set direction to inverted (right inverted)
+	 * 
+	 * Left side inverted (default) is Collector forward Right side inverted is
+	 * Gear Loader forward
+	 */
+	public void setInversionBackward() {
+		RobotMap.driveTrainLeftFront.setInverted(false);
+		RobotMap.driveTrainLeftBack.setInverted(false);
+		RobotMap.driveTrainRightFront.setInverted(true);
+		RobotMap.driveTrainRightBack.setInverted(true);
+	}
 
 	/**
 	 * Get drivetrain is inverted (Gear Loader forward)
