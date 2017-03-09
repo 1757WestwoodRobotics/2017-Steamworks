@@ -14,11 +14,6 @@ public class RotateToAngle extends Command {
     	requires(Robot.driveTrain);
     }
     
-    public RotateToAngle(double angle) {
-    	requires(Robot.driveTrain);
-    	SmartDashboard.putNumber("targetAngle", angle);
-    }
-    
     // Called once before execute
     protected void initialize() {
     	Robot.driveTrain.enableGyroPID();
