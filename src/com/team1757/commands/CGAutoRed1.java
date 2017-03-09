@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Autonomous for center starting positions on both red and blue alliances
  */
-public class CGAutoRedBlue2 extends CommandGroup {
+public class CGAutoRed1 extends CommandGroup {
 
-	public CGAutoRedBlue2() {
+	public CGAutoRed1() {
 		// Face gear loader forward
 		addSequential(new DriveDirectionInverted());
 		// Drop gear to receive
@@ -36,9 +36,7 @@ public class CGAutoRedBlue2 extends CommandGroup {
 		// Rotate left 90
 		SmartDashboard.putNumber("targetAngle", 90);
 		addSequential(new RotateToAngle());
-		// Translate right
-		addSequential(new DriveStraightX(2.0));
-		// Cross line
-		addSequential(new DriveStraightY(1.65));
+		// Drive a bit more
+		addSequential(new DriveStraightY(.5));
 	}
 }
