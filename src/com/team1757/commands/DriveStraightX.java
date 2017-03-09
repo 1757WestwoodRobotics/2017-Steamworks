@@ -6,11 +6,19 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 /**
  *
  */
-public class DriveStraight extends TimedCommand {
+public class DriveStraightX extends TimedCommand {
 
-    public DriveStraight(double timeout) {
+	private double velocity = .5;
+	
+    public DriveStraightX(double timeout) {
         super(timeout);
         requires(Robot.driveTrain);
+    }
+    
+    public DriveStraightX(double timeout, double velocity) {
+        super(timeout);
+        requires(Robot.driveTrain);
+        this.velocity = velocity;
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +29,7 @@ public class DriveStraight extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.moveWithGyroPID(0, -0.5);
+    	Robot.driveTrain.moveWithGyroPID(velocity, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

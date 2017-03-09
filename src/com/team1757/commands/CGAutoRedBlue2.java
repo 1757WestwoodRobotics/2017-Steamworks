@@ -1,6 +1,5 @@
 package com.team1757.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -15,11 +14,11 @@ public class CGAutoRedBlue2 extends CommandGroup {
 		// Drop gear to receive
 		addSequential(new GearReceive());
 		// Drive straight ~100"
-		addSequential(new DriveStraight(1.2));
+		addSequential(new DriveStraightY(1.2));
 		// Correct translation with vision
 		// addSequential(new VisionFaceGearTarget());
 		// Drive straight ~14.3"
-		addSequential(new DriveStraight(.1));
+		addSequential(new DriveStraightY(.1));
 		// "Wait a beat"
 		addSequential(new Delay(.5));
 		// Place gear
@@ -29,7 +28,7 @@ public class CGAutoRedBlue2 extends CommandGroup {
 		// Reverse
 		addSequential(new DriveToggleDirection());
 		// Drive backwards ~100"
-		addSequential(new DriveStraight(1.0));
+		addSequential(new DriveStraightY(1.0));
 		// Close gear
 		addSequential(new GearReceive());
 		// Rotate left 90

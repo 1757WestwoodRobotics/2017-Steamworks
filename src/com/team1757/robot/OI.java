@@ -8,7 +8,7 @@ import com.team1757.commands.CollectReverseWithPercentVoltage;
 import com.team1757.commands.CollectWithPercentVoltage;
 import com.team1757.commands.CollectorStop;
 import com.team1757.commands.DriveGyroAssisted;
-import com.team1757.commands.DriveStraight;
+import com.team1757.commands.DriveStraightY;
 import com.team1757.commands.DriveToggleDirection;
 import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
@@ -146,7 +146,7 @@ public class OI {
 
 		// Put Commands on SmartDashboard
 		// Drive functions
-		SmartDashboard.putData(new DriveStraight(1.65));
+		SmartDashboard.putData(new DriveStraightY(1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
 		SmartDashboard.putData(new DriveToggleDirection());
 
