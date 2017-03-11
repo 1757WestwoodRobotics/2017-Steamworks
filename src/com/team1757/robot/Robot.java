@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.team1757.commands.CGAutoRight;
+import com.team1757.commands.CGAutoCrossLine;
 import com.team1757.commands.CGAutoLeft;
 import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.GetStatus;
@@ -71,6 +72,7 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Middle", new CGAutoMiddle());
 		chooser.addObject("Right", new CGAutoRight());
 		chooser.addObject("Left", new CGAutoLeft());
+		chooser.addObject("Cross Line (Right or Left)", new CGAutoCrossLine());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 

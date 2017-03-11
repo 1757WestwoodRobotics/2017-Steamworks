@@ -25,7 +25,6 @@ public class Vision extends Subsystem {
 
 	private static boolean isGearCamActive = true;
 
-
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
 	private NetworkTable linesReport;
@@ -33,7 +32,7 @@ public class Vision extends Subsystem {
 	private int xResolution = 160;
 	private int yResolution = 120;
 	private int fps = 30;
-	
+
 	private final double GEAR_TRANSLATION_PID_TOLERANCE = 100;
 
 	public void initDefaultCommand() {
@@ -48,11 +47,13 @@ public class Vision extends Subsystem {
 	public void init() {
 		gearCam.setFPS(fps);
 		gearCam.setResolution(xResolution, yResolution);
-		gearCam.setExposureManual(0);
+		// Use zero exposure for bright vision targets and back light
+		// gearCam.setExposureManual(0);
 
 		shooterCam.setFPS(fps);
 		shooterCam.setResolution(xResolution, yResolution);
-		shooterCam.setExposureManual(0);
+		// Use zero exposure for bright vision targets and back light
+		// shooterCam.setExposureManual(0);
 
 		CameraServer.getInstance().addCamera(gearCam);
 
@@ -200,13 +201,16 @@ public class Vision extends Subsystem {
 	}
 
 	/**
-	 * Gets the difference between current setpoint (0) and current difference in gear target areas (in pixels squared)
-	 * @return error in difference between gear target areas in range (-MAX_DOUBLE, MAX_DOUBLE)
+	 * Gets the difference between current setpoint (0) and current difference
+	 * in gear target areas (in pixels squared)
+	 * 
+	 * @return error in difference between gear target areas in range
+	 *         (-MAX_DOUBLE, MAX_DOUBLE)
 	 */
-	public double getVisionGearTranslationControllerError(){
+	public double getVisionGearTranslationControllerError() {
 		return 0 - getDifferenceInGearTargetAreas();
 	}
-	
+
 	/**
 	 * Returns whether the robot has centered itself on the gear's double vision
 	 * targets with a tolerance of .001

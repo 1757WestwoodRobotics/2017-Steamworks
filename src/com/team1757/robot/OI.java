@@ -139,7 +139,6 @@ public class OI {
 		buttonBoxButton2.toggleWhenPressed(new CollectWithPercentVoltage());
 		buttonBoxButton5.toggleWhenPressed(new VisionToggleCamera());
 		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
-		// buttonBoxButton6.toggleWhenPressed(new CGCenterAndScoreGear());
 		buttonBoxButton6.whileHeld(new LiftUp());
 
 		// Bind Commands to Xbox Controller
@@ -328,57 +327,5 @@ public class OI {
 		}
 		return output;
 	}
-
-	// public static double inputControlYOld2(double axis) {
-	// // Modeled by -4.59x^4+10.027x^3-6.344x^2+1.909x-0.0002595
-	// double output = 0;
-	// if (axis > OI.DEADBAND) {
-	// // output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis -
-	// // DEADBAND) * 0.802);
-	// // NEEDS TESTING!!!
-	// output = -4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) -
-	// 6.322 * (Math.pow(axis, 2))
-	// + 1.909 * axis - 0.0002595;
-	// } else if (axis < -OI.DEADBAND) {
-	// // output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis +
-	// // DEADBAND) * 0.802);
-	// // NEEDS TESTING
-	// axis = -axis;
-	// output = -(-4.59 * (Math.pow(axis, 4)) + 10.027 * (Math.pow(axis, 3)) -
-	// 6.322 * (Math.pow(axis, 2))
-	// + 1.909 * axis - 0.0002595);
-	// } else {
-	// output = 0.0;
-	// }
-	// return output;
-	// }
-	//
-	// public static double inputControlYOld(double axis) {
-	// // Model by G(X-D)^3 + GX
-	// double output = 0;
-	// if (axis > OI.DEADBAND) {
-	// output = (Math.pow(axis - DEADBAND, 3) * GAIN) + ((axis - DEADBAND) *
-	// GAIN);
-	// } else if (axis < -OI.DEADBAND) {
-	// output = (Math.pow(axis + DEADBAND, 3) * GAIN) + ((axis + DEADBAND) *
-	// GAIN);
-	// } else {
-	// output = 0.0;
-	// }
-	// return output;
-	// }
-	//
-	// public static double inputControlXOld(double axis) {
-	// // Model by 1.5X + .2
-	// double output = 0;
-	// if (axis > OI.DEADBAND) {
-	// output = 1.5 * (axis - DEADBAND) + .2;
-	// } else if (axis < -OI.DEADBAND) {
-	// output = 1.5 * (axis + DEADBAND) - .2;
-	// } else {
-	// output = 0.0;
-	// }
-	// return output;
-	// }
 
 }

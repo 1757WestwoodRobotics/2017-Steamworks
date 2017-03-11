@@ -26,7 +26,7 @@ public class CGAutoLeft extends CommandGroup {
 		// "Wait a beat"
 		addSequential(new Delay(.2));
 		// Place gear
-		addSequential(new GearScore());
+//		addSequential(new GearScore());
 		// "Wait a beat"
 		addSequential(new Delay(.2));
 		// Reverse

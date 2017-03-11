@@ -24,7 +24,7 @@ public class LiftUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.getLeftTrigger() > 0.2) {
+    	if (Robot.oi.getRightTrigger() > 0.2) {
     		targetLifterPVbus = 1.0;
     	} else {
     		targetLifterPVbus = .75;
