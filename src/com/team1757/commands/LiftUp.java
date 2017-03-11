@@ -25,13 +25,9 @@ public class LiftUp extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.oi.getLeftTrigger() > 0.2) {
-    		if (targetLifterPVbus > 0) {
-    			targetLifterPVbus = targetLifterPVbus - 0.01;
-    		}
-    	} else if (Robot.oi.getRightTrigger() > 0.2) {
-    		if (targetLifterPVbus < 1) {
-    			targetLifterPVbus = targetLifterPVbus + 0.01;
-    		}
+    		targetLifterPVbus = 1.0;
+    	} else {
+    		targetLifterPVbus = .75;
     	}
     	
     	SmartDashboard.putNumber("targetLifterPVbus", targetLifterPVbus);

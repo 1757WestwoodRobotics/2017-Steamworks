@@ -1,7 +1,6 @@
 package com.team1757.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Autonomous for center starting positions on both red and blue alliances
@@ -34,8 +33,8 @@ public class CGAutoRedBlue2 extends CommandGroup {
 		// Reverse
 		addSequential(new DriveToggleDirection());
 		// Rotate left 90
-		SmartDashboard.putNumber("targetAngle", 90);
-		addSequential(new RotateToAngle());
+//		SmartDashboard.putNumber("targetAngle", 90);
+//		addSequential(new RotateToAngle());
 		// Translate right
 		addSequential(new DriveStraightX(2.0));
 		// Cross line

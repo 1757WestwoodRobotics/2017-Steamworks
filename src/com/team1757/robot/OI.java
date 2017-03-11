@@ -144,7 +144,9 @@ public class OI {
 		// Bind Commands to Xbox Controller
 		xboxButtonY.whenPressed(new DriveToggleDirection());
 		xboxButtonA.whenPressed(new DriveManual());
-
+		xboxButtonLB.toggleWhenPressed(new LiftUp());
+		xboxButtonRB.whileHeld(new LiftUp());
+		
 		// Put Commands on SmartDashboard
 		// Drive functions
 		SmartDashboard.putData(new DriveStraightY(1.65));
