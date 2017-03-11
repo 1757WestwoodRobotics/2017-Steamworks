@@ -182,7 +182,7 @@ public class RobotMap {
 		gyroController = new PIDController(0.034, 0.0, 0.04, gyroInput, gyroOutput);
 
 		// Configure PIDController (gyroscope)
-		SmartDashboard.putData("RotateController", gyroController);
+		//SmartDashboard.putData("RotateController", gyroController);
 		gyroController.setOutputRange(-1.0, 1.0);
 		gyroController.setAbsoluteTolerance(2.0f);
 		gyroController.setContinuous(true);
@@ -197,7 +197,7 @@ public class RobotMap {
 		visionTranslationController = new PIDController(1.0, 0.0, 0.04, visionCenterInput, visionCenterOutput);
 
 		// Configure PIDController (VisionCenter)
-		SmartDashboard.putData("visionTranslationController", visionTranslationController);
+	//	SmartDashboard.putData("visionTranslationController", visionTranslationController);
 		visionTranslationController.setInputRange(-1.0, 1.0);
 		visionTranslationController.setOutputRange(-1, 1);
 		visionTranslationController.setAbsoluteTolerance(.0005);
@@ -212,7 +212,7 @@ public class RobotMap {
 				visionCenterGearOutput);
 
 		// Configure PIDController (Gear)
-		SmartDashboard.putData("visionGearTranslationController", visionGearTranslationController);
+		//SmartDashboard.putData("visionGearTranslationController", visionGearTranslationController);
 		visionGearTranslationController.setOutputRange(-.5, .5);
 		visionGearTranslationController.setAbsoluteTolerance(8);
 

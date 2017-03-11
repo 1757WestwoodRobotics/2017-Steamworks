@@ -2,6 +2,7 @@ package com.team1757.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.commands.DriveManual;
+import com.team1757.robot.Robot;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -36,18 +37,6 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void toggleInversion() {
 		isInverted = !isInverted;
-
-		if (RobotMap.driveTrainLeftBack.getInverted()) {
-			RobotMap.driveTrainLeftFront.setInverted(false);
-			RobotMap.driveTrainLeftBack.setInverted(false);
-			RobotMap.driveTrainRightFront.setInverted(true);
-			RobotMap.driveTrainRightBack.setInverted(true);
-		} else {
-			RobotMap.driveTrainLeftFront.setInverted(true);
-			RobotMap.driveTrainLeftBack.setInverted(true);
-			RobotMap.driveTrainRightFront.setInverted(false);
-			RobotMap.driveTrainRightBack.setInverted(false);
-		}
 	}
 	
 	/**
@@ -57,10 +46,7 @@ public class DriveTrain extends Subsystem {
 	 * Gear Loader forward
 	 */
 	public void setInversionForward() {
-		RobotMap.driveTrainLeftFront.setInverted(true);
-		RobotMap.driveTrainLeftBack.setInverted(true);
-		RobotMap.driveTrainRightFront.setInverted(false);
-		RobotMap.driveTrainRightBack.setInverted(false);
+		isInverted = false;
 	}
 	
 	/**
@@ -70,10 +56,7 @@ public class DriveTrain extends Subsystem {
 	 * Gear Loader forward
 	 */
 	public void setInversionBackward() {
-		RobotMap.driveTrainLeftFront.setInverted(false);
-		RobotMap.driveTrainLeftBack.setInverted(false);
-		RobotMap.driveTrainRightFront.setInverted(true);
-		RobotMap.driveTrainRightBack.setInverted(true);
+		isInverted = true;
 	}
 
 	/**
@@ -100,7 +83,7 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void manualDrive(double translateX, double translateY, double rotate) {
 		if (isInverted) {
-			driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, -rotate, 0);
+			driveTrainMecanumDrive.mecanumDrive_Cartesian(-translateX, -translateY, rotate, 0);
 		} else {
 			driveTrainMecanumDrive.mecanumDrive_Cartesian(translateX, translateY, rotate, 0);
 		}
@@ -237,6 +220,14 @@ public class DriveTrain extends Subsystem {
 	public double getTargetAngle() {
 		return gyroController.getSetpoint();
 	}
+	
+	/**
+	 * Gets the difference between current setpoint and current gyro angle (unbounded)
+	 * @return anglular error in range (-MAX_DOUBLE, MAX_DOUBLE)
+	 */
+	public double getGyroControllerError(){
+		return gyroController.getSetpoint() - getCurrentRawAngle();
+	}
 
 	/**
 	 * Get gyroscope PID Controller reached setpoint within tolerance
@@ -244,7 +235,9 @@ public class DriveTrain extends Subsystem {
 	 * @return boolean gyroscope PID controller error within constant tolerance
 	 */
 	public boolean reachedGyroSetpoint() {
-		return (Math.abs(gyroController.getError()) <= GYRO_PID_TOLERANCE);
+		//return (Math.abs(gyroController.getError()) <= GYRO_PID_TOLERANCE); 
+		//Unreliably works on second run of the command
+		return Math.abs(getGyroControllerError()) <= GYRO_PID_TOLERANCE;
 	}
 
 	/**

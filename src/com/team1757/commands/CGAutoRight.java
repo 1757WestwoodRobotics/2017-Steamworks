@@ -9,14 +9,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CGAutoRight extends CommandGroup {
 
 	public CGAutoRight() {
+		//Reset Gryo
+		addSequential(new DriveResetGyro());
 		// Face gear loader forward
 		addSequential(new DriveDirectionInverted());
 		// Drop gear to receive
 		addSequential(new GearReceive());
 		// Drive straight ~114"
 		addSequential(new DriveStraightY(1.3));
-		// Rotate left 60
-		SmartDashboard.putNumber("targetAngle", 300);
+		// Rotate left 60 
+		addSequential(new RotateSetTargetAngle(-60));
 		addSequential(new RotateToAngle());
 		// Correct translation with vision
 		// addSequential(new VisionFaceGearTarget());
@@ -35,8 +37,7 @@ public class CGAutoRight extends CommandGroup {
 		// Close gear
 		addSequential(new GearReceive());
 		// Rotate right 60
-		System.out.println("CGAutoRedRight - Rotating right 60");
-		SmartDashboard.putNumber("targetAngle", 0);
+		addSequential(new RotateSetTargetAngle(0));
 		addSequential(new RotateToAngle());
 		// Drive straight across the baseline
 		addSequential(new DriveStraightY(.8));

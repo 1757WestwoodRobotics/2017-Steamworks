@@ -68,7 +68,7 @@ public class Robot extends IterativeRobot {
 		getStatus.setRunWhenDisabled(true);
 
 		chooser = new SendableChooser<>();
-		chooser.addDefault("Center", new CGAutoMiddle());
+		chooser.addDefault("Middle", new CGAutoMiddle());
 		chooser.addObject("Right", new CGAutoRight());
 		chooser.addObject("Left", new CGAutoLeft());
 		SmartDashboard.putData("Auto mode", chooser);

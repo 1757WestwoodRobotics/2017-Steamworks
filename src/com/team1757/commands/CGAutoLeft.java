@@ -1,7 +1,6 @@
 package com.team1757.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Autonomous for Red alliance left side (not near boiler) and Blue alliance left side (near boiler)
@@ -9,6 +8,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CGAutoLeft extends CommandGroup {
 
 	public CGAutoLeft() {
+		//Reset the Gyro
+		addSequential(new DriveResetGyro());
 		// Face gear loader forward
 		addSequential(new DriveDirectionInverted());
 		// Drop gear to receive
