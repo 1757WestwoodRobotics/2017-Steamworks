@@ -44,9 +44,6 @@ public class RobotMap {
 	private static final int gearLoaderTalonPort = 6;
 	private static final int liftTalonPort = 5;
 
-	// Spike ids
-	private static final int gearRingLightPort = 0;
-
 	// Talon objects
 	public static CANTalon driveTrainLeftFront;
 	public static CANTalon driveTrainLeftBack;
@@ -216,8 +213,6 @@ public class RobotMap {
 		visionGearTranslationController.setOutputRange(-.5, .5);
 		visionGearTranslationController.setAbsoluteTolerance(8);
 
-		// Initialize RingLight
-		gearRingLight = new Relay(gearRingLightPort, Relay.Direction.kForward);
 
 	}
 }

@@ -5,7 +5,6 @@ import com.team1757.robot.RobotMap;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
@@ -26,7 +25,6 @@ public class Vision extends Subsystem {
 
 	private static boolean isGearCamActive = true;
 
-	private static Relay gearRingLight = RobotMap.gearRingLight;
 
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
@@ -35,6 +33,8 @@ public class Vision extends Subsystem {
 	private int xResolution = 160;
 	private int yResolution = 120;
 	private int fps = 30;
+	
+	private final double GEAR_TRANSLATION_PID_TOLERANCE = 100;
 
 	public void initDefaultCommand() {
 	}
@@ -137,15 +137,12 @@ public class Vision extends Subsystem {
 	 * Activates the relay connected to the gear camera's ring light
 	 */
 	public void turnOnGearRingLight() {
-		gearRingLight.set(Relay.Value.kOn);
-
 	}
 
 	/**
 	 * Deactivates the relay connected to the gear camera's ring light
 	 */
 	public void turnOffGearRingLight() {
-		gearRingLight.set(Relay.Value.kOff);
 	}
 
 	// PID Translation Controllers
@@ -203,13 +200,21 @@ public class Vision extends Subsystem {
 	}
 
 	/**
+	 * Gets the difference between current setpoint (0) and current difference in gear target areas (in pixels squared)
+	 * @return error in difference between gear target areas in range (-MAX_DOUBLE, MAX_DOUBLE)
+	 */
+	public double getVisionGearTranslationControllerError(){
+		return 0 - getDifferenceInGearTargetAreas();
+	}
+	
+	/**
 	 * Returns whether the robot has centered itself on the gear's double vision
 	 * targets with a tolerance of .001
 	 * 
 	 * @return isSetPointedReached
 	 */
 	public boolean reachedVisionGearTranslationSetpoint() {
-		return Math.abs(visionGearTranslationController.getError()) < .001;
+		return Math.abs(getVisionGearTranslationControllerError()) <= GEAR_TRANSLATION_PID_TOLERANCE;
 	}
 
 	/**

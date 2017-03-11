@@ -1,7 +1,6 @@
 package com.team1757.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Autonomous for Red alliance right side (near boiler) and Blue alliance right side (not near boiler)

@@ -41,9 +41,7 @@ public class VisionGetReadyToScoreGear extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		// return Robot.vision.reachedVisionGearTranslationSetpoint() &&
-		// Robot.driveTrain.reachedGyroSetpoint();
-		return false;
+		return Robot.vision.reachedVisionGearTranslationSetpoint() && Robot.driveTrain.reachedGyroSetpoint();
 	}
 
 	// Called once after isFinished returns true

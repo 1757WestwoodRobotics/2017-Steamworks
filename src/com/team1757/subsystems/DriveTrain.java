@@ -2,7 +2,6 @@ package com.team1757.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.commands.DriveManual;
-import com.team1757.robot.Robot;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.RobotDrive;
