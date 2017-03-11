@@ -1,7 +1,7 @@
 package com.team1757.robot;
 
-import com.team1757.commands.CGAutoRed1;
-import com.team1757.commands.CGAutoRedBlue2;
+import com.team1757.commands.CGAutoRight;
+import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.CGCenterAndScoreGear;
 import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.CGShootandIndexStop;
@@ -202,8 +202,8 @@ public class OI {
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
 		SmartDashboard.putData(new CGShootandIndexStop());
-		SmartDashboard.putData(new CGAutoRedBlue2());
-		SmartDashboard.putData(new CGAutoRed1());
+		SmartDashboard.putData(new CGAutoMiddle());
+		SmartDashboard.putData(new CGAutoRight());
 
 		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);

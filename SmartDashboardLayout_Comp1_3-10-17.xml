@@ -1,115 +1,115 @@
 <xml version="1.0">
 <dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="181" y="8"/>
+		<width>454</width>
+		<height>315</height>
+		<property name="Camera Choice" value=""/>
+	</static-widget>
+	<widget field="targetLifterPVbus" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="86" y="546"/>
+	</widget>
 	<widget field="VisionFaceGearTarget" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="514" y="422"/>
+		<location x="705" y="200"/>
 	</widget>
 	<widget field="GearScore" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="461" y="283"/>
+		<location x="592" y="467"/>
 	</widget>
 	<widget field="VisionGetReadyToScoreGear" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="504" y="450"/>
+		<location x="673" y="224"/>
 	</widget>
 	<widget field="GearManualInput" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="428" y="314"/>
+		<location x="560" y="407"/>
 	</widget>
 	<widget field="VisionCenterTranslationX" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="511" y="393"/>
-	</widget>
-	<widget field="visionTranslationController" type="PIDController" class="edu.wpi.first.smartdashboard.gui.elements.PIDEditor">
-		<location x="683" y="161"/>
+		<location x="690" y="175"/>
 	</widget>
 	<widget field="CollectReverseWithPercentVoltage" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="3" y="537"/>
+		<location x="639" y="295"/>
 	</widget>
 	<widget field="DriveToggleDirection" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="208" y="0"/>
+		<location x="1" y="230"/>
 	</widget>
 	<widget field="DriveGyroPIDClear" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="-2" y="109"/>
+		<location x="9" y="201"/>
 	</widget>
 	<widget field="GearMatchStart" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="339" y="381"/>
+		<location x="565" y="492"/>
 	</widget>
 	<widget field="RotateToAngle" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="230" y="518"/>
+		<location x="39" y="381"/>
 	</widget>
 	<widget field="Auto mode" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
-		<location x="187" y="0"/>
+		<location x="18" y="7"/>
 	</widget>
 	<widget field="ShootWithVoltage" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
 		<location x="720" y="430"/>
 	</widget>
 	<widget field="DriveResetGyro" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="5" y="174"/>
+		<location x="22" y="173"/>
 	</widget>
 	<widget field="RotateDegrees" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="236" y="82"/>
+		<location x="43" y="443"/>
 	</widget>
 	<widget field="VisionGearRingLightOff" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="529" y="348"/>
+		<location x="700" y="119"/>
 	</widget>
 	<widget field="RotateDegreesShortest" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="199" y="54"/>
+		<location x="3" y="413"/>
 	</widget>
 	<widget field="DriveStraightY" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="16" y="146"/>
+		<location x="26" y="144"/>
 	</widget>
 	<widget field="VisionCenterOnGearTranslationX" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="411" y="4"/>
+		<location x="652" y="1"/>
 	</widget>
 	<widget field="CGShootandIndex" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
 		<location x="719" y="542"/>
 	</widget>
-	<widget field="RotateController" type="PIDController" class="edu.wpi.first.smartdashboard.gui.elements.PIDEditor">
-		<location x="7" y="383"/>
-	</widget>
 	<widget field="LifterStop" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="387" y="566"/>
+		<location x="552" y="574"/>
 	</widget>
 	<widget field="CollectorStop" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="5" y="571"/>
+		<location x="741" y="319"/>
 	</widget>
 	<widget field="ShooterStop" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
 		<location x="748" y="501"/>
 	</widget>
 	<widget field="VisionToggleCamera" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="179" y="123"/>
+		<location x="713" y="62"/>
 	</widget>
 	<widget field="VisionFollowReflectiveTape" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="436" y="37"/>
+		<location x="681" y="32"/>
 	</widget>
 	<widget field="ShootWithSpeed" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
 		<location x="724" y="463"/>
 	</widget>
 	<widget field="CGAutoRedBlue2" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="359" y="463"/>
+		<location x="357" y="479"/>
 	</widget>
 	<widget field="LiftUp" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="401" y="539"/>
-	</widget>
-	<widget field="visionGearTranslationController" type="PIDController" class="edu.wpi.first.smartdashboard.gui.elements.PIDEditor">
-		<location x="655" y="3"/>
+		<location x="568" y="545"/>
 	</widget>
 	<widget field="GearReceive" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="448" y="254"/>
+		<location x="583" y="436"/>
 	</widget>
 	<widget field="CGAutoRed1" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="392" y="487"/>
+		<location x="375" y="504"/>
 	</widget>
 	<widget field="VisionGearRingLightOn" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="531" y="374"/>
+		<location x="702" y="148"/>
 	</widget>
 	<widget field="DriveGyroAssisted" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="0" y="317"/>
+		<location x="11" y="257"/>
 	</widget>
 	<widget field="VisionFaceReflectiveTape" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="0" y="283"/>
+		<location x="688" y="90"/>
 	</widget>
 	<widget field="CGShootandIndexStop" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
 		<location x="698" y="574"/>
 	</widget>
 	<widget field="CollectWithPercentVoltage" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="0" y="215"/>
+		<location x="681" y="267"/>
 	</widget>
 	<widget field="IndexerRun" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
 		<location x="750" y="350"/>
@@ -118,28 +118,31 @@
 		<location x="746" y="383"/>
 	</widget>
 	<widget field="angularDelta" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="9" y="92"/>
+		<location x="206" y="454"/>
 		<height>20</height>
 	</widget>
 	<widget field="GyroAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="4" y="25"/>
+		<location x="65" y="354"/>
 	</widget>
 	<widget field="targetAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="2" y="70"/>
+		<location x="206" y="388"/>
 	</widget>
 	<widget field="Gear Manual Target Position" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="367" y="232"/>
+		<location x="492" y="389"/>
 	</widget>
 	<widget field="angularDeltaShortest" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="3" y="47"/>
+		<location x="204" y="423"/>
 	</widget>
 	<widget field="BoundedGyroAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="4" y="5"/>
+		<location x="20" y="326"/>
 	</widget>
 	<widget field="Gear - ActualPosition" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
-		<location x="402" y="207"/>
+		<location x="529" y="363"/>
 	</widget>
 </dashboard>
 <live-window>
 </live-window>
+	<hidden field="visionGearTranslationController"/>
+	<hidden field="visionTranslationController"/>
+	<hidden field="RotateController"/>
 </xml>

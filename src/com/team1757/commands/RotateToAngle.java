@@ -10,39 +10,41 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class RotateToAngle extends Command {
 
-    public RotateToAngle() {
-    	requires(Robot.driveTrain);
-    }
-    
-    // Called once before execute
-    protected void initialize() {
-    	Robot.driveTrain.enableGyroPID();
-    	// TODO Change the default angle to something more reasonable
-    	Robot.driveTrain.setTargetAngle(SmartDashboard.getNumber("targetAngle", Robot.driveTrain.getCurrentBoundedAngle()));
-    }
+	public RotateToAngle() {
+		requires(Robot.driveTrain);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	// Update motor output
-    	Robot.driveTrain.moveToTargetAngle();
-    }
+	// Called once before execute
+	protected void initialize() {
+		Robot.driveTrain.enableGyroPID();
+		// Angle from SmartDash, default is the robots current angle
+		double targetAngle = SmartDashboard.getNumber("targetAngle", Robot.driveTrain.getCurrentBoundedAngle());
+		System.out.println(targetAngle);
+		Robot.driveTrain.setTargetAngle(targetAngle);
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	// TODO Use onTarget() provided by controller
-        return Robot.driveTrain.reachedGyroSetpoint();
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		// Update motor output
+		Robot.driveTrain.moveToTargetAngle();
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	// TODO Default to something reasonable
-    	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
-    	Robot.driveTrain.disableGyroPID();
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		// TODO Use onTarget() provided by controller
+		return Robot.driveTrain.reachedGyroSetpoint();
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	end();
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+		// TODO Default to something reasonable
+		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
+		Robot.driveTrain.disableGyroPID();
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+		end();
+	}
 }

@@ -1,14 +1,13 @@
 package com.team1757.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Autonomous for center starting positions on both red and blue alliances
  */
-public class CGAutoRed1 extends CommandGroup {
+public class CGAutoMiddle extends CommandGroup {
 
-	public CGAutoRed1() {
+	public CGAutoMiddle() {
 		// Face gear loader forward
 		addSequential(new DriveDirectionInverted());
 		// Drop gear to receive
@@ -34,9 +33,11 @@ public class CGAutoRed1 extends CommandGroup {
 		// Reverse
 		addSequential(new DriveToggleDirection());
 		// Rotate left 90
-		SmartDashboard.putNumber("targetAngle", 90);
-		addSequential(new RotateToAngle());
-		// Drive a bit more
-		addSequential(new DriveStraightY(.5));
+//		SmartDashboard.putNumber("targetAngle", 90);
+//		addSequential(new RotateToAngle());
+		// Translate right
+		addSequential(new DriveStraightX(2.0));
+		// Cross line
+		addSequential(new DriveStraightY(1.65));
 	}
 }

@@ -7,8 +7,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.team1757.commands.CGAutoRed1;
-import com.team1757.commands.CGAutoRedBlue2;
+import com.team1757.commands.CGAutoRight;
+import com.team1757.commands.CGAutoLeft;
+import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.GetStatus;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.DriveTrain;
@@ -67,8 +68,9 @@ public class Robot extends IterativeRobot {
 		getStatus.setRunWhenDisabled(true);
 
 		chooser = new SendableChooser<>();
-		chooser.addDefault("Red Blue Center", new CGAutoRedBlue2());
-		chooser.addObject("Red 1", new CGAutoRed1());
+		chooser.addDefault("Center", new CGAutoMiddle());
+		chooser.addObject("Right", new CGAutoRight());
+		chooser.addObject("Left", new CGAutoLeft());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 
