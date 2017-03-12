@@ -3,14 +3,16 @@ package com.team1757.commands;
 import com.team1757.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Rotate directly to a given angle
  */
-public class RotateToAngle extends Command {
+public class RotateToAngle extends TimedCommand {
 
-	public RotateToAngle() {
+	public RotateToAngle(double timeout) {
+		super(timeout);
 		requires(Robot.driveTrain);
 	}
 
@@ -32,7 +34,7 @@ public class RotateToAngle extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		// TODO Use onTarget() provided by controller
-		return Robot.driveTrain.reachedGyroSetpoint();
+		return Robot.driveTrain.reachedGyroSetpoint() || isTimedOut();
 	}
 
 	// Called once after isFinished returns true

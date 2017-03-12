@@ -1,6 +1,7 @@
 package com.team1757.robot;
 
 import com.team1757.commands.CGAutoRight;
+import com.team1757.commands.CGAutoCrossLine;
 import com.team1757.commands.CGAutoLeft;
 import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.CGCenterAndScoreGear;
@@ -12,6 +13,7 @@ import com.team1757.commands.CollectorStop;
 import com.team1757.commands.DriveGyroAssisted;
 import com.team1757.commands.DriveStraightY;
 import com.team1757.commands.DriveToggleDirection;
+import com.team1757.commands.GearHug;
 import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
 import com.team1757.commands.GearManualInput;
@@ -22,6 +24,8 @@ import com.team1757.commands.DriveGyroPIDClear;
 import com.team1757.commands.DriveManual;
 import com.team1757.commands.LiftUp;
 import com.team1757.commands.DriveResetGyro;
+import com.team1757.commands.DriveRestrictForward;
+import com.team1757.commands.DriveRestrictRotation;
 import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
@@ -137,9 +141,9 @@ public class OI {
 		buttonBoxButton1.whenPressed(new GearReceive());
 		buttonBoxButton4.whenPressed(new GearScore());
 		buttonBoxButton2.toggleWhenPressed(new CollectWithPercentVoltage());
-		buttonBoxButton5.toggleWhenPressed(new VisionToggleCamera());
+		buttonBoxButton5.whenPressed(new GearHug());
 		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
-		buttonBoxButton6.whileHeld(new LiftUp());
+		buttonBoxButton6.whenPressed(new VisionToggleCamera());
 
 		// Bind Commands to Xbox Controller
 		xboxButtonY.whenPressed(new DriveToggleDirection());
@@ -152,13 +156,15 @@ public class OI {
 		SmartDashboard.putData(new DriveStraightY(1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
 		SmartDashboard.putData(new DriveToggleDirection());
+		SmartDashboard.putData(new DriveRestrictForward());
+		SmartDashboard.putData(new DriveRestrictRotation());
 
 		// Gyro Systems
 		SmartDashboard.putData(new DriveResetGyro());
 		SmartDashboard.putData(new DriveGyroPIDClear());
 
 		// Gyro Commands
-		SmartDashboard.putData(new RotateToAngle());
+		SmartDashboard.putData(new RotateToAngle(1));
 		SmartDashboard.putData(new RotateDegrees());
 		SmartDashboard.putData(new RotateDegreesShortest());
 
@@ -181,6 +187,7 @@ public class OI {
 		SmartDashboard.putData(new GearMatchStart());
 		SmartDashboard.putData(new GearReceive());
 		SmartDashboard.putData(new GearScore());
+		SmartDashboard.putData(new GearHug());
 
 		// Lifter Commands
 		SmartDashboard.putData(new LiftUp());
@@ -205,6 +212,7 @@ public class OI {
 		SmartDashboard.putData(new CGAutoMiddle());
 		SmartDashboard.putData(new CGAutoRight());
 		SmartDashboard.putData(new CGAutoLeft());
+		SmartDashboard.putData(new CGAutoCrossLine());
 
 		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);

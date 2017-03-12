@@ -69,10 +69,11 @@ public class Robot extends IterativeRobot {
 		getStatus.setRunWhenDisabled(true);
 
 		chooser = new SendableChooser<>();
-		chooser.addDefault("Middle", new CGAutoMiddle());
+		chooser.addDefault("Cross Line (L/R)", new CGAutoCrossLine());
 		chooser.addObject("Right", new CGAutoRight());
+		chooser.addObject("Middle", new CGAutoMiddle());
 		chooser.addObject("Left", new CGAutoLeft());
-		chooser.addObject("Cross Line (Right or Left)", new CGAutoCrossLine());
+		
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 

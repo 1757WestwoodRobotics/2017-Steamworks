@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class GearReceive extends Command {
 	
-	private double targetPosition = 730.0;
+	private double targetPosition = 780;
 
     public GearReceive() {
     	requires(Robot.gearLoader);

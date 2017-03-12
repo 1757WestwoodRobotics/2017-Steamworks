@@ -13,11 +13,11 @@ public class CGAutoMiddle extends CommandGroup {
 		// Drop gear to receive
 		addSequential(new GearReceive());
 		// Drive straight ~100"
-		addSequential(new DriveStraightY(1.2));
+		addSequential(new DriveStraightY(2, -.27));
 		// Correct translation with vision
 		// addSequential(new VisionFaceGearTarget());
 		// Drive straight ~14.3"
-		addSequential(new DriveStraightY(.1));
+		addSequential(new DriveStraightY(.4, -.2));
 		// "Wait a beat"
 		addSequential(new Delay(.5));
 		// Place gear

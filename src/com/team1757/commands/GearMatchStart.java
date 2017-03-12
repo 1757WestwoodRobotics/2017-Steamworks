@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class GearMatchStart extends Command {
 	
-	private double targetPosition = 280.0;
+	private double targetPosition = 330;
 
     public GearMatchStart() {
     	requires(Robot.gearLoader);

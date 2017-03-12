@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
  */
 public class DriveStraightY extends TimedCommand {
 
-	private double velocity = -0.5;
+	private double velocity = -0.35;
 	
     public DriveStraightY(double timeout) {
         super(timeout);

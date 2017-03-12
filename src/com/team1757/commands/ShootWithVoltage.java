@@ -1,6 +1,7 @@
 package com.team1757.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.team1757.robot.Robot;
 
@@ -18,6 +19,7 @@ public class ShootWithVoltage extends Command {
     	Robot.shooter.setFlyWheelModePercentVoltage();
     	Robot.shooter.enableFlyWheel();
     	Robot.shooter.enableFlyWheelControl();
+    	SmartDashboard.putBoolean("isShooting", true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,6 +36,7 @@ public class ShootWithVoltage extends Command {
     protected void end() {
     	Robot.shooter.disableFlyWheelControl();
     	Robot.shooter.disableFlyWheel();
+    	SmartDashboard.putBoolean("isShooting", true);
     }
 
     // Called when another command which requires one or more of the same

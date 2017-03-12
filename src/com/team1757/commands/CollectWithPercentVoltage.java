@@ -1,6 +1,7 @@
 package com.team1757.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.team1757.robot.Robot;
 
@@ -18,6 +19,7 @@ public class CollectWithPercentVoltage extends Command {
     	Robot.ballCollector.setModePercentVoltage();
     	Robot.ballCollector.enableFlyWheel();
     	Robot.ballCollector.enableFlyWheelControl();
+    	SmartDashboard.putBoolean("isCollecting", true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,6 +36,7 @@ public class CollectWithPercentVoltage extends Command {
     protected void end() {
     	Robot.ballCollector.disableFlyWheelControl();
     	Robot.ballCollector.disableFlyWheel();
+    	SmartDashboard.putBoolean("isCollecting", false);
     }
 
     // Called when another command which requires one or more of the same
