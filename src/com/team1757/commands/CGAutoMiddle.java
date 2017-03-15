@@ -17,7 +17,7 @@ public class CGAutoMiddle extends CommandGroup {
 		// Correct translation with vision
 		// addSequential(new VisionFaceGearTarget());
 		// Drive straight ~14.3"
-		addSequential(new DriveStraightY(.4, -.2));
+		addSequential(new DriveStraightY(.7, -.2));
 		// "Wait a beat"
 		addSequential(new Delay(.5));
 		// Place gear

@@ -4,7 +4,6 @@ import com.team1757.commands.CGAutoRight;
 import com.team1757.commands.CGAutoCrossLine;
 import com.team1757.commands.CGAutoLeft;
 import com.team1757.commands.CGAutoMiddle;
-import com.team1757.commands.CGCenterAndScoreGear;
 import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.CGShootandIndexStop;
 import com.team1757.commands.CollectReverseWithPercentVoltage;
@@ -219,6 +218,10 @@ public class OI {
 		SmartDashboard.putNumber("angularDelta", 0.0);
 		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
 		SmartDashboard.putNumber("Gear Manual Target Position", 618.0);
+		
+		//Other SmartDashboard
+		SmartDashboard.putNumber("driveLength", 0);
+		SmartDashboard.putNumber("driveSpeed", .2);
 
 	}
 
