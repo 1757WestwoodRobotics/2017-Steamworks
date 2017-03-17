@@ -6,6 +6,7 @@ import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDController;
 
 /**
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.PIDController;
 
 public class DriveTrain extends Subsystem {
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
+	private final AnalogInput ultrasonicSensor = RobotMap.ultrasonicSensor;
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final PIDController accelControllerX = RobotMap.accelControllerX;
 	private final PIDController accelControllerY = RobotMap.accelControllerY;

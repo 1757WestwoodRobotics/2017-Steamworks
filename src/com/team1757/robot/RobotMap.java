@@ -11,6 +11,7 @@ import com.team1757.utils.VisionCenterPIDSource;
 import com.team1757.utils.VisionDetectionType;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -61,6 +62,7 @@ public class RobotMap {
 	public static RobotDrive driveTrainMecanumDrive;
 
 	public static AHRS driveTrainNavX;
+	public static AnalogInput ultrasonicSensor;
 
 	public static PIDController gyroController;
 	public static PIDController accelControllerX;
@@ -149,6 +151,13 @@ public class RobotMap {
 		driveTrainMecanumDrive.setSafetyEnabled(true);
 		driveTrainMecanumDrive.setExpiration(0.1);
 		driveTrainMecanumDrive.setMaxOutput(1.0);
+		
+		//Initialize Ultrasonic Sensor
+		try {
+			ultrasonicSensor = new AnalogInput(0);
+		} catch (Exception e) {
+			DriverStation.reportError("Error instantiating Ultrasonic Sensor:  " + e.getMessage(), true);
+		}
 
 		// Initialize NavX
 		try {
