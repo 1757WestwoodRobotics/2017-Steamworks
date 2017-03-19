@@ -4,6 +4,7 @@ import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.subsystems.Vision;
 import com.team1757.utils.IllegalSourceException;
+import com.team1757.utils.MaxbotixUltrasonicSerial;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
 import com.team1757.utils.VisionCenterGearPIDSource;
@@ -11,7 +12,6 @@ import com.team1757.utils.VisionCenterPIDSource;
 import com.team1757.utils.VisionDetectionType;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -62,7 +62,7 @@ public class RobotMap {
 	public static RobotDrive driveTrainMecanumDrive;
 
 	public static AHRS driveTrainNavX;
-	public static AnalogInput ultrasonicSensor;
+	public static MaxbotixUltrasonicSerial ultrasonicSerial;
 
 	public static PIDController gyroController;
 	public static PIDController accelControllerX;
@@ -153,11 +153,7 @@ public class RobotMap {
 		driveTrainMecanumDrive.setMaxOutput(1.0);
 		
 		//Initialize Ultrasonic Sensor
-		try {
-			ultrasonicSensor = new AnalogInput(0);
-		} catch (Exception e) {
-			DriverStation.reportError("Error instantiating Ultrasonic Sensor:  " + e.getMessage(), true);
-		}
+		ultrasonicSerial = new MaxbotixUltrasonicSerial();
 
 		// Initialize NavX
 		try {

@@ -3,10 +3,10 @@ package com.team1757.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.commands.DriveManual;
 import com.team1757.robot.RobotMap;
+import com.team1757.utils.MaxbotixUltrasonicSerial;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PIDController;
 
 /**
@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.PIDController;
 
 public class DriveTrain extends Subsystem {
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
-	private final AnalogInput ultrasonicSensor = RobotMap.ultrasonicSensor;
+	private final MaxbotixUltrasonicSerial ultrasonicSerial = RobotMap.ultrasonicSerial;
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final PIDController accelControllerX = RobotMap.accelControllerX;
 	private final PIDController accelControllerY = RobotMap.accelControllerY;
@@ -197,6 +197,42 @@ public class DriveTrain extends Subsystem {
 		return driveTrainNavX.getDisplacementX();
 	}
 
+	
+	// Ultrasonic
+	
+	/**
+     * getRangeMM
+     * 
+     * @return double measured range (mm) in range [TODO COME BACK TO MEEEE]
+     * @return -1.0 if the voltage is below the minimum
+     * @return -2.0 if voltage is above the maximum
+     */
+    public double getRangeMM() {
+    	return ultrasonicSerial.getRangeMM();
+    }
+	
+    /**
+     * getRangeInches
+     * 
+     * @return double measured range (inches) in range [TODO COME BACK TO MEE]
+     * @return -1.0 if the voltage is below the minimum
+     */
+    public double getRangeInches() {
+    	return ultrasonicSerial.getRangeInches();
+    }
+    
+    /**
+     * getRangeCM
+     * 
+     * @return double measured range (inches) in range [TODO COME BACK TO MEE]
+     * @return -1.0 if the voltage is below the minimum
+     * @return -2.0 if voltage is above the maximum
+     */
+    public double getRangeCM() {
+        return ultrasonicSerial.getRangeCM();
+    }
+	
+	
 	// Gyroscope PID
 
 	/**

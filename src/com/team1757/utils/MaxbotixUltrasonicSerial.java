@@ -34,7 +34,7 @@ public class MaxbotixUltrasonicSerial {
      * @return -1.0 if the voltage is below the minimum
      * @return -2.0 if voltage is above the maximum
      */
-    double getRangeMM() {
+    public double getRangeMM() {
     	return Double.parseDouble(serial.readString().substring(1));
     }
 	
@@ -44,7 +44,7 @@ public class MaxbotixUltrasonicSerial {
      * @return double measured range (inches) in range [3.0, 60.0]
      * @return -1.0 if the voltage is below the minimum
      */
-    double getRangeInches() {
+    public double getRangeInches() {
     	return getRangeMM() * MM_TO_IN;
     }
     
@@ -55,7 +55,7 @@ public class MaxbotixUltrasonicSerial {
      * @return -1.0 if the voltage is below the minimum
      * @return -2.0 if voltage is above the maximum
      */
-    double getRangeCM() {
+    public double getRangeCM() {
         return getRangeMM() * MM_TO_CM;
     }
 }
