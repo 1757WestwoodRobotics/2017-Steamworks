@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
  * 
  * @author ACabey
  */
-public class MaxbotixUltrasonic extends AnalogInput {
+public class MaxbotixUltrasonicAnalog extends AnalogInput {
 	
 	private final double MM_TO_IN = 0.0394;
 	private final double MM_TO_CM = 0.100;
@@ -61,7 +61,7 @@ public class MaxbotixUltrasonic extends AnalogInput {
     	}
     }
     
-	public MaxbotixUltrasonic(int channel) {
+	public MaxbotixUltrasonicAnalog(int channel) {
 		super(channel);
 	}
 	
