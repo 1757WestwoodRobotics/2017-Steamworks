@@ -3,6 +3,7 @@ package com.team1757.robot;
 import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.subsystems.Vision;
+import com.team1757.utils.ADIS16448_IMU;
 import com.team1757.utils.IllegalSourceException;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
@@ -61,6 +62,7 @@ public class RobotMap {
 	public static RobotDrive driveTrainMecanumDrive;
 
 	public static AHRS driveTrainNavX;
+	public static ADIS16448_IMU driveTrainADISimu;
 
 	public static PIDController gyroController;
 	public static PIDController accelControllerX;
@@ -149,6 +151,14 @@ public class RobotMap {
 		driveTrainMecanumDrive.setSafetyEnabled(true);
 		driveTrainMecanumDrive.setExpiration(0.1);
 		driveTrainMecanumDrive.setMaxOutput(1.0);
+		
+		// Initialize ADIS imu 
+		
+		try {
+			driveTrainADISimu = new ADIS16448_IMU();
+		} catch (Exception e) {
+			DriverStation.reportError("Error instantiating ADIS16448 gyro: " + e.getMessage(), true);
+		}
 
 		// Initialize NavX
 		try {

@@ -3,6 +3,7 @@ package com.team1757.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.commands.DriveManual;
 import com.team1757.robot.RobotMap;
+import com.team1757.utils.ADIS16448_IMU;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.PIDController;
 
 public class DriveTrain extends Subsystem {
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
+	private final ADIS16448_IMU driveTrainADISimu = RobotMap.driveTrainADISimu;
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final PIDController accelControllerX = RobotMap.accelControllerX;
 	private final PIDController accelControllerY = RobotMap.accelControllerY;
@@ -387,6 +389,13 @@ public class DriveTrain extends Subsystem {
 	 */
 	public boolean reachedAccelSetpointX() {
 		return (Math.abs(accelControllerX.getError()) <= ACCEL_PID_TOLERANCE);
+	}
+	
+	
+	// ADIS imu
+	
+	public double getADISGyroAngle() {
+		return driveTrainADISimu.getAngle();
 	}
 
 }
