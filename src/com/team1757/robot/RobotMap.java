@@ -4,7 +4,7 @@ import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.subsystems.Vision;
 import com.team1757.utils.IllegalSourceException;
-import com.team1757.utils.MaxbotixUltrasonicSerial;
+import com.team1757.utils.MaxbotixUltrasonicAnalog;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
 import com.team1757.utils.VisionCenterGearPIDSource;
@@ -62,7 +62,7 @@ public class RobotMap {
 	public static RobotDrive driveTrainMecanumDrive;
 
 	public static AHRS driveTrainNavX;
-	public static MaxbotixUltrasonicSerial ultrasonicSerial;
+	public static MaxbotixUltrasonicAnalog ultrasonicAnalog;
 
 	public static PIDController gyroController;
 	public static PIDController accelControllerX;
@@ -152,8 +152,8 @@ public class RobotMap {
 		driveTrainMecanumDrive.setExpiration(0.1);
 		driveTrainMecanumDrive.setMaxOutput(1.0);
 		
-		//Initialize Ultrasonic Sensor
-		ultrasonicSerial = new MaxbotixUltrasonicSerial();
+		// Initialize Ultrasonic Sensor
+		ultrasonicAnalog = new MaxbotixUltrasonicAnalog(0);
 
 		// Initialize NavX
 		try {

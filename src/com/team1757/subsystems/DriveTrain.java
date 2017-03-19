@@ -3,7 +3,8 @@ package com.team1757.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.commands.DriveManual;
 import com.team1757.robot.RobotMap;
-import com.team1757.utils.MaxbotixUltrasonicSerial;
+import com.team1757.utils.MaxbotixUltrasonicAnalog;
+import com.team1757.utils.Unit;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.PIDController;
 
 public class DriveTrain extends Subsystem {
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
-	private final MaxbotixUltrasonicSerial ultrasonicSerial = RobotMap.ultrasonicSerial;
+	private final MaxbotixUltrasonicAnalog ultrasonicAnalog = RobotMap.ultrasonicAnalog;
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final PIDController accelControllerX = RobotMap.accelControllerX;
 	private final PIDController accelControllerY = RobotMap.accelControllerY;
@@ -208,7 +209,7 @@ public class DriveTrain extends Subsystem {
      * @return -2.0 if voltage is above the maximum
      */
     public double getRangeMM() {
-    	return ultrasonicSerial.getRangeMM();
+    	return ultrasonicAnalog.getRange(Unit.kMM);
     }
 	
     /**
@@ -218,7 +219,7 @@ public class DriveTrain extends Subsystem {
      * @return -1.0 if the voltage is below the minimum
      */
     public double getRangeInches() {
-    	return ultrasonicSerial.getRangeInches();
+    	return ultrasonicAnalog.getRange(Unit.kInches);
     }
     
     /**
@@ -229,11 +230,11 @@ public class DriveTrain extends Subsystem {
      * @return -2.0 if voltage is above the maximum
      */
     public double getRangeCM() {
-        return ultrasonicSerial.getRangeCM();
+        return ultrasonicAnalog.getRange(Unit.kCM);
     }
 	
-	
-	// Gyroscope PID
+
+    // Gyroscope PID
 
 	/**
 	 * Enable gyroscope PID Controller

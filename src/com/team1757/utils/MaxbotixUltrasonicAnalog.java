@@ -14,9 +14,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
  */
 public class MaxbotixUltrasonicAnalog extends AnalogInput {
 	
-	private final double MM_TO_IN = 0.0394;
-	private final double MM_TO_CM = 0.100;
-	
 	// TODO Verify true maximum and minumum accurate distance reported
     private final double DISTANCE_MIN_MM = 300.0;						// Advertised minumum distance (mm)
     private final double DISTANCE_MAX_MM = 5000.0;						// Advertised max distance is (mm)
@@ -52,7 +49,7 @@ public class MaxbotixUltrasonicAnalog extends AnalogInput {
      * @return -1.0 if the voltage is below the minimum
      * @return -2.0 if voltage is above the maximum
      */
-    double getRangeMM() {
+    private double getRangeMM() {
     	double voltageMeasured = getVoltage();
     	if (voltageMeasured < VOLTAGE_MIN) {
     		return -1.0;
@@ -68,21 +65,11 @@ public class MaxbotixUltrasonicAnalog extends AnalogInput {
     /**
      * getRangeInches
      * 
-     * @return double measured range (inches) in range [3.0, 60.0]
-     * @return -1.0 if the voltage is below the minimum
-     */
-    double getRangeInches() {
-    	return getRangeMM() * MM_TO_IN;
-    }
-    
-    /**
-     * getRangeCM
-     * 
-     * @return double measured range (inches) in range [7.62, 152.4]
+     * @return double measured range (unit)
      * @return -1.0 if the voltage is below the minimum
      * @return -2.0 if voltage is above the maximum
      */
-    double getRangeCM() {
-        return getRangeMM() * MM_TO_CM;
+    public double getRange(Unit unit) {
+    	return unit.get(getRangeMM());
     }
 }
