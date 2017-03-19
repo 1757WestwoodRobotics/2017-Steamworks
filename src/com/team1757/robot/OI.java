@@ -110,8 +110,6 @@ public class OI {
 	// Input Control Constants
 	private final static double DEADBAND = 0.1;
 	private final static double GAIN = 0.9;
-	// private final static double DEADBAND_OLD = 0.2;
-	// private final static double GAIN_OLD = 0.7;
 
 	// OI Constructor
 	public OI() {
@@ -270,7 +268,6 @@ public class OI {
 	 * @return Normalized input from X axis of Xbox 360 gamepad's right stick in range [-1, 1]
 	 */
 	public double getRotate() {
-		// Use inputControlY because that model works for rotation
 		return inputControlX(xbox360.getRawAxis(xboxRightStickX));
 	}
 
@@ -341,5 +338,4 @@ public class OI {
 		}
 		return output;
 	}
-
 }
