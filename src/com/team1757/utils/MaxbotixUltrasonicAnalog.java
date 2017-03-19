@@ -32,6 +32,10 @@ public class MaxbotixUltrasonicAnalog extends AnalogInput {
     private final double VOLTAGE_MIN = DISTANCE_MIN_MM * VOLTAGE_SCALE / 5.0;
     private final double VOLTAGE_MAX = DISTANCE_MAX_MM * VOLTAGE_SCALE / 5.0;
     
+	public MaxbotixUltrasonicAnalog(int channel) {
+		super(channel);
+	}
+    
     /**
      * getRangeMM
      * 
@@ -60,10 +64,6 @@ public class MaxbotixUltrasonicAnalog extends AnalogInput {
     		return 5.0 * voltageMeasured/VOLTAGE_SCALE;
     	}
     }
-    
-	public MaxbotixUltrasonicAnalog(int channel) {
-		super(channel);
-	}
 	
     /**
      * getRangeInches
