@@ -31,7 +31,6 @@ public class RotateToAngle extends TimedCommand {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		// TODO Use onTarget() provided by controller
 		return Robot.driveTrain.reachedGyroSetpoint() || isTimedOut();
 	}
 

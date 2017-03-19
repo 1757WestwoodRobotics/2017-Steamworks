@@ -131,9 +131,12 @@ public class DriveTrain extends Subsystem {
 	public void moveWithAccelPID() {
 		manualDrive(accelControllerX.get(), -accelControllerY.get(), 0);
 	}
-	
+
 	/**
-	 * TODO javadoc
+	 * Ultrasonic PID Drive
+	 * 
+	 * Updates motors with ultrasonic PID as output on the Y axis and gyroscope
+	 * PID as output for Z axis (rotation)
 	 */
 	public void moveWithUltrasonicGyroPID() {
 		manualDrive(0, -ultrasonicController.get(), gyroController.get());
@@ -214,7 +217,7 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * getRangeMM
 	 * 
-	 * @return double measured range (mm) in range [TODO COME BACK TO MEEEE]
+	 * @return double measured range (mm)
 	 * @return -1.0 if the voltage is below the minimum
 	 * @return -2.0 if voltage is above the maximum
 	 */
@@ -225,7 +228,7 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * getRangeInches
 	 * 
-	 * @return double measured range (inches) in range [TODO COME BACK TO MEE]
+	 * @return double measured range (inches)
 	 * @return -1.0 if the voltage is below the minimum
 	 */
 	public double getRangeInches() {
@@ -235,7 +238,7 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * getRangeCM
 	 * 
-	 * @return double measured range (inches) in range [TODO COME BACK TO MEE]
+	 * @return double measured range (inches)
 	 * @return -1.0 if the voltage is below the minimum
 	 * @return -2.0 if voltage is above the maximum
 	 */
@@ -246,7 +249,7 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * getRange
 	 * 
-	 * @return double measured range in range
+	 * @return double measured range (default unit)
 	 * @return -1.0 if the voltage is below the minimum
 	 * @return -2.0 if voltage is above the maximum
 	 */
@@ -257,7 +260,7 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * getUltrasonicDefaultUnit
 	 * 
-	 * @return current default unit
+	 * @return Current default unit
 	 */
 	public Unit getUltrasonicDefaultUnit() {
 		return ultrasonicAnalog.getDefaultUnit();
@@ -505,11 +508,9 @@ public class DriveTrain extends Subsystem {
 	public void setUltrasonicTargetDistance(double distance) {
 		if (distance < ultrasonicAnalog.getMinRange()) {
 			ultrasonicController.setSetpoint(ultrasonicAnalog.getMinRange());
-		}
-		else if (distance > ultrasonicAnalog.getMaxRange()) {
+		} else if (distance > ultrasonicAnalog.getMaxRange()) {
 			ultrasonicController.setSetpoint(ultrasonicAnalog.getMaxRange());
-		}
-		else {
+		} else {
 			ultrasonicController.setSetpoint(distance);
 		}
 	}
@@ -525,11 +526,9 @@ public class DriveTrain extends Subsystem {
 	public void setUltrasonicTargetDistance(double distance, Unit unit) {
 		if (distance < ultrasonicAnalog.getMinRange(unit)) {
 			ultrasonicController.setSetpoint(ultrasonicAnalog.getMinRange(unit));
-		}
-		else if (distance > ultrasonicAnalog.getMaxRange(unit)) {
+		} else if (distance > ultrasonicAnalog.getMaxRange(unit)) {
 			ultrasonicController.setSetpoint(ultrasonicAnalog.getMaxRange(unit));
-		}
-		else {
+		} else {
 			ultrasonicController.setSetpoint(distance);
 		}
 	}

@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 
 
 /**
- * Implementation of Maxbotix MB1013 Ultrasonic rangefinder
+ * Implementation of Maxbotix MB1013 Ultrasonic rangefinder for analog input
  * 
  * Provides voltage scaling to report range in mm, cm, or inches
  * 
@@ -14,11 +14,8 @@ import edu.wpi.first.wpilibj.AnalogInput;
  */
 public class MaxbotixUltrasonicAnalog extends AnalogInput {
 	
-    private final double DISTANCE_MIN_MM = 300.0;						// Advertised minumum distance (mm)
-    private final double DISTANCE_MAX_MM = 3000.0;						// Advertised max distance is (mm)
-    
-//    private final double DISTANCE_MIN = DISTANCE_MIN_MM*MM_TO_IN;		// Minumum accurate distance (inches)
-//    private final double DISTANCE_MAX = DISTANCE_MAX_MM*MM_TO_IN;		// Maximum accurate distance (inches)
+    private final double DISTANCE_MIN_MM = 300.0;						// Advertised minumum distance is 300 (mm)
+    private final double DISTANCE_MAX_MM = 3000.0;						// Advertised max distance is 5000 (mm)
     
     private final double VOLTAGE_IN = 5.0;								// Supplied voltage
     private final double VOLTAGE_SCALE = VOLTAGE_IN/1024.0;				// Volts per 5mm (scaling factor)
@@ -51,7 +48,7 @@ public class MaxbotixUltrasonicAnalog extends AnalogInput {
      * Vi = Volts per 5 mm (Scaling)
      * Ri = Range in mm
      * 
-     * @return double measured range (mm) in range [TODO COME BACK TO MEEEE]
+     * @return double measured range (mm)
      * @return -1.0 if the voltage is below the minimum
      * @return -2.0 if voltage is above the maximum
      */
@@ -71,7 +68,7 @@ public class MaxbotixUltrasonicAnalog extends AnalogInput {
     /**
      * getDefaultUnit
      * 
-     * @return current default unit
+     * @return Current default unit
      */
     public Unit getDefaultUnit() {
     	return defaultUnit;
@@ -95,24 +92,41 @@ public class MaxbotixUltrasonicAnalog extends AnalogInput {
      * @return -2.0 if voltage is above the maximum
      */
     public double getRange() {
-    	return defaultUnit.get(getRangeMM());
+    	double rangeMM = getRangeMM();
+    	
+    	// Return error values
+    	if (rangeMM < 0.0) {
+    		return rangeMM;
+    	}
+    	else {
+    		return defaultUnit.get(getRangeMM());
+    	}
     }
     
     /**
-     * getRangeInches
+     * getRange
      * 
+     * @param Desired unit of length
      * @return double measured range (unit)
      * @return -1.0 if the voltage is below the minimum
      * @return -2.0 if voltage is above the maximum
      */
     public double getRange(Unit unit) {
-    	return unit.get(getRangeMM());
+    	double rangeMM = getRangeMM();
+    	
+    	// Return error values
+    	if (rangeMM < 0.0) {
+    		return rangeMM;
+    	}
+    	else {
+    		return unit.get(getRangeMM());
+    	}
     }
     
     /**
      * getMinRange
      * 
-     * @param Desired unit for distance
+     * @param Desired unit of length
      * @return Minimum accurate distance in unit
      */
     public double getMinRange(Unit unit) {
@@ -131,7 +145,7 @@ public class MaxbotixUltrasonicAnalog extends AnalogInput {
     /**
      * getMaxRange
      * 
-     * @param Desired unit for distance
+     * @param Desired unit of length
      * @return Maximum accurate distance in unit
      */
     public double getMaxRange(Unit unit) {

@@ -6,6 +6,8 @@ import com.team1757.utils.Unit;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * @author ACabey
+ * 
  * Drive to a given ultrasonic range
  * 
  * Translation Y controller by ultrasonic rangefinder
@@ -37,13 +39,14 @@ public class DriveStraightToRange extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
+    // Update motor controllers with output from ultrasonic and gyro PID controllers
     protected void execute() {
     	Robot.driveTrain.moveWithUltrasonicGyroPID();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.driveTrain.reachedUltrasonicSetpoint();
     }
 
     // Called once after isFinished returns true
