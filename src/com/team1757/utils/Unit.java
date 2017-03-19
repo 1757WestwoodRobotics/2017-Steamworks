@@ -8,7 +8,7 @@ public enum Unit {
 		this.conversionFactor = factor;
 	}
 	
-	double get(double value) {
+	public double get(double value) {
 		return value * conversionFactor;
 	}
 }

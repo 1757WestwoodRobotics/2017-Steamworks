@@ -20,9 +20,13 @@ public class DriveTrain extends Subsystem {
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final PIDController accelControllerX = RobotMap.accelControllerX;
 	private final PIDController accelControllerY = RobotMap.accelControllerY;
+	private final PIDController ultrasonicController = RobotMap.ultrasonicController;
 	private final RobotDrive driveTrainMecanumDrive = RobotMap.driveTrainMecanumDrive;
+
 	private final double GYRO_PID_TOLERANCE = .5;
 	private final double ACCEL_PID_TOLERANCE = .05;
+	private final double ULTRASONIC_PID_TOLERANCE = 1.0;
+
 	private boolean isInverted = false;
 
 	public void initDefaultCommand() {
@@ -40,7 +44,7 @@ public class DriveTrain extends Subsystem {
 	public void toggleInversion() {
 		isInverted = !isInverted;
 	}
-	
+
 	/**
 	 * Set direction to forward (left inverted)
 	 * 
@@ -50,7 +54,7 @@ public class DriveTrain extends Subsystem {
 	public void setInversionForward() {
 		isInverted = false;
 	}
-	
+
 	/**
 	 * Set direction to inverted (right inverted)
 	 * 
@@ -127,6 +131,13 @@ public class DriveTrain extends Subsystem {
 	public void moveWithAccelPID() {
 		manualDrive(accelControllerX.get(), -accelControllerY.get(), 0);
 	}
+	
+	/**
+	 * TODO javadoc
+	 */
+	public void moveWithUltrasonicGyroPID() {
+		manualDrive(0, -ultrasonicController.get(), gyroController.get());
+	}
 
 	/**
 	 * Stop motors
@@ -198,43 +209,71 @@ public class DriveTrain extends Subsystem {
 		return driveTrainNavX.getDisplacementX();
 	}
 
-	
 	// Ultrasonic
-	
-	/**
-     * getRangeMM
-     * 
-     * @return double measured range (mm) in range [TODO COME BACK TO MEEEE]
-     * @return -1.0 if the voltage is below the minimum
-     * @return -2.0 if voltage is above the maximum
-     */
-    public double getRangeMM() {
-    	return ultrasonicAnalog.getRange(Unit.kMM);
-    }
-	
-    /**
-     * getRangeInches
-     * 
-     * @return double measured range (inches) in range [TODO COME BACK TO MEE]
-     * @return -1.0 if the voltage is below the minimum
-     */
-    public double getRangeInches() {
-    	return ultrasonicAnalog.getRange(Unit.kInches);
-    }
-    
-    /**
-     * getRangeCM
-     * 
-     * @return double measured range (inches) in range [TODO COME BACK TO MEE]
-     * @return -1.0 if the voltage is below the minimum
-     * @return -2.0 if voltage is above the maximum
-     */
-    public double getRangeCM() {
-        return ultrasonicAnalog.getRange(Unit.kCM);
-    }
-	
 
-    // Gyroscope PID
+	/**
+	 * getRangeMM
+	 * 
+	 * @return double measured range (mm) in range [TODO COME BACK TO MEEEE]
+	 * @return -1.0 if the voltage is below the minimum
+	 * @return -2.0 if voltage is above the maximum
+	 */
+	public double getRangeMM() {
+		return ultrasonicAnalog.getRange(Unit.kMM);
+	}
+
+	/**
+	 * getRangeInches
+	 * 
+	 * @return double measured range (inches) in range [TODO COME BACK TO MEE]
+	 * @return -1.0 if the voltage is below the minimum
+	 */
+	public double getRangeInches() {
+		return ultrasonicAnalog.getRange(Unit.kInches);
+	}
+
+	/**
+	 * getRangeCM
+	 * 
+	 * @return double measured range (inches) in range [TODO COME BACK TO MEE]
+	 * @return -1.0 if the voltage is below the minimum
+	 * @return -2.0 if voltage is above the maximum
+	 */
+	public double getRangeCM() {
+		return ultrasonicAnalog.getRange(Unit.kCM);
+	}
+
+	/**
+	 * getRange
+	 * 
+	 * @return double measured range in range
+	 * @return -1.0 if the voltage is below the minimum
+	 * @return -2.0 if voltage is above the maximum
+	 */
+	public double getRange() {
+		return ultrasonicAnalog.getRange();
+	}
+
+	/**
+	 * getUltrasonicDefaultUnit
+	 * 
+	 * @return current default unit
+	 */
+	public Unit getUltrasonicDefaultUnit() {
+		return ultrasonicAnalog.getDefaultUnit();
+	}
+
+	/**
+	 * setUltrasonicDefaultUnit
+	 * 
+	 * @param unit
+	 *            Unit instance for default measurements
+	 */
+	public void setUltrasonicDefaultUnit(Unit unit) {
+		ultrasonicAnalog.setDefaultUnit(unit);
+	}
+
+	// Gyroscope PID
 
 	/**
 	 * Enable gyroscope PID Controller
@@ -258,12 +297,14 @@ public class DriveTrain extends Subsystem {
 	public double getTargetAngle() {
 		return gyroController.getSetpoint();
 	}
-	
+
 	/**
-	 * Gets the difference between current setpoint and current gyro angle (unbounded)
+	 * Gets the difference between current setpoint and current gyro angle
+	 * (unbounded)
+	 * 
 	 * @return anglular error in range (-MAX_DOUBLE, MAX_DOUBLE)
 	 */
-	public double getGyroControllerError(){
+	public double getGyroControllerError() {
 		return gyroController.getSetpoint() - getCurrentRawAngle();
 	}
 
@@ -273,8 +314,8 @@ public class DriveTrain extends Subsystem {
 	 * @return boolean gyroscope PID controller error within constant tolerance
 	 */
 	public boolean reachedGyroSetpoint() {
-		//return (Math.abs(gyroController.getError()) <= GYRO_PID_TOLERANCE); 
-		//Unreliably works on second run of the command
+		// return (Math.abs(gyroController.getError()) <= GYRO_PID_TOLERANCE);
+		// Unreliably works on second run of the command
 		return Math.abs(getGyroControllerError()) <= GYRO_PID_TOLERANCE;
 	}
 
@@ -426,6 +467,90 @@ public class DriveTrain extends Subsystem {
 	 */
 	public boolean reachedAccelSetpointX() {
 		return (Math.abs(accelControllerX.getError()) <= ACCEL_PID_TOLERANCE);
+	}
+
+	// Ultrasonic PID
+
+	/**
+	 * Enable ultrasonic PID controller
+	 */
+	public void enableUltrasonicPID() {
+		ultrasonicController.enable();
+	}
+
+	/**
+	 * Disable ultrasonic PID controller
+	 */
+	public void disableUltrasonicPID() {
+		ultrasonicController.disable();
+	}
+
+	/**
+	 * Get ultrasonic PID controller target angle (setpoint)
+	 * 
+	 * @return double distance in range (-MAX_DOUBLE, MAX_DOUBLE)
+	 */
+	public double getUltrasonicTargetDistance() {
+		return ultrasonicController.getSetpoint();
+	}
+
+	/**
+	 * Set ultrasonic PID Controller target distance (setpoint) to a given
+	 * distance (default unit)
+	 * 
+	 * @param distanceY
+	 *            Double distance in range (MIN_ULTRASONIC_RANGE,
+	 *            MAX_ULTRASONIC_RANGE) measured in current default unit
+	 */
+	public void setUltrasonicTargetDistance(double distance) {
+		if (distance < ultrasonicAnalog.getMinRange()) {
+			ultrasonicController.setSetpoint(ultrasonicAnalog.getMinRange());
+		}
+		else if (distance > ultrasonicAnalog.getMaxRange()) {
+			ultrasonicController.setSetpoint(ultrasonicAnalog.getMaxRange());
+		}
+		else {
+			ultrasonicController.setSetpoint(distance);
+		}
+	}
+
+	/**
+	 * Set ultrasonic PID Controller target distance (setpoint) to a given
+	 * distance (unit)
+	 * 
+	 * @param distanceY
+	 *            Double distance in range (MIN_ULTRASONIC_RANGE,
+	 *            MAX_ULTRASONIC_RANGE) measured in unit
+	 */
+	public void setUltrasonicTargetDistance(double distance, Unit unit) {
+		if (distance < ultrasonicAnalog.getMinRange(unit)) {
+			ultrasonicController.setSetpoint(ultrasonicAnalog.getMinRange(unit));
+		}
+		else if (distance > ultrasonicAnalog.getMaxRange(unit)) {
+			ultrasonicController.setSetpoint(ultrasonicAnalog.getMaxRange(unit));
+		}
+		else {
+			ultrasonicController.setSetpoint(distance);
+		}
+	}
+
+	/**
+	 * Set target by distance delta
+	 * 
+	 * @param delta
+	 *            Double distance (default unit) representing target delta
+	 */
+	public void setTargetDistanceDelta(double delta) {
+		setUltrasonicTargetDistance(getRange() + delta);
+	}
+
+	/**
+	 * Get ultrasonic PID Controller reached setpoint within tolerance
+	 * 
+	 * @return boolean ultrasonic PID controller error within constant tolerance
+	 */
+	public boolean reachedUltrasonicSetpoint() {
+		return (Math.abs(ultrasonicController.getError()) <= ULTRASONIC_PID_TOLERANCE);
 	}
 
 }

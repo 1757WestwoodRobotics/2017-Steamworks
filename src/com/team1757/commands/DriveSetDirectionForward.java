@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveDirectionForward extends Command {
+public class DriveSetDirectionForward extends Command {
 
-	public DriveDirectionForward() {
+	public DriveSetDirectionForward() {
 		requires(Robot.driveTrain);
 	}
 

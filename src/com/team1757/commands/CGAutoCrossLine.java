@@ -9,7 +9,7 @@ public class CGAutoCrossLine extends CommandGroup {
 
 	public CGAutoCrossLine() {
 		// Face gear loader forward
-		addSequential(new DriveDirectionInverted());
+		addSequential(new DriveSetDirectionInverted());
 		// Drop gear to receive
 		addSequential(new GearReceive());
 		// Drive straight ~100"

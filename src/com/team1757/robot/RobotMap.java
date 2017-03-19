@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -67,10 +68,12 @@ public class RobotMap {
 	public static PIDController gyroController;
 	public static PIDController accelControllerX;
 	public static PIDController accelControllerY;
+	public static PIDController ultrasonicController;
 	public static PIDController visionGearTranslationController;
 
 	private static NavXGyroWrapper gyroInput;
 	private static VariablePIDOutput gyroOutput;
+	private static VariablePIDOutput ultrasonicOutput;
 
 	public static PIDController visionTranslationController;
 	// TODO change back to private
@@ -151,7 +154,7 @@ public class RobotMap {
 		driveTrainMecanumDrive.setSafetyEnabled(true);
 		driveTrainMecanumDrive.setExpiration(0.1);
 		driveTrainMecanumDrive.setMaxOutput(1.0);
-		
+
 		// Initialize Ultrasonic Sensor
 		ultrasonicAnalog = new MaxbotixUltrasonicAnalog(0);
 
@@ -179,11 +182,19 @@ public class RobotMap {
 		gyroController = new PIDController(0.034, 0.0, 0.04, gyroInput, gyroOutput);
 
 		// Configure PIDController (gyroscope)
-		//SmartDashboard.putData("RotateController", gyroController);
+		// SmartDashboard.putData("RotateController", gyroController);
 		gyroController.setOutputRange(-1.0, 1.0);
 		gyroController.setAbsoluteTolerance(2.0f);
 		gyroController.setContinuous(true);
 		driveTrainNavX.reset();
+
+		// Initialize PID Input/ Output (rangefinder)
+		ultrasonicOutput = new VariablePIDOutput();
+
+		// Initialize PIDController (rangefinder)
+		ultrasonicController = new PIDController(1.0, 0.0, 0.0, ultrasonicAnalog, ultrasonicOutput);
+		SmartDashboard.putData("rangeController", ultrasonicController);
+		ultrasonicController.setOutputRange(-1, 1);
 
 		// Initialize PID Input/ Output (VisionCenter)
 		visionCenterInput = new VisionCenterPIDSource();
@@ -194,7 +205,8 @@ public class RobotMap {
 		visionTranslationController = new PIDController(1.0, 0.0, 0.04, visionCenterInput, visionCenterOutput);
 
 		// Configure PIDController (VisionCenter)
-	//	SmartDashboard.putData("visionTranslationController", visionTranslationController);
+		// SmartDashboard.putData("visionTranslationController",
+		// visionTranslationController);
 		visionTranslationController.setInputRange(-1.0, 1.0);
 		visionTranslationController.setOutputRange(-1, 1);
 		visionTranslationController.setAbsoluteTolerance(.0005);
@@ -209,10 +221,10 @@ public class RobotMap {
 				visionCenterGearOutput);
 
 		// Configure PIDController (Gear)
-		//SmartDashboard.putData("visionGearTranslationController", visionGearTranslationController);
+		// SmartDashboard.putData("visionGearTranslationController",
+		// visionGearTranslationController);
 		visionGearTranslationController.setOutputRange(-.5, .5);
 		visionGearTranslationController.setAbsoluteTolerance(8);
-
 
 	}
 }
