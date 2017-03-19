@@ -14,9 +14,8 @@ import edu.wpi.first.wpilibj.AnalogInput;
  */
 public class MaxbotixUltrasonicAnalog extends AnalogInput {
 	
-	// TODO Verify true maximum and minumum accurate distance reported
     private final double DISTANCE_MIN_MM = 300.0;						// Advertised minumum distance (mm)
-    private final double DISTANCE_MAX_MM = 5000.0;						// Advertised max distance is (mm)
+    private final double DISTANCE_MAX_MM = 3000.0;						// Advertised max distance is (mm)
     
 //    private final double DISTANCE_MIN = DISTANCE_MIN_MM*MM_TO_IN;		// Minumum accurate distance (inches)
 //    private final double DISTANCE_MAX = DISTANCE_MAX_MM*MM_TO_IN;		// Maximum accurate distance (inches)
