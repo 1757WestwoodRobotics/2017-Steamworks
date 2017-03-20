@@ -2,7 +2,6 @@ package com.team1757.robot;
 
 import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
-import com.team1757.subsystems.Vision;
 import com.team1757.utils.IllegalSourceException;
 import com.team1757.utils.MaxbotixUltrasonicAnalog;
 import com.team1757.utils.NavXGyroWrapper;
@@ -70,20 +69,18 @@ public class RobotMap {
 	public static PIDController accelControllerY;
 	public static PIDController ultrasonicController;
 	public static PIDController visionGearTranslationController;
+	public static PIDController visionTranslationController;
 
 	private static NavXGyroWrapper gyroInput;
 	private static VariablePIDOutput gyroOutput;
+
 	private static VariablePIDOutput ultrasonicOutput;
 
-	public static PIDController visionTranslationController;
-	// TODO change back to private
-	public static VisionCenterPIDSource visionCenterInput;
-	public static VariablePIDOutput visionCenterOutput;
+	private static VisionCenterPIDSource visionCenterInput;
+	private static VariablePIDOutput visionCenterOutput;
 
 	private static VisionCenterGearPIDSource visionCenterGearInput;
-	public static VariablePIDOutput visionCenterGearOutput;
-
-	public static Vision vision;
+	private static VariablePIDOutput visionCenterGearOutput;
 
 	public static UsbCamera gearCam = new UsbCamera("gearCam", 0);
 	public static UsbCamera shooterCam = new UsbCamera("shooterCam", 1);

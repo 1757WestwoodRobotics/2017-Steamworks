@@ -23,7 +23,7 @@ public class Vision extends Subsystem {
 	private final PIDController visionTranslationController = RobotMap.visionTranslationController;
 	private final PIDController visionGearTranslationController = RobotMap.visionGearTranslationController;
 
-	private static boolean isGearCamActive = true;
+	private boolean isGearCamActive = true;
 
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
@@ -138,6 +138,7 @@ public class Vision extends Subsystem {
 	 * Activates the relay connected to the gear camera's ring light
 	 */
 	public void turnOnGearRingLight() {
+		// TODO Arduino light controls
 	}
 
 	/**
