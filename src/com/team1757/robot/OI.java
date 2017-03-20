@@ -15,7 +15,6 @@ import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
 import com.team1757.commands.DriveGyroPIDClear;
 import com.team1757.commands.DriveManual;
-import com.team1757.commands.LiftUp;
 import com.team1757.commands.DriveResetGyro;
 import com.team1757.commands.DriveRestrictForward;
 import com.team1757.commands.DriveRestrictRotation;
@@ -24,9 +23,9 @@ import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
 import com.team1757.commands.Index;
+import com.team1757.commands.Lift;
 import com.team1757.commands.ShootWithSpeed;
 import com.team1757.commands.ShootWithVoltage;
-import com.team1757.commands.LifterStop;
 import com.team1757.commands.ShooterStop;
 import com.team1757.commands.VisionCenterOnGearTranslationX;
 import com.team1757.commands.VisionGetReadyToScoreGear;
@@ -36,6 +35,7 @@ import com.team1757.commands.VisionToggleCamera;
 import com.team1757.utils.CollectorControlMode;
 import com.team1757.utils.GearControlMode;
 import com.team1757.utils.IndexerControlMode;
+import com.team1757.utils.LifterControlMode;
 import com.team1757.utils.Unit;
 import com.team1757.commands.VisionCenterTranslationX;
 import com.team1757.commands.VisionFaceGearTarget;
@@ -143,8 +143,8 @@ public class OI {
 		// Bind Commands to Xbox Controller
 		xboxButtonY.whenPressed(new DriveToggleDirection());
 		xboxButtonA.whenPressed(new DriveManual());
-		xboxButtonLB.toggleWhenPressed(new LiftUp());
-		xboxButtonRB.whileHeld(new LiftUp());
+		xboxButtonLB.toggleWhenPressed(new Lift(LifterControlMode.kUp));
+		xboxButtonRB.whileHeld(new Lift(LifterControlMode.kUp));
 		
 		// Put Commands on SmartDashboard
 		// Drive functions
@@ -188,8 +188,8 @@ public class OI {
 		SmartDashboard.putData(new GearRun(GearControlMode.kHug));
 
 		// Lifter Commands
-		SmartDashboard.putData(new LiftUp());
-		SmartDashboard.putData(new LifterStop());
+		SmartDashboard.putData(new Lift(LifterControlMode.kUp));
+		SmartDashboard.putData(new Lift(LifterControlMode.kStop));
 
 		// Vision Commands
 		SmartDashboard.putData(new VisionFollowReflectiveTape());

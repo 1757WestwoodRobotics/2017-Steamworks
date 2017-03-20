@@ -1,6 +1,7 @@
 package com.team1757.commands;
 
 import com.team1757.robot.Robot;
+import com.team1757.utils.LifterControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -8,12 +9,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class LiftUp extends Command {
+public class Lift extends Command {
 	
-	private static double targetLifterPVbus = 0.75; 
+	private LifterControlMode controlMode;
+	private double targetLifterPVbus;
 
-    public LiftUp() {
+    public Lift(LifterControlMode controlMode) {
         requires(Robot.lifter);
+        this.controlMode = controlMode;
+        targetLifterPVbus = controlMode.getOutput();
     }
 
     // Called just before this Command runs the first time
@@ -24,10 +28,12 @@ public class LiftUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.getRightTrigger() > 0.2) {
-    		targetLifterPVbus = 1.0;
-    	} else {
-    		targetLifterPVbus = .75;
+    	if (controlMode == LifterControlMode.kUp) {
+        	if (Robot.oi.getRightTrigger() > 0.2) {
+        		targetLifterPVbus = 1.0;
+        	} else {
+        		targetLifterPVbus = .75;
+        	}
     	}
     	
     	SmartDashboard.putNumber("targetLifterPVbus", targetLifterPVbus);
