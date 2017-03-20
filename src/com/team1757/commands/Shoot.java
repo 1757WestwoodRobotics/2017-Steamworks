@@ -4,19 +4,28 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.team1757.robot.Robot;
+import com.team1757.utils.ShooterControlMode;
 
 /**
  *
  */
-public class ShootWithVoltage extends Command {
+public class Shoot extends Command {
 
-    public ShootWithVoltage() {
+	private ShooterControlMode controlMode = ShooterControlMode.kPercentForward;
+	
+    public Shoot() {
         requires(Robot.shooter);
+    }
+    
+    public Shoot(ShooterControlMode controlMode) {
+        requires(Robot.shooter);
+        this.controlMode = controlMode;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.setFlyWheelModePercentVoltage();
+    	Robot.shooter.initializeFlyWheelPID();
+    	Robot.shooter.changeControlMode(controlMode.getControlMode());
     	Robot.shooter.enableFlyWheel();
     	Robot.shooter.enableFlyWheelControl();
     	SmartDashboard.putBoolean("isShooting", true);
@@ -24,7 +33,7 @@ public class ShootWithVoltage extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.setFlyWheelTarget(-.8);
+    	Robot.shooter.setFlyWheelTarget(controlMode.getOutput());
     }
 
     // Make this return true when this Command no longer needs to run execute()

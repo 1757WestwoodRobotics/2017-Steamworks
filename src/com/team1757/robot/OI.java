@@ -16,17 +16,12 @@ import com.team1757.commands.VisionFollowReflectiveTape;
 import com.team1757.commands.DriveGyroPIDClear;
 import com.team1757.commands.DriveManual;
 import com.team1757.commands.DriveResetGyro;
-import com.team1757.commands.DriveRestrictForward;
-import com.team1757.commands.DriveRestrictRotation;
 import com.team1757.commands.DriveStraightToRange;
-import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
+import com.team1757.commands.Shoot;
 import com.team1757.commands.Index;
 import com.team1757.commands.Lift;
-import com.team1757.commands.ShootWithSpeed;
-import com.team1757.commands.ShootWithVoltage;
-import com.team1757.commands.ShooterStop;
 import com.team1757.commands.VisionCenterOnGearTranslationX;
 import com.team1757.commands.VisionGetReadyToScoreGear;
 import com.team1757.commands.VisionGearRingLightOff;
@@ -36,6 +31,7 @@ import com.team1757.utils.CollectorControlMode;
 import com.team1757.utils.GearControlMode;
 import com.team1757.utils.IndexerControlMode;
 import com.team1757.utils.LifterControlMode;
+import com.team1757.utils.ShooterControlMode;
 import com.team1757.utils.Unit;
 import com.team1757.commands.VisionCenterTranslationX;
 import com.team1757.commands.VisionFaceGearTarget;
@@ -151,8 +147,6 @@ public class OI {
 		SmartDashboard.putData(new DriveStraightY(1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
 		SmartDashboard.putData(new DriveToggleDirection());
-		SmartDashboard.putData(new DriveRestrictForward());
-		SmartDashboard.putData(new DriveRestrictRotation());
 		SmartDashboard.putData(new DriveStraightToRange(60, Unit.kInches));
 
 		// Gyro Systems
@@ -161,13 +155,13 @@ public class OI {
 
 		// Gyro Commands
 		SmartDashboard.putData(new RotateToAngle(1));
-		SmartDashboard.putData(new RotateDegrees());
 		SmartDashboard.putData(new RotateDegreesShortest());
 
 		// Shooter Commands
-		SmartDashboard.putData(new ShootWithSpeed());
-		SmartDashboard.putData(new ShootWithVoltage());
-		SmartDashboard.putData(new ShooterStop());
+		SmartDashboard.putData(new Shoot(ShooterControlMode.kSpeedForward));
+		SmartDashboard.putData(new Shoot(ShooterControlMode.kPercentForward));
+		SmartDashboard.putData(new Shoot(ShooterControlMode.kVoltageForward));
+		SmartDashboard.putData(new Shoot(ShooterControlMode.kStop));
 
 		// Indexer Commands
 		SmartDashboard.putData(new Index(IndexerControlMode.kPercentForward));
