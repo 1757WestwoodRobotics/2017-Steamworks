@@ -44,7 +44,7 @@ Compiled javadocs are in the `doc/` directory. Open the `doc/index.html` file to
  
 ## About Us
 We are a veteran <i>FIRST</i> Robotics Competition team from Westwood High School in Westwood, Massachusetts.
-Feel free to check us out on [Twitter](https://twitter.com/WWRobotics1757), [Snapchat](https://www.snapchat.com/add/wwrobotics), or at our [website](team1757.com)!
+Feel free to check us out on [Twitter](https://twitter.com/WWRobotics1757), [Snapchat](https://www.snapchat.com/add/wwrobotics), or at our [website](https://team1757.com)!
 
 ![Robot](https://pbs.twimg.com/media/C5Plwg-VUAAwj8x.jpg:large)
 ![Robot](https://pbs.twimg.com/media/C6uKH6jWoAE3xXp.jpg:large)
