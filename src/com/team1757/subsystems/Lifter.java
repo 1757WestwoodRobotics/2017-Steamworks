@@ -56,4 +56,15 @@ public class Lifter extends Subsystem {
 	public void setLiftTarget(double target) {
 		liftTalon.set(target);
 	}
+	
+	
+	/**
+	 * Get target for any control mode
+	 * 
+	 * @return target
+	 * 		Generally percent voltage in range [-1, 1]
+	 */
+	public double getLiftTarget() {
+		return liftTalon.get();
+	}
 }

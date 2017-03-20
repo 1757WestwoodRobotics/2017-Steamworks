@@ -6,8 +6,13 @@ import com.team1757.utils.IndexerControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Operate Indexer mechanism.
+ * 
+ * Defaults to 0.55 in PercentVBus mode
+ * 
+ * @author ACabey
  */
+
 public class Index extends Command {
 
 	private IndexerControlMode controlMode = IndexerControlMode.kPercentForward;
@@ -18,7 +23,7 @@ public class Index extends Command {
     
     public Index(IndexerControlMode controlMode) {
     	requires(Robot.indexer);
-    	
+    	this.controlMode = controlMode;
     }
 
     // Called just before this Command runs the first time
@@ -39,6 +44,7 @@ public class Index extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.indexer.stopIndexer();
     	Robot.indexer.disableIndexer();
     }
 

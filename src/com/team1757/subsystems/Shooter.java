@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shooter extends Subsystem {
 
 	private final CANTalon shooterFlyWheel = RobotMap.shooterFlyWheel;
-
+	private boolean isShooting = false;
+	
 	public void initDefaultCommand() {
 		setDefaultCommand(new Shoot(ShooterControlMode.kStop));
 	}
@@ -83,5 +84,27 @@ public class Shooter extends Subsystem {
 	 */
 	public void setFlyWheelTarget(double target) {
 		shooterFlyWheel.set(target);
+	}
+	
+	/**
+	 * Set isShooting boolean
+	 * 
+	 * Used in SmartDashboard output
+	 * 
+	 * @param isShooting
+	 */
+	public void setIsShooting(boolean isShooting) {
+		this.isShooting = isShooting;
+	}
+	
+	/**
+	 * Get isShooting boolean
+	 * 
+	 * Used in SmartDashboard output
+	 * 
+	 * @return isShooting
+	 */
+	public boolean getIsShooting() {
+		return isShooting;
 	}
 }

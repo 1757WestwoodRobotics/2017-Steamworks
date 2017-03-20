@@ -5,7 +5,6 @@ import com.team1757.commands.CGAutoCrossLine;
 import com.team1757.commands.CGAutoLeft;
 import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.CGShootandIndex;
-import com.team1757.commands.CGShootandIndexStop;
 import com.team1757.commands.Collect;
 import com.team1757.commands.DriveGyroAssisted;
 import com.team1757.commands.DriveStraightY;
@@ -200,7 +199,6 @@ public class OI {
 
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
-		SmartDashboard.putData(new CGShootandIndexStop());
 		SmartDashboard.putData(new CGAutoMiddle());
 		SmartDashboard.putData(new CGAutoRight());
 		SmartDashboard.putData(new CGAutoLeft());

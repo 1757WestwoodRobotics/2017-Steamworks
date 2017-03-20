@@ -4,16 +4,25 @@ import com.team1757.robot.Robot;
 import com.team1757.utils.LifterControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Operate Lifter mechanism.
+ * 
+ * Defaults to 0.75 in PercentVBus mode
+ * 
+ * @author ACabey
  */
+
 public class Lift extends Command {
 	
-	private LifterControlMode controlMode;
+	private LifterControlMode controlMode = LifterControlMode.kUp;
 	private double targetLifterPVbus;
-
+	
+	public Lift() {
+        requires(Robot.lifter);
+        targetLifterPVbus = controlMode.getOutput();
+    }
+	
     public Lift(LifterControlMode controlMode) {
         requires(Robot.lifter);
         this.controlMode = controlMode;
@@ -24,6 +33,7 @@ public class Lift extends Command {
     protected void initialize() {
     	Robot.lifter.enableLifter();
     	Robot.lifter.setModePercentVoltage();
+    	this.targetLifterPVbus = controlMode.getOutput();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,7 +46,6 @@ public class Lift extends Command {
         	}
     	}
     	
-    	SmartDashboard.putNumber("targetLifterPVbus", targetLifterPVbus);
     	Robot.lifter.setLiftTarget(targetLifterPVbus);
     }
 
@@ -47,6 +56,7 @@ public class Lift extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.lifter.stopLifter();
     	Robot.lifter.disableLifter();
     }
 

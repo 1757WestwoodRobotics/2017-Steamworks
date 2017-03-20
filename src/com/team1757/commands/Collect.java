@@ -6,8 +6,13 @@ import com.team1757.robot.Robot;
 import com.team1757.utils.CollectorControlMode;
 
 /**
- *
+ * Operate Collector mechanism.
+ * 
+ * Defaults to 1.0 in PercentVBus mode
+ * 
+ * @author ACabey
  */
+
 public class Collect extends Command {
 	
 	private CollectorControlMode controlMode = CollectorControlMode.kPercentForward;
@@ -40,6 +45,7 @@ public class Collect extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ballCollector.stopFlyWheel();
     	Robot.ballCollector.disableFlyWheelControl();
     	Robot.ballCollector.disableFlyWheel();
     }

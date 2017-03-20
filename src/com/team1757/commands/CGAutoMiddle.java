@@ -1,5 +1,7 @@
 package com.team1757.commands;
 
+import com.team1757.utils.GearControlMode;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -8,10 +10,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CGAutoMiddle extends CommandGroup {
 
 	public CGAutoMiddle() {
+		// TODO Incomplete
+		
 		// Face gear loader forward
 		addSequential(new DriveSetDirectionInverted());
 		// Drop gear to receive
-		addSequential(new GearReceive());
+		addSequential(new GearRun(GearControlMode.kReceive));
 		// Drive straight ~100"
 		addSequential(new DriveStraightY(2, -.27));
 		// Correct translation with vision
@@ -21,7 +25,7 @@ public class CGAutoMiddle extends CommandGroup {
 		// "Wait a beat"
 		addSequential(new Delay(.5));
 		// Place gear
-		addSequential(new GearScore());
+		addSequential(new GearRun(GearControlMode.kScore));
 		// "Wait a beat"
 		addSequential(new Delay(.5));
 		// Reverse
@@ -29,12 +33,11 @@ public class CGAutoMiddle extends CommandGroup {
 		// Drive backwards ~100"
 		addSequential(new DriveStraightY(.7));
 		// Close gear
-		addSequential(new GearReceive());
+		addSequential(new GearRun(GearControlMode.kReceive));
 		// Reverse
 		addSequential(new DriveToggleDirection());
 		// Rotate left 90
-//		SmartDashboard.putNumber("targetAngle", 90);
-//		addSequential(new RotateToAngle());
+		
 		// Translate right
 		addSequential(new DriveStraightX(2.0));
 		// Cross line

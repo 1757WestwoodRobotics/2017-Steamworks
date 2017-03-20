@@ -2,6 +2,12 @@ package com.team1757.utils;
 
 import com.ctre.CANTalon.TalonControlMode;
 
+/**
+ * Provide premade parameter structures for controlling the Indexer 
+ * 
+ * @author ACabey
+ */
+
 public enum IndexerControlMode {
 	kPercentForward(0.55, TalonControlMode.PercentVbus), kPercentReverse(-.30, TalonControlMode.PercentVbus),
 	kStop(0.0);

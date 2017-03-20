@@ -1,5 +1,7 @@
 package com.team1757.commands;
 
+import com.team1757.utils.GearControlMode;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -13,12 +15,11 @@ public class CGAutoRight extends CommandGroup {
 		// Face gear loader forward
 		addSequential(new DriveSetDirectionInverted());
 		// Drop gear to receive
-		addSequential(new GearReceive());
+		addSequential(new GearRun(GearControlMode.kReceive));
 		// Drive straight ~114"
 		addSequential(new DriveStraightY(1.6));
 		// Rotate left 60 
-		addSequential(new RotateSetTargetAngle(-60));
-		addSequential(new RotateToAngle(.5));
+		addSequential(new RotateToAngle(-60.0));
 		// Correct translation with vision
 		// addSequential(new VisionFaceGearTarget());
 		// Drive straight ~14.3"
