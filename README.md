@@ -2,8 +2,9 @@
 Team 1757 - Wolverines' robot code for the 2017 <i>FIRST</i> STEAMWORKS game challenge. Main robot code is written in Java based off of WPILib's command-based control system. Onboard Arduino code is written in Arduino C.
 
 The code is divided into several packages based off of the command-based structure. 
-All required library blobs are included in the lib/ directory.
-Compiled javadocs are in the doc/ directory. Open the doc/index.html file to view it.
+All required library blobs are included in the `lib/` directory.
+
+Compiled javadocs are in the `doc/` directory. Open the `doc/index.html` file to view it.
 
 ## Robot Features
  - Mecanum drivetrain
@@ -34,12 +35,12 @@ Compiled javadocs are in the doc/ directory. Open the doc/index.html file to vie
  - utils
    - Any utility classes for PID control or improving hardware functionality
 
- For a more complete breakdown of the code structure, see [blog post](https://acabey.xyz/blog/posts/3-9-17/)
+ For a more complete breakdown of the code structure, see [blog post](https://acabey.xyz/blog/posts/3-9-17/).
 
 ## Naming Conventions
- - CONSTANT_EXAMPLE (i.e. DISTANCE_MAX_MM)	: Final constants
- - camelCase (i.e. defaultUnit)				: Instance variables
- - kInstanceName (i.e. kInches)				: enum instances
+ - `CONSTANT_EXAMPLE` (i.e. `DISTANCE_MAX_MM`)	: Final constants
+ - `camelCase` (i.e. `defaultUnit`)				: Instance variables
+ - `kInstanceName` (i.e. `kInches`)				: enum instances
  
 ## About Us
 We are a veteran <i>FIRST</i> Robotics Competition team from Westwood High School in Westwood, Massachusetts.
