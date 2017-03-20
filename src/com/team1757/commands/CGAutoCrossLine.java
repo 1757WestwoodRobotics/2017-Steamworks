@@ -1,5 +1,6 @@
 package com.team1757.commands;
 
+import com.team1757.utils.Axis;
 import com.team1757.utils.DirectionControlMode;
 import com.team1757.utils.GearControlMode;
 
@@ -16,6 +17,6 @@ public class CGAutoCrossLine extends CommandGroup {
 		// Drop gear to receive
 		addSequential(new GearRun(GearControlMode.kReceive));
 		// Drive straight ~100"
-		addSequential(new DriveStraightY(2.0));
+		addSequential(new DriveStraight(Axis.axisY, 2.0));
 	}
 }

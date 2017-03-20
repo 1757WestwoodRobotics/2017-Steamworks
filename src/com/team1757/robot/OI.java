@@ -7,14 +7,13 @@ import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.Collect;
 import com.team1757.commands.DriveGyroAssisted;
-import com.team1757.commands.DriveStraightY;
 import com.team1757.commands.GearRun;
 import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
-import com.team1757.commands.DriveGyroPIDClear;
 import com.team1757.commands.DriveManual;
 import com.team1757.commands.DriveResetGyro;
 import com.team1757.commands.DriveSetDirection;
+import com.team1757.commands.DriveStraight;
 import com.team1757.commands.DriveStraightToRange;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
@@ -25,6 +24,7 @@ import com.team1757.commands.VisionCenterOnGearTranslationX;
 import com.team1757.commands.VisionGetReadyToScoreGear;
 import com.team1757.commands.VisionRingLight;
 import com.team1757.commands.VisionToggleCamera;
+import com.team1757.utils.Axis;
 import com.team1757.utils.CollectorControlMode;
 import com.team1757.utils.DirectionControlMode;
 import com.team1757.utils.GearControlMode;
@@ -144,14 +144,13 @@ public class OI {
 		
 		// Put Commands on SmartDashboard
 		// Drive functions
-		SmartDashboard.putData(new DriveStraightY(1.65));
+		SmartDashboard.putData(new DriveStraight(Axis.axisY, 1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
 		SmartDashboard.putData(new DriveSetDirection(DirectionControlMode.kToggle));
 		SmartDashboard.putData(new DriveStraightToRange(60, Unit.kInches));			
 
 		// Gyro Systems
 		SmartDashboard.putData(new DriveResetGyro());
-		SmartDashboard.putData(new DriveGyroPIDClear());
 
 		// Gyro Commands
 		SmartDashboard.putData(new RotateToAngle());

@@ -1,5 +1,6 @@
 package com.team1757.commands;
 
+import com.team1757.utils.Axis;
 import com.team1757.utils.DirectionControlMode;
 import com.team1757.utils.GearControlMode;
 
@@ -18,13 +19,13 @@ public class CGAutoRight extends CommandGroup {
 		// Drop gear to receive
 		addSequential(new GearRun(GearControlMode.kReceive));
 		// Drive straight ~114"
-		addSequential(new DriveStraightY(1.6));
+		addSequential(new DriveStraight(Axis.axisY, 1.6));
 		// Rotate left 60 
 		addSequential(new RotateToAngle(-60.0));
 		// Correct translation with vision
 		// addSequential(new VisionFaceGearTarget());
 		// Drive straight ~14.3"
-		addSequential(new DriveStraightY(1, -.2));
+		addSequential(new DriveStraight(Axis.axisY, 1, -.2));
 //		// "Wait a beat"
 //		addSequential(new Delay(.2));
 //		// Place gear
