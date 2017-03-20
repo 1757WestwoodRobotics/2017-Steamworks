@@ -6,9 +6,7 @@ import com.team1757.commands.CGAutoLeft;
 import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.CGShootandIndexStop;
-import com.team1757.commands.CollectReverseWithPercentVoltage;
-import com.team1757.commands.CollectWithPercentVoltage;
-import com.team1757.commands.CollectorStop;
+import com.team1757.commands.Collect;
 import com.team1757.commands.DriveGyroAssisted;
 import com.team1757.commands.DriveStraightY;
 import com.team1757.commands.DriveToggleDirection;
@@ -40,6 +38,7 @@ import com.team1757.commands.VisionGetReadyToScoreGear;
 import com.team1757.commands.VisionGearRingLightOff;
 import com.team1757.commands.VisionGearRingLightOn;
 import com.team1757.commands.VisionToggleCamera;
+import com.team1757.utils.CollectorControlMode;
 import com.team1757.utils.Unit;
 import com.team1757.commands.VisionCenterTranslationX;
 import com.team1757.commands.VisionFaceGearTarget;
@@ -139,7 +138,7 @@ public class OI {
 		// Bind Commands to ButtonBox
 		buttonBoxButton1.whenPressed(new GearReceive());
 		buttonBoxButton4.whenPressed(new GearScore());
-		buttonBoxButton2.toggleWhenPressed(new CollectWithPercentVoltage());
+		buttonBoxButton2.toggleWhenPressed(new Collect(CollectorControlMode.kPercentForward));
 		buttonBoxButton5.whenPressed(new GearHug());
 		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
 		buttonBoxButton6.whenPressed(new VisionToggleCamera());
@@ -178,9 +177,9 @@ public class OI {
 		SmartDashboard.putData(new IndexerStop());
 
 		// Collector Commands
-		SmartDashboard.putData(new CollectWithPercentVoltage());
-		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
-		SmartDashboard.putData(new CollectorStop());
+		SmartDashboard.putData(new Collect(CollectorControlMode.kPercentForward));
+		SmartDashboard.putData(new Collect(CollectorControlMode.kPercentReverse));
+		SmartDashboard.putData(new Collect(CollectorControlMode.kStop));
 
 		// GearLoader Commands
 		SmartDashboard.putData(new GearManualInput());

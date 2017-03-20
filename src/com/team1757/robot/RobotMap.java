@@ -92,6 +92,7 @@ public class RobotMap {
 	// CameraServer.getInstance().startAutomaticCapture(1);
 
 	public static void init() {
+		
 		// Initialize Talons
 		driveTrainLeftFront = new CANTalon(driveTrainLeftFrontPort);
 		LiveWindow.addActuator("Drive Train", "Left Front", driveTrainLeftFront);
@@ -121,15 +122,20 @@ public class RobotMap {
 		LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
 
 		// Configure Talons
-		// Invert talons to correct driving
+		
+		// Invert talons to correct driving direction
 		driveTrainLeftFront.setInverted(true);
 		driveTrainLeftBack.setInverted(true);
+		
+		// Collector and shooter reverse
+		collectorFlyWheel.setInverted(true);
+		shooterFlyWheel.setInverted(true);
+		
 		// Change to brake mode tighter steering and autonomous stopping
 		driveTrainLeftFront.enableBrakeMode(true);
 		driveTrainLeftBack.enableBrakeMode(true);
 		driveTrainRightFront.enableBrakeMode(true);
 		driveTrainRightBack.enableBrakeMode(true);
-
 		gearLoaderTalon.enableBrakeMode(true);
 
 		// Soft Limits
