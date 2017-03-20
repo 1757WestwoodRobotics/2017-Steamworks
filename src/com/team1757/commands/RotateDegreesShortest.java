@@ -2,51 +2,98 @@ package com.team1757.commands;
 
 import com.team1757.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Rotate the shortest direction relative to current angular position 
+ * Rotate the shortest direction relative to current angular position
+ * 
+ * Default timeout of 0.5s
+ * 
+ * Times out due to problems where we fail to reach the setpoint due to physical
+ * barriers, resulting in a stuck robot
  */
-public class RotateDegreesShortest extends Command {
-	
-    public RotateDegreesShortest() {
-    	requires(Robot.driveTrain);
-    }
-    
-    public RotateDegreesShortest(double deltaDegrees) {
-    	requires(Robot.driveTrain);
-    	SmartDashboard.putNumber("angularDeltaShortest", deltaDegrees);
-    }
+public class RotateDegreesShortest extends TimedCommand {
 
-    // Called once before execute
-    protected void initialize() {
-    	Robot.driveTrain.enableGyroPID();
-    	// TODO Change the default angle to something more reasonable
-    	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + SmartDashboard.getNumber("angularDeltaShortest", 0));
-    }
+	private static final double TIMEOUT = 0.5;
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	// Update motor output
-    	Robot.driveTrain.moveToTargetAngle();
-    }
+	private boolean useSmartDashboard;
+	private double deltaDegrees;
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return Robot.driveTrain.reachedGyroSetpoint();
-    }
+	/**
+	 * No parameters explicit. Pulls delta from SmartDashboard and uses default
+	 * timeout of .s
+	 */
+	public RotateDegreesShortest() {
+		super(TIMEOUT);
+		this.useSmartDashboard = true;
+		requires(Robot.driveTrain);
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	// TODO Default to something reasonable
-    	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
-    	Robot.driveTrain.disableGyroPID();
-    }
+	/**
+	 * Explicitly provide deltaDegrees. Uses default timeout of .5s
+	 * 
+	 * @param deltaDegrees
+	 *            Desired angle relative to current (degrees)
+	 */
+	public RotateDegreesShortest(double deltaDegrees) {
+		super(TIMEOUT);
+		this.useSmartDashboard = false;
+		this.deltaDegrees = deltaDegrees;
+		requires(Robot.driveTrain);
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    	end();
-    }
+	/**
+	 * All parameters explicit. If useSmartDashboard is true, provided
+	 * targetAngle has no effect
+	 * 
+	 * 
+	 * @param useSmartDashboard
+	 *            Whether or not to pull the targetAngle from the smartDashboard
+	 * @param deltaDegrees
+	 *            Desired angle relative to current (degrees). No effect if
+	 *            useSmartDashboard is true
+	 * @param timeout
+	 */
+	public RotateDegreesShortest(boolean useSmartDashboard, double deltaDegrees, double timeout) {
+		super(timeout);
+		this.useSmartDashboard = useSmartDashboard;
+		this.deltaDegrees = deltaDegrees;
+		requires(Robot.driveTrain);
+	}
+
+	// Called once before execute
+	protected void initialize() {
+		Robot.driveTrain.enableGyroPID();
+
+		if (useSmartDashboard) {
+			Robot.driveTrain.setTargetAngle(
+					Robot.driveTrain.getCurrentBoundedAngle() + SmartDashboard.getNumber("angularDeltaShortest", 0));
+		} else {
+			Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + this.deltaDegrees);
+		}
+	}
+
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		// Update motor output
+		Robot.driveTrain.moveToTargetAngle();
+	}
+
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return Robot.driveTrain.reachedGyroSetpoint();
+	}
+
+	// Called once after isFinished returns true
+	protected void end() {
+		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
+		Robot.driveTrain.disableGyroPID();
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+		end();
+	}
 }

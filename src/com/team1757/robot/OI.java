@@ -147,14 +147,14 @@ public class OI {
 		SmartDashboard.putData(new DriveStraightY(1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
 		SmartDashboard.putData(new DriveToggleDirection());
-		SmartDashboard.putData(new DriveStraightToRange(60, Unit.kInches));
+		SmartDashboard.putData(new DriveStraightToRange(60, Unit.kInches));			
 
 		// Gyro Systems
 		SmartDashboard.putData(new DriveResetGyro());
 		SmartDashboard.putData(new DriveGyroPIDClear());
 
 		// Gyro Commands
-		SmartDashboard.putData(new RotateToAngle(1));
+		SmartDashboard.putData(new RotateToAngle());
 		SmartDashboard.putData(new RotateDegreesShortest());
 
 		// Shooter Commands
