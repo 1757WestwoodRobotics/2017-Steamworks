@@ -1,15 +1,19 @@
 package com.team1757.commands;
 
 import com.team1757.robot.Robot;
+import com.team1757.utils.GearControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * TODO This is very experimental; I have no idea if it will work
  */
 public class GearRun extends Command {
 	
-    public GearRun() {
+	private GearControlMode controlMode;
+	
+    public GearRun(GearControlMode controlMode) {
     	requires(Robot.gearLoader);
     }
 
@@ -20,7 +24,15 @@ public class GearRun extends Command {
     	Robot.gearLoader.enableGearTalon();
     	Robot.gearLoader.enableGearPIDControl();
     	
-    	Robot.gearLoader.setTargetPosition(Robot.gearLoader.getPulseWidthPosition());
+    	if (controlMode == GearControlMode.kCurrent) {
+    		Robot.gearLoader.setTargetPosition(Robot.gearLoader.getPulseWidthPosition());
+    	}
+    	else if (controlMode == GearControlMode.kManual) {
+    		SmartDashboard.getNumber("Gear Manual Target Position", GearControlMode.kReceive.getOutput());
+    	}
+    	else {
+    		Robot.gearLoader.setTargetPosition(controlMode.getOutput());
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,6 +42,9 @@ public class GearRun extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if (controlMode != GearControlMode.kCurrent) {
+    		return Robot.gearLoader.reachedSetpoint();
+    	}
     	return false;
     }
 

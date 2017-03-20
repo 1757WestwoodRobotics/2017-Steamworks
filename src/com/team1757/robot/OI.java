@@ -10,13 +10,9 @@ import com.team1757.commands.Collect;
 import com.team1757.commands.DriveGyroAssisted;
 import com.team1757.commands.DriveStraightY;
 import com.team1757.commands.DriveToggleDirection;
-import com.team1757.commands.GearHug;
+import com.team1757.commands.GearRun;
 import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
-import com.team1757.commands.GearManualInput;
-import com.team1757.commands.GearMatchStart;
-import com.team1757.commands.GearReceive;
-import com.team1757.commands.GearScore;
 import com.team1757.commands.DriveGyroPIDClear;
 import com.team1757.commands.DriveManual;
 import com.team1757.commands.LiftUp;
@@ -38,6 +34,7 @@ import com.team1757.commands.VisionGearRingLightOff;
 import com.team1757.commands.VisionGearRingLightOn;
 import com.team1757.commands.VisionToggleCamera;
 import com.team1757.utils.CollectorControlMode;
+import com.team1757.utils.GearControlMode;
 import com.team1757.utils.IndexerControlMode;
 import com.team1757.utils.Unit;
 import com.team1757.commands.VisionCenterTranslationX;
@@ -136,10 +133,10 @@ public class OI {
 		buttonBoxButton6 = new JoystickButton(buttonBox, buttonBoxButton6Port);
 
 		// Bind Commands to ButtonBox
-		buttonBoxButton1.whenPressed(new GearReceive());
-		buttonBoxButton4.whenPressed(new GearScore());
+		buttonBoxButton1.whenPressed(new GearRun(GearControlMode.kReceive));
+		buttonBoxButton4.whenPressed(new GearRun(GearControlMode.kScore));
 		buttonBoxButton2.toggleWhenPressed(new Collect(CollectorControlMode.kPercentForward));
-		buttonBoxButton5.whenPressed(new GearHug());
+		buttonBoxButton5.whenPressed(new GearRun(GearControlMode.kHug));
 		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
 		buttonBoxButton6.whenPressed(new VisionToggleCamera());
 
@@ -183,11 +180,12 @@ public class OI {
 		SmartDashboard.putData(new Collect(CollectorControlMode.kStop));
 
 		// GearLoader Commands
-		SmartDashboard.putData(new GearManualInput());
-		SmartDashboard.putData(new GearMatchStart());
-		SmartDashboard.putData(new GearReceive());
-		SmartDashboard.putData(new GearScore());
-		SmartDashboard.putData(new GearHug());
+		
+		SmartDashboard.putData(new GearRun(GearControlMode.kManual));
+		SmartDashboard.putData(new GearRun(GearControlMode.kMatchStart));
+		SmartDashboard.putData(new GearRun(GearControlMode.kReceive));
+		SmartDashboard.putData(new GearRun(GearControlMode.kScore));
+		SmartDashboard.putData(new GearRun(GearControlMode.kHug));
 
 		// Lifter Commands
 		SmartDashboard.putData(new LiftUp());
