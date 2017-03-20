@@ -8,13 +8,13 @@ import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.Collect;
 import com.team1757.commands.DriveGyroAssisted;
 import com.team1757.commands.DriveStraightY;
-import com.team1757.commands.DriveToggleDirection;
 import com.team1757.commands.GearRun;
 import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
 import com.team1757.commands.DriveGyroPIDClear;
 import com.team1757.commands.DriveManual;
 import com.team1757.commands.DriveResetGyro;
+import com.team1757.commands.DriveSetDirection;
 import com.team1757.commands.DriveStraightToRange;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
@@ -26,6 +26,7 @@ import com.team1757.commands.VisionGetReadyToScoreGear;
 import com.team1757.commands.VisionRingLight;
 import com.team1757.commands.VisionToggleCamera;
 import com.team1757.utils.CollectorControlMode;
+import com.team1757.utils.DirectionControlMode;
 import com.team1757.utils.GearControlMode;
 import com.team1757.utils.IndexerControlMode;
 import com.team1757.utils.LifterControlMode;
@@ -136,7 +137,7 @@ public class OI {
 		buttonBoxButton6.whenPressed(new VisionToggleCamera());
 
 		// Bind Commands to Xbox Controller
-		xboxButtonY.whenPressed(new DriveToggleDirection());
+		xboxButtonY.whenPressed(new DriveSetDirection(DirectionControlMode.kToggle));
 		xboxButtonA.whenPressed(new DriveManual());
 		xboxButtonLB.toggleWhenPressed(new Lift(LifterControlMode.kUp));
 		xboxButtonRB.whileHeld(new Lift(LifterControlMode.kUp));
@@ -145,7 +146,7 @@ public class OI {
 		// Drive functions
 		SmartDashboard.putData(new DriveStraightY(1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
-		SmartDashboard.putData(new DriveToggleDirection());
+		SmartDashboard.putData(new DriveSetDirection(DirectionControlMode.kToggle));
 		SmartDashboard.putData(new DriveStraightToRange(60, Unit.kInches));			
 
 		// Gyro Systems

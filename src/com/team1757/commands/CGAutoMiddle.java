@@ -1,5 +1,6 @@
 package com.team1757.commands;
 
+import com.team1757.utils.DirectionControlMode;
 import com.team1757.utils.GearControlMode;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -13,7 +14,7 @@ public class CGAutoMiddle extends CommandGroup {
 		// TODO Incomplete
 		
 		// Face gear loader forward
-		addSequential(new DriveSetDirectionInverted());
+		addSequential(new DriveSetDirection(DirectionControlMode.kInverted));
 		// Drop gear to receive
 		addSequential(new GearRun(GearControlMode.kReceive));
 		// Drive straight ~100"
@@ -29,13 +30,13 @@ public class CGAutoMiddle extends CommandGroup {
 		// "Wait a beat"
 		addSequential(new Delay(.5));
 		// Reverse
-		addSequential(new DriveToggleDirection());
+		addSequential(new DriveSetDirection(DirectionControlMode.kToggle));
 		// Drive backwards ~100"
 		addSequential(new DriveStraightY(.7));
 		// Close gear
 		addSequential(new GearRun(GearControlMode.kReceive));
 		// Reverse
-		addSequential(new DriveToggleDirection());
+		addSequential(new DriveSetDirection(DirectionControlMode.kToggle));
 		// Rotate left 90
 		
 		// Translate right
