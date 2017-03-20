@@ -15,7 +15,7 @@ import com.team1757.commands.DriveResetGyro;
 import com.team1757.commands.DriveSetDirection;
 import com.team1757.commands.DriveStraight;
 import com.team1757.commands.DriveStraightToRange;
-import com.team1757.commands.RotateDegreesShortest;
+import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateToAngle;
 import com.team1757.commands.Shoot;
 import com.team1757.commands.Index;
@@ -154,7 +154,7 @@ public class OI {
 
 		// Gyro Commands
 		SmartDashboard.putData(new RotateToAngle());
-		SmartDashboard.putData(new RotateDegreesShortest());
+		SmartDashboard.putData(new RotateDegrees());
 
 		// Shooter Commands
 		SmartDashboard.putData(new Shoot(ShooterControlMode.kSpeedForward));

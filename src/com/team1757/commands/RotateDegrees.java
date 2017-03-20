@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * Times out due to problems where we fail to reach the setpoint due to physical
  * barriers, resulting in a stuck robot
  */
-public class RotateDegreesShortest extends TimedCommand {
+public class RotateDegrees extends TimedCommand {
 
 	private static final double TIMEOUT = 0.5;
 
@@ -24,7 +24,7 @@ public class RotateDegreesShortest extends TimedCommand {
 	 * No parameters explicit. Pulls delta from SmartDashboard and uses default
 	 * timeout of .s
 	 */
-	public RotateDegreesShortest() {
+	public RotateDegrees() {
 		super(TIMEOUT);
 		this.useSmartDashboard = true;
 		requires(Robot.driveTrain);
@@ -36,7 +36,7 @@ public class RotateDegreesShortest extends TimedCommand {
 	 * @param deltaDegrees
 	 *            Desired angle relative to current (degrees)
 	 */
-	public RotateDegreesShortest(double deltaDegrees) {
+	public RotateDegrees(double deltaDegrees) {
 		super(TIMEOUT);
 		this.useSmartDashboard = false;
 		this.deltaDegrees = deltaDegrees;
@@ -55,7 +55,7 @@ public class RotateDegreesShortest extends TimedCommand {
 	 *            useSmartDashboard is true
 	 * @param timeout
 	 */
-	public RotateDegreesShortest(boolean useSmartDashboard, double deltaDegrees, double timeout) {
+	public RotateDegrees(boolean useSmartDashboard, double deltaDegrees, double timeout) {
 		super(timeout);
 		this.useSmartDashboard = useSmartDashboard;
 		this.deltaDegrees = deltaDegrees;
