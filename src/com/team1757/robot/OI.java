@@ -27,10 +27,9 @@ import com.team1757.commands.DriveStraightToRange;
 import com.team1757.commands.RotateDegrees;
 import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
-import com.team1757.commands.IndexerRun;
+import com.team1757.commands.Index;
 import com.team1757.commands.ShootWithSpeed;
 import com.team1757.commands.ShootWithVoltage;
-import com.team1757.commands.IndexerStop;
 import com.team1757.commands.LifterStop;
 import com.team1757.commands.ShooterStop;
 import com.team1757.commands.VisionCenterOnGearTranslationX;
@@ -39,6 +38,7 @@ import com.team1757.commands.VisionGearRingLightOff;
 import com.team1757.commands.VisionGearRingLightOn;
 import com.team1757.commands.VisionToggleCamera;
 import com.team1757.utils.CollectorControlMode;
+import com.team1757.utils.IndexerControlMode;
 import com.team1757.utils.Unit;
 import com.team1757.commands.VisionCenterTranslationX;
 import com.team1757.commands.VisionFaceGearTarget;
@@ -173,8 +173,9 @@ public class OI {
 		SmartDashboard.putData(new ShooterStop());
 
 		// Indexer Commands
-		SmartDashboard.putData(new IndexerRun());
-		SmartDashboard.putData(new IndexerStop());
+		SmartDashboard.putData(new Index(IndexerControlMode.kPercentForward));
+		SmartDashboard.putData(new Index(IndexerControlMode.kPercentReverse));
+		SmartDashboard.putData(new Index(IndexerControlMode.kStop));
 
 		// Collector Commands
 		SmartDashboard.putData(new Collect(CollectorControlMode.kPercentForward));

@@ -1,27 +1,35 @@
 package com.team1757.commands;
 
 import com.team1757.robot.Robot;
+import com.team1757.utils.IndexerControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class IndexerReverse extends Command {
+public class Index extends Command {
 
-    public IndexerReverse() {
+	private IndexerControlMode controlMode = IndexerControlMode.kPercentForward;
+	
+    public Index() {
     	requires(Robot.indexer);
+    }
+    
+    public Index(IndexerControlMode controlMode) {
+    	requires(Robot.indexer);
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.indexer.setIndexerModePercentVoltage();
+    	Robot.indexer.changeControlMode(controlMode.getControlMode());
     	Robot.indexer.enableIndexer();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.indexer.setIndexerTarget(-.30);
+    	Robot.indexer.setIndexerTarget(controlMode.getOutput());
     }
 
     // Make this return true when this Command no longer needs to run execute()

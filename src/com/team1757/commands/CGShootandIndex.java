@@ -10,6 +10,6 @@ public class CGShootandIndex extends CommandGroup {
     public CGShootandIndex() {
     	
     	addParallel(new ShootWithVoltage());
-    	addParallel(new IndexerRun());
+    	addParallel(new Index());
     }
 }
