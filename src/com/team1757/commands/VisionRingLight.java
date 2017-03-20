@@ -1,15 +1,24 @@
 package com.team1757.commands;
 
+import com.team1757.utils.RingLightControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Turns the gear cammer's ring light on
+ * Operate ring lights
  * 
- * @author Ryan Marten
+ * No default; must explicitly provide control mode
+ * 
+ * @author ACabey
  */
-public class VisionGearRingLightOn extends Command {
+public class VisionRingLight extends Command {
 
-    public VisionGearRingLightOn() {
+	// TODO Implement the controller and an Arduino subsystem
+	
+	@SuppressWarnings("unused")
+	private RingLightControlMode controlMode;
+	
+    public VisionRingLight(RingLightControlMode controlMode) {
     }
 
     // Called just before this Command runs the first time

@@ -534,12 +534,12 @@ public class DriveTrain extends Subsystem {
 	}
 
 	/**
-	 * Set target by distance delta
+	 * Set ultrasonic target by distance delta
 	 * 
 	 * @param delta
 	 *            Double distance (default unit) representing target delta
 	 */
-	public void setTargetDistanceDelta(double delta) {
+	public void setUltrasonicTargetDistanceDelta(double delta) {
 		setUltrasonicTargetDistance(getRange() + delta);
 	}
 

@@ -2,6 +2,12 @@ package com.team1757.utils;
 
 import com.ctre.CANTalon.TalonControlMode;
 
+/**
+ * Provide premade parameter structures for controlling the Shooter 
+ * 
+ * @author ACabey
+ */
+
 public enum ShooterControlMode {
 	kPercentForward(0.8, TalonControlMode.PercentVbus),
 	kVoltageForward(4.0, TalonControlMode.Voltage),

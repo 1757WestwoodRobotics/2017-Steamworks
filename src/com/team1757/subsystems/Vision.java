@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
- * Subsystem that contains cameras and ring lights. Interacts with GRIP for
- * vision processing via NetworkTables and has several methods for computing
- * different responses to the GRIP output
+ * Interacts with GRIP for vision processing
+ * via NetworkTables and has several methods for computing different responses
+ * to the GRIP output
  * 
  * @author Ryan Marten
  */
@@ -130,21 +130,6 @@ public class Vision extends Subsystem {
 			isGearCamActive = true;
 		}
 
-	}
-
-	// Ring Lights
-
-	/**
-	 * Activates the relay connected to the gear camera's ring light
-	 */
-	public void turnOnGearRingLight() {
-		// TODO Arduino light controls
-	}
-
-	/**
-	 * Deactivates the relay connected to the gear camera's ring light
-	 */
-	public void turnOffGearRingLight() {
 	}
 
 	// PID Translation Controllers
