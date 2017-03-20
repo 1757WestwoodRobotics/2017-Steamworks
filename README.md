@@ -3,6 +3,7 @@ Team 1757 - Wolverines' robot code for the 2017 <i>FIRST</i> STEAMWORKS game cha
 
 The code is divided into several packages based off of the command-based structure. 
 All required library blobs are included in the lib/ directory.
+Compiled javadocs are in the doc/ directory. Open the doc/index.html file to view it.
 
 ## Robot Features
  - Mecanum drivetrain
