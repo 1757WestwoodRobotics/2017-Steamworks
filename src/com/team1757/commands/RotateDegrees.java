@@ -68,7 +68,7 @@ public class RotateDegrees extends TimedCommand {
 
 		if (useSmartDashboard) {
 			Robot.driveTrain.setTargetAngle(
-					Robot.driveTrain.getCurrentBoundedAngle() + SmartDashboard.getNumber("angularDeltaShortest", 0));
+					Robot.driveTrain.getCurrentBoundedAngle() + SmartDashboard.getNumber("angularDelta", 0));
 		} else {
 			Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + this.deltaDegrees);
 		}
