@@ -15,6 +15,7 @@ public class GearRun extends Command {
 	
     public GearRun(GearControlMode controlMode) {
     	requires(Robot.gearLoader);
+    	this.controlMode = controlMode;
     }
 
     // Called just before this Command runs the first time
