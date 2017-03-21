@@ -11,6 +11,8 @@ import com.team1757.utils.VisionCenterPIDSource;
 import com.team1757.utils.VisionDetectionType;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -54,9 +56,6 @@ public class RobotMap {
 
 	public static CANTalon liftTalon;
 
-	// Spike objects
-	public static Relay gearRingLight;
-
 	// Robot objects
 	public static RobotDrive driveTrainMecanumDrive;
 
@@ -79,6 +78,8 @@ public class RobotMap {
 	public static VariablePIDOutput visionCenterGearOutput;
 
 	public static Vision vision;
+	
+	public static DigitalOutput gearRingLightController;
 
 	public static UsbCamera gearCam = new UsbCamera("gearCam", 0);
 	public static UsbCamera shooterCam = new UsbCamera("shooterCam", 1);
@@ -140,6 +141,10 @@ public class RobotMap {
 		gearLoaderTalon.configNominalOutputVoltage(4.2, 4.2);
 
 		liftTalon.enableBrakeMode(false);
+		
+		// Initialize gearRingLight
+		gearRingLightController = new DigitalOutput(0);
+		
 
 		// Initialize RobotDrive
 		driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack, driveTrainRightFront,
