@@ -146,7 +146,7 @@ public class OI {
 		// Drive functions
 		SmartDashboard.putData("DriveStraight axisY", new DriveStraight(Axis.axisY, 1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
-		SmartDashboard.putData("Drive kToggle", new DriveSetDirection(DirectionControlMode.kToggle));
+		SmartDashboard.putData("Drive Toggle", new DriveSetDirection(DirectionControlMode.kToggle));
 		SmartDashboard.putData(new DriveStraightToRange(60, Unit.kInches));
 
 		// Gyro Systems
@@ -157,32 +157,32 @@ public class OI {
 		SmartDashboard.putData(new RotateDegrees());
 
 		// Shooter Commands
-		SmartDashboard.putData("Shoot kSpeedForward", new Shoot(ShooterControlMode.kSpeedForward));
-		SmartDashboard.putData("Shoot kPercentForward", new Shoot(ShooterControlMode.kPercentForward));
-		SmartDashboard.putData("Shoot kVoltageForward", new Shoot(ShooterControlMode.kVoltageForward));
-		SmartDashboard.putData("Shoot kStop", new Shoot(ShooterControlMode.kStop));
+		SmartDashboard.putData("Shoot SpeedForward", new Shoot(ShooterControlMode.kSpeedForward));
+		SmartDashboard.putData("Shoot PercentForward", new Shoot(ShooterControlMode.kPercentForward));
+		SmartDashboard.putData("Shoot VoltageForward", new Shoot(ShooterControlMode.kVoltageForward));
+		SmartDashboard.putData("Shoot Stop", new Shoot(ShooterControlMode.kStop));
 
 		// Indexer Commands
-		SmartDashboard.putData("Index kPercentForward", new Index(IndexerControlMode.kPercentForward));
-		SmartDashboard.putData("Index kPercentReverse", new Index(IndexerControlMode.kPercentReverse));
-		SmartDashboard.putData("Index kStop", new Index(IndexerControlMode.kStop));
+		SmartDashboard.putData("Index PercentForward", new Index(IndexerControlMode.kPercentForward));
+		SmartDashboard.putData("Index PercentReverse", new Index(IndexerControlMode.kPercentReverse));
+		SmartDashboard.putData("Index Stop", new Index(IndexerControlMode.kStop));
 
 		// Collector Commands
-		SmartDashboard.putData("Collect kPercentForward", new Collect(CollectorControlMode.kPercentForward));
-		SmartDashboard.putData("Collect kPercentReverse", new Collect(CollectorControlMode.kPercentReverse));
-		SmartDashboard.putData("Collect kStop", new Collect(CollectorControlMode.kStop));
+		SmartDashboard.putData("Collect PercentForward", new Collect(CollectorControlMode.kPercentForward));
+		SmartDashboard.putData("Collect PercentReverse", new Collect(CollectorControlMode.kPercentReverse));
+		SmartDashboard.putData("Collect Stop", new Collect(CollectorControlMode.kStop));
 
 		// GearLoader Commands
 		
-		SmartDashboard.putData("GearRun kManual", new GearRun(GearControlMode.kManual));
-		SmartDashboard.putData("GearRun kMatchStart", new GearRun(GearControlMode.kMatchStart));
-		SmartDashboard.putData("GearRun kReceive", new GearRun(GearControlMode.kReceive));
-		SmartDashboard.putData("GearRun kHug", new GearRun(GearControlMode.kHug));
-		SmartDashboard.putData("GearRun kScore", new GearRun(GearControlMode.kScore));
+		SmartDashboard.putData("GearRun Manual", new GearRun(GearControlMode.kManual));
+		SmartDashboard.putData("GearRun MatchStart", new GearRun(GearControlMode.kMatchStart));
+		SmartDashboard.putData("GearRun Receive", new GearRun(GearControlMode.kReceive));
+		SmartDashboard.putData("GearRun Hug", new GearRun(GearControlMode.kHug));
+		SmartDashboard.putData("GearRun Score", new GearRun(GearControlMode.kScore));
 
 		// Lifter Commands
-		SmartDashboard.putData("Lift kUp", new Lift(LifterControlMode.kUp));
-		SmartDashboard.putData("Lift kStop", new Lift(LifterControlMode.kStop));
+		SmartDashboard.putData("Lift Up", new Lift(LifterControlMode.kUp));
+		SmartDashboard.putData("Lift Stop", new Lift(LifterControlMode.kStop));
 
 		// Vision Commands
 		SmartDashboard.putData(new VisionFollowReflectiveTape());
@@ -194,8 +194,8 @@ public class OI {
 		SmartDashboard.putData(new VisionToggleCamera());
 
 		// RingLight Commands
-		SmartDashboard.putData("RingLight kGearOn", new VisionRingLight(RingLightControlMode.kGearOn));
-		SmartDashboard.putData("RingLight kGearOff", new VisionRingLight(RingLightControlMode.kGearOff));
+		SmartDashboard.putData("RingLight GearOn", new VisionRingLight(RingLightControlMode.kGearOn));
+		SmartDashboard.putData("RingLight GearOff", new VisionRingLight(RingLightControlMode.kGearOff));
 
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
