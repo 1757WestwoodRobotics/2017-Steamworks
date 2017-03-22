@@ -8,21 +8,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Rotate the shortest direction relative to current angular position
  * 
- * Default timeout of 0.5s
+ * Default timeout of 1.0s
  * 
  * Times out due to problems where we fail to reach the setpoint due to physical
  * barriers, resulting in a stuck robot
  */
 public class RotateDegrees extends TimedCommand {
 
-	private static final double TIMEOUT = 0.5;
+	private static final double TIMEOUT = 1.0;
 
 	private boolean useSmartDashboard;
 	private double deltaDegrees;
 
 	/**
 	 * No parameters explicit. Pulls delta from SmartDashboard and uses default
-	 * timeout of .s
+	 * timeout of 1.0s
 	 */
 	public RotateDegrees() {
 		super(TIMEOUT);

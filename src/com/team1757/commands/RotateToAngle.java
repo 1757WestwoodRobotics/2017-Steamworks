@@ -7,21 +7,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Rotate directly to a given angle
  * 
- * Default timeout of 0.5s
+ * Default timeout of 1.0s
  * 
  * Times out due to problems where we fail to reach the setpoint due to physical
  * barriers, resulting in a stuck robot
  */
 public class RotateToAngle extends TimedCommand {
 
-	private static final double TIMEOUT = 0.5;
+	private static final double TIMEOUT = 1.0;
 
 	private boolean useSmartDashboard = true;
 	private double targetAngle;
 
 	/**
 	 * No parameters explicit. Pulls target angle from SmartDashboard and uses
-	 * default timeout of 5.s
+	 * default timeout of 1.0s
 	 */
 	public RotateToAngle() {
 		super(TIMEOUT);
