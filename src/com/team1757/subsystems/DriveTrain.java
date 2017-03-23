@@ -241,10 +241,6 @@ public class DriveTrain extends Subsystem {
 		return RobotMap.ultrasonicSerial.getRange();
 	}
 	
-	public String getSerialRangeRaw() {
-		return RobotMap.ultrasonicSerial.getRangeRaw();
-	}
-
 	/**
 	 * getRangeCM
 	 * 
