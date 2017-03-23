@@ -221,24 +221,34 @@ public class DriveTrain extends Subsystem {
 	 * @return -1.0 if the voltage is below the minimum
 	 * @return -2.0 if voltage is above the maximum
 	 */
-	public double getRangeMM() {
+	public double getAnalogRangeMM() {
 		return ultrasonicAnalog.getRange(Unit.kMM);
 	}
 
 	/**
 	 * getRangeInches
 	 * 
+	 * TODO Change me BACK!!
+	 * 
 	 * @return double measured range (inches)
 	 * @return -1.0 if the voltage is below the minimum
 	 */
-	public double getRangeInches() {
+	public double getAnalogRangeInches() {
 		return ultrasonicAnalog.getRange(Unit.kInches);
+	}
+	
+	public double getSerialRangeInches() {
+		return RobotMap.ultrasonicSerial.getRange();
+	}
+	
+	public String getSerialRangeRaw() {
+		return RobotMap.ultrasonicSerial.getRangeRaw();
 	}
 
 	/**
 	 * getRangeCM
 	 * 
-	 * @return double measured range (inches)
+	 * @return double measured range (cm)
 	 * @return -1.0 if the voltage is below the minimum
 	 * @return -2.0 if voltage is above the maximum
 	 */
@@ -324,7 +334,7 @@ public class DriveTrain extends Subsystem {
 
 	/**
 	 * Set gyroscope PID Controller target angle (setpoint) to a given angle
-	 * Calculates the shortest required travek distance for a desired angle
+	 * Calculates the shortest required travel distance for a desired angle
 	 * 
 	 * @param targetAngle
 	 *            Double angle in range [0, 360)

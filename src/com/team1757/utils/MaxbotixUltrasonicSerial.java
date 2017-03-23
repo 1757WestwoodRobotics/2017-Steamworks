@@ -1,5 +1,7 @@
 package com.team1757.utils;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.SerialPort;
@@ -9,6 +11,8 @@ import edu.wpi.first.wpilibj.SerialPort.StopBits;
 
 /**
  * Implementation of Maxbotix MB1013 Ultrasonic rangefinder for RS-232 serial (digital) input
+ * 
+ * Updates serial asynchronously every .5s
  * 
  * Provides voltage scaling to report range in mm, cm, or inches
  * 
@@ -23,15 +27,123 @@ public class MaxbotixUltrasonicSerial implements PIDSource {
 													// is 300 (mm)
 	private final double DISTANCE_MAX_MM = 3000.0; // Advertised max distance is
 													// 5000 (mm)
+	private final int RESPONSE_BYTES = 6;			// R header byte, 4 bytes payload, ASCII 13 termination
 
 	private SerialPort serial;
 	private Unit defaultUnit = Unit.kInches;
+	
+	private Thread serialReader;
+	private AtomicInteger rangeOutput;
+	
 	private PIDSourceType pidSource = PIDSourceType.kDisplacement;
 	
 
 	public MaxbotixUltrasonicSerial() {
-		serial = new SerialPort(9600, Port.kOnboard, 8, Parity.kNone, StopBits.kOne);
-		serial.enableTermination((char) 13);
+		this(Port.kOnboard);
+	}
+	
+	public MaxbotixUltrasonicSerial(Port port) {
+		
+		rangeOutput = new AtomicInteger();
+		
+		try {
+			serial = new SerialPort(9600, port, 8, Parity.kNone, StopBits.kOne);
+		}
+		catch(RuntimeException e) {
+			if(e.getMessage().contains("Busy")) {
+				System.out.println("Failed to initialize serial port: Serial port busy");
+			}
+			else {
+				System.out.println("Failed to initialize serial port");
+			}
+		}
+		// serial.setTimeout(2);
+		serial.setReadBufferSize(RESPONSE_BYTES);
+		
+		serialReader = new Thread(this::readBytes);
+		serialReader.start();
+	}
+	
+	
+	/**
+	 * validateResponse
+	 * 
+	 * Checks if response from serial buffer matches format for MB1013 (e.g. R1234<13>)
+	 * 
+	 * @param Response from serial buffer
+	 * @return Response is valid
+	 */
+	private boolean validateResponse(String response) {
+		
+		// Check malformed buffer
+		if(response == null || response.length() < 4) {
+			return false;
+		}
+		
+		// Strip header and footer ('R', ASCII 13)
+		response = response.substring(1, response.length() - 1);
+		
+		
+		// Check payload is all digits
+		for (char ordinal : response.toCharArray()) {
+			if (!(Character.isDigit(ordinal))) return false;
+		}
+		
+		return true;
+	}
+	
+	
+	/**
+	 * parseResponse
+	 * 
+	 * Parses the response from serial buffer to an integer
+	 * 
+	 * Result is the measured range in MM
+	 * 
+	 * @param Response from serial buffer
+	 * @return Parsed double representation of digits
+	 */
+	private int parseResponse(String response) throws NumberFormatException {
+		
+		// Strip header and footer ('R', ASCII 13)
+		response = response.substring(1, response.length() - 1);
+		
+		try {
+			int range = Integer.parseInt(response);
+			return range;
+		}
+		catch(NumberFormatException e) {
+			throw e;
+		}
+	}
+	
+	private void readBytes() {
+		while(true) {
+
+			String serialBuffer;
+			
+			serialBuffer = serial.readString(RESPONSE_BYTES);	
+			
+			if(serialReader.isInterrupted()) {
+				return;
+			}
+			
+			if(validateResponse(serialBuffer) == true) {
+				int output = -1;
+				try {
+					 output = parseResponse(serialBuffer);
+				}
+				catch (NumberFormatException e) {
+					System.out.println("Failed to parse integer from response");
+				}
+				
+				rangeOutput.set(output);
+			} 
+			else {
+				serial.reset();
+			}
+
+		}
 	}
 	
 	/**
@@ -45,24 +157,10 @@ public class MaxbotixUltrasonicSerial implements PIDSource {
 	 * Serial data sent is 9600 baud, with 8 data bits, no parity, and one stop bit
 	 * 
 	 * @return double measured range (mm)
-	 * @return -1.0 if the voltage is below the minimum
-	 * @return -2.0 if voltage is above the maximum
+	 * @return -1.0 if there was an error reading from serial
 	 */
 	private double getRangeMM() {
-		String response = serial.readString();
-
-		if (response.isEmpty() || response == null) {
-			return -1.0;
-		} else {
-			double parsed = Double.parseDouble(response.substring(1));
-			if (parsed < DISTANCE_MIN_MM) {
-				return -1.0;
-			} else if (parsed > DISTANCE_MAX_MM) {
-				return -2.0;
-			} else {
-				return parsed;
-			}
-		}
+		return (double) rangeOutput.get();
 	}
 	
     /**
@@ -88,8 +186,7 @@ public class MaxbotixUltrasonicSerial implements PIDSource {
      * getRange
      * 
      * @return double measured range (default unit)
-     * @return -1.0 if the voltage is below the minimum
-     * @return -2.0 if voltage is above the maximum
+     * @return -1.0 if there was an error reading from serials
      */
     public double getRange() {
     	double rangeMM = getRangeMM();
@@ -107,8 +204,7 @@ public class MaxbotixUltrasonicSerial implements PIDSource {
 	 * getRange
 	 * 
 	 * @return double measured range (unit)
-	 * @return -1.0 if the voltage is below the minimum
-	 * @return -2.0 if voltage is above the maximum
+	 * @return -1.0 if there was an error reading from serial
 	 */
 	public double getRange(Unit unit) {
     	double rangeMM = getRangeMM();

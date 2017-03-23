@@ -21,7 +21,10 @@ public class GetStatus extends Command {
 	protected void execute() {
 		SmartDashboard.putNumber("GyroAngle", Robot.driveTrain.getCurrentRawAngle());
 		SmartDashboard.putNumber("BoundedGyroAngle", Robot.driveTrain.getCurrentBoundedAngle());
-		SmartDashboard.putNumber("Analog Ultrasonic Distance", Robot.driveTrain.getRangeInches());
+		SmartDashboard.putNumber("Analog Ultrasonic Distance", Robot.driveTrain.getAnalogRangeInches());
+		SmartDashboard.putNumber("Analog Ultrasonic Distance MM", Robot.driveTrain.getAnalogRangeMM());
+		SmartDashboard.putString("Raw Serial Ultrasonic Distance", Robot.driveTrain.getSerialRangeRaw());
+		SmartDashboard.putNumber("Serial Ultrasonic Distance", Robot.driveTrain.getSerialRangeInches());
 		SmartDashboard.putNumber("targetLifterPVbus", Robot.lifter.getLiftTarget());
 		SmartDashboard.putBoolean("isShooting", Robot.shooter.getIsShooting());
 
