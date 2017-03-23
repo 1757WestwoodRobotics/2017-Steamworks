@@ -204,8 +204,8 @@ public class OI {
 		SmartDashboard.putData(new VisionToggleCamera());
 
 		// RingLight Commands
-		SmartDashboard.putData("RingLight On", new RingLightSwitch(RingLightControlMode.kGearOn));
-		SmartDashboard.putData("RingLight Off", new RingLightSwitch(RingLightControlMode.kGearOff));
+		SmartDashboard.putData("RingLight On", new RingLightSwitch(RingLightControlMode.kGearLightOn));
+		SmartDashboard.putData("RingLight Off", new RingLightSwitch(RingLightControlMode.kGearLightOff));
 
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());

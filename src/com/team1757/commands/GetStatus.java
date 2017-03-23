@@ -1,8 +1,10 @@
 package com.team1757.commands;
 
 import com.team1757.robot.Robot;
+import com.team1757.subsystems.RingLight;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -21,6 +23,7 @@ public class GetStatus extends Command {
 	protected void execute() {
 		SmartDashboard.putNumber("GyroAngle", Robot.driveTrain.getCurrentRawAngle());
 		SmartDashboard.putNumber("BoundedGyroAngle", Robot.driveTrain.getCurrentBoundedAngle());
+		SmartDashboard.putBoolean("RingLight status", Robot.ringLight.getRingLightStatus());
 
 		try {
 			if (Robot.gearLoader.isSensorPresent()) {

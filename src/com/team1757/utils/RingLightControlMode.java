@@ -7,7 +7,8 @@ package com.team1757.utils;
  */
 
 public enum RingLightControlMode {
-	kGearOn(true), kGearOff(false); //, kShooterOn(true), kShooterOff(false);
+	// reversed for default as off
+	kGearLightOn(false), kGearLightOff(true); //, kShooterLightOn(true), kShooterLightOff(false);
 	
 	private boolean isEnabled;
 	

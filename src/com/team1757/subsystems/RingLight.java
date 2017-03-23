@@ -18,11 +18,15 @@ public class RingLight extends Subsystem {
 	private DigitalOutput gearRingLightController = RobotMap.gearRingLightController;
 
     public void initDefaultCommand() {
-        setDefaultCommand(new RingLightSwitch(RingLightControlMode.kGearOff));
+        setDefaultCommand(new RingLightSwitch(RingLightControlMode.kGearLightOff));
     }
     
 	public void setRingLight(RingLightControlMode ringLightControl) {
-		gearRingLightController.set(ringLightControl.getOutput());
+		gearRingLightController.set(RingLightControlMode.kGearLightOn.getOutput());
+	}
+	
+	public boolean getRingLightStatus() {
+		return gearRingLightController.get();
 	}
 }
 

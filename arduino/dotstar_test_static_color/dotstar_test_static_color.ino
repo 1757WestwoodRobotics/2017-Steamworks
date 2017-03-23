@@ -57,11 +57,12 @@ void loop()
 //  const int hue        = cycle_hue;
   const int hue        = 100; //analogRead(H_ANALOG_PIN);
   const int saturation = 255; //analogRead(S_ANALOG_PIN);
+  int value = 0;
 
-  if (digitalRead(V_DIGITAL_PIN) == 1) {
-    const int value = digitalRead(V_DIGITAL_PIN);
+  if (digitalRead(V_DIGITAL_PIN) == 0) {
+    value = 255;
   } else {
-    const int value = 0;
+    value = 0;
   }
   
   
