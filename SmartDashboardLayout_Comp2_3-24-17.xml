@@ -1,0 +1,179 @@
+<xml version="1.0">
+<dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="938" y="403"/>
+		<height>15</height>
+		<property name="Text" value="Shooter"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="189" y="68"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="811" y="11"/>
+		<width>499</width>
+		<height>379</height>
+		<property name="Camera Choice" value=""/>
+	</static-widget>
+	<widget field="DriveRestrictForward" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="582" y="238"/>
+	</widget>
+	<widget field="CGAutoLeft" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="434" y="161"/>
+	</widget>
+	<widget field="GearManualInput" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="582" y="170"/>
+	</widget>
+	<widget field="VisionGetReadyToScoreGear" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="573" y="195"/>
+	</widget>
+	<widget field="GearHug" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="594" y="290"/>
+	</widget>
+	<widget field="CollectReverseWithPercentVoltage" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="208" y="419"/>
+	</widget>
+	<widget field="VisionCenterTranslationX" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="2" y="378"/>
+	</widget>
+	<widget field="DriveToggleDirection" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="582" y="0"/>
+	</widget>
+	<widget field="DriveGyroPIDClear" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="8" y="302"/>
+	</widget>
+	<widget field="GearMatchStart" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="581" y="265"/>
+	</widget>
+	<widget field="DriveRestrictRotation" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="374" y="340"/>
+	</widget>
+	<widget field="DriveResetGyro" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="381" y="306"/>
+	</widget>
+	<widget field="RotateToAngle" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="374" y="272"/>
+	</widget>
+	<widget field="GearScore" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="374" y="238"/>
+	</widget>
+	<widget field="Auto mode" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="669" y="43"/>
+	</widget>
+	<widget field="RotateDegrees" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="374" y="204"/>
+	</widget>
+	<widget field="ShootWithVoltage" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="774" y="391"/>
+	</widget>
+	<widget field="RotateDegreesShortest" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="374" y="136"/>
+	</widget>
+	<widget field="VisionGearRingLightOff" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="4" y="336"/>
+	</widget>
+	<widget field="DriveStraightY" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="374" y="68"/>
+	</widget>
+	<widget field="CGShootandIndex" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="609" y="389"/>
+	</widget>
+	<widget field="VisionCenterOnGearTranslationX" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="374" y="34"/>
+	</widget>
+	<widget field="CollectorStop" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="310" y="390"/>
+	</widget>
+	<widget field="ShooterStop" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="801" y="418"/>
+	</widget>
+	<widget field="VisionToggleCamera" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="14" y="287"/>
+	</widget>
+	<widget field="CGAutoRight" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="187" y="272"/>
+	</widget>
+	<widget field="VisionFollowReflectiveTape" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="374" y="0"/>
+	</widget>
+	<widget field="ShootWithSpeed" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="187" y="238"/>
+	</widget>
+	<widget field="LiftUp" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="187" y="204"/>
+	</widget>
+	<widget field="CGAutoMiddle" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="222" y="170"/>
+	</widget>
+	<widget field="GearReceive" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="222" y="136"/>
+	</widget>
+	<widget field="VisionFaceGearTarget" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="16" y="392"/>
+	</widget>
+	<widget field="LifterStop" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="686" y="339"/>
+	</widget>
+	<widget field="CGAutoCrossLine" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="187" y="34"/>
+	</widget>
+	<widget field="VisionGearRingLightOn" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="-4" y="362"/>
+	</widget>
+	<widget field="DriveGyroAssisted" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="6" y="270"/>
+	</widget>
+	<widget field="VisionFaceReflectiveTape" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="1" y="419"/>
+	</widget>
+	<widget field="CGShootandIndexStop" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="588" y="417"/>
+	</widget>
+	<widget field="CollectWithPercentVoltage" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="247" y="364"/>
+	</widget>
+	<widget field="IndexerRun" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="456" y="390"/>
+	</widget>
+	<widget field="IndexerStop" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="453" y="418"/>
+	</widget>
+	<widget field="angularDelta" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="231"/>
+	</widget>
+	<widget field="GyroAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="210"/>
+	</widget>
+	<widget field="targetAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="189"/>
+	</widget>
+	<widget field="Gear Manual Target Position" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="168"/>
+	</widget>
+	<widget field="driveSpeed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="147"/>
+	</widget>
+	<widget field="isCollecting" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="126"/>
+	</widget>
+	<widget field="isShooting" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="105"/>
+	</widget>
+	<widget field="angularDeltaShortest" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="84"/>
+	</widget>
+	<widget field="targetLifterPVbus" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="63"/>
+	</widget>
+	<widget field="BoundedGyroAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="42"/>
+	</widget>
+	<widget field="Gear - ActualPosition" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="21"/>
+	</widget>
+	<widget field="driveLength" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="0"/>
+	</widget>
+</dashboard>
+<live-window>
+</live-window>
+</xml>
