@@ -56,10 +56,10 @@ public class Vision extends Subsystem {
 		// shooterCam.setExposureManual(0);
 
 		CameraServer.getInstance().addCamera(gearCam);
-
 		CameraServer.getInstance().addCamera(shooterCam);
 
 		CameraServer.getInstance().startAutomaticCapture(gearCam);
+		CameraServer.getInstance().startAutomaticCapture(shooterCam);
 
 	}
 

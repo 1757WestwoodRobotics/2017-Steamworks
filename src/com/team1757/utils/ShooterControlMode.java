@@ -10,7 +10,7 @@ import com.ctre.CANTalon.TalonControlMode;
 
 public enum ShooterControlMode {
 	kPercentForward(0.8, TalonControlMode.PercentVbus),
-	kVoltageForward(4.0, TalonControlMode.Voltage),
+	kVoltageForward(10.0, TalonControlMode.Voltage),
 	kSpeedForward(32000.0, TalonControlMode.Speed),
 	kStop(0.0);
 	

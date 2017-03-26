@@ -161,10 +161,12 @@ public class RobotMap {
 		driveTrainMecanumDrive.setMaxOutput(1.0);
 
 		// Initialize Ultrasonic Sensor
-		ultrasonicAnalog = new MaxbotixUltrasonicAnalog(0);
 		
-		// Configure Ultrasonic Sensor
-		ultrasonicSerial = new MaxbotixUltrasonicSerial();
+//		// TODO Use ultrasonic
+//		ultrasonicAnalog = new MaxbotixUltrasonicAnalog(0);
+//		
+//		// Configure Ultrasonic Sensor
+//		ultrasonicSerial = new MaxbotixUltrasonicSerial();
 
 		// Initialize NavX
 		try {
@@ -197,12 +199,12 @@ public class RobotMap {
 		driveTrainNavX.reset();
 
 		// Initialize PID Input/ Output (rangefinder)
-		ultrasonicOutput = new VariablePIDOutput();
+//		ultrasonicOutput = new VariablePIDOutput();
 
-		// Initialize PIDController (rangefinder)
-		ultrasonicController = new PIDController(1.0, 0.0, 0.0, ultrasonicAnalog, ultrasonicOutput);
-		SmartDashboard.putData("rangeController", ultrasonicController);
-		ultrasonicController.setOutputRange(-1, 1);
+//		// Initialize PIDController (rangefinder)
+//		ultrasonicController = new PIDController(1.0, 0.0, 0.0, ultrasonicAnalog, ultrasonicOutput);
+//		SmartDashboard.putData("rangeController", ultrasonicController);
+//		ultrasonicController.setOutputRange(-1, 1);
 
 		// Initialize PID Input/ Output (VisionCenter)
 		visionCenterInput = new VisionCenterPIDSource();
