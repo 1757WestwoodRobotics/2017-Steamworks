@@ -29,7 +29,7 @@ public class CGAutoMiddle extends CommandGroup {
 		// Drive backwards ~100"
 		addSequential(new DriveStraightY(.7));
 		// Close gear
-		addSequential(new GearReceive());
+		addSequential(new GearHug());
 		// Reverse
 		addSequential(new DriveToggleDirection());
 		// Rotate left 90

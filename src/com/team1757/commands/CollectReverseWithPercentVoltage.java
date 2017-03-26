@@ -9,8 +9,15 @@ import com.team1757.robot.Robot;
  */
 public class CollectReverseWithPercentVoltage extends Command {
 
+	private double target = .5;
+	
     public CollectReverseWithPercentVoltage() {
         requires(Robot.ballCollector);
+    }
+    
+    public CollectReverseWithPercentVoltage(double target) {
+        requires(Robot.ballCollector);
+        this.target = target;
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +29,7 @@ public class CollectReverseWithPercentVoltage extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ballCollector.setFlyWheelTarget(0.5);
+    	Robot.ballCollector.setFlyWheelTarget(target);
     }
 
     // Make this return true when this Command no longer needs to run execute()

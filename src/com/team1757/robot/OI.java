@@ -142,29 +142,26 @@ public class OI {
 		buttonBoxButton2.toggleWhenPressed(new CollectWithPercentVoltage());
 		buttonBoxButton5.whenPressed(new GearHug());
 		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
-		buttonBoxButton6.whenPressed(new VisionToggleCamera());
+		buttonBoxButton6.whenPressed(new GearMatchStart());
 
 		// Bind Commands to Xbox Controller
 		xboxButtonY.whenPressed(new DriveToggleDirection());
 		xboxButtonA.whenPressed(new DriveManual());
 		xboxButtonLB.toggleWhenPressed(new LiftUp());
 		xboxButtonRB.whileHeld(new LiftUp());
+		xboxButtonBack.toggleWhenPressed(new CollectReverseWithPercentVoltage(.1));
 		
 		// Put Commands on SmartDashboard
 		// Drive functions
 		SmartDashboard.putData(new DriveStraightY(1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
 		SmartDashboard.putData(new DriveToggleDirection());
-		SmartDashboard.putData(new DriveRestrictForward());
-		SmartDashboard.putData(new DriveRestrictRotation());
 
 		// Gyro Systems
 		SmartDashboard.putData(new DriveResetGyro());
-		SmartDashboard.putData(new DriveGyroPIDClear());
 
 		// Gyro Commands
 		SmartDashboard.putData(new RotateToAngle(1));
-		SmartDashboard.putData(new RotateDegrees());
 		SmartDashboard.putData(new RotateDegreesShortest());
 
 		// Shooter Commands
@@ -215,13 +212,12 @@ public class OI {
 
 		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);
-		SmartDashboard.putNumber("angularDelta", 0.0);
 		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
 		SmartDashboard.putNumber("Gear Manual Target Position", 618.0);
 		
 		//Other SmartDashboard
-		SmartDashboard.putNumber("driveLength", 0);
-		SmartDashboard.putNumber("driveSpeed", .2);
+//		SmartDashboard.putNumber("driveLength", 0);
+//		SmartDashboard.putNumber("driveSpeed", .2);
 
 	}
 

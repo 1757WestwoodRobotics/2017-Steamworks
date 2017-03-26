@@ -80,8 +80,8 @@ public class RobotMap {
 
 	public static Vision vision;
 
-	public static UsbCamera gearCam = new UsbCamera("gearCam", 0);
-	public static UsbCamera shooterCam = new UsbCamera("shooterCam", 1);
+	public static UsbCamera gearCam; // = new UsbCamera("gearCam", 0);
+	public static UsbCamera shooterCam; // = new UsbCamera("shooterCam", 1);
 
 	// This will allow you to stream both at the same time...
 	// public static UsbCamera gearCam =
