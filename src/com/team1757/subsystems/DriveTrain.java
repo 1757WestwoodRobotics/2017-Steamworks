@@ -4,6 +4,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.team1757.commands.DriveManual;
 import com.team1757.robot.RobotMap;
 import com.team1757.utils.MaxbotixUltrasonicAnalog;
+import com.team1757.utils.MaxbotixUltrasonicSerial;
 import com.team1757.utils.Unit;
 
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -17,6 +18,7 @@ import edu.wpi.first.wpilibj.PIDController;
 public class DriveTrain extends Subsystem {
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
 	private final MaxbotixUltrasonicAnalog ultrasonicAnalog = RobotMap.ultrasonicAnalog;
+	private final MaxbotixUltrasonicSerial ultrasonicSerial = RobotMap.ultrasonicSerial;
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final PIDController accelControllerX = RobotMap.accelControllerX;
 	private final PIDController accelControllerY = RobotMap.accelControllerY;
@@ -215,72 +217,106 @@ public class DriveTrain extends Subsystem {
 	// Ultrasonic
 
 	/**
-	 * getRangeMM
+	 * getRangeAnalogMM
 	 * 
 	 * @return double measured range (mm)
 	 * @return -1.0 if the voltage is below the minimum
 	 * @return -2.0 if voltage is above the maximum
 	 */
-	public double getAnalogRangeMM() {
+	public double getRangeAnalogMM() {
 		return ultrasonicAnalog.getRange(Unit.kMM);
 	}
 
 	/**
-	 * getRangeInches
-	 * 
-	 * TODO Change me BACK!!
+	 * getRangeAnalogInches
 	 * 
 	 * @return double measured range (inches)
 	 * @return -1.0 if the voltage is below the minimum
 	 */
-	public double getAnalogRangeInches() {
+	public double getRangeAnalogInches() {
 		return ultrasonicAnalog.getRange(Unit.kInches);
 	}
 	
-	public double getSerialRangeInches() {
-		return RobotMap.ultrasonicSerial.getRange();
-	}
-	
 	/**
-	 * getRangeCM
+	 * getRangeAnalogCM
 	 * 
 	 * @return double measured range (cm)
 	 * @return -1.0 if the voltage is below the minimum
 	 * @return -2.0 if voltage is above the maximum
 	 */
-	public double getRangeCM() {
+	public double getRangeAnalogCM() {
 		return ultrasonicAnalog.getRange(Unit.kCM);
 	}
-
+	
 	/**
-	 * getRange
+	 * getRangeAnalog
 	 * 
 	 * @return double measured range (default unit)
 	 * @return -1.0 if the voltage is below the minimum
 	 * @return -2.0 if voltage is above the maximum
 	 */
-	public double getRange() {
+	public double getRangeAnalog() {
 		return ultrasonicAnalog.getRange();
 	}
 
 	/**
-	 * getUltrasonicDefaultUnit
+	 * getUltrasonicAnalogDefaultUnit
 	 * 
 	 * @return Current default unit
 	 */
-	public Unit getUltrasonicDefaultUnit() {
+	public Unit getUltrasonicAnalogDefaultUnit() {
 		return ultrasonicAnalog.getDefaultUnit();
 	}
 
 	/**
-	 * setUltrasonicDefaultUnit
+	 * setUltrasonicAnalogDefaultUnit
 	 * 
 	 * @param unit
 	 *            Unit instance for default measurements
 	 */
-	public void setUltrasonicDefaultUnit(Unit unit) {
+	public void setUltrasonicAnalogDefaultUnit(Unit unit) {
 		ultrasonicAnalog.setDefaultUnit(unit);
 	}
+	
+	/**
+	 * getRangeSerialInches
+	 * 
+	 * @return double measured range (inches)
+	 */
+	public double getRangeSerialInches() {
+		return ultrasonicSerial.getRange(Unit.kInches);
+	}
+	
+	/**
+	 * getRangeSerial
+	 * 
+	 * @return double measured range (default unit)
+	 * @return -1.0 if the voltage is below the minimum
+	 * @return -2.0 if voltage is above the maximum
+	 */
+	public double getRangeSerial() {
+		return ultrasonicSerial.getRange();
+	}
+
+	/**
+	 * getUltrasonicSerialDefaultUnit
+	 * 
+	 * @return Current default unit
+	 */
+	public Unit getUltrasonicSerialDefaultUnit() {
+		return ultrasonicSerial.getDefaultUnit();
+	}
+
+	/**
+	 * setUltrasonicSerialDefaultUnit
+	 * 
+	 * @param unit
+	 *            Unit instance for default measurements
+	 */
+	public void setUltrasonicSerialDefaultUnit(Unit unit) {
+		ultrasonicSerial.setDefaultUnit(unit);
+	}
+	
 
 	// Gyroscope PID
 
@@ -546,7 +582,7 @@ public class DriveTrain extends Subsystem {
 	 *            Double distance (default unit) representing target delta
 	 */
 	public void setUltrasonicTargetDistanceDelta(double delta) {
-		setUltrasonicTargetDistance(getRange() + delta);
+		setUltrasonicTargetDistance(getRangeSerial() + delta);
 	}
 
 	/**

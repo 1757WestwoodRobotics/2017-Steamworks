@@ -33,7 +33,7 @@ public class DriveStraightToRange extends Command {
     protected void initialize() {
     	Robot.driveTrain.enableGyroPID();
     	Robot.driveTrain.enableUltrasonicPID();
-    	Robot.driveTrain.setUltrasonicDefaultUnit(distanceUnit);
+    	Robot.driveTrain.setUltrasonicAnalogDefaultUnit(distanceUnit);
     	Robot.driveTrain.setUltrasonicTargetDistance(targetDistance);
     	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
     }
