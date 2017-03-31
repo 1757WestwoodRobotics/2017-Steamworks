@@ -1,5 +1,9 @@
 package com.team1757.commands;
 
+import com.team1757.utils.Axis;
+import com.team1757.utils.DirectionControlMode;
+import com.team1757.utils.GearControlMode;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -9,10 +13,10 @@ public class CGAutoCrossLine extends CommandGroup {
 
 	public CGAutoCrossLine() {
 		// Face gear loader forward
-		addSequential(new DriveDirectionInverted());
+		addSequential(new DriveSetDirection(DirectionControlMode.kInverted));
 		// Drop gear to receive
-		addSequential(new GearReceive());
+		addSequential(new GearRun(GearControlMode.kReceive));
 		// Drive straight ~100"
-		addSequential(new DriveStraightY(2.0));
+		addSequential(new DriveStraight(Axis.axisY, 2.0));
 	}
 }

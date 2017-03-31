@@ -12,40 +12,42 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  *
  */
 public class VisionCenterPIDSource implements PIDSource {
-	private VisionDetectionType m_visionDetectionType;
+	
+	
+	private VisionDetectionType visionDetectionType;
+	@SuppressWarnings("unused")
+	private PIDSourceType pidSourceType;
 
 	public VisionCenterPIDSource() {
 	}
 
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
-		// TODO Auto-generated method stub
-
+		pidSourceType = pidSource;
 	}
 
 	@Override
 	public PIDSourceType getPIDSourceType() {
-		// TODO Auto-generated method stub
 		return PIDSourceType.kDisplacement;
 	}
 
 	public void setVisionDetectionType(VisionDetectionType visionDetection) {
-		m_visionDetectionType = visionDetection;
+		visionDetectionType = visionDetection;
 	}
 
 	public VisionDetectionType getVisionDetectionType() {
-		return m_visionDetectionType;
+		return visionDetectionType;
 	}
 
 	@Override
 	public double pidGet() {
-		if (m_visionDetectionType == VisionDetectionType.ContourCenterX) {
+		if (visionDetectionType == VisionDetectionType.ContourCenterX) {
 			return Robot.vision.getTargetCenterContour();
-		} else if (m_visionDetectionType == VisionDetectionType.ContourCenterY) {
+		} else if (visionDetectionType == VisionDetectionType.ContourCenterY) {
 
-		} else if (m_visionDetectionType == VisionDetectionType.BlobCenterY) {
+		} else if (visionDetectionType == VisionDetectionType.BlobCenterY) {
 
-		} else if (m_visionDetectionType == VisionDetectionType.BlobCenterY) {
+		} else if (visionDetectionType == VisionDetectionType.BlobCenterY) {
 
 		}
 		return 0;

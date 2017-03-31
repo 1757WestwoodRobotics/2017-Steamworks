@@ -2,8 +2,9 @@ package com.team1757.robot;
 
 import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
-import com.team1757.subsystems.Vision;
 import com.team1757.utils.IllegalSourceException;
+import com.team1757.utils.MaxbotixUltrasonicAnalog;
+import com.team1757.utils.MaxbotixUltrasonicSerial;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
 import com.team1757.utils.VisionCenterGearPIDSource;
@@ -18,6 +19,7 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -61,24 +63,26 @@ public class RobotMap {
 	public static RobotDrive driveTrainMecanumDrive;
 
 	public static AHRS driveTrainNavX;
+	public static MaxbotixUltrasonicAnalog ultrasonicAnalog;
+	public static MaxbotixUltrasonicSerial ultrasonicSerial;
 
 	public static PIDController gyroController;
 	public static PIDController accelControllerX;
 	public static PIDController accelControllerY;
+	public static PIDController ultrasonicController;
 	public static PIDController visionGearTranslationController;
+	public static PIDController visionTranslationController;
 
 	private static NavXGyroWrapper gyroInput;
 	private static VariablePIDOutput gyroOutput;
 
-	public static PIDController visionTranslationController;
-	// TODO change back to private
-	public static VisionCenterPIDSource visionCenterInput;
-	public static VariablePIDOutput visionCenterOutput;
+	private static VariablePIDOutput ultrasonicOutput;
+
+	private static VisionCenterPIDSource visionCenterInput;
+	private static VariablePIDOutput visionCenterOutput;
 
 	private static VisionCenterGearPIDSource visionCenterGearInput;
-	public static VariablePIDOutput visionCenterGearOutput;
-
-	public static Vision vision;
+	private static VariablePIDOutput visionCenterGearOutput;
 
 	public static UsbCamera gearCam; // = new UsbCamera("gearCam", 0);
 	public static UsbCamera shooterCam; // = new UsbCamera("shooterCam", 1);
@@ -90,6 +94,7 @@ public class RobotMap {
 	// CameraServer.getInstance().startAutomaticCapture(1);
 
 	public static void init() {
+		
 		// Initialize Talons
 		driveTrainLeftFront = new CANTalon(driveTrainLeftFrontPort);
 		LiveWindow.addActuator("Drive Train", "Left Front", driveTrainLeftFront);
@@ -119,15 +124,20 @@ public class RobotMap {
 		LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
 
 		// Configure Talons
-		// Invert talons to correct driving
+		
+		// Invert talons to correct driving direction
 		driveTrainLeftFront.setInverted(true);
 		driveTrainLeftBack.setInverted(true);
+		
+		// Collector and shooter reverse
+		collectorFlyWheel.setInverted(true);
+		shooterFlyWheel.setInverted(true);
+		
 		// Change to brake mode tighter steering and autonomous stopping
 		driveTrainLeftFront.enableBrakeMode(true);
 		driveTrainLeftBack.enableBrakeMode(true);
 		driveTrainRightFront.enableBrakeMode(true);
 		driveTrainRightBack.enableBrakeMode(true);
-
 		gearLoaderTalon.enableBrakeMode(true);
 
 		// Soft Limits
@@ -149,6 +159,14 @@ public class RobotMap {
 		driveTrainMecanumDrive.setSafetyEnabled(true);
 		driveTrainMecanumDrive.setExpiration(0.1);
 		driveTrainMecanumDrive.setMaxOutput(1.0);
+
+		// Initialize Ultrasonic Sensor
+		
+//		// TODO Use ultrasonic
+//		ultrasonicAnalog = new MaxbotixUltrasonicAnalog(0);
+//		
+//		// Configure Ultrasonic Sensor
+//		ultrasonicSerial = new MaxbotixUltrasonicSerial();
 
 		// Initialize NavX
 		try {
@@ -174,11 +192,19 @@ public class RobotMap {
 		gyroController = new PIDController(0.034, 0.0, 0.04, gyroInput, gyroOutput);
 
 		// Configure PIDController (gyroscope)
-		//SmartDashboard.putData("RotateController", gyroController);
+		// SmartDashboard.putData("RotateController", gyroController);
 		gyroController.setOutputRange(-1.0, 1.0);
 		gyroController.setAbsoluteTolerance(2.0f);
 		gyroController.setContinuous(true);
 		driveTrainNavX.reset();
+
+		// Initialize PID Input/ Output (rangefinder)
+//		ultrasonicOutput = new VariablePIDOutput();
+
+//		// Initialize PIDController (rangefinder)
+//		ultrasonicController = new PIDController(1.0, 0.0, 0.0, ultrasonicAnalog, ultrasonicOutput);
+//		SmartDashboard.putData("rangeController", ultrasonicController);
+//		ultrasonicController.setOutputRange(-1, 1);
 
 		// Initialize PID Input/ Output (VisionCenter)
 		visionCenterInput = new VisionCenterPIDSource();
@@ -189,7 +215,8 @@ public class RobotMap {
 		visionTranslationController = new PIDController(1.0, 0.0, 0.04, visionCenterInput, visionCenterOutput);
 
 		// Configure PIDController (VisionCenter)
-	//	SmartDashboard.putData("visionTranslationController", visionTranslationController);
+		// SmartDashboard.putData("visionTranslationController",
+		// visionTranslationController);
 		visionTranslationController.setInputRange(-1.0, 1.0);
 		visionTranslationController.setOutputRange(-1, 1);
 		visionTranslationController.setAbsoluteTolerance(.0005);
@@ -204,10 +231,10 @@ public class RobotMap {
 				visionCenterGearOutput);
 
 		// Configure PIDController (Gear)
-		//SmartDashboard.putData("visionGearTranslationController", visionGearTranslationController);
+		// SmartDashboard.putData("visionGearTranslationController",
+		// visionGearTranslationController);
 		visionGearTranslationController.setOutputRange(-.5, .5);
 		visionGearTranslationController.setAbsoluteTolerance(8);
-
 
 	}
 }

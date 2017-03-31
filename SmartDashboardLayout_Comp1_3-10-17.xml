@@ -64,9 +64,6 @@
 	<widget field="VisionGearRingLightOff" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
 		<location x="700" y="119"/>
 	</widget>
-	<widget field="RotateDegreesShortest" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
-		<location x="1124" y="284"/>
-	</widget>
 	<widget field="DriveStraightY" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
 		<location x="935" y="122"/>
 	</widget>

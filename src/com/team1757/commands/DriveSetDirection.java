@@ -1,21 +1,36 @@
 package com.team1757.commands;
 
 import com.team1757.robot.Robot;
+import com.team1757.utils.DirectionControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * Sets the direction for operator control inversion
  *
+ * No default; must explicitly provide DirectionControlMode
+ *
+ * @author ACabey
  */
-public class DriveDirectionInverted extends Command {
+public class DriveSetDirection extends Command {
 
-	public DriveDirectionInverted() {
-		requires(Robot.driveTrain);
+	private DirectionControlMode controlMode;
+	
+	public DriveSetDirection(DirectionControlMode controlMode) {
+		this.controlMode = controlMode;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.driveTrain.setInversionBackward();
+		if (controlMode == DirectionControlMode.kToggle) {
+			Robot.driveTrain.toggleInversion();
+		}
+		else if (controlMode == DirectionControlMode.kForward) {
+			Robot.driveTrain.setInversionForward();
+		}
+		else {
+			Robot.driveTrain.setInversionBackward();
+		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
