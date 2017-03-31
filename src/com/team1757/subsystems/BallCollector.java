@@ -3,9 +3,8 @@ package com.team1757.subsystems;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-import com.team1757.commands.Collect;
+import com.team1757.commands.CollectorStop;
 import com.team1757.robot.RobotMap;
-import com.team1757.utils.CollectorControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,7 +16,7 @@ public class BallCollector extends Subsystem {
 	private final CANTalon collectorFlyWheel = RobotMap.collectorFlyWheel;
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new Collect(CollectorControlMode.kStop));
+		setDefaultCommand(new CollectorStop());
 	}
 
 	/**
@@ -67,11 +66,17 @@ public class BallCollector extends Subsystem {
 	}
 
 	/**
-	 * Change Talon control mode
-	 * @param TalonControlMode 
+	 * Set flywheel control mode to speed
 	 */
-	public void changeControlMode(TalonControlMode talonControl) {
-		collectorFlyWheel.changeControlMode(talonControl);
+	public void setModeSpeed() {
+		collectorFlyWheel.changeControlMode(TalonControlMode.Speed);
+	}
+
+	/**
+	 * set flywheel control mode to percent vbus
+	 */
+	public void setModePercentVoltage() {
+		collectorFlyWheel.changeControlMode(TalonControlMode.PercentVbus);
 	}
 
 	/**

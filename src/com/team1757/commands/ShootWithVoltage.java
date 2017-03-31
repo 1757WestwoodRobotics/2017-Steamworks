@@ -1,43 +1,30 @@
 package com.team1757.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.team1757.robot.Robot;
-import com.team1757.utils.ShooterControlMode;
 
 /**
- * Operate Shooter mechanism.
- * 
- * Defaults to 0.80 in PercentVBus mode
- * 
- * @author ACabey
+ *
  */
+public class ShootWithVoltage extends Command {
 
-public class Shoot extends Command {
-
-	private ShooterControlMode controlMode = ShooterControlMode.kPercentForward;
-	
-    public Shoot() {
+    public ShootWithVoltage() {
         requires(Robot.shooter);
-    }
-    
-    public Shoot(ShooterControlMode controlMode) {
-        requires(Robot.shooter);
-        this.controlMode = controlMode;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooter.initializeFlyWheelPID();
-    	Robot.shooter.changeControlMode(controlMode.getControlMode());
+    	Robot.shooter.setFlyWheelModePercentVoltage();
     	Robot.shooter.enableFlyWheel();
     	Robot.shooter.enableFlyWheelControl();
-    	Robot.shooter.setIsShooting(true);
+    	SmartDashboard.putBoolean("isShooting", true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.setFlyWheelTarget(controlMode.getOutput());
+    	Robot.shooter.setFlyWheelTarget(-.8);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -47,10 +34,9 @@ public class Shoot extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.stopFlyWheel();
     	Robot.shooter.disableFlyWheelControl();
     	Robot.shooter.disableFlyWheel();
-    	Robot.shooter.setIsShooting(false);
+    	SmartDashboard.putBoolean("isShooting", true);
     }
 
     // Called when another command which requires one or more of the same

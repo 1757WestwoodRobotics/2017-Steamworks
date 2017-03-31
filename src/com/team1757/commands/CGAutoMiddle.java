@@ -1,9 +1,5 @@
 package com.team1757.commands;
 
-import com.team1757.utils.Axis;
-import com.team1757.utils.DirectionControlMode;
-import com.team1757.utils.GearControlMode;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -13,34 +9,35 @@ public class CGAutoMiddle extends CommandGroup {
 
 	public CGAutoMiddle() {
 		// Face gear loader forward
-		addSequential(new DriveSetDirection(DirectionControlMode.kInverted));
+		addSequential(new DriveDirectionInverted());
 		// Drop gear to receive
-		addSequential(new GearRun(GearControlMode.kReceive));
+		addSequential(new GearReceive());
 		// Drive straight ~100"
-		addSequential(new DriveStraight(Axis.axisY, 2, -.27));
+		addSequential(new DriveStraightY(2, -.27));
 		// Correct translation with vision
 		// addSequential(new VisionFaceGearTarget());
 		// Drive straight ~14.3"
-		addSequential(new DriveStraight(Axis.axisY, .7, -.2));
+		addSequential(new DriveStraightY(.7, -.2));
 		// "Wait a beat"
 		addSequential(new Delay(.5));
 		// Place gear
-		addSequential(new GearRun(GearControlMode.kScore));
+		addSequential(new GearScore());
 		// "Wait a beat"
 		addSequential(new Delay(.5));
 		// Reverse
-		addSequential(new DriveSetDirection(DirectionControlMode.kToggle));
+		addSequential(new DriveToggleDirection());
 		// Drive backwards ~100"
-		addSequential(new DriveStraight(Axis.axisY, .7));
+		addSequential(new DriveStraightY(.7));
 		// Close gear
-		addSequential(new GearRun(GearControlMode.kReceive));
+		addSequential(new GearHug());
 		// Reverse
-		addSequential(new DriveSetDirection(DirectionControlMode.kToggle));
+		addSequential(new DriveToggleDirection());
 		// Rotate left 90
-		
+//		SmartDashboard.putNumber("targetAngle", 90);
+//		addSequential(new RotateToAngle());
 		// Translate right
-		addSequential(new DriveStraight(Axis.axisX, 2.0));
+		addSequential(new DriveStraightX(2.0));
 		// Cross line
-		addSequential(new DriveStraight(Axis.axisY, 1.65));
+		addSequential(new DriveStraightY(1.65));
 	}
 }

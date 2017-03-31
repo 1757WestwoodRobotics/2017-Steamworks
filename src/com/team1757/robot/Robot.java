@@ -54,6 +54,7 @@ public class Robot extends IterativeRobot {
 
 		// Initialize subsystems and default ManualDrive
 		driveTrain = new DriveTrain();
+
 		vision = new Vision();
 		vision.init();
 		shooter = new Shooter();

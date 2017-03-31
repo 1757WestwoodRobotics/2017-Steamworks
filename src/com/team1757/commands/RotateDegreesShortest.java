@@ -6,15 +6,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Rotate an angular delta from the current reading
+ * Rotate the shortest direction relative to current angular position 
  */
-public class RotateDegrees extends Command {
+public class RotateDegreesShortest extends Command {
 	
-    public RotateDegrees() {
+    public RotateDegreesShortest() {
     	requires(Robot.driveTrain);
     }
     
-    public RotateDegrees(double deltaDegrees) {
+    public RotateDegreesShortest(double deltaDegrees) {
     	requires(Robot.driveTrain);
     	SmartDashboard.putNumber("angularDeltaShortest", deltaDegrees);
     }
@@ -22,7 +22,8 @@ public class RotateDegrees extends Command {
     // Called once before execute
     protected void initialize() {
     	Robot.driveTrain.enableGyroPID();
-    	Robot.driveTrain.changeAngleBy(SmartDashboard.getNumber("angularDelta", 0));
+    	// TODO Change the default angle to something more reasonable
+    	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + SmartDashboard.getNumber("angularDeltaShortest", 0));
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -38,6 +39,7 @@ public class RotateDegrees extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	// TODO Default to something reasonable
     	Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
     	Robot.driveTrain.disableGyroPID();
     }

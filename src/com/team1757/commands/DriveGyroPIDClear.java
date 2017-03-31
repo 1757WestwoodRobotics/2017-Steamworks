@@ -7,41 +7,35 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class GearRun extends Command {
-	
-    public GearRun() {
-    	requires(Robot.gearLoader);
+public class DriveGyroPIDClear extends Command {
+
+    public DriveGyroPIDClear() {
+        requires(Robot.driveTrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gearLoader.initializeGearPID();
-    	Robot.gearLoader.initEncoder();
-    	Robot.gearLoader.enableGearTalon();
-    	Robot.gearLoader.enableGearPIDControl();
-    	
-    	Robot.gearLoader.setTargetPosition(Robot.gearLoader.getPulseWidthPosition());
+    	Robot.driveTrain.stop();
+    	Robot.driveTrain.disableGyroPID();
+    	Robot.driveTrain.setTargetAngle(0);
+    	Robot.driveTrain.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearLoader.runGearTalon();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.gearLoader.disableGearPIDControl();
-    	Robot.gearLoader.disableGearTalon();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

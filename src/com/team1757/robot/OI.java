@@ -5,34 +5,40 @@ import com.team1757.commands.CGAutoCrossLine;
 import com.team1757.commands.CGAutoLeft;
 import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.CGShootandIndex;
-import com.team1757.commands.Collect;
+import com.team1757.commands.CGShootandIndexStop;
+import com.team1757.commands.CollectReverseWithPercentVoltage;
+import com.team1757.commands.CollectWithPercentVoltage;
+import com.team1757.commands.CollectorStop;
 import com.team1757.commands.DriveGyroAssisted;
-import com.team1757.commands.GearRun;
+import com.team1757.commands.DriveStraightY;
+import com.team1757.commands.DriveToggleDirection;
+import com.team1757.commands.GearHug;
 import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
+import com.team1757.commands.GearManualInput;
+import com.team1757.commands.GearMatchStart;
+import com.team1757.commands.GearReceive;
+import com.team1757.commands.GearScore;
+import com.team1757.commands.DriveGyroPIDClear;
 import com.team1757.commands.DriveManual;
+import com.team1757.commands.LiftUp;
 import com.team1757.commands.DriveResetGyro;
-import com.team1757.commands.DriveSetDirection;
-import com.team1757.commands.DriveStraight;
-import com.team1757.commands.DriveStraightToRange;
+import com.team1757.commands.DriveRestrictForward;
+import com.team1757.commands.DriveRestrictRotation;
 import com.team1757.commands.RotateDegrees;
+import com.team1757.commands.RotateDegreesShortest;
 import com.team1757.commands.RotateToAngle;
-import com.team1757.commands.Shoot;
-import com.team1757.commands.Index;
-import com.team1757.commands.Lift;
+import com.team1757.commands.IndexerRun;
+import com.team1757.commands.ShootWithSpeed;
+import com.team1757.commands.ShootWithVoltage;
+import com.team1757.commands.IndexerStop;
+import com.team1757.commands.LifterStop;
+import com.team1757.commands.ShooterStop;
 import com.team1757.commands.VisionCenterOnGearTranslationX;
 import com.team1757.commands.VisionGetReadyToScoreGear;
-import com.team1757.commands.VisionRingLight;
+import com.team1757.commands.VisionGearRingLightOff;
+import com.team1757.commands.VisionGearRingLightOn;
 import com.team1757.commands.VisionToggleCamera;
-import com.team1757.utils.Axis;
-import com.team1757.utils.CollectorControlMode;
-import com.team1757.utils.DirectionControlMode;
-import com.team1757.utils.GearControlMode;
-import com.team1757.utils.IndexerControlMode;
-import com.team1757.utils.LifterControlMode;
-import com.team1757.utils.RingLightControlMode;
-import com.team1757.utils.ShooterControlMode;
-import com.team1757.utils.Unit;
 import com.team1757.commands.VisionCenterTranslationX;
 import com.team1757.commands.VisionFaceGearTarget;
 
@@ -102,6 +108,8 @@ public class OI {
 	// Input Control Constants
 	private final static double DEADBAND = 0.1;
 	private final static double GAIN = 0.9;
+	// private final static double DEADBAND_OLD = 0.2;
+	// private final static double GAIN_OLD = 0.7;
 
 	// OI Constructor
 	public OI() {
@@ -129,60 +137,57 @@ public class OI {
 		buttonBoxButton6 = new JoystickButton(buttonBox, buttonBoxButton6Port);
 
 		// Bind Commands to ButtonBox
-		buttonBoxButton1.whenPressed(new GearRun(GearControlMode.kReceive));
-		buttonBoxButton4.whenPressed(new GearRun(GearControlMode.kScore));
-		buttonBoxButton2.toggleWhenPressed(new Collect(CollectorControlMode.kPercentForward));
-		buttonBoxButton5.whenPressed(new GearRun(GearControlMode.kHug));
+		buttonBoxButton1.whenPressed(new GearReceive());
+		buttonBoxButton4.whenPressed(new GearScore());
+		buttonBoxButton2.toggleWhenPressed(new CollectWithPercentVoltage());
+		buttonBoxButton5.whenPressed(new GearHug());
 		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
-		buttonBoxButton6.whenPressed(new VisionToggleCamera());
+		buttonBoxButton6.whenPressed(new GearMatchStart());
 
 		// Bind Commands to Xbox Controller
-		xboxButtonY.whenPressed(new DriveSetDirection(DirectionControlMode.kToggle));
+		xboxButtonY.whenPressed(new DriveToggleDirection());
 		xboxButtonA.whenPressed(new DriveManual());
-		xboxButtonLB.toggleWhenPressed(new Lift(LifterControlMode.kUp));
-		xboxButtonRB.whileHeld(new Lift(LifterControlMode.kUp));
+		xboxButtonLB.toggleWhenPressed(new LiftUp());
+		xboxButtonRB.whileHeld(new LiftUp());
+		xboxButtonBack.toggleWhenPressed(new CollectReverseWithPercentVoltage(.1));
 		
 		// Put Commands on SmartDashboard
 		// Drive functions
-		SmartDashboard.putData("DriveStraight axisY", new DriveStraight(Axis.axisY, 1.65));
+		SmartDashboard.putData(new DriveStraightY(1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
-		SmartDashboard.putData("Drive Toggle", new DriveSetDirection(DirectionControlMode.kToggle));
-		SmartDashboard.putData(new DriveStraightToRange(60, Unit.kInches));
+		SmartDashboard.putData(new DriveToggleDirection());
 
 		// Gyro Systems
 		SmartDashboard.putData(new DriveResetGyro());
 
 		// Gyro Commands
-		SmartDashboard.putData(new RotateToAngle());
-		SmartDashboard.putData(new RotateDegrees());
+		SmartDashboard.putData(new RotateToAngle(1));
+		SmartDashboard.putData(new RotateDegreesShortest());
 
 		// Shooter Commands
-		SmartDashboard.putData("Shoot SpeedForward", new Shoot(ShooterControlMode.kSpeedForward));
-		SmartDashboard.putData("Shoot PercentForward", new Shoot(ShooterControlMode.kPercentForward));
-		SmartDashboard.putData("Shoot VoltageForward", new Shoot(ShooterControlMode.kVoltageForward));
-		SmartDashboard.putData("Shoot Stop", new Shoot(ShooterControlMode.kStop));
+		SmartDashboard.putData(new ShootWithSpeed());
+		SmartDashboard.putData(new ShootWithVoltage());
+		SmartDashboard.putData(new ShooterStop());
 
 		// Indexer Commands
-		SmartDashboard.putData("Index PercentForward", new Index(IndexerControlMode.kPercentForward));
-		SmartDashboard.putData("Index PercentReverse", new Index(IndexerControlMode.kPercentReverse));
-		SmartDashboard.putData("Index Stop", new Index(IndexerControlMode.kStop));
+		SmartDashboard.putData(new IndexerRun());
+		SmartDashboard.putData(new IndexerStop());
 
 		// Collector Commands
-		SmartDashboard.putData("Collect PercentForward", new Collect(CollectorControlMode.kPercentForward));
-		SmartDashboard.putData("Collect PercentReverse", new Collect(CollectorControlMode.kPercentReverse));
-		SmartDashboard.putData("Collect Stop", new Collect(CollectorControlMode.kStop));
+		SmartDashboard.putData(new CollectWithPercentVoltage());
+		SmartDashboard.putData(new CollectReverseWithPercentVoltage());
+		SmartDashboard.putData(new CollectorStop());
 
 		// GearLoader Commands
-		
-		SmartDashboard.putData("GearRun Manual", new GearRun(GearControlMode.kManual));
-		SmartDashboard.putData("GearRun MatchStart", new GearRun(GearControlMode.kMatchStart));
-		SmartDashboard.putData("GearRun Receive", new GearRun(GearControlMode.kReceive));
-		SmartDashboard.putData("GearRun Hug", new GearRun(GearControlMode.kHug));
-		SmartDashboard.putData("GearRun Score", new GearRun(GearControlMode.kScore));
+		SmartDashboard.putData(new GearManualInput());
+		SmartDashboard.putData(new GearMatchStart());
+		SmartDashboard.putData(new GearReceive());
+		SmartDashboard.putData(new GearScore());
+		SmartDashboard.putData(new GearHug());
 
 		// Lifter Commands
-		SmartDashboard.putData("Lift Up", new Lift(LifterControlMode.kUp));
-		SmartDashboard.putData("Lift Stop", new Lift(LifterControlMode.kStop));
+		SmartDashboard.putData(new LiftUp());
+		SmartDashboard.putData(new LifterStop());
 
 		// Vision Commands
 		SmartDashboard.putData(new VisionFollowReflectiveTape());
@@ -194,11 +199,12 @@ public class OI {
 		SmartDashboard.putData(new VisionToggleCamera());
 
 		// RingLight Commands
-		SmartDashboard.putData("RingLight GearOn", new VisionRingLight(RingLightControlMode.kGearOn));
-		SmartDashboard.putData("RingLight GearOff", new VisionRingLight(RingLightControlMode.kGearOff));
+		SmartDashboard.putData(new VisionGearRingLightOn());
+		SmartDashboard.putData(new VisionGearRingLightOff());
 
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());
+		SmartDashboard.putData(new CGShootandIndexStop());
 		SmartDashboard.putData(new CGAutoMiddle());
 		SmartDashboard.putData(new CGAutoRight());
 		SmartDashboard.putData(new CGAutoLeft());
@@ -206,9 +212,13 @@ public class OI {
 
 		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);
-		SmartDashboard.putNumber("angularDelta", 0.0);
-		SmartDashboard.putNumber("Gear Manual Target", 330.0);
+		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
+		SmartDashboard.putNumber("Gear Manual Target Position", 618.0);
 		
+		//Other SmartDashboard
+//		SmartDashboard.putNumber("driveLength", 0);
+//		SmartDashboard.putNumber("driveSpeed", .2);
+
 	}
 
 	/**
@@ -253,6 +263,7 @@ public class OI {
 	 * @return Normalized input from X axis of Xbox 360 gamepad's right stick in range [-1, 1]
 	 */
 	public double getRotate() {
+		// Use inputControlY because that model works for rotation
 		return inputControlX(xbox360.getRawAxis(xboxRightStickX));
 	}
 
@@ -323,4 +334,5 @@ public class OI {
 		}
 		return output;
 	}
+
 }

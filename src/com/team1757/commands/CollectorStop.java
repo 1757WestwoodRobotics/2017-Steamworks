@@ -1,51 +1,41 @@
 package com.team1757.commands;
 
 import com.team1757.robot.Robot;
-import com.team1757.utils.IndexerControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Operate Indexer mechanism.
- * 
- * Defaults to 0.55 in PercentVBus mode
- * 
- * @author ACabey
+ *
  */
+public class CollectorStop extends Command {
 
-public class Index extends Command {
-
-	private IndexerControlMode controlMode = IndexerControlMode.kPercentForward;
-	
-    public Index() {
-    	requires(Robot.indexer);
-    }
-    
-    public Index(IndexerControlMode controlMode) {
-    	requires(Robot.indexer);
-    	this.controlMode = controlMode;
+    public CollectorStop() {
+        requires(Robot.ballCollector);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.indexer.changeControlMode(controlMode.getControlMode());
-    	Robot.indexer.enableIndexer();
+    	Robot.ballCollector.initializeFlyWheelPID();
+    	Robot.ballCollector.setModePercentVoltage();
+    	Robot.ballCollector.enableFlyWheel();
+    	Robot.ballCollector.enableFlyWheelControl();
+    	Robot.ballCollector.setFlyWheelTarget(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.indexer.setIndexerTarget(controlMode.getOutput());
+    	Robot.ballCollector.setFlyWheelTarget(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.indexer.stopIndexer();
-    	Robot.indexer.disableIndexer();
+    	Robot.ballCollector.disableFlyWheelControl();
+    	Robot.ballCollector.disableFlyWheel();
     }
 
     // Called when another command which requires one or more of the same
