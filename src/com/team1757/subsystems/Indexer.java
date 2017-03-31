@@ -2,8 +2,9 @@ package com.team1757.subsystems;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
-import com.team1757.commands.IndexerStop;
+import com.team1757.commands.Index;
 import com.team1757.robot.RobotMap;
+import com.team1757.utils.IndexerControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -15,7 +16,7 @@ public class Indexer extends Subsystem {
 	private final CANTalon indexerTalon = RobotMap.indexerTalon;
 
     public void initDefaultCommand() {
-        setDefaultCommand(new IndexerStop());
+        setDefaultCommand(new Index(IndexerControlMode.kStop));
     }
     
     public void enableIndexer() {
@@ -26,16 +27,16 @@ public class Indexer extends Subsystem {
     	indexerTalon.disable();
     }
     
-    public void setIndexerModeSpeed() {
-    	indexerTalon.changeControlMode(TalonControlMode.Speed);
-    }
-    
-    public void setIndexerModePercentVoltage() {
-    	indexerTalon.changeControlMode(TalonControlMode.PercentVbus);
+    public void changeControlMode(TalonControlMode talonControl) {
+    	indexerTalon.changeControlMode(talonControl);
     }
     
     public void setIndexerTarget(double target) {
     	indexerTalon.set(target);
+    }
+    
+    public void stopIndexer() {
+    	indexerTalon.set(0);
     }
 }
 

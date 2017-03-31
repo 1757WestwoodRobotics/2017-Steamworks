@@ -1,5 +1,9 @@
 package com.team1757.commands;
 
+import com.team1757.utils.Axis;
+import com.team1757.utils.DirectionControlMode;
+import com.team1757.utils.GearControlMode;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -11,18 +15,17 @@ public class CGAutoLeft extends CommandGroup {
 		//Reset the Gyro
 		addSequential(new DriveResetGyro());
 		// Face gear loader forward
-		addSequential(new DriveDirectionInverted());
+		addSequential(new DriveSetDirection(DirectionControlMode.kInverted));
 		// Drop gear to receive
-		addSequential(new GearReceive());
+		addSequential(new GearRun(GearControlMode.kReceive));
 		// Drive straight ~114"
-		addSequential(new DriveStraightY(1.6));
+		addSequential(new DriveStraight(Axis.axisY, 1.6));
 		// Rotate right 60
-		addSequential(new RotateSetTargetAngle(60));
-		addSequential(new RotateToAngle(.5));
+		addSequential(new RotateToAngle(60.0));
 		// Correct translation with vision
 		// addSequential(new VisionFaceGearTarget());
 		// Drive straight ~14.3"
-		addSequential(new DriveStraightY(1, -.2));
+		addSequential(new DriveStraight(Axis.axisY, 1, -.2));
 //		// "Wait a beat"
 //		addSequential(new Delay(.2));
 //		// Place gear

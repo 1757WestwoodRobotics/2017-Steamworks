@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
- * Subsystem that contains cameras and ring lights. Interacts with GRIP for
- * vision processing via NetworkTables and has several methods for computing
- * different responses to the GRIP output
+ * Interacts with GRIP for vision processing
+ * via NetworkTables and has several methods for computing different responses
+ * to the GRIP output
  * 
  * @author Ryan Marten
  */
@@ -23,7 +23,7 @@ public class Vision extends Subsystem {
 	private final PIDController visionTranslationController = RobotMap.visionTranslationController;
 	private final PIDController visionGearTranslationController = RobotMap.visionGearTranslationController;
 
-	private static boolean isGearCamActive = true;
+	private boolean isGearCamActive = true;
 
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
@@ -45,7 +45,7 @@ public class Vision extends Subsystem {
 	 * SmartDashboard
 	 */
 	public void init() {
-	/*	gearCam.setFPS(fps);
+		gearCam.setFPS(fps);
 		gearCam.setResolution(xResolution, yResolution);
 		// Use zero exposure for bright vision targets and back light
 		// gearCam.setExposureManual(0);
@@ -56,12 +56,10 @@ public class Vision extends Subsystem {
 		// shooterCam.setExposureManual(0);
 
 		CameraServer.getInstance().addCamera(gearCam);
-
 		CameraServer.getInstance().addCamera(shooterCam);
 
-		CameraServer.getInstance().startAutomaticCapture(gearCam); */
-		
-		CameraServer.getInstance().startAutomaticCapture(0);
+		CameraServer.getInstance().startAutomaticCapture(gearCam);
+		CameraServer.getInstance().startAutomaticCapture(shooterCam);
 
 	}
 
@@ -132,20 +130,6 @@ public class Vision extends Subsystem {
 			isGearCamActive = true;
 		}
 
-	}
-
-	// Ring Lights
-
-	/**
-	 * Activates the relay connected to the gear camera's ring light
-	 */
-	public void turnOnGearRingLight() {
-	}
-
-	/**
-	 * Deactivates the relay connected to the gear camera's ring light
-	 */
-	public void turnOffGearRingLight() {
 	}
 
 	// PID Translation Controllers

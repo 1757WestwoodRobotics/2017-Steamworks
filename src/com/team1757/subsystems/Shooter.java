@@ -3,8 +3,9 @@ package com.team1757.subsystems;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
-import com.team1757.commands.ShooterStop;
+import com.team1757.commands.Shoot;
 import com.team1757.robot.RobotMap;
+import com.team1757.utils.ShooterControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -14,9 +15,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shooter extends Subsystem {
 
 	private final CANTalon shooterFlyWheel = RobotMap.shooterFlyWheel;
-
+	private boolean isShooting = false;
+	
 	public void initDefaultCommand() {
-		setDefaultCommand(new ShooterStop());
+		setDefaultCommand(new Shoot(ShooterControlMode.kStop));
 	}
 
 	/**
@@ -68,17 +70,10 @@ public class Shooter extends Subsystem {
 	}
 
 	/**
-	 * Set flywheel control mode to speed (requires feedback device)
+	 * Set flywheel control mode
 	 */
-	public void setFlyWheelModeSpeed() {
-		shooterFlyWheel.changeControlMode(TalonControlMode.Speed);
-	}
-
-	/**
-	 * Set flywheel control mode to percent vbus
-	 */
-	public void setFlyWheelModePercentVoltage() {
-		shooterFlyWheel.changeControlMode(TalonControlMode.PercentVbus);
+	public void changeControlMode(TalonControlMode controlMode) {
+		shooterFlyWheel.changeControlMode(controlMode);
 	}
 
 	/**
@@ -89,5 +84,27 @@ public class Shooter extends Subsystem {
 	 */
 	public void setFlyWheelTarget(double target) {
 		shooterFlyWheel.set(target);
+	}
+	
+	/**
+	 * Set isShooting boolean
+	 * 
+	 * Used in SmartDashboard output
+	 * 
+	 * @param isShooting
+	 */
+	public void setIsShooting(boolean isShooting) {
+		this.isShooting = isShooting;
+	}
+	
+	/**
+	 * Get isShooting boolean
+	 * 
+	 * Used in SmartDashboard output
+	 * 
+	 * @return isShooting
+	 */
+	public boolean getIsShooting() {
+		return isShooting;
 	}
 }

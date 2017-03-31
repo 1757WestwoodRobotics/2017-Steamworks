@@ -2,7 +2,7 @@ package com.team1757.subsystems;
 
 import com.team1757.commands.GearRun;
 import com.team1757.robot.RobotMap;
-
+import com.team1757.utils.GearControlMode;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.FeedbackDeviceStatus;
@@ -21,7 +21,7 @@ public class GearLoader extends Subsystem {
 	FeedbackDeviceStatus gearEncoderStatus = gearTalon.isSensorPresent(FeedbackDevice.CtreMagEncoder_Absolute);
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new GearRun());
+		setDefaultCommand(new GearRun(GearControlMode.kCurrent));
 	}
 
 	/**
