@@ -29,11 +29,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  for (int i = 0; i < 24; i++) {
-    leds[i] = GREEN;
-  }
+//  for (int i = 0; i < 24; i++) {
+//    leds[i] = GREEN;
+//  }
   for (int i = 24; i < 48; i++) {
-    leds[i] = BLUE;
+    leds[i] = GREEN;
   }
   FastLED.show();
   delay(100);
