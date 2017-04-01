@@ -57,14 +57,7 @@ void loop()
 //  const int hue        = cycle_hue;
   const int hue        = 100; //analogRead(H_ANALOG_PIN);
   const int saturation = 255; //analogRead(S_ANALOG_PIN);
-  int value = 0;
-
-  if (digitalRead(V_DIGITAL_PIN) == 0) {
-    value = 255;
-  } else {
-    value = 0;
-  }
-  
+  int value = 255;
   
   const CHSV color(hue        ,
                    saturation ,
@@ -77,11 +70,11 @@ void loop()
 
   delay(1);
   neopixel_leds.fill_solid(color);
-  dotstar_leds.fill_solid(color);
+  //dotstar_leds.fill_solid(color);
   FastLED.show(); // display this frame
-  Serial << " H: " << hue
-         << " S: " << saturation
-         << " V: " << value
-         << "\n";
+//  Serial << " H: " << hue
+//         << " S: " << saturation
+//         << " V: " << value
+//         << "\n";
   FastLED.delay(100); // sanity delay
 }
