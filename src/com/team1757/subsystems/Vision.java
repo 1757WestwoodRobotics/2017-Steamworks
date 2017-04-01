@@ -202,6 +202,7 @@ public class Vision extends Subsystem {
 		}
 		return 0;
 	}
+	
 
 	/**
 	 * Updates the local contoursReport table. WARNING, this has to be somewhat

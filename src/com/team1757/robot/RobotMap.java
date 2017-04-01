@@ -7,8 +7,8 @@ import com.team1757.utils.MaxbotixUltrasonicAnalog;
 import com.team1757.utils.MaxbotixUltrasonicSerial;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
-import com.team1757.utils.VisionCenterGearPIDSource;
-import com.team1757.utils.VisionCenterPIDSource;
+import com.team1757.utils.VisionAirshipSource;
+import com.team1757.utils.VisionTestSource;
 import com.team1757.utils.VisionDetectionType;
 
 import edu.wpi.cscore.UsbCamera;
@@ -78,10 +78,10 @@ public class RobotMap {
 
 	private static VariablePIDOutput ultrasonicOutput;
 
-	private static VisionCenterPIDSource visionCenterInput;
+	private static VisionTestSource visionCenterInput;
 	private static VariablePIDOutput visionCenterOutput;
 
-	private static VisionCenterGearPIDSource visionCenterGearInput;
+	private static VisionAirshipSource visionCenterGearInput;
 	private static VariablePIDOutput visionCenterGearOutput;
 
 	public static UsbCamera gearCam; // = new UsbCamera("gearCam", 0);
@@ -207,8 +207,7 @@ public class RobotMap {
 //		ultrasonicController.setOutputRange(-1, 1);
 
 		// Initialize PID Input/ Output (VisionCenter)
-		visionCenterInput = new VisionCenterPIDSource();
-		visionCenterInput.setVisionDetectionType(VisionDetectionType.ContourCenterX);
+		visionCenterInput = new VisionTestSource();
 		visionCenterOutput = new VariablePIDOutput();
 
 		// Initialize PIDController (VisionCenter)
@@ -222,8 +221,7 @@ public class RobotMap {
 		visionTranslationController.setAbsoluteTolerance(.0005);
 
 		// Initialize PID Input / Output (Gear)
-		visionCenterGearInput = new VisionCenterGearPIDSource();
-		visionCenterGearInput.setVisionDetectionType(VisionDetectionType.ContourCenterX);
+		visionCenterGearInput = new VisionAirshipSource();
 		visionCenterGearOutput = new VariablePIDOutput();
 
 		// Initialize PIDController (Gear)
