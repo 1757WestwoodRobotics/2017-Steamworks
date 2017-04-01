@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * Aligns the robot perpendicularly to the gear target using vision processing
  */
-public class VisionGetReadyToScoreGear extends Command {
+public class VisionPerpendicularAlignGear extends Command {
 
-	public VisionGetReadyToScoreGear() {
+	public VisionPerpendicularAlignGear() {
 		requires(Robot.driveTrain);
 	}
 

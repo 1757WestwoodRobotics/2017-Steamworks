@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * @author Ryan Marten
  */
-public class VisionGearRingLightOn extends Command {
+public class CameraRingLightOn extends Command {
 
-    public VisionGearRingLightOn() {
+    public CameraRingLightOn() {
     }
 
     // Called just before this Command runs the first time

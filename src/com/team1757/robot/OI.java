@@ -13,8 +13,8 @@ import com.team1757.commands.DriveGyroAssisted;
 import com.team1757.commands.DriveStraightY;
 import com.team1757.commands.DriveToggleDirection;
 import com.team1757.commands.GearHug;
-import com.team1757.commands.VisionFaceReflectiveTape;
-import com.team1757.commands.VisionFollowReflectiveTape;
+import com.team1757.commands.VisionCenterRotation;
+import com.team1757.commands.VisionCenterRotationContinous;
 import com.team1757.commands.GearManualInput;
 import com.team1757.commands.GearMatchStart;
 import com.team1757.commands.GearReceive;
@@ -34,13 +34,13 @@ import com.team1757.commands.ShootWithVoltage;
 import com.team1757.commands.IndexerStop;
 import com.team1757.commands.LifterStop;
 import com.team1757.commands.ShooterStop;
-import com.team1757.commands.VisionCenterOnGearTranslationX;
-import com.team1757.commands.VisionGetReadyToScoreGear;
-import com.team1757.commands.VisionGearRingLightOff;
-import com.team1757.commands.VisionGearRingLightOn;
-import com.team1757.commands.VisionToggleCamera;
+import com.team1757.commands.VisionCenterTranslationXGear;
+import com.team1757.commands.VisionPerpendicularAlignGear;
+import com.team1757.commands.CameraRingLightOff;
+import com.team1757.commands.CameraRingLightOn;
+import com.team1757.commands.CameraToggleStream;
 import com.team1757.commands.VisionCenterTranslationX;
-import com.team1757.commands.VisionFaceGearTarget;
+import com.team1757.commands.VisionCenterRotationGear;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
@@ -190,17 +190,17 @@ public class OI {
 		SmartDashboard.putData(new LifterStop());
 
 		// Vision Commands
-		SmartDashboard.putData(new VisionFollowReflectiveTape());
-		SmartDashboard.putData(new VisionFaceReflectiveTape());
+		SmartDashboard.putData(new VisionCenterRotationContinous());
+		SmartDashboard.putData(new VisionCenterRotation());
 		SmartDashboard.putData(new VisionCenterTranslationX());
-		SmartDashboard.putData(new VisionGetReadyToScoreGear());
-		SmartDashboard.putData(new VisionFaceGearTarget());
-		SmartDashboard.putData(new VisionCenterOnGearTranslationX());
-		SmartDashboard.putData(new VisionToggleCamera());
+		SmartDashboard.putData(new VisionPerpendicularAlignGear());
+		SmartDashboard.putData(new VisionCenterRotationGear());
+		SmartDashboard.putData(new VisionCenterTranslationXGear());
+		SmartDashboard.putData(new CameraToggleStream());
 
 		// RingLight Commands
-		SmartDashboard.putData(new VisionGearRingLightOn());
-		SmartDashboard.putData(new VisionGearRingLightOff());
+		SmartDashboard.putData(new CameraRingLightOn());
+		SmartDashboard.putData(new CameraRingLightOff());
 
 		// CommandGroup Functions
 		SmartDashboard.putData(new CGShootandIndex());

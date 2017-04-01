@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CGCenterAndScoreGear extends CommandGroup {
 
 	public CGCenterAndScoreGear() {
-		addSequential(new VisionGetReadyToScoreGear());
+		addSequential(new VisionPerpendicularAlignGear());
 		addSequential(new DriveGyroAssisted());
 	}
 }

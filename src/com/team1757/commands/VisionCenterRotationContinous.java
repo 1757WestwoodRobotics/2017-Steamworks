@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * @author Ryan Marten
  */
-public class VisionFaceReflectiveTape extends Command {
+public class VisionCenterRotationContinous extends Command {
 
-	public VisionFaceReflectiveTape() {
+	public VisionCenterRotationContinous() {
 		requires(Robot.driveTrain);
 	}
 
@@ -22,8 +22,7 @@ public class VisionFaceReflectiveTape extends Command {
 
 		// Using GyroPID with camera
 		Robot.driveTrain.enableGyroPID();
-		Robot.driveTrain.setTargetAngle(
-				Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getTargetCenterContour() * 19.82));
+		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getTargetCenterContour() * 19.82));
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -37,12 +36,14 @@ public class VisionFaceReflectiveTape extends Command {
 		// -Robot.vision.getCenterPID());
 
 		// Using gyroPID with scaled camera
-		Robot.driveTrain.moveToTargetAngle();
+		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getTargetCenterContour() * 19.82));
+		
+		Robot.driveTrain.moveWithGyroPID(Robot.oi.getTranslateX(), Robot.oi.getTranslateY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return Robot.driveTrain.reachedGyroSetpoint();
+		return false;
 	}
 
 	// Called once after isFinished returns true

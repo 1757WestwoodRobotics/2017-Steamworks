@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * @author Ryan Marten
  */
-public class VisionFaceGearTarget extends Command {
+public class VisionCenterRotationGear extends Command {
 
-	public VisionFaceGearTarget() {
+	public VisionCenterRotationGear() {
 		requires(Robot.driveTrain);
 	}
 

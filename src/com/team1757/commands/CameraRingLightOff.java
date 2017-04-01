@@ -1,23 +1,19 @@
 package com.team1757.commands;
 
-import com.team1757.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Switches streaming between the gear camera and the shooter camera
+ * Turn the gear camera's ring light off
  * 
  * @author Ryan Marten
  */
-public class VisionToggleCamera extends Command {
+public class CameraRingLightOff extends Command {
 
-	public VisionToggleCamera() {
-
+	public CameraRingLightOff() {
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.vision.toggleVisionCamera();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

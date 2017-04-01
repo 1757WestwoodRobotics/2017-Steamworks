@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * @author Ryan Marten
  */
-public class VisionCenterOnGearTranslationX extends Command {
+public class VisionCenterTranslationXGear extends Command {
 
-	public VisionCenterOnGearTranslationX() {
+	public VisionCenterTranslationXGear() {
 		requires(Robot.vision);
 		requires(Robot.driveTrain);
 	}
