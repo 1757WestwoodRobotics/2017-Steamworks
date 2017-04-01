@@ -12,7 +12,6 @@ import com.team1757.commands.CGAutoCrossLine;
 import com.team1757.commands.CGAutoLeft;
 import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.GetStatus;
-import com.team1757.subsystems.RingLight;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.DriveTrain;
 import com.team1757.subsystems.GearLoader;
@@ -36,7 +35,6 @@ public class Robot extends IterativeRobot {
 	public static BallCollector ballCollector;
 	public static GearLoader gearLoader;
 	public static Lifter lifter;
-	public static RingLight ringLight;
 	public static OI oi;
 	public static Vision vision;
 
@@ -64,7 +62,6 @@ public class Robot extends IterativeRobot {
 		ballCollector = new BallCollector();
 		gearLoader = new GearLoader();
 		lifter = new Lifter();
-		ringLight = new RingLight();
 		
 		// Initialize OI
 		oi = new OI();

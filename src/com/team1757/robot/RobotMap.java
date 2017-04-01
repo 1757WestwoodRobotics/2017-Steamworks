@@ -79,7 +79,7 @@ public class RobotMap {
 
 	public static Vision vision;
 	
-	public static DigitalOutput gearRingLightController;
+	
 
 	public static UsbCamera gearCam; // = new UsbCamera("gearCam", 0);
 	public static UsbCamera shooterCam; // = new UsbCamera("shooterCam", 1);
@@ -141,10 +141,6 @@ public class RobotMap {
 		gearLoaderTalon.configNominalOutputVoltage(4.2, 4.2);
 
 		liftTalon.enableBrakeMode(false);
-		
-		// Initialize gearRingLight
-		gearRingLightController = new DigitalOutput(0);
-		
 
 		// Initialize RobotDrive
 		driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack, driveTrainRightFront,
@@ -212,7 +208,6 @@ public class RobotMap {
 		//SmartDashboard.putData("visionGearTranslationController", visionGearTranslationController);
 		visionGearTranslationController.setOutputRange(-.5, .5);
 		visionGearTranslationController.setAbsoluteTolerance(8);
-
 
 	}
 }

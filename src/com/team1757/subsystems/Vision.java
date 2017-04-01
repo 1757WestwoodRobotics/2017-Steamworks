@@ -134,20 +134,6 @@ public class Vision extends Subsystem {
 
 	}
 
-	// Ring Lights
-
-	/**
-	 * Activates the relay connected to the gear camera's ring light
-	 */
-	public void turnOnGearRingLight() {
-	}
-
-	/**
-	 * Deactivates the relay connected to the gear camera's ring light
-	 */
-	public void turnOffGearRingLight() {
-	}
-
 	// PID Translation Controllers
 
 	/**
