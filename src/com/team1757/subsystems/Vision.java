@@ -45,7 +45,7 @@ public class Vision extends Subsystem {
 	 * SmartDashboard
 	 */
 	public void init() {
-		gearCam.setFPS(fps);
+	/*	gearCam.setFPS(fps);
 		gearCam.setResolution(xResolution, yResolution);
 		// Use zero exposure for bright vision targets and back light
 		// gearCam.setExposureManual(0);
@@ -59,7 +59,9 @@ public class Vision extends Subsystem {
 
 		CameraServer.getInstance().addCamera(shooterCam);
 
-		CameraServer.getInstance().startAutomaticCapture(gearCam);
+		CameraServer.getInstance().startAutomaticCapture(gearCam); */
+		
+		CameraServer.getInstance().startAutomaticCapture(0);
 
 	}
 
