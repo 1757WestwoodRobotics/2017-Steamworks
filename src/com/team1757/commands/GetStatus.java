@@ -1,6 +1,8 @@
 package com.team1757.commands;
 
 import com.team1757.robot.Robot;
+import com.team1757.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,6 +22,7 @@ public class GetStatus extends Command {
 	protected void execute() {
 		SmartDashboard.putNumber("GyroAngle", Robot.driveTrain.getCurrentRawAngle());
 		SmartDashboard.putNumber("BoundedGyroAngle", Robot.driveTrain.getCurrentBoundedAngle());
+		SmartDashboard.putBoolean("Arduino Detected on I2C", RobotMap.arduino.addressOnly());
 
 		try {
 			if (Robot.gearLoader.isSensorPresent()) {

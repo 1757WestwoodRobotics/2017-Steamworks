@@ -14,6 +14,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Relay;
@@ -79,7 +80,7 @@ public class RobotMap {
 
 	public static Vision vision;
 	
-	
+	public static I2C arduino;
 
 	public static UsbCamera gearCam; // = new UsbCamera("gearCam", 0);
 	public static UsbCamera shooterCam; // = new UsbCamera("shooterCam", 1);
@@ -141,6 +142,9 @@ public class RobotMap {
 		gearLoaderTalon.configNominalOutputVoltage(4.2, 4.2);
 
 		liftTalon.enableBrakeMode(false);
+		
+		// Initialize arduino I2C
+		arduino = new I2C(I2C.Port.kOnboard, 8);
 
 		// Initialize RobotDrive
 		driveTrainMecanumDrive = new RobotDrive(driveTrainLeftFront, driveTrainLeftBack, driveTrainRightFront,
