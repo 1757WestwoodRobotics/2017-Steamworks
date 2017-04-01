@@ -13,6 +13,7 @@ import com.team1757.commands.CGAutoLeft;
 import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.GetStatus;
 import com.team1757.subsystems.BallCollector;
+import com.team1757.subsystems.Camera;
 import com.team1757.subsystems.DriveTrain;
 import com.team1757.subsystems.GearLoader;
 import com.team1757.subsystems.Indexer;
@@ -37,7 +38,8 @@ public class Robot extends IterativeRobot {
 	public static Lifter lifter;
 	public static OI oi;
 	public static Vision vision;
-
+	public static Camera camera;
+		
 	Command autonomousCommand;
 	Command getStatus;
 	SendableChooser<Command> chooser;
@@ -55,7 +57,8 @@ public class Robot extends IterativeRobot {
 		// Initialize subsystems and default ManualDrive
 		driveTrain = new DriveTrain();
 		vision = new Vision();
-		vision.init();
+		camera = new Camera();
+		camera.init();
 		shooter = new Shooter();
 		indexer = new Indexer();
 		ballCollector = new BallCollector();

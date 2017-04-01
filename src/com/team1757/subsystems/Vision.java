@@ -1,5 +1,6 @@
 package com.team1757.subsystems;
 
+import com.team1757.robot.Robot;
 import com.team1757.robot.RobotMap;
 
 import edu.wpi.cscore.UsbCamera;
@@ -17,120 +18,24 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  */
 public class Vision extends Subsystem {
 
-	private final UsbCamera gearCam = RobotMap.gearCam;
-	private final UsbCamera shooterCam = RobotMap.shooterCam;
+	
 
 	private final PIDController visionTranslationController = RobotMap.visionTranslationController;
 	private final PIDController visionGearTranslationController = RobotMap.visionGearTranslationController;
 
-	private boolean isGearCamActive = true;
+
 
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
 	private NetworkTable linesReport;
 
-	private int xResolution = 160;
-	private int yResolution = 120;
-	private int fps = 30;
+	
 
 	private final double GEAR_TRANSLATION_PID_TOLERANCE = 100;
 
 	public void initDefaultCommand() {
 	}
 
-	// Cameras
-
-	/**
-	 * Initializes the cameras and starts the CameraServer to stream to GRIP /
-	 * SmartDashboard
-	 */
-	public void init() {
-		gearCam.setFPS(fps);
-		gearCam.setResolution(xResolution, yResolution);
-		// Use zero exposure for bright vision targets and back light
-		// gearCam.setExposureManual(0);
-
-		shooterCam.setFPS(fps);
-		shooterCam.setResolution(xResolution, yResolution);
-		// Use zero exposure for bright vision targets and back light
-		// shooterCam.setExposureManual(0);
-
-		CameraServer.getInstance().addCamera(gearCam);
-		CameraServer.getInstance().addCamera(shooterCam);
-
-		CameraServer.getInstance().startAutomaticCapture(gearCam);
-		CameraServer.getInstance().startAutomaticCapture(shooterCam);
-
-	}
-
-	/**
-	 * Sets the resolution of both cameras on the robot
-	 * 
-	 * @param x
-	 *            x dimension of the camera's image
-	 * @param y
-	 *            y dimension of the camera's image
-	 */
-	public void camerasSetResolution(int x, int y) {
-		xResolution = x;
-		yResolution = y;
-		gearCam.setResolution(x, y);
-		shooterCam.setResolution(x, y);
-	}
-
-	/**
-	 * Accessor for the X resolution used by both cameras on the robot
-	 * 
-	 * @return x dimension of the camera's image
-	 */
-	public int getResolutionX() {
-		return xResolution;
-	}
-
-	/**
-	 * Accessor for the Y resolution used by both cameras on the robot
-	 * 
-	 * @return y dimension of the camera's image
-	 */
-	public int getResolutionY() {
-		return yResolution;
-	}
-
-	/**
-	 * Sets the frame rate for both cameras on the robot. Streaming to the
-	 * CameraServer will not necessarily reach set FPS.
-	 * 
-	 * @param fps
-	 */
-	public void camerasSetFPS(int fps) {
-		this.fps = fps;
-		gearCam.setFPS(fps);
-		shooterCam.setFPS(fps);
-	}
-
-	/**
-	 * Accessor for the frame rate used by both cameras on the robot
-	 * 
-	 * @return fps
-	 */
-	public int getFPS() {
-		return fps;
-	}
-
-	/**
-	 * Swaps the current camera streaming to GRIP / SmartDashboard with the one
-	 * not streaming (and not capturing)
-	 */
-	public void toggleVisionCamera() {
-		if (isGearCamActive) {
-			CameraServer.getInstance().getServer().setSource(shooterCam);
-			isGearCamActive = false;
-		} else {
-			CameraServer.getInstance().getServer().setSource(gearCam);
-			isGearCamActive = true;
-		}
-
-	}
 
 	// PID Translation Controllers
 
@@ -228,7 +133,7 @@ public class Vision extends Subsystem {
 	 * @return normalizedX
 	 */
 	public double normalizePixelsX(double coordinateX) {
-		return coordinateX * (2.0f / xResolution) - 1;
+		return coordinateX * (2.0f / Robot.camera.xResolution) - 1;
 	}
 
 	/**
@@ -239,7 +144,7 @@ public class Vision extends Subsystem {
 	 * @return normalizedY
 	 */
 	public double normalizePixelsY(double coordinateY) {
-		return coordinateY * (2.0f / yResolution) - 1;
+		return coordinateY * (2.0f / Robot.camera.yResolution) - 1;
 	}
 
 	// Contour Vision Processing

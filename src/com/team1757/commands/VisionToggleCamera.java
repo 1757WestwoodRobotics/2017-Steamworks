@@ -17,7 +17,7 @@ public class VisionToggleCamera extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.vision.toggleVisionCamera();
+		Robot.camera.toggleVisionCamera();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

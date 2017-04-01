@@ -36,8 +36,6 @@ public class VisionGetReadyToScoreGear extends Command {
 		Robot.driveTrain.setTargetAngle(
 				Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getGearTargetCenter() * 19.82));
 		
-		SmartDashboard.putNumber("TranslationWithTrackingGear", -Robot.vision.getGearTranslationPID());
-		
 		Robot.driveTrain.moveWithGyroPID(-Robot.vision.getGearTranslationPID(), Robot.oi.getTranslateY());
 	}
 

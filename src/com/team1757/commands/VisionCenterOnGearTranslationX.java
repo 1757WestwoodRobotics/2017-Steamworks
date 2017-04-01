@@ -25,12 +25,6 @@ public class VisionCenterOnGearTranslationX extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-//		if(Robot.vision.reachedVisionGearTranslationSetpoint()){
-//			Robot.driveTrain.moveWithGyroPID(0, Robot.oi.getTranslateY());
-//		}else {
-//			Robot.driveTrain.moveWithGyroPID(-Robot.vision.getGearTranslationPID(), Robot.oi.getTranslateY());
-//		}
-		
 		Robot.driveTrain.moveWithGyroPID(-Robot.vision.getGearTranslationPID(), Robot.oi.getTranslateY());
 	}
 
