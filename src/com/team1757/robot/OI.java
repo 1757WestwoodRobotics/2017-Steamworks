@@ -19,6 +19,9 @@ import com.team1757.commands.GearManualInput;
 import com.team1757.commands.GearMatchStart;
 import com.team1757.commands.GearReceive;
 import com.team1757.commands.GearScore;
+import com.team1757.commands.GearWheelReverse;
+import com.team1757.commands.GearWheelRun;
+import com.team1757.commands.GearWheelStop;
 import com.team1757.commands.DriveGyroPIDClear;
 import com.team1757.commands.DriveManual;
 import com.team1757.commands.LiftUp;
@@ -184,6 +187,9 @@ public class OI {
 		SmartDashboard.putData(new GearReceive());
 		SmartDashboard.putData(new GearScore());
 		SmartDashboard.putData(new GearHug());
+		SmartDashboard.putData(new GearWheelRun());
+		SmartDashboard.putData(new GearWheelReverse());
+		SmartDashboard.putData(new GearWheelStop());
 
 		// Lifter Commands
 		SmartDashboard.putData(new LiftUp());
@@ -214,6 +220,8 @@ public class OI {
 		SmartDashboard.putNumber("targetAngle", 0.0);
 		SmartDashboard.putNumber("angularDeltaShortest", 0.0);
 		SmartDashboard.putNumber("Gear Manual Target Position", 618.0);
+		SmartDashboard.putNumber("GearWheelTalonRev", -1);
+		SmartDashboard.putNumber("GearWheelTalonFwd", 0.4);
 		
 		//Other SmartDashboard
 //		SmartDashboard.putNumber("driveLength", 0);

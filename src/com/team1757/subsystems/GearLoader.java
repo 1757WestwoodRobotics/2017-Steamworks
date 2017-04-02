@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class GearLoader extends Subsystem {
 
 	private static CANTalon gearTalon = RobotMap.gearLoaderTalon;
+	private static CANTalon gearWheelTalon = RobotMap.gearWheelTalon;
 	private final double GEAR_PID_TOLERANCE = 80;
 
 	FeedbackDeviceStatus gearEncoderStatus = gearTalon.isSensorPresent(FeedbackDevice.CtreMagEncoder_Absolute);
@@ -128,5 +129,20 @@ public class GearLoader extends Subsystem {
 	 */
 	public void runGearTalon() {
 		gearTalon.set(gearTalon.getSetpoint());
+	}
+	
+	
+	// Gear Wheel
+	public void initGearWheel() {
+		gearWheelTalon.changeControlMode(TalonControlMode.PercentVbus);
+	}
+	public void enableGearWheelTalon() {
+		gearWheelTalon.enable();
+	}
+	public void disableGearWheelTalon() {
+		gearWheelTalon.disable();
+	}
+	public void setGearWheelTalon(double pVBus) {
+		gearWheelTalon.set(pVBus);
 	}
 }

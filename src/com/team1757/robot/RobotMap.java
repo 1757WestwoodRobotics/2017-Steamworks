@@ -37,6 +37,7 @@ public class RobotMap {
 	private static final int indexerTalonPort = 9;
 	private static final int collectorFlyWheelPort = 7;
 	private static final int gearLoaderTalonPort = 6;
+	private static final int gearWheelTalonPort = 10;
 	private static final int liftTalonPort = 5;
 
 	// Talon objects
@@ -51,6 +52,7 @@ public class RobotMap {
 	public static CANTalon collectorFlyWheel;
 
 	public static CANTalon gearLoaderTalon;
+	public static CANTalon gearWheelTalon;
 
 	public static CANTalon liftTalon;
 
@@ -114,6 +116,9 @@ public class RobotMap {
 
 		gearLoaderTalon = new CANTalon(gearLoaderTalonPort);
 		LiveWindow.addActuator("GearLoader", "GearLoader Talon", gearLoaderTalon);
+		
+		gearWheelTalon = new CANTalon(gearWheelTalonPort);
+		LiveWindow.addActuator("GearWheel", "GearWheel Talon", gearWheelTalon);
 
 		liftTalon = new CANTalon(liftTalonPort);
 		LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
@@ -129,6 +134,7 @@ public class RobotMap {
 		driveTrainRightBack.enableBrakeMode(true);
 
 		gearLoaderTalon.enableBrakeMode(true);
+		gearWheelTalon.enableBrakeMode(true);
 
 		// Soft Limits
 		gearLoaderTalon.setReverseSoftLimit(270 / 4096.0);

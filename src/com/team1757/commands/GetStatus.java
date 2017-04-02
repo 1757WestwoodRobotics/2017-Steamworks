@@ -21,7 +21,7 @@ public class GetStatus extends Command {
 	protected void execute() {
 		SmartDashboard.putNumber("GyroAngle", Robot.driveTrain.getCurrentRawAngle());
 		SmartDashboard.putNumber("BoundedGyroAngle", Robot.driveTrain.getCurrentBoundedAngle());
-
+		
 		try {
 			if (Robot.gearLoader.isSensorPresent()) {
 				SmartDashboard.putNumber("Gear - ActualPosition", Robot.gearLoader.getPulseWidthPosition());
