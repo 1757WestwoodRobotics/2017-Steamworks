@@ -1,5 +1,16 @@
 // http://dsscircuits.com/articles/arduino-i2c-slave-guide
 
+// -------------------------
+// | Register Map          |
+// | Address   Descriptor  |
+// |-----------------------|
+// | 0    | Light1 Set     |
+// | 1    | Light2 Set     |
+// | 2    | Ultrasonic     |
+// | 3    | ---            |
+// | 4    | ---            |
+// -------------------------
+
 #include <Wire.h>
 
 #define SLAVE_ADDRESS   8
@@ -7,8 +18,6 @@
 #define MAX_SENT_BYTES  3
 
 byte registerMap[REG_MAP_SIZE];
-byte registerMapTemp[REG_MAP_SIZE-1];
-byte receivedCommands[MAX_SENT_BYTES]; // address, led1, led2
 
 int ultrasonicDistance;
 
@@ -21,8 +30,6 @@ void setup() {
 
 void loop() {
   ultrasonicDistance = getUltrasonicDistance();
-  storeData();
-
 }
 
 void requestEvent() {
@@ -39,28 +46,13 @@ void receiveEvent(int bytesReceived) {
       Wire.read();
     }
   }
-  
-  if (bytesReceived == 1 && (receivedCommands[0] < REG_MAP_SIZE)) {
-    return;
-  }
-
-  if (bytesReceived == 1 && (receivedCommands[0] >= REG_MAP_SIZE)) {
-    receivedCommands[0] = 0x00;
-    return;
-  }
-
-  byte zeroZeroData;
-  byte zeroOneData;
 
   switch (receivedCommands[0]) {
-    case 0x00:
-      zeroZeroData = receivedCommands[1];
-      bytesReceived--;
-      if (bytesReceived == 1) {
-        return;
-      }
+    case 0:
+      zeroZeroData = receivedCommands[1]; // set Address
+      return;
       break;
-    case 0x01:
+    case 1:
       zeroOneData = receivedCommands[1];
       return;
       break;
