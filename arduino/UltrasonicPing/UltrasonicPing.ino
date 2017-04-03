@@ -9,7 +9,7 @@
 #define MIN_DISTANCE 2   // Minimum distance the sensor can detect (in centimeters).
 #define MAX_DISTANCE 400 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
 
-NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
+NewPing ultrasonic(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
 
 void setup() {
   Serial.begin(115200); // Open serial monitor at 115200 baud to see ping results.
@@ -18,6 +18,6 @@ void setup() {
 void loop() {
   delay(50);                     // Wait 50ms between pings (about 20 pings/sec). 29ms should be the shortest delay between pings.
   Serial.print("Ping: ");
-  Serial.print(sonar.ping_cm()); // Send ping, get distance in cm and print result (0 = outside set distance range)
+  Serial.print(ultrasonic.ping_cm()); // Send ping, get distance in cm and print result (0 = outside set distance range)
   Serial.println("cm");
 }
