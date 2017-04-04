@@ -74,7 +74,7 @@ public class RobotMap {
 	private static VisionSourceTest visionCenterInput;
 	private static VisionSourceAirship visionCenterGearInput;
 
-	public static UsbCamera gearCam; // = new UsbCamera("gearCam", 0);
+	public static UsbCamera gearCam;
 	public static UsbCamera shooterCam; // = new UsbCamera("shooterCam", 1);
 
 	public static void init() {
@@ -173,6 +173,10 @@ public class RobotMap {
 		driveTrainNavX.setPIDSourceType(PIDSourceType.kDisplacement);
 		driveTrainNavX.reset();
 
+		// Initialize Cameras
+		gearCam = new UsbCamera("gearCam", 0);
+		shooterCam = new UsbCamera("shooterCam", 1);
+		
 		// Initialize PID Input/ Output (gyroscope)
 		try {
 			gyroInput = new NavXGyroWrapper(driveTrainNavX);
@@ -220,6 +224,5 @@ public class RobotMap {
 		// visionGearTranslationController);
 		visionGearTranslationController.setOutputRange(-.5, .5);
 		visionGearTranslationController.setAbsoluteTolerance(8);
-
 	}
 }

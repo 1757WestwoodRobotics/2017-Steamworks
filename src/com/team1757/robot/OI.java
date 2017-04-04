@@ -8,6 +8,7 @@ import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.Collect;
 import com.team1757.commands.DriveGyroAssisted;
 import com.team1757.commands.DropGearRun;
+import com.team1757.commands.FloorGearCollect;
 import com.team1757.commands.FloorGearRun;
 import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
@@ -29,6 +30,7 @@ import com.team1757.utils.Axis;
 import com.team1757.utils.CollectorControlMode;
 import com.team1757.utils.DirectionControlMode;
 import com.team1757.utils.DropGearControlMode;
+import com.team1757.utils.FloorGearCollectorControlMode;
 import com.team1757.utils.FloorGearPivotControlMode;
 import com.team1757.utils.IndexerControlMode;
 import com.team1757.utils.LifterControlMode;
@@ -140,6 +142,8 @@ public class OI {
 
 		// Bind Commands to Xbox Controller
 		xboxButtonY.whenPressed(new DriveSetDirection(DirectionControlMode.kToggle));
+		xboxButtonA.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kIntake));
+		xboxButtonB.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kDump));
 		xboxButtonLB.toggleWhenPressed(new Lift(LifterControlMode.kUp));
 		xboxButtonRB.whileHeld(new Lift(LifterControlMode.kUp));
 		
