@@ -15,6 +15,9 @@ public class VisionGetReadyToScoreGear extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		// Low exposure to remove backlight
+		Robot.camera.setExposureLow();
+		
 		// Using GyroPID with camera
 		Robot.driveTrain.enableGyroPID();
 
@@ -34,7 +37,7 @@ public class VisionGetReadyToScoreGear extends Command {
 		// areas of the two targets are equal)
 		Robot.driveTrain.setTargetAngle(
 				Robot.driveTrain.getCurrentBoundedAngle() + (Robot.vision.getGearTargetCenter() * 19.82));
-		
+
 		Robot.driveTrain.moveWithGyroPID(-Robot.vision.getGearTranslationPID(), Robot.oi.getTranslateY());
 	}
 
@@ -48,6 +51,7 @@ public class VisionGetReadyToScoreGear extends Command {
 		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
 		Robot.driveTrain.disableGyroPID();
 		Robot.vision.disableGearTranslationPID();
+		Robot.camera.setExposureAuto();
 	}
 
 	// Called when another command which requires one or more of the same

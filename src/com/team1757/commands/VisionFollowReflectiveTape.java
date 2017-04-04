@@ -19,6 +19,9 @@ public class VisionFollowReflectiveTape extends Command {
 	protected void initialize() {
 		// Using VisionPID with camera
 		// Robot.vision.enableCenterPID();
+		
+		// Low exposure to remove backlight
+		Robot.camera.setExposureLow();
 
 		// Using GyroPID with camera
 		Robot.driveTrain.enableGyroPID();
@@ -58,6 +61,9 @@ public class VisionFollowReflectiveTape extends Command {
 		// Using GyroPID with camera
 		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
 		Robot.driveTrain.disableGyroPID();
+		
+		// Auto exposure for driver
+		Robot.camera.setExposureAuto();
 	}
 
 	// Called when another command which requires one or more of the same

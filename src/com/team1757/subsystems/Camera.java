@@ -26,20 +26,15 @@ public class Camera extends Subsystem {
 	public void init() {
 		gearCam.setFPS(fps);
 		gearCam.setResolution(xResolution, yResolution);
-		// Use zero exposure for bright vision targets and back light
-		// gearCam.setExposureManual(0);
-
+		
 		shooterCam.setFPS(fps);
 		shooterCam.setResolution(xResolution, yResolution);
-		// Use zero exposure for bright vision targets and back light
-		// shooterCam.setExposureManual(0);
 
 		CameraServer.getInstance().addCamera(gearCam);
 		CameraServer.getInstance().addCamera(shooterCam);
 
 		CameraServer.getInstance().startAutomaticCapture(gearCam);
 		CameraServer.getInstance().startAutomaticCapture(shooterCam);
-
 	}
 
 	/**
@@ -94,6 +89,22 @@ public class Camera extends Subsystem {
 	 */
 	public int getFPS() {
 		return fps;
+	}
+	
+	/**
+	 * Set low exposure for accurate vision processing
+	 */
+	public void setExposureLow() {
+		gearCam.setExposureManual(20);
+		shooterCam.setExposureManual(20);
+	}
+	
+	/**
+	 * Set auto exposure for driver viewing
+	 */
+	public void setExposureAuto() {
+		gearCam.setExposureManual(20);
+		shooterCam.setExposureManual(20);
 	}
 
 	/**
