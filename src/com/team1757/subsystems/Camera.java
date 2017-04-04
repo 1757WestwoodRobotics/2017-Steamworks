@@ -13,6 +13,8 @@ public class Camera extends Subsystem {
 	public int xResolution = 160;
 	public int yResolution = 120;
 	private int fps = 30;
+	
+	private final int EXPOSURE_LOW = 0;
 
 	@Override
 	protected void initDefaultCommand() {
@@ -26,10 +28,12 @@ public class Camera extends Subsystem {
 	public void init() {
 		gearCam.setFPS(fps);
 		gearCam.setResolution(xResolution, yResolution);
+		gearCam.setExposureAuto();
 		
 		shooterCam.setFPS(fps);
 		shooterCam.setResolution(xResolution, yResolution);
-
+		shooterCam.setExposureAuto();
+		
 		CameraServer.getInstance().addCamera(gearCam);
 		CameraServer.getInstance().addCamera(shooterCam);
 
@@ -95,16 +99,16 @@ public class Camera extends Subsystem {
 	 * Set low exposure for accurate vision processing
 	 */
 	public void setExposureLow() {
-		gearCam.setExposureManual(20);
-		shooterCam.setExposureManual(20);
+		gearCam.setExposureManual(EXPOSURE_LOW);
+		shooterCam.setExposureManual(EXPOSURE_LOW);
 	}
 	
 	/**
 	 * Set auto exposure for driver viewing
 	 */
 	public void setExposureAuto() {
-		gearCam.setExposureManual(20);
-		shooterCam.setExposureManual(20);
+		gearCam.setExposureAuto();
+		shooterCam.setExposureAuto();
 	}
 
 	/**

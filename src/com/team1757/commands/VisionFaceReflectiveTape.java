@@ -2,6 +2,7 @@ package com.team1757.commands;
 
 import com.team1757.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -19,6 +20,10 @@ public class VisionFaceReflectiveTape extends Command {
 	protected void initialize() {
 		// Using VisionPID with camera
 		// Robot.vision.enableCenterPID();
+		
+		// Low exposure for processing
+		Robot.camera.setExposureLow();
+		Timer.delay(.5);
 
 		// Using GyroPID with camera
 		Robot.driveTrain.enableGyroPID();
@@ -53,6 +58,9 @@ public class VisionFaceReflectiveTape extends Command {
 		// Using GyroPID with camera
 		Robot.driveTrain.setTargetAngle(Robot.driveTrain.getCurrentBoundedAngle());
 		Robot.driveTrain.disableGyroPID();
+
+		// Automatic exposure for driver
+		Robot.camera.setExposureAuto();
 	}
 
 	// Called when another command which requires one or more of the same
