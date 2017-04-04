@@ -15,6 +15,14 @@ public class GetStatus extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		// Floor Gear Pivot Manual - FloorGearRun.java
+		SmartDashboard.putNumber("Floor Gear Manual Target Position", 0.0);
+		// Drop Gear Manual - DropGearRun.java
+		SmartDashboard.putNumber("Gear Manual Target Position", 0.0);
+		//RotateDegrees
+		SmartDashboard.putNumber("angularDelta", 0.0);
+		//RotateToAngle
+		SmartDashboard.putNumber("targetAngle", 0.0);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -34,6 +42,15 @@ public class GetStatus extends Command {
 
 		} catch (Exception e) {
 			System.out.println("Error with gear subsystem: " + e.getMessage());
+		}
+		
+		try {
+			if (Robot.floorGearLoader.isSensorPresent()) {
+				SmartDashboard.putNumber("Pivot - ActualPosition", Robot.floorGearLoader.getPulseWidthPosition());
+			}
+
+		} catch (Exception e) {
+			System.out.println("Error with floor gear subsystem: " + e.getMessage());
 		}
 	}
 
