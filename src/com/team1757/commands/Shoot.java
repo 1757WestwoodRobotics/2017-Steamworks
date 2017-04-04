@@ -32,7 +32,7 @@ public class Shoot extends Command {
     	Robot.shooter.changeControlMode(controlMode.getControlMode());
     	Robot.shooter.enableFlyWheel();
     	Robot.shooter.enableFlyWheelControl();
-    	Robot.shooter.setIsShooting(true);
+    	Robot.shooter.setIsShooting(controlMode.getIsShooting());
     }
 
     // Called repeatedly when this Command is scheduled to run
