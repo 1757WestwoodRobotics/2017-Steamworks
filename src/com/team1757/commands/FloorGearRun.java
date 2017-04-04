@@ -17,43 +17,43 @@ public class FloorGearRun extends Command {
 	private FloorGearPivotControlMode pivotControlMode;
 
 	public FloorGearRun(FloorGearPivotControlMode pivotControlMode) {
-		requires(Robot.dropGearLoader);
+		requires(Robot.floorGearLoader);
 		this.pivotControlMode = pivotControlMode;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.dropGearLoader.initializeGearPID();
-		Robot.dropGearLoader.initEncoder();
-		Robot.dropGearLoader.enableGearTalon();
-		Robot.dropGearLoader.enableGearPIDControl();
+		Robot.floorGearLoader.initializePivotPID();
+		Robot.floorGearLoader.initPivotEncoder();
+		Robot.floorGearLoader.enablePivotTalon();
+		Robot.floorGearLoader.enablePivotPIDControl();
 
 		if (pivotControlMode == FloorGearPivotControlMode.kCurrent) {
-			Robot.dropGearLoader.setTargetPosition(Robot.dropGearLoader.getPulseWidthPosition());
+			Robot.floorGearLoader.setPivotTargetPosition(Robot.floorGearLoader.getPulseWidthPosition());
 		} else if (pivotControlMode == FloorGearPivotControlMode.kManual) {
-			SmartDashboard.getNumber("Floor Gear Manual Target Position", FloorGearPivotControlMode.kReceive.getOutput());
+			Robot.floorGearLoader.setPivotTargetPosition(SmartDashboard.getNumber("Floor Gear Manual Target Position", FloorGearPivotControlMode.kReceive.getOutput()));
 		} else {
-			Robot.dropGearLoader.setTargetPosition(pivotControlMode.getOutput());
+			Robot.floorGearLoader.setPivotTargetPosition(pivotControlMode.getOutput());
 		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.dropGearLoader.runGearTalon();
+		Robot.floorGearLoader.runPivotTalon();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		if (pivotControlMode != FloorGearPivotControlMode.kCurrent) {
-			return Robot.dropGearLoader.reachedSetpoint();
+			return Robot.floorGearLoader.reachedPivotSetpoint();
 		}
 		return false;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.dropGearLoader.disableGearPIDControl();
-		Robot.dropGearLoader.disableGearTalon();
+		Robot.floorGearLoader.disablePivotPIDControl();
+		Robot.floorGearLoader.disablePivotTalon();
 	}
 
 	// Called when another command which requires one or more of the same

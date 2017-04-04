@@ -7,7 +7,7 @@ package com.team1757.utils;
  */
 
 public enum FloorGearPivotControlMode {
-	kCurrent(0), kManual(0), kCarry(330), kReceive(780), kScore(1430);
+	kCurrent(0), kManual(0), kReceive(600), kScore(0), kCarry(-246);
 	
 	private double target;
 	

@@ -31,7 +31,7 @@ public class DropGearRun extends Command {
 		if (controlMode == DropGearControlMode.kCurrent) {
 			Robot.dropGearLoader.setTargetPosition(Robot.dropGearLoader.getPulseWidthPosition());
 		} else if (controlMode == DropGearControlMode.kManual) {
-			SmartDashboard.getNumber("Gear Manual Target Position", DropGearControlMode.kReceive.getOutput());
+			Robot.dropGearLoader.setTargetPosition(SmartDashboard.getNumber("Gear Manual Target Position", DropGearControlMode.kReceive.getOutput()));
 		} else {
 			Robot.dropGearLoader.setTargetPosition(controlMode.getOutput());
 		}

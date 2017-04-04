@@ -51,7 +51,7 @@ public class FloorGearLoader extends Subsystem {
 	 * 
 	 * Set PID target to current position to lock in place
 	 */
-	public void initEncoder() {
+	public void initPivotEncoder() {
 		pivotTalon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 		pivotTalon.changeControlMode(TalonControlMode.Position);
 
@@ -189,4 +189,5 @@ public class FloorGearLoader extends Subsystem {
 		gearTalon.set(0);
 		
 	}
+
 }
