@@ -1,7 +1,5 @@
 package com.team1757.utils;
 
-import com.team1757.robot.Robot;
-
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
@@ -11,18 +9,18 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  * @author Ryan Marten
  *
  */
-public class VisionPlayerStationSource implements PIDSource {
+public class VisionSourcePlayerStation implements PIDSource {
 	
 	
 
 	private PIDSourceType pidSourceType = PIDSourceType.kDisplacement;
 	private double offset;
 
-	public VisionPlayerStationSource() {
+	public VisionSourcePlayerStation() {
 		this.offset = 0;
 	}
 	
-	public VisionPlayerStationSource(double offset){
+	public VisionSourcePlayerStation(double offset){
 		this.offset = offset;
 	}
 

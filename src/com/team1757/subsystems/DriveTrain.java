@@ -19,10 +19,12 @@ public class DriveTrain extends Subsystem {
 	private final AHRS driveTrainNavX = RobotMap.driveTrainNavX;
 	private final MaxbotixUltrasonicAnalog ultrasonicAnalog = RobotMap.ultrasonicAnalog;
 	private final MaxbotixUltrasonicSerial ultrasonicSerial = RobotMap.ultrasonicSerial;
+	
 	private final PIDController gyroController = RobotMap.gyroController;
 	private final PIDController accelControllerX = RobotMap.accelControllerX;
 	private final PIDController accelControllerY = RobotMap.accelControllerY;
 	private final PIDController ultrasonicController = RobotMap.ultrasonicController;
+	
 	private final RobotDrive driveTrainMecanumDrive = RobotMap.driveTrainMecanumDrive;
 
 	private final double GYRO_PID_TOLERANCE = .5;

@@ -7,7 +7,8 @@ import com.team1757.commands.CGAutoMiddle;
 import com.team1757.commands.CGShootandIndex;
 import com.team1757.commands.Collect;
 import com.team1757.commands.DriveGyroAssisted;
-import com.team1757.commands.GearRun;
+import com.team1757.commands.DropGearRun;
+import com.team1757.commands.FloorGearRun;
 import com.team1757.commands.VisionFaceReflectiveTape;
 import com.team1757.commands.VisionFollowReflectiveTape;
 import com.team1757.commands.DriveManual;
@@ -27,7 +28,8 @@ import com.team1757.commands.VisionToggleCamera;
 import com.team1757.utils.Axis;
 import com.team1757.utils.CollectorControlMode;
 import com.team1757.utils.DirectionControlMode;
-import com.team1757.utils.GearControlMode;
+import com.team1757.utils.DropGearControlMode;
+import com.team1757.utils.FloorGearPivotControlMode;
 import com.team1757.utils.IndexerControlMode;
 import com.team1757.utils.LifterControlMode;
 import com.team1757.utils.RingLightControlMode;
@@ -129,24 +131,23 @@ public class OI {
 		buttonBoxButton6 = new JoystickButton(buttonBox, buttonBoxButton6Port);
 
 		// Bind Commands to ButtonBox
-		buttonBoxButton1.whenPressed(new GearRun(GearControlMode.kReceive));
-		buttonBoxButton4.whenPressed(new GearRun(GearControlMode.kScore));
+		buttonBoxButton1.whenPressed(new DropGearRun(DropGearControlMode.kReceive));
+		buttonBoxButton4.whenPressed(new DropGearRun(DropGearControlMode.kScore));
 		buttonBoxButton2.toggleWhenPressed(new Collect(CollectorControlMode.kPercentForward));
-		buttonBoxButton5.whenPressed(new GearRun(GearControlMode.kHug));
+		buttonBoxButton5.whenPressed(new DropGearRun(DropGearControlMode.kHug));
 		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
 		buttonBoxButton6.whenPressed(new VisionToggleCamera());
 
 		// Bind Commands to Xbox Controller
 		xboxButtonY.whenPressed(new DriveSetDirection(DirectionControlMode.kToggle));
-		xboxButtonA.whenPressed(new DriveManual());
 		xboxButtonLB.toggleWhenPressed(new Lift(LifterControlMode.kUp));
 		xboxButtonRB.whileHeld(new Lift(LifterControlMode.kUp));
 		
 		// Put Commands on SmartDashboard
 		// Drive functions
+		SmartDashboard.putData("Drive Toggle", new DriveSetDirection(DirectionControlMode.kToggle));
 		SmartDashboard.putData("DriveStraight axisY", new DriveStraight(Axis.axisY, 1.65));
 		SmartDashboard.putData(new DriveGyroAssisted());
-		SmartDashboard.putData("Drive Toggle", new DriveSetDirection(DirectionControlMode.kToggle));
 		SmartDashboard.putData(new DriveStraightToRange(60, Unit.kInches));
 
 		// Gyro Systems
@@ -160,29 +161,31 @@ public class OI {
 		SmartDashboard.putData("Shoot SpeedForward", new Shoot(ShooterControlMode.kSpeedForward));
 		SmartDashboard.putData("Shoot PercentForward", new Shoot(ShooterControlMode.kPercentForward));
 		SmartDashboard.putData("Shoot VoltageForward", new Shoot(ShooterControlMode.kVoltageForward));
-		SmartDashboard.putData("Shoot Stop", new Shoot(ShooterControlMode.kStop));
 
 		// Indexer Commands
 		SmartDashboard.putData("Index PercentForward", new Index(IndexerControlMode.kPercentForward));
 		SmartDashboard.putData("Index PercentReverse", new Index(IndexerControlMode.kPercentReverse));
-		SmartDashboard.putData("Index Stop", new Index(IndexerControlMode.kStop));
 
 		// Collector Commands
 		SmartDashboard.putData("Collect PercentForward", new Collect(CollectorControlMode.kPercentForward));
 		SmartDashboard.putData("Collect PercentReverse", new Collect(CollectorControlMode.kPercentReverse));
-		SmartDashboard.putData("Collect Stop", new Collect(CollectorControlMode.kStop));
 
-		// GearLoader Commands
+		// Drop GearLoader Commands
 		
-		SmartDashboard.putData("GearRun Manual", new GearRun(GearControlMode.kManual));
-		SmartDashboard.putData("GearRun MatchStart", new GearRun(GearControlMode.kMatchStart));
-		SmartDashboard.putData("GearRun Receive", new GearRun(GearControlMode.kReceive));
-		SmartDashboard.putData("GearRun Hug", new GearRun(GearControlMode.kHug));
-		SmartDashboard.putData("GearRun Score", new GearRun(GearControlMode.kScore));
+		SmartDashboard.putData("Drop GearRun Manual", new DropGearRun(DropGearControlMode.kManual));
+		SmartDashboard.putData("Drop GearRun MatchStart", new DropGearRun(DropGearControlMode.kMatchStart));
+		SmartDashboard.putData("Drop GearRun Receive", new DropGearRun(DropGearControlMode.kReceive));
+		SmartDashboard.putData("Drop GearRun Hug", new DropGearRun(DropGearControlMode.kHug));
+		SmartDashboard.putData("Drop GearRun Score", new DropGearRun(DropGearControlMode.kScore));
 
+		// Floor GearLoader Commands
+		SmartDashboard.putData("Floor GearRun Manual", new FloorGearRun(FloorGearPivotControlMode.kManual));
+		SmartDashboard.putData("Floor GearRun Receive", new FloorGearRun(FloorGearPivotControlMode.kReceive));
+		SmartDashboard.putData("Floor GearRun Carry", new FloorGearRun(FloorGearPivotControlMode.kCarry));
+		SmartDashboard.putData("Floor GearRun Score", new FloorGearRun(FloorGearPivotControlMode.kScore));
+		
 		// Lifter Commands
 		SmartDashboard.putData("Lift Up", new Lift(LifterControlMode.kUp));
-		SmartDashboard.putData("Lift Stop", new Lift(LifterControlMode.kStop));
 
 		// Vision Commands
 		SmartDashboard.putData(new VisionFollowReflectiveTape());

@@ -3,7 +3,6 @@ package com.team1757.commands;
 import com.team1757.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Aligns the robot perpendicularly to the gear target using vision processing

@@ -28,8 +28,8 @@ public class GetStatus extends Command {
 		SmartDashboard.putBoolean("isShooting", Robot.shooter.getIsShooting());
 
 		try {
-			if (Robot.gearLoader.isSensorPresent()) {
-				SmartDashboard.putNumber("Gear - ActualPosition", Robot.gearLoader.getPulseWidthPosition());
+			if (Robot.dropGearLoader.isSensorPresent()) {
+				SmartDashboard.putNumber("Gear - ActualPosition", Robot.dropGearLoader.getPulseWidthPosition());
 			}
 
 		} catch (Exception e) {

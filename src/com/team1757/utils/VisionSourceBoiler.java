@@ -11,18 +11,18 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  * @author Ryan Marten
  *
  */
-public class VisionTestSource implements PIDSource {
+public class VisionSourceBoiler implements PIDSource {
 	
 	
 
 	private PIDSourceType pidSourceType = PIDSourceType.kDisplacement;
 	private double offset;
 
-	public VisionTestSource() {
+	public VisionSourceBoiler() {
 		this.offset = 0;
 	}
 	
-	public VisionTestSource(double offset){
+	public VisionSourceBoiler(double offset){
 		this.offset = offset;
 	}
 

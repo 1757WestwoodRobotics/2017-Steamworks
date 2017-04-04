@@ -15,7 +15,8 @@ import com.team1757.commands.GetStatus;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.Camera;
 import com.team1757.subsystems.DriveTrain;
-import com.team1757.subsystems.GearLoader;
+import com.team1757.subsystems.DropGearLoader;
+import com.team1757.subsystems.FloorGearLoader;
 import com.team1757.subsystems.Indexer;
 import com.team1757.subsystems.Lifter;
 import com.team1757.subsystems.Shooter;
@@ -34,7 +35,8 @@ public class Robot extends IterativeRobot {
 	public static Shooter shooter;
 	public static Indexer indexer;
 	public static BallCollector ballCollector;
-	public static GearLoader gearLoader;
+	public static DropGearLoader dropGearLoader;
+	public static FloorGearLoader floorGearLoader;
 	public static Lifter lifter;
 	public static OI oi;
 	public static Vision vision;
@@ -62,7 +64,8 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		indexer = new Indexer();
 		ballCollector = new BallCollector();
-		gearLoader = new GearLoader();
+		dropGearLoader = new DropGearLoader();
+		floorGearLoader = new FloorGearLoader();
 		lifter = new Lifter();
 		
 		// Initialize OI

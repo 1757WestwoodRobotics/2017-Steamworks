@@ -6,23 +6,21 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
 /**
- * A PID source for a single vision target using the center of the target
+ * A PID source for gear target using difference in the two areas of 3M tape
  * 
  * @author Ryan Marten
  *
  */
-public class VisionBoilerSource implements PIDSource {
+public class VisionSourceAirship implements PIDSource {
 	
-	
-
 	private PIDSourceType pidSourceType = PIDSourceType.kDisplacement;
 	private double offset;
 
-	public VisionBoilerSource() {
+	public VisionSourceAirship() {
 		this.offset = 0;
 	}
 	
-	public VisionBoilerSource(double offset){
+	public VisionSourceAirship(double offset){
 		this.offset = offset;
 	}
 
@@ -36,10 +34,8 @@ public class VisionBoilerSource implements PIDSource {
 		return pidSourceType;
 	}
 
-
 	@Override
 	public double pidGet() {
-			return Robot.vision.getTargetCenterContour() + offset;
+		return Robot.vision.getGearTargetCenter() + offset;
 	}
-
 }

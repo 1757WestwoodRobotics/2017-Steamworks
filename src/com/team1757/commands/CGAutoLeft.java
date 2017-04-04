@@ -2,7 +2,7 @@ package com.team1757.commands;
 
 import com.team1757.utils.Axis;
 import com.team1757.utils.DirectionControlMode;
-import com.team1757.utils.GearControlMode;
+import com.team1757.utils.DropGearControlMode;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -17,7 +17,7 @@ public class CGAutoLeft extends CommandGroup {
 		// Face gear loader forward
 		addSequential(new DriveSetDirection(DirectionControlMode.kInverted));
 		// Drop gear to receive
-		addSequential(new GearRun(GearControlMode.kReceive));
+		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Drive straight ~114"
 		addSequential(new DriveStraight(Axis.axisY, 1.6));
 		// Rotate right 60

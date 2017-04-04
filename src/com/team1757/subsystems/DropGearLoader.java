@@ -1,8 +1,8 @@
 package com.team1757.subsystems;
 
-import com.team1757.commands.GearRun;
+import com.team1757.commands.DropGearRun;
 import com.team1757.robot.RobotMap;
-import com.team1757.utils.GearControlMode;
+import com.team1757.utils.DropGearControlMode;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.FeedbackDeviceStatus;
@@ -13,15 +13,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class GearLoader extends Subsystem {
+public class DropGearLoader extends Subsystem {
 
-	private static CANTalon gearTalon = RobotMap.gearLoaderTalon;
+	private static CANTalon gearTalon = RobotMap.dropGearLoaderTalon;
 	private final double GEAR_PID_TOLERANCE = 80;
 
 	FeedbackDeviceStatus gearEncoderStatus = gearTalon.isSensorPresent(FeedbackDevice.CtreMagEncoder_Absolute);
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new GearRun(GearControlMode.kCurrent));
+		setDefaultCommand(new DropGearRun(DropGearControlMode.kCurrent));
 	}
 
 	/**

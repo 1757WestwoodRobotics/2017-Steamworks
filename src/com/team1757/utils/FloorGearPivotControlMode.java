@@ -6,12 +6,12 @@ package com.team1757.utils;
  * @author ACabey
  */
 
-public enum GearControlMode {
-	kCurrent(0), kManual(0), kMatchStart(330), kReceive(780), kHug(580), kScore(1430);
+public enum FloorGearPivotControlMode {
+	kCurrent(0), kManual(0), kCarry(330), kReceive(780), kScore(1430);
 	
 	private double target;
 	
-	GearControlMode(double target) {
+	FloorGearPivotControlMode(double target) {
 		this.target = target;
 	}
 	
