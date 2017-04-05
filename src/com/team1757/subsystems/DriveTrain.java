@@ -301,6 +301,18 @@ public class DriveTrain extends Subsystem {
 	}
 
 	/**
+	 * getRangeSerialMM
+	 * 
+	 * @return double measured range (MM)
+	 * @return -1.0 if the voltage is below the minimum
+	 * @return -2.0 if voltage is above the maximum
+	 */
+	public double getRangeSerialMM() {
+		return ultrasonicSerial.getRange(Unit.kMM);
+	}
+	
+	
+	/**
 	 * getUltrasonicSerialDefaultUnit
 	 * 
 	 * @return Current default unit

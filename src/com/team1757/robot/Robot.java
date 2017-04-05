@@ -57,10 +57,10 @@ public class Robot extends IterativeRobot {
 		RobotMap.init();
 
 		// Initialize subsystems and default ManualDrive
-		driveTrain = new DriveTrain();
-		vision = new Vision();
 		camera = new Camera();
 		camera.init();
+		vision = new Vision();
+		driveTrain = new DriveTrain();
 		shooter = new Shooter();
 		indexer = new Indexer();
 		ballCollector = new BallCollector();
