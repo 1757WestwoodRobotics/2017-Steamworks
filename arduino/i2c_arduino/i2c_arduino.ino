@@ -21,10 +21,10 @@
 #include <Wire.h>
 
 #define SLAVE_ADDRESS   8
-#define REG_MAP_SIZE    4
-#define MAX_SENT_BYTES  3
+#define REG_SIZE        
 
-byte receivedCommands[3];
+byte sendCommands[3*8];
+byte receivedCommands[3*8];
 int ultrasonicDistance;
 
 void setup() {
@@ -36,6 +36,12 @@ void setup() {
 
 void loop() {
   // ultrasonicDistance = getUltrasonicDistance();
+//  for (int a=0; a<3; a++) {
+//    Serial.print(a);
+//    Serial.print(": ");
+//    Serial.println(receivedCommands[a]);
+//  }
+  Serial.println(ultrasonicDistance);
 }
 
 void requestEvent() {
@@ -46,26 +52,36 @@ void receiveEvent(int bytesReceived) {
   
   for (int i=0; i<bytesReceived; i++) {
     receivedCommands[i] = Wire.read();
-    Serial.println(receivedCommands[i]);
+    //Serial.println(receivedCommands[i]);
   }
 
-//  switch (receivedCommands[0]) {
-//    case 0:
-//      zeroZeroData = receivedCommands[1]; // set Address
-//      return;
-//      break;
-//    case 1:
-//      zeroOneData = receivedCommands[1];
-//      return;
-//      break;
-//    default:
-//      return;
-//  }
+  ultrasonicDistance = unpack(recievedCommands);
+
+  switch (receivedCommands[0]) {
+    case 0:
+      Serial.println("case 0");
+      break;
+    case 1:
+      Serial.println("case 1");
+      break;
+    case 2:
+      Serial.println("case 2");
+      break;
+    default:
+      break;
+  }
   
 }
 
-void storeData() {
-  
+void storeData(byte[] target, int data) {
+  target[0] = (data & 0x000000FF) >> 0;
+  target[1] = (data & 0x0000FF00) >> 8;
+  target[2] = (data & 0x00FF0000) >> 16;
+  target[3] = (data & 0xFF000000) >> 24;
+}
+
+int unpackData(byte[] data) {
+  return (data[0] | (data[1] << 8) | (data[2] << 16) | (data[3] << 24));
 }
 
 /**
