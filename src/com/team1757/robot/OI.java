@@ -1,31 +1,7 @@
 package com.team1757.robot;
 
-import com.team1757.commands.CGAutoRight;
-import com.team1757.commands.CGAutoCrossLine;
-import com.team1757.commands.CGAutoLeft;
-import com.team1757.commands.CGAutoMiddle;
-import com.team1757.commands.CGShootandIndex;
-import com.team1757.commands.Collect;
-import com.team1757.commands.DriveGyroAssisted;
-import com.team1757.commands.DropGearRun;
-import com.team1757.commands.FloorGearCollect;
-import com.team1757.commands.FloorGearRun;
-import com.team1757.commands.VisionFaceReflectiveTape;
-import com.team1757.commands.VisionFollowReflectiveTape;
-import com.team1757.commands.DriveManual;
-import com.team1757.commands.DriveResetGyro;
-import com.team1757.commands.DriveSetDirection;
-import com.team1757.commands.DriveStraight;
-import com.team1757.commands.DriveStraightToRange;
-import com.team1757.commands.RotateDegrees;
-import com.team1757.commands.RotateToAngle;
-import com.team1757.commands.Shoot;
-import com.team1757.commands.Index;
-import com.team1757.commands.Lift;
-import com.team1757.commands.VisionCenterOnGearTranslationX;
-import com.team1757.commands.VisionGetReadyToScoreGear;
-import com.team1757.commands.VisionRingLight;
-import com.team1757.commands.VisionToggleCamera;
+
+import com.team1757.commands.*;
 import com.team1757.utils.Axis;
 import com.team1757.utils.CollectorControlMode;
 import com.team1757.utils.DirectionControlMode;
@@ -37,8 +13,7 @@ import com.team1757.utils.LifterControlMode;
 import com.team1757.utils.RingLightControlMode;
 import com.team1757.utils.ShooterControlMode;
 import com.team1757.utils.Unit;
-import com.team1757.commands.VisionCenterTranslationX;
-import com.team1757.commands.VisionFaceGearTarget;
+import com.team1757.utils.VisionDetectionTarget;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
@@ -192,14 +167,13 @@ public class OI {
 		SmartDashboard.putData("Lift Up", new Lift(LifterControlMode.kUp));
 
 		// Vision Commands
-		SmartDashboard.putData(new VisionFollowReflectiveTape());
-		SmartDashboard.putData(new VisionFaceReflectiveTape());
-		SmartDashboard.putData(new VisionCenterTranslationX());
-		SmartDashboard.putData(new VisionGetReadyToScoreGear());
-		SmartDashboard.putData(new VisionFaceGearTarget());
-		SmartDashboard.putData(new VisionCenterOnGearTranslationX());
 		SmartDashboard.putData(new VisionToggleCamera());
-
+		SmartDashboard.putData("Test Target Rotation", new VisionCenterTargetRotation(VisionDetectionTarget.TestSingleTarget));
+		SmartDashboard.putData("Gear Target Rotation", new VisionCenterTargetRotation(VisionDetectionTarget.GearAirship));
+		SmartDashboard.putData("Test Target Translation", new VisionCenterTargetTranslation(VisionDetectionTarget.TestSingleTarget));
+		SmartDashboard.putData("Gear Target Translation", new VisionCenterTargetRotation(VisionDetectionTarget.GearAirship));
+		SmartDashboard.putData("Get Ready to Score Gear", new VisionAlignTargetPerpendicular(VisionDetectionTarget.GearAirship));
+		
 		// RingLight Commands
 		SmartDashboard.putData("RingLight GearOn", new VisionRingLight(RingLightControlMode.kGearOn));
 		SmartDashboard.putData("RingLight GearOff", new VisionRingLight(RingLightControlMode.kGearOff));

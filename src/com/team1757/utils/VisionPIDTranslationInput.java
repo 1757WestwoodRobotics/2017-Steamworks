@@ -11,19 +11,15 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  * @author Ryan Marten
  *
  */
-public class VisionSourceAirship implements PIDSource {
+public class VisionPIDTranslationInput implements PIDSource {
 	
 	private PIDSourceType pidSourceType = PIDSourceType.kDisplacement;
-	private double offset;
+	private VisionDetectionTarget target;
 
-	public VisionSourceAirship() {
-		this.offset = 0;
+	public VisionPIDTranslationInput(VisionDetectionTarget target){
+		this.target = target;
 	}
 	
-	public VisionSourceAirship(double offset){
-		this.offset = offset;
-	}
-
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
 		pidSourceType = pidSource;
@@ -36,6 +32,6 @@ public class VisionSourceAirship implements PIDSource {
 
 	@Override
 	public double pidGet() {
-		return Robot.vision.getGearTargetCenter() + offset;
+		return Robot.vision.getTargetTranslationInput(target);
 	}
 }

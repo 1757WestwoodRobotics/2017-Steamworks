@@ -2,6 +2,7 @@ package com.team1757.subsystems;
 
 import com.team1757.robot.Robot;
 import com.team1757.robot.RobotMap;
+import com.team1757.utils.VisionDetectionTarget;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 public class Vision extends Subsystem {
 
 	private final PIDController visionTranslationController = RobotMap.visionTranslationController;
-	private final PIDController visionGearTranslationController = RobotMap.visionGearTranslationController;
+	public final double SECRET_SAUCE = 20;
 
 	private NetworkTable contoursReport;
 	private NetworkTable blobsReport;
@@ -67,21 +68,6 @@ public class Vision extends Subsystem {
 		return visionTranslationController.get();
 	}
 
-	/**
-	 * Enables the PID controller for using X translation of the robot to center
-	 * the gear's double vision targets
-	 */
-	public void enableGearTranslationPID() {
-		visionGearTranslationController.enable();
-	}
-
-	/**
-	 * Disables the PID controller for using X translation of the robot to
-	 * center the gear's double vision targets
-	 */
-	public void disableGearTranslationPID() {
-		visionGearTranslationController.disable();
-	}
 
 	/**
 	 * Gets the difference between current setpoint (0) and current difference
@@ -102,17 +88,6 @@ public class Vision extends Subsystem {
 	 */
 	public boolean reachedVisionGearTranslationSetpoint() {
 		return Math.abs(getVisionGearTranslationControllerError()) <= GEAR_TRANSLATION_PID_TOLERANCE;
-	}
-
-	/**
-	 * Returns the output of the PID controller for translation to center a the
-	 * gear's double vision targets
-	 * 
-	 * @return PIDOutput
-	 */
-	public double getGearTranslationPID() {
-		// System.out.println(visionGearTranslationController.get());
-		return visionGearTranslationController.get();
 	}
 
 	// Math operations
@@ -165,6 +140,29 @@ public class Vision extends Subsystem {
 		}
 		return 0;
 	}
+	
+	
+	public double getTargetTranslationInput(VisionDetectionTarget target){
+		if(target == VisionDetectionTarget.GearAirship || target == VisionDetectionTarget.GearPlayerStation){
+			return getDifferenceInGearTargetAreas();
+		}else if (target == VisionDetectionTarget.BallHighGoal || target == VisionDetectionTarget.TestSingleTarget){
+			return getSingleTargetCenter();
+		} else {
+			System.out.println("Not a valid detection target");
+			return 0;
+		}
+	}
+	
+	public double getTargetCenterAngle(VisionDetectionTarget target){
+		if(target == VisionDetectionTarget.GearAirship || target == VisionDetectionTarget.GearPlayerStation){
+			return getGearTargetCenter() * SECRET_SAUCE;
+		}else if (target == VisionDetectionTarget.BallHighGoal || target == VisionDetectionTarget.TestSingleTarget){
+			return getSingleTargetCenter() * SECRET_SAUCE;
+		} else {
+			System.out.println("Not a valid detection target");
+			return 0;
+		}
+	}
 
 	/**
 	 * Returns the center of two targets if they are detected, otherwise, 0.
@@ -187,9 +185,10 @@ public class Vision extends Subsystem {
 	 * 
 	 * @return targetCenter in the image from [-1,1]
 	 */
-	public double getTargetCenterContour() {
+	public double getSingleTargetCenter() {
 		updateContoursReport();
 		if (getContoursCount() != 0) {
+			System.out.println(normalizePixelsX(getContourCenterX(0)));
 			return normalizePixelsX(getContourCenterX(0));
 		}
 		return 0;

@@ -1,5 +1,7 @@
 package com.team1757.commands;
 
+import com.team1757.utils.VisionDetectionTarget;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -11,7 +13,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CGCenterAndScoreGear extends CommandGroup {
 
 	public CGCenterAndScoreGear() {
-		addSequential(new VisionGetReadyToScoreGear());
+		addSequential(new VisionAlignTargetPerpendicular(VisionDetectionTarget.GearAirship));
 		addSequential(new DriveGyroAssisted());
 	}
 }

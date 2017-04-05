@@ -1,5 +1,6 @@
 package com.team1757.robot;
 
+
 import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 import com.team1757.utils.IllegalSourceException;
@@ -7,8 +8,6 @@ import com.team1757.utils.MaxbotixUltrasonicAnalog;
 import com.team1757.utils.MaxbotixUltrasonicSerial;
 import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
-import com.team1757.utils.VisionSourceAirship;
-import com.team1757.utils.VisionSourceTest;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -70,9 +69,6 @@ public class RobotMap {
 	public static PIDController visionTranslationController;
 
 	private static NavXGyroWrapper gyroInput;
-
-	private static VisionSourceTest visionCenterInput;
-	private static VisionSourceAirship visionCenterGearInput;
 
 	public static UsbCamera gearCam = new UsbCamera("gearCam", 0);
 	public static UsbCamera shooterCam = new UsbCamera("shooterCam", 1);
@@ -195,30 +191,5 @@ public class RobotMap {
 		SmartDashboard.putData("rangeController", ultrasonicController);
 		ultrasonicController.setOutputRange(-1, 1);
 
-		// Initialize PID Input/ Output (VisionCenter)
-		visionCenterInput = new VisionSourceTest();
-
-		// Initialize PIDController (VisionCenter)
-		visionTranslationController = new PIDController(1.0, 0.0, 0.04, visionCenterInput, new VariablePIDOutput());
-
-		// Configure PIDController (VisionCenter)
-		// SmartDashboard.putData("visionTranslationController",
-		// visionTranslationController);
-		visionTranslationController.setInputRange(-1.0, 1.0);
-		visionTranslationController.setOutputRange(-1, 1);
-		visionTranslationController.setAbsoluteTolerance(.0005);
-
-		// Initialize PID Input / Output (Gear)
-		visionCenterGearInput = new VisionSourceAirship();
-
-		// Initialize PIDController (Gear)
-		visionGearTranslationController = new PIDController(.03, 0.0002, .04, visionCenterGearInput,
-				new VariablePIDOutput());
-
-		// Configure PIDController (Gear)
-		// SmartDashboard.putData("visionGearTranslationController",
-		// visionGearTranslationController);
-		visionGearTranslationController.setOutputRange(-.5, .5);
-		visionGearTranslationController.setAbsoluteTolerance(8);
 	}
 }
