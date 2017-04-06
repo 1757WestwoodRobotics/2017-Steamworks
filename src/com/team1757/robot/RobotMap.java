@@ -103,11 +103,11 @@ public class RobotMap {
 		dropGearLoaderTalon = new CANTalon(dropGearLoaderTalonPort);
 		LiveWindow.addActuator("DropGearLoader", "Drop GearLoader Talon", dropGearLoaderTalon);
 
-		floorGearLoaderTalon = new CANTalon(floorGearLoaderTalonPort);
-		LiveWindow.addActuator("FloorGearLoader", "Floor GearLoader Talon", floorGearLoaderTalon);
+//		floorGearLoaderTalon = new CANTalon(floorGearLoaderTalonPort);
+//		LiveWindow.addActuator("FloorGearLoader", "Floor GearLoader Talon", floorGearLoaderTalon);
 
-		floorGearPivotTalon = new CANTalon(floorGearPivotTalonPort);
-		LiveWindow.addActuator("FloorGearPivot", "Floor GearLoader Pivot", floorGearPivotTalon);
+//		floorGearPivotTalon = new CANTalon(floorGearPivotTalonPort);
+//		LiveWindow.addActuator("FloorGearPivot", "Floor GearLoader Pivot", floorGearPivotTalon);
 
 		liftTalon = new CANTalon(liftTalonPort);
 		LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
@@ -138,8 +138,8 @@ public class RobotMap {
 		dropGearLoaderTalon.configMaxOutputVoltage(4.2);
 		dropGearLoaderTalon.configNominalOutputVoltage(4.2, 4.2);
 		
-		floorGearPivotTalon.configMaxOutputVoltage(4.2);
-		floorGearPivotTalon.configNominalOutputVoltage(4.2, 4.2);
+//		floorGearPivotTalon.configMaxOutputVoltage(4.2);
+//		floorGearPivotTalon.configNominalOutputVoltage(4.2, 4.2);
 
 		liftTalon.enableBrakeMode(false);
 

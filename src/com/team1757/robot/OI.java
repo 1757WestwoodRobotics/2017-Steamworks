@@ -104,9 +104,11 @@ public class OI {
 		xboxButtonStart = new JoystickButton(xbox360, xboxButtonStartPort);
 
 		// Bind Commands to Xbox Controller
+		xboxButtonX.whenPressed(new DropGearRun(DropGearControlMode.kReceive));
+		xboxButtonB.whenPressed(new DropGearRun(DropGearControlMode.kScore));
 		xboxButtonY.whenPressed(new DriveSetDirection(DirectionControlMode.kToggle));
-		xboxButtonA.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kIntake));
-		xboxButtonB.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kDump));
+//		xboxButtonA.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kIntake));
+//		xboxButtonB.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kDump));
 		xboxButtonLB.toggleWhenPressed(new Lift(LifterControlMode.kUp));
 		xboxButtonRB.whileHeld(new Lift(LifterControlMode.kUp));
 
@@ -119,19 +121,18 @@ public class OI {
 		buttonBoxButton6 = new JoystickButton(buttonBox, buttonBoxButton6Port);
 
 		// Bind Commands to ButtonBox
-		buttonBoxButton1.whenPressed(new DropGearRun(DropGearControlMode.kReceive));
-		buttonBoxButton4.whenPressed(new DropGearRun(DropGearControlMode.kScore));
-		//buttonBoxButton2.toggleWhenPressed(new Collect(CollectorControlMode.kPercentForward));
-		buttonBoxButton2.whenPressed(new TriggerSetEnabledStatus(false));
-		buttonBoxButton5.whenPressed(new DropGearRun(DropGearControlMode.kHug));
-		//buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
+		buttonBoxButton1.whenPressed(new DropGearRun(DropGearControlMode.kScore));
+		buttonBoxButton2.whenPressed(new DropGearRun(DropGearControlMode.kReceive));
+		buttonBoxButton3.whenPressed(new DropGearRun(DropGearControlMode.kHug));
+		buttonBoxButton4.whenPressed(new TriggerSetEnabledStatus(false));
+		buttonBoxButton5.toggleWhenPressed(new CGShootandIndex());
 		buttonBoxButton6.whenPressed(new VisionToggleCamera());
 
 		// Initialize Triggers
 		bumperPlateTrigger = new BumperPlate();
 
 		// Bind Commands to Triggers
-		bumperPlateTrigger.whenActive(new CGOverridedGearScore());
+		bumperPlateTrigger.whenActive(new CGOverrideGearScore());
 
 		// Put Commands on SmartDashboard
 		// Drive functions
@@ -168,11 +169,11 @@ public class OI {
 		SmartDashboard.putData("Drop GearRun Hug", new DropGearRun(DropGearControlMode.kHug));
 		SmartDashboard.putData("Drop GearRun Score", new DropGearRun(DropGearControlMode.kScore));
 
-		// Floor GearLoader Commands
+	/*	// Floor GearLoader Commands
 		SmartDashboard.putData("Floor GearRun Manual", new FloorGearRun(FloorGearPivotControlMode.kManual));
 		SmartDashboard.putData("Floor GearRun Receive", new FloorGearRun(FloorGearPivotControlMode.kReceive));
 		SmartDashboard.putData("Floor GearRun Carry", new FloorGearRun(FloorGearPivotControlMode.kCarry));
-		SmartDashboard.putData("Floor GearRun Score", new FloorGearRun(FloorGearPivotControlMode.kScore));
+		SmartDashboard.putData("Floor GearRun Score", new FloorGearRun(FloorGearPivotControlMode.kScore));*/
 
 		// Lifter Commands
 		SmartDashboard.putData("Lift Up", new Lift(LifterControlMode.kUp));

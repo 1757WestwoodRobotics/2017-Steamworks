@@ -34,6 +34,7 @@ public class GetStatus extends Command {
 //		SmartDashboard.putNumber("Serial Ultrasonic Distance", Robot.driveTrain.getRangeSerialInches());
 		SmartDashboard.putNumber("targetLifterPVbus", Robot.lifter.getLiftTarget());
 		SmartDashboard.putBoolean("isShooting", Robot.shooter.getIsShooting());
+		SmartDashboard.putBoolean("reed switch open", Robot.dropGearLoader.isReedSwitchSeperated());
 
 		try {
 			if (Robot.dropGearLoader.isSensorPresent()) {
@@ -44,14 +45,14 @@ public class GetStatus extends Command {
 			System.out.println("Error with gear subsystem: " + e.getMessage());
 		}
 		
-		try {
-			if (Robot.floorGearLoader.isSensorPresent()) {
-				SmartDashboard.putNumber("Pivot - ActualPosition", Robot.floorGearLoader.getPulseWidthPosition());
-			}
-
-		} catch (Exception e) {
-			System.out.println("Error with floor gear subsystem: " + e.getMessage());
-		}
+//		try {
+//			if (Robot.floorGearLoader.isSensorPresent()) {
+//				SmartDashboard.putNumber("Pivot - ActualPosition", Robot.floorGearLoader.getPulseWidthPosition());
+//			}
+//
+//		} catch (Exception e) {
+//			System.out.println("Error with floor gear subsystem: " + e.getMessage());
+//		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -19,7 +19,7 @@ public class DropGearLoader extends Subsystem {
 	private static CANTalon gearTalon = RobotMap.dropGearLoaderTalon;
 	private final double GEAR_PID_TOLERANCE = 80;
 	private DigitalInput reedSwitch = RobotMap.dropGearReedSwitch;
-	private boolean isTriggerEnabled = true;
+	private boolean isTriggerEnabled = false;
 
 	FeedbackDeviceStatus gearEncoderStatus = gearTalon.isSensorPresent(FeedbackDevice.CtreMagEncoder_Absolute);
 
