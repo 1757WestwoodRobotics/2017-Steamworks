@@ -1,7 +1,7 @@
 package com.team1757.robot;
 
-
 import com.team1757.commands.*;
+import com.team1757.triggers.BumperPlate;
 import com.team1757.utils.Axis;
 import com.team1757.utils.CollectorControlMode;
 import com.team1757.utils.DirectionControlMode;
@@ -18,6 +18,7 @@ import com.team1757.utils.VisionDetectionTarget;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -47,6 +48,9 @@ public class OI {
 	private JoystickButton buttonBoxButton4;
 	private JoystickButton buttonBoxButton5;
 	private JoystickButton buttonBoxButton6;
+
+	// Triggers
+	private final Trigger bumperPlateTrigger;
 
 	// Joystick Ports
 	private final int xbox360Port = 0;
@@ -99,6 +103,13 @@ public class OI {
 		xboxButtonBack = new JoystickButton(xbox360, xboxButtonBackPort);
 		xboxButtonStart = new JoystickButton(xbox360, xboxButtonStartPort);
 
+		// Bind Commands to Xbox Controller
+		xboxButtonY.whenPressed(new DriveSetDirection(DirectionControlMode.kToggle));
+		xboxButtonA.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kIntake));
+		xboxButtonB.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kDump));
+		xboxButtonLB.toggleWhenPressed(new Lift(LifterControlMode.kUp));
+		xboxButtonRB.whileHeld(new Lift(LifterControlMode.kUp));
+
 		// Initialize ButtonBox Buttons
 		buttonBoxButton1 = new JoystickButton(buttonBox, buttonBoxButton1Port);
 		buttonBoxButton2 = new JoystickButton(buttonBox, buttonBoxButton2Port);
@@ -115,13 +126,12 @@ public class OI {
 		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
 		buttonBoxButton6.whenPressed(new VisionToggleCamera());
 
-		// Bind Commands to Xbox Controller
-		xboxButtonY.whenPressed(new DriveSetDirection(DirectionControlMode.kToggle));
-		xboxButtonA.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kIntake));
-		xboxButtonB.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kDump));
-		xboxButtonLB.toggleWhenPressed(new Lift(LifterControlMode.kUp));
-		xboxButtonRB.whileHeld(new Lift(LifterControlMode.kUp));
-		
+		// Initialize Triggers
+		bumperPlateTrigger = new BumperPlate();
+
+		// Bind Commands to Triggers
+		bumperPlateTrigger.whenActive(new TestPrint());
+
 		// Put Commands on SmartDashboard
 		// Drive functions
 		SmartDashboard.putData("Drive Toggle", new DriveSetDirection(DirectionControlMode.kToggle));
@@ -150,7 +160,7 @@ public class OI {
 		SmartDashboard.putData("Collect PercentReverse", new Collect(CollectorControlMode.kPercentReverse));
 
 		// Drop GearLoader Commands
-		
+
 		SmartDashboard.putData("Drop GearRun Manual", new DropGearRun(DropGearControlMode.kManual));
 		SmartDashboard.putData("Drop GearRun MatchStart", new DropGearRun(DropGearControlMode.kMatchStart));
 		SmartDashboard.putData("Drop GearRun Receive", new DropGearRun(DropGearControlMode.kReceive));
@@ -162,18 +172,23 @@ public class OI {
 		SmartDashboard.putData("Floor GearRun Receive", new FloorGearRun(FloorGearPivotControlMode.kReceive));
 		SmartDashboard.putData("Floor GearRun Carry", new FloorGearRun(FloorGearPivotControlMode.kCarry));
 		SmartDashboard.putData("Floor GearRun Score", new FloorGearRun(FloorGearPivotControlMode.kScore));
-		
+
 		// Lifter Commands
 		SmartDashboard.putData("Lift Up", new Lift(LifterControlMode.kUp));
 
 		// Vision Commands
 		SmartDashboard.putData(new VisionToggleCamera());
-		SmartDashboard.putData("Test Target Rotation", new VisionCenterTargetRotation(VisionDetectionTarget.TestSingleTarget));
-		SmartDashboard.putData("Gear Target Rotation", new VisionCenterTargetRotation(VisionDetectionTarget.GearAirship));
-		SmartDashboard.putData("Test Target Translation", new VisionCenterTargetTranslation(VisionDetectionTarget.TestSingleTarget));
-		SmartDashboard.putData("Gear Target Translation", new VisionCenterTargetRotation(VisionDetectionTarget.GearAirship));
-		SmartDashboard.putData("Get Ready to Score Gear", new VisionAlignTargetPerpendicular(VisionDetectionTarget.GearAirship));
-		
+		SmartDashboard.putData("Test Target Rotation",
+				new VisionCenterTargetRotation(VisionDetectionTarget.TestSingleTarget));
+		SmartDashboard.putData("Gear Target Rotation",
+				new VisionCenterTargetRotation(VisionDetectionTarget.GearAirship));
+		SmartDashboard.putData("Test Target Translation",
+				new VisionCenterTargetTranslation(VisionDetectionTarget.TestSingleTarget));
+		SmartDashboard.putData("Gear Target Translation",
+				new VisionCenterTargetRotation(VisionDetectionTarget.GearAirship));
+		SmartDashboard.putData("Get Ready to Score Gear",
+				new VisionAlignTargetPerpendicular(VisionDetectionTarget.GearAirship));
+
 		// RingLight Commands
 		SmartDashboard.putData("RingLight GearOn", new VisionRingLight(RingLightControlMode.kGearOn));
 		SmartDashboard.putData("RingLight GearOff", new VisionRingLight(RingLightControlMode.kGearOff));
@@ -189,7 +204,7 @@ public class OI {
 		SmartDashboard.putNumber("targetAngle", 0.0);
 		SmartDashboard.putNumber("angularDelta", 0.0);
 		SmartDashboard.putNumber("Gear Manual Target", 330.0);
-		
+
 	}
 
 	/**
@@ -213,7 +228,8 @@ public class OI {
 	/**
 	 * Get X translation operator operator input
 	 * 
-	 * @return Normalized input from X axis of Xbox 360 gamepad's left stick in range [-1, 1]
+	 * @return Normalized input from X axis of Xbox 360 gamepad's left stick in
+	 *         range [-1, 1]
 	 */
 	public double getTranslateX() {
 		return inputControlX(xbox360.getRawAxis(xboxLeftStickX));
@@ -222,7 +238,8 @@ public class OI {
 	/**
 	 * Get Y translation operator input
 	 * 
-	 * @return Normalized input from Y axis of Xbox 360 gamepad's left stick in range [-1, 1]
+	 * @return Normalized input from Y axis of Xbox 360 gamepad's left stick in
+	 *         range [-1, 1]
 	 */
 	public double getTranslateY() {
 		return inputControlY(xbox360.getRawAxis(xboxLeftStickY));
@@ -231,7 +248,8 @@ public class OI {
 	/**
 	 * Get rotation operator input
 	 * 
-	 * @return Normalized input from X axis of Xbox 360 gamepad's right stick in range [-1, 1]
+	 * @return Normalized input from X axis of Xbox 360 gamepad's right stick in
+	 *         range [-1, 1]
 	 */
 	public double getRotate() {
 		return inputControlX(xbox360.getRawAxis(xboxRightStickX));
@@ -240,7 +258,8 @@ public class OI {
 	/**
 	 * Get right trigger
 	 * 
-	 * @return Raw analog reading from Xbox 360 gamepad's right trigger in range [-1, 1]
+	 * @return Raw analog reading from Xbox 360 gamepad's right trigger in range
+	 *         [-1, 1]
 	 */
 	public double getRightTrigger() {
 		return xbox360.getRawAxis(xboxRightTrigger);
@@ -249,7 +268,8 @@ public class OI {
 	/**
 	 * Get left trigger
 	 * 
-	 * @return Raw analog reading from Xbox 360 gamepad's left trigger in range [-1, 1]
+	 * @return Raw analog reading from Xbox 360 gamepad's left trigger in range
+	 *         [-1, 1]
 	 */
 	public double getLeftTrigger() {
 		return xbox360.getRawAxis(xboxLeftTrigger);
@@ -258,8 +278,11 @@ public class OI {
 	/**
 	 * Sets the vibration motors of the Xbox 360 gamepad controller
 	 * 
-	 * @param type	The motor to vibrate. Left motor is rougher than right motor. Uses a RumbleType constant.
-	 * @param value	The strength at which the motor vibrates in range [0, 1]
+	 * @param type
+	 *            The motor to vibrate. Left motor is rougher than right motor.
+	 *            Uses a RumbleType constant.
+	 * @param value
+	 *            The strength at which the motor vibrates in range [0, 1]
 	 */
 	public void vibrateXboxController(RumbleType type, double value) {
 		xbox360.setRumble(type, value);
@@ -268,7 +291,8 @@ public class OI {
 	/**
 	 * Y axis input normalization modeled by y=0.9x^3 + 0.1
 	 * 
-	 * @param axis	Raw operator input from Y axis in range [-1, 1] 
+	 * @param axis
+	 *            Raw operator input from Y axis in range [-1, 1]
 	 * @return Normalized output in range [-1, 1]
 	 */
 	public static double inputControlY(double axis) {
@@ -288,7 +312,8 @@ public class OI {
 	/**
 	 * X axis input normalization modeled by y=0.9x^2 + 0.1
 	 * 
-	 * @param axis	Raw operator input from X axis in range [-1, 1]
+	 * @param axis
+	 *            Raw operator input from X axis in range [-1, 1]
 	 * @return Normalized output in range [-1, 1]
 	 */
 	public static double inputControlX(double axis) {

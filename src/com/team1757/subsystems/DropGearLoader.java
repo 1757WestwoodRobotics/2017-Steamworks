@@ -8,6 +8,7 @@ import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.FeedbackDeviceStatus;
 import com.ctre.CANTalon.TalonControlMode;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,6 +18,7 @@ public class DropGearLoader extends Subsystem {
 
 	private static CANTalon gearTalon = RobotMap.dropGearLoaderTalon;
 	private final double GEAR_PID_TOLERANCE = 80;
+	private DigitalInput reedSwitch = RobotMap.dropGearReedSwitch;
 
 	FeedbackDeviceStatus gearEncoderStatus = gearTalon.isSensorPresent(FeedbackDevice.CtreMagEncoder_Absolute);
 
@@ -24,6 +26,12 @@ public class DropGearLoader extends Subsystem {
 		setDefaultCommand(new DropGearRun(DropGearControlMode.kCurrent));
 	}
 
+	
+	public boolean isReedSwitchSeperated(){
+		System.out.println(reedSwitch.get());
+		return reedSwitch.get();
+	}
+	
 	/**
 	 * Initialize PID feedback and constants for gear loader
 	 * 

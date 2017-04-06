@@ -10,6 +10,7 @@ import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -72,6 +73,8 @@ public class RobotMap {
 
 	public static UsbCamera gearCam = new UsbCamera("gearCam", 0);
 	public static UsbCamera shooterCam = new UsbCamera("shooterCam", 1);
+	
+	public static DigitalInput dropGearReedSwitch = new DigitalInput(0);
 
 	public static void init() {
 
