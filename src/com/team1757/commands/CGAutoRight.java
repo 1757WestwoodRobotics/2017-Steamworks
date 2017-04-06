@@ -15,7 +15,7 @@ public class CGAutoRight extends CommandGroup {
 		//Reset Gryo
 		addSequential(new DriveResetGyro());
 		// Face gear loader forward
-		addSequential(new DriveSetDirection(DirectionControlMode.kInverted));
+		addSequential(new DriveSetDirection(DirectionControlMode.kFloorGear));
 		// Drop gear to receive
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Drive straight ~114"

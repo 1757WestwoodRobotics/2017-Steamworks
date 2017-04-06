@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CGAutoMiddle extends CommandGroup {
 
 	public CGAutoMiddle() {
+		// Forward direction
+		addSequential(new DriveSetDirection(DirectionControlMode.kDropGear));
 		// Drop gear to receive
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Drive straight ~100" (changed from 2.0 for district champs)
@@ -30,10 +32,6 @@ public class CGAutoMiddle extends CommandGroup {
 		addSequential(new DriveStraight(Axis.axisY, .7, -.35));
 		// Close gear
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
-		// Reverse
-		addSequential(new DriveSetDirection(DirectionControlMode.kToggle));
-		// Rotate left 90
-		
 		// Translate right
 		addSequential(new DriveStraight(Axis.axisX, 2.0));
 		// Cross line

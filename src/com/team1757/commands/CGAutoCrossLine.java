@@ -1,6 +1,7 @@
 package com.team1757.commands;
 
 import com.team1757.utils.Axis;
+import com.team1757.utils.DirectionControlMode;
 import com.team1757.utils.DropGearControlMode;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -11,7 +12,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CGAutoCrossLine extends CommandGroup {
 
 	public CGAutoCrossLine() {
-		// Face gear loader forward
+		// Forward direction
+		addSequential(new DriveSetDirection(DirectionControlMode.kDropGear));
 		// Drop gear to receive
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Drive straight ~100"

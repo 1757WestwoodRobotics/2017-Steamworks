@@ -1,6 +1,7 @@
 package com.team1757.commands;
 
 import com.team1757.utils.Axis;
+import com.team1757.utils.DirectionControlMode;
 import com.team1757.utils.DropGearControlMode;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -19,10 +20,13 @@ public class CGDropGearOverrideScore extends CommandGroup {
 	 * This trigger uses .whenActive() on the command group to stop, score, and skrt. 
 	 */
 	public CGDropGearOverrideScore() {
+		// Stop
 		addSequential(new DriveStop());
+		// Forward direction
+		addSequential(new DriveSetDirection(DirectionControlMode.kDropGear));
 		addSequential(new DropGearRun(DropGearControlMode.kScore));
 		// Go backwards
-		addSequential(new DriveStraight(Axis.axisY, .5, .3));
+		addSequential(new DriveStraight(Axis.axisY, .5, -.3));
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 	}
 }

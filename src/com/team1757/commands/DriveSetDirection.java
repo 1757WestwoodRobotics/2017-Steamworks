@@ -25,7 +25,7 @@ public class DriveSetDirection extends Command {
 		if (controlMode == DirectionControlMode.kToggle) {
 			Robot.driveTrain.toggleInversion();
 		}
-		else if (controlMode == DirectionControlMode.kForward) {
+		else if (controlMode == DirectionControlMode.kDropGear) {
 			Robot.driveTrain.setInversionForward();
 		}
 		else {

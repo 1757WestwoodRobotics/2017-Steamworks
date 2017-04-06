@@ -7,5 +7,5 @@ package com.team1757.utils;
  */
 
 public enum DirectionControlMode {
-	kForward, kInverted, kToggle;
+	kDropGear, kFloorGear, kToggle;
 }
