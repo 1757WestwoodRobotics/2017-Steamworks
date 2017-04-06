@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * 
  * @author Ryan Marten
  */
-public class CGCenterAndScoreGear extends CommandGroup {
+public class CGDropGearVisionScore extends CommandGroup {
 
-	public CGCenterAndScoreGear() {
+	public CGDropGearVisionScore() {
 		addSequential(new VisionAlignTargetPerpendicular(VisionDetectionTarget.GearAirship));
 		addSequential(new DriveGyroAssisted());
 	}

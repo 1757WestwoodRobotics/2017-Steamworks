@@ -10,16 +10,18 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
  * @author Ryan Marten
  */
 public class BumperPlate extends Trigger {
-	
+
 	private Timer timer = new Timer();
-	
+
 	public boolean get() {
-		if(Robot.dropGearLoader.isReedSwitchSeperated()){
-			timer.start();
+		if (Robot.dropGearLoader.isReedSwitchSeperated()) {
+			if (timer.get() == 0) {
+				timer.start();
+			}
 		} else {
 			timer.stop();
 			timer.reset();
 		}
-		return  Robot.dropGearLoader.isTriggerEnabled() && timer.get() > .5;
+		return Robot.dropGearLoader.isTriggerEnabled() && timer.get() > .5;
 	}
 }

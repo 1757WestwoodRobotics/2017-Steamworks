@@ -125,14 +125,15 @@ public class OI {
 		buttonBoxButton2.whenPressed(new DropGearRun(DropGearControlMode.kReceive));
 		buttonBoxButton3.whenPressed(new DropGearRun(DropGearControlMode.kHug));
 		buttonBoxButton4.whenPressed(new TriggerSetEnabledStatus(false));
-		buttonBoxButton5.toggleWhenPressed(new CGShootandIndex());
-		buttonBoxButton6.whenPressed(new VisionToggleCamera());
+		buttonBoxButton5.whenPressed(new TriggerSetEnabledStatus(true));
+		buttonBoxButton6.toggleWhenPressed(new CGShootandIndex());
+		//buttonBoxButton6.whenPressed(new VisionToggleCamera());
 
 		// Initialize Triggers
 		bumperPlateTrigger = new BumperPlate();
 
 		// Bind Commands to Triggers
-		bumperPlateTrigger.whenActive(new CGOverrideGearScore());
+		bumperPlateTrigger.whenActive(new CGDropGearOverrideScore());
 
 		// Put Commands on SmartDashboard
 		// Drive functions
