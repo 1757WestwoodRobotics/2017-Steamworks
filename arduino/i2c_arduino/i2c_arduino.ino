@@ -56,8 +56,7 @@ uint8_t arr[4];
 
 void setup() {
   Wire.begin(SLAVE_ADDRESS);                // join i2c bus with address #8
-  Wire.onReceive(receiveEvent); // register event
-  Wire.onRequest(requestEvent);
+  
   Serial.begin(9600);           // start serial for output
 
   delay(100);
@@ -103,16 +102,24 @@ void loop() {
 //  }
 //  Serial.println(unpackData(arr));
 //  commandRequested = false;
+//  Serial.print("Address: ");
+//  Serial.println(receivedCommands[0]);
+//  Serial.print("Data: ");
+//  Serial.println(receivedCommands[1]);
+Wire.onReceive(receiveEvent); // register event
+  Wire.onRequest(requestEvent);
 }
 
 void requestEvent() {
-  
+  Serial.println("Request Event interrupted");
   switch (receivedCommands[0]) {
     case 0:
       // null
       break;
     case 5:
       // led1_val_set
+//      Serial.print("Led 1 being set to: ");
+//      Serial.println(receivedCommands[1]);
       setRingLightValue(1, receivedCommands[1]);
       break;
     case 8:
@@ -138,8 +145,28 @@ void receiveEvent(int bytesReceived) {
 //  Serial.println(unpackData(&receivedCommands[0])); // gets address
 //  Serial.println(unpackData(&receivedCommands[5]));
 
-  commandRequested = true;
-  // ultrasonicDistance = unpackData(receivedCommands); //pack data?
+//  commandRequested = true;
+//  ultrasonicDistance = unpackData(receivedCommands); //pack data?
+
+  switch (receivedCommands[0]) {
+    case 0:
+      // null
+      break;
+    case 5:
+      // led1_val_set
+      Serial.print("Led 1 being set to: ");
+      Serial.println(receivedCommands[1]);
+      setRingLightValue(1, receivedCommands[1]);
+      break;
+    case 8:
+      // led2_val_set
+      Serial.print("Led 2 being set to: ");
+      Serial.println(receivedCommands[1]);
+      setRingLightValue(2, receivedCommands[1]);
+      break;
+    default:
+      break;
+  }
 }
 
 /**
