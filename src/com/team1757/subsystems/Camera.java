@@ -30,15 +30,15 @@ public class Camera extends Subsystem {
 		gearCam.setResolution(xResolution, yResolution);
 		gearCam.setExposureAuto();
 		
-//		shooterCam.setFPS(fps);
-//		shooterCam.setResolution(xResolution, yResolution);
-//		shooterCam.setExposureAuto();
+		shooterCam.setFPS(fps);
+		shooterCam.setResolution(xResolution, yResolution);
+		shooterCam.setExposureAuto();
 		
 		CameraServer.getInstance().addCamera(gearCam);
-//		CameraServer.getInstance().addCamera(shooterCam);
+		CameraServer.getInstance().addCamera(shooterCam);
 
 		CameraServer.getInstance().startAutomaticCapture(gearCam);
-//		CameraServer.getInstance().startAutomaticCapture(shooterCam);
+		CameraServer.getInstance().startAutomaticCapture(shooterCam);
 	}
 
 	/**

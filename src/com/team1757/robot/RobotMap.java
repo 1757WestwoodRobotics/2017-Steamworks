@@ -89,7 +89,7 @@ public class RobotMap {
 		LiveWindow.addActuator("Drive Train", "Right Back", driveTrainRightBack);
 
 		shooterFlyWheel = new CANTalon(shooterFlyWheelPort);
-		LiveWindow.addActuator("Shooter", "Shooter FlyWheel", shooterFlyWheel);
+		LiveWindow.addActuator("Shooter", "ShooterFlyWheel", shooterFlyWheel);
 
 		collectorFlyWheel = new CANTalon(collectorFlyWheelPort);
 		LiveWindow.addActuator("Collector", "Collector FlyWheel", collectorFlyWheel);
@@ -152,10 +152,10 @@ public class RobotMap {
 		// Initialize Ultrasonic Sensor
 
 		// TODO Use ultrasonic
-		ultrasonicAnalog = new MaxbotixUltrasonicAnalog(0);
+//		ultrasonicAnalog = new MaxbotixUltrasonicAnalog(0);
 
 		// Configure Ultrasonic Sensor
-		ultrasonicSerial = new MaxbotixUltrasonicSerial();
+//		ultrasonicSerial = new MaxbotixUltrasonicSerial();
 
 		// Initialize NavX
 		try {
@@ -187,9 +187,9 @@ public class RobotMap {
 		driveTrainNavX.reset();
 
 		// Initialize PIDController (rangefinder)
-		ultrasonicController = new PIDController(1.0, 0.0, 0.0, ultrasonicAnalog, new VariablePIDOutput());
-		SmartDashboard.putData("rangeController", ultrasonicController);
-		ultrasonicController.setOutputRange(-1, 1);
+//		ultrasonicController = new PIDController(1.0, 0.0, 0.0, ultrasonicAnalog, new VariablePIDOutput());
+//		SmartDashboard.putData("rangeController", ultrasonicController);
+//		ultrasonicController.setOutputRange(-1, 1);
 
 	}
 }
