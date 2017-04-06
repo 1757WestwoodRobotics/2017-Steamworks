@@ -15,11 +15,11 @@ public class CGAutoMiddle extends CommandGroup {
 		// Drop gear to receive
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Drive straight ~100" (changed from 2.0 for district champs)
-		addSequential(new DriveStraight(Axis.axisY, 2.2, -.27));
+		addSequential(new DriveStraight(Axis.axisY, 2.2, .27));
 		// Correct translation with vision
 		// addSequential(new VisionFaceGearTarget());
 		// Drive straight ~14.3"
-		addSequential(new DriveStraight(Axis.axisY, .7, -.2));
+		addSequential(new DriveStraight(Axis.axisY, .7, .2));
 		// "Wait a beat"
 		addSequential(new Delay(.5));
 		// Place gear
@@ -27,7 +27,7 @@ public class CGAutoMiddle extends CommandGroup {
 		// "Wait a beat"
 		addSequential(new Delay(.5));
 		// Drive backwards ~100"
-		addSequential(new DriveStraight(Axis.axisY, .7, .7));
+		addSequential(new DriveStraight(Axis.axisY, .7, -.35));
 		// Close gear
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Reverse
