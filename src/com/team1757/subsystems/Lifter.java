@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Lifter extends Subsystem {
 
 	private final CANTalon liftTalon = RobotMap.liftTalon;
+	private final CANTalon lift2Talon = RobotMap.lift2Talon;
 
 	public void initDefaultCommand() {
 		setDefaultCommand(new Lift(LifterControlMode.kStop));
@@ -24,6 +25,7 @@ public class Lifter extends Subsystem {
 	 */
 	public void enableLifter() {
 		liftTalon.enable();
+		lift2Talon.enable();
 	}
 
 	/**
@@ -31,6 +33,7 @@ public class Lifter extends Subsystem {
 	 */
 	public void disableLifter() {
 		liftTalon.disable();
+		lift2Talon.disable();
 	}
 
 	/**
@@ -38,6 +41,7 @@ public class Lifter extends Subsystem {
 	 */
 	public void stopLifter() {
 		liftTalon.set(0);
+		lift2Talon.set(0);
 	}
 
 	/**
@@ -45,6 +49,7 @@ public class Lifter extends Subsystem {
 	 */
 	public void setModePercentVoltage() {
 		liftTalon.changeControlMode(TalonControlMode.PercentVbus);
+		lift2Talon.changeControlMode(TalonControlMode.PercentVbus);
 	}
 
 	/**
@@ -55,6 +60,7 @@ public class Lifter extends Subsystem {
 	 */
 	public void setLiftTarget(double target) {
 		liftTalon.set(target);
+		lift2Talon.set(target);
 	}
 	
 	

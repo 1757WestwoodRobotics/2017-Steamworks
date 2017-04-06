@@ -83,7 +83,7 @@ public class OI {
 	private final int buttonBoxButton6Port = 6;
 
 	// Input Control Constants
-	private final static double DEADBAND = 0.1;
+	private final static double DEADBAND = 0.15;
 	private final static double GAIN = 0.9;
 
 	// OI Constructor

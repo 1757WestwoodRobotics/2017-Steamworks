@@ -40,6 +40,7 @@ public class RobotMap {
 	private static final int floorGearLoaderTalonPort = 10;
 	private static final int floorGearPivotTalonPort = 11; // TODO Change to actual port
 	private static final int liftTalonPort = 5;
+	private static final int lift2TalonPort = 12;
 
 	// Talon objects
 	public static CANTalon driveTrainLeftFront;
@@ -54,6 +55,7 @@ public class RobotMap {
 	public static CANTalon floorGearLoaderTalon;
 	public static CANTalon floorGearPivotTalon;
 	public static CANTalon liftTalon;
+	public static CANTalon lift2Talon;
 
 	// Robot objects
 	public static RobotDrive driveTrainMecanumDrive;
@@ -111,8 +113,14 @@ public class RobotMap {
 
 		liftTalon = new CANTalon(liftTalonPort);
 		LiveWindow.addActuator("Lifter", "Lifter Talon", liftTalon);
+		
+		lift2Talon = new CANTalon(lift2TalonPort);
+		LiveWindow.addActuator("Lifter", "Lifter Talon #2", liftTalon);
 
 		// Configure Talons
+		
+		//Invert lifter talon #2, which should rotate in the opposite direction as #1
+		lift2Talon.setInverted(true);
 
 		// Invert talons to correct driving direction
 		driveTrainLeftFront.setInverted(true);
