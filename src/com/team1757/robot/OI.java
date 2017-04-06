@@ -121,16 +121,17 @@ public class OI {
 		// Bind Commands to ButtonBox
 		buttonBoxButton1.whenPressed(new DropGearRun(DropGearControlMode.kReceive));
 		buttonBoxButton4.whenPressed(new DropGearRun(DropGearControlMode.kScore));
-		buttonBoxButton2.toggleWhenPressed(new Collect(CollectorControlMode.kPercentForward));
+		//buttonBoxButton2.toggleWhenPressed(new Collect(CollectorControlMode.kPercentForward));
+		buttonBoxButton2.whenPressed(new TriggerSetEnabledStatus(false));
 		buttonBoxButton5.whenPressed(new DropGearRun(DropGearControlMode.kHug));
-		buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
+		//buttonBoxButton3.toggleWhenPressed(new CGShootandIndex());
 		buttonBoxButton6.whenPressed(new VisionToggleCamera());
 
 		// Initialize Triggers
 		bumperPlateTrigger = new BumperPlate();
 
 		// Bind Commands to Triggers
-		bumperPlateTrigger.whenActive(new TestPrint());
+		bumperPlateTrigger.whenActive(new CGOverridedGearScore());
 
 		// Put Commands on SmartDashboard
 		// Drive functions

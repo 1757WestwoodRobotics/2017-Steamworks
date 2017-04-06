@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
  * @author Ryan Marten
  */
 public class BumperPlate extends Trigger {
-
+	
 	public boolean get() {
-		return Robot.dropGearLoader.isReedSwitchSeperated();
+		return Robot.dropGearLoader.isReedSwitchSeperated() && Robot.dropGearLoader.isTriggerEnabled();
 	}
 }
