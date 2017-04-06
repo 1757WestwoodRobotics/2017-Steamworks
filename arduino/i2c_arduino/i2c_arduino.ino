@@ -6,11 +6,31 @@
  * - commands[1] - component address
  * - commands[2] - data
  */
- 
+
 #include <Wire.h>
+#include <FastLED.h>
 
 #define SLAVE_ADDRESS   8
 #define REG_SIZE        10
+
+#define DATA_PIN    6
+#define COLOR_ORDER GRB
+#define CHIPSET     WS2812 
+#define NUM_LEDS    48
+
+CRGB leds[NUM_LEDS];
+
+int led1_hue = 100;
+int led1_sat = 255;
+int led1_val = 255;
+int led2_hue = 0;
+int led2_sat = 255;
+int led2_val = 255;
+
+const CHSV GREEN(100, 255, 255);
+const CHSV RED(0, 255, 255);
+const CHSV BLUE(160, 255, 255);
+const CHSV BLANK(0, 0, 0);
 
 // enum of addresses and data
 
@@ -39,6 +59,14 @@ void setup() {
   Wire.onReceive(receiveEvent); // register event
   Wire.onRequest(requestEvent);
   Serial.begin(9600);           // start serial for output
+
+  delay(100);
+  FastLED.delay(3000); // sanity delay
+  FastLED.addLeds<CHIPSET, DATA_PIN, COLOR_ORDER>(leds, NUM_LEDS);
+  for (int k = 0; k < 48; k++) {
+    leds[k] = BLANK;
+  }
+  
 }
 
 void storeData(byte target[], uint32_t data) {
@@ -70,11 +98,11 @@ uint32_t unpackData(uint8_t data[]) {
 }
 
 void loop() {
-//   for (int i = 0; i < 4; ++i) {
+//  for (int i = 0; i < 4; ++i) {
 //    Serial.println(arr[i]);
-//   }
-  // Serial.println(unpackData(arr));
-  commandRequested = false;
+//  }
+//  Serial.println(unpackData(arr));
+//  commandRequested = false;
 }
 
 void requestEvent() {
@@ -82,6 +110,14 @@ void requestEvent() {
   switch (receivedCommands[0]) {
     case 0:
       // null
+      break;
+    case 5:
+      // led1_val_set
+      setRingLightValue(1, receivedCommands[1]);
+      break;
+    case 8:
+      // led2_val_set
+      setRingLightValue(2, receivedCommands[1]);
       break;
     case 9:
       storeData(arr, 151192065); // 0x01020309
@@ -111,5 +147,28 @@ void receiveEvent(int bytesReceived) {
  */
 uint8_t getUltrasonicDistance() {
   return 0;
+}
+
+// Ring Light Functions
+
+void setRingLightValue(int whichLED, int value) {
+  switch (whichLED) {
+    case 1:
+      for (int i = 24; i < 48; i++) {
+        leds[i] = CHSV(led1_hue, led1_sat, value);
+      }
+      FastLED.show();
+      delay(100);
+      break;
+    case 2:
+      for (int i = 0; i < 24; i++) {
+        leds[i] = CHSV(led2_hue, led2_sat, value);
+      }
+      FastLED.show();
+      delay(100);
+      break;
+    default:
+      break;
+  }
 }
 
