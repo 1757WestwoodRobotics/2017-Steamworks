@@ -65,7 +65,7 @@ public class Robot extends IterativeRobot {
 		indexer = new Indexer();
 		ballCollector = new BallCollector();
 		dropGearLoader = new DropGearLoader();
-//		floorGearLoader = new FloorGearLoader();
+		floorGearLoader = new FloorGearLoader();
 		lifter = new Lifter();
 		
 		// Initialize OI

@@ -124,8 +124,8 @@ public class OI {
 		buttonBoxButton1.whenPressed(new DropGearRun(DropGearControlMode.kScore));
 		buttonBoxButton2.whenPressed(new DropGearRun(DropGearControlMode.kReceive));
 		buttonBoxButton3.whenPressed(new DropGearRun(DropGearControlMode.kHug));
-		buttonBoxButton4.whenPressed(new TriggerSetEnabledStatus(false));
-		buttonBoxButton5.whenPressed(new TriggerSetEnabledStatus(true));
+		buttonBoxButton4.whenPressed(new TriggerSetEnabledStatus(true));
+		buttonBoxButton5.whenPressed(new TriggerSetEnabledStatus(false));
 		buttonBoxButton6.toggleWhenPressed(new CGShootandIndex());
 		//buttonBoxButton6.whenPressed(new VisionToggleCamera());
 

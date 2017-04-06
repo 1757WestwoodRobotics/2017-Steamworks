@@ -13,10 +13,9 @@ public class CGAutoCrossLine extends CommandGroup {
 
 	public CGAutoCrossLine() {
 		// Face gear loader forward
-		addSequential(new DriveSetDirection(DirectionControlMode.kInverted));
 		// Drop gear to receive
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Drive straight ~100"
-		addSequential(new DriveStraight(Axis.axisY, 2.0));
+		addSequential(new DriveStraight(Axis.axisY, 2.0, -.7));
 	}
 }
