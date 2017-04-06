@@ -37,6 +37,6 @@ public class CGAutoMiddle extends CommandGroup {
 		// Translate right
 		addSequential(new DriveStraight(Axis.axisX, 2.0));
 		// Cross line
-		addSequential(new DriveStraight(Axis.axisY, 1.65));
+		addSequential(new DriveStraight(Axis.axisY, 1.65, .35));
 	}
 }

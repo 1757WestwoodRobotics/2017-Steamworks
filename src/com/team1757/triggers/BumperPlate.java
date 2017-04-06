@@ -22,6 +22,6 @@ public class BumperPlate extends Trigger {
 			timer.stop();
 			timer.reset();
 		}
-		return Robot.dropGearLoader.isTriggerEnabled() && timer.get() > .5;
+		return Robot.dropGearLoader.isTriggerEnabled() && timer.get() > .2;
 	}
 }

@@ -18,11 +18,9 @@ public class FloorGearCollect extends Command {
 	private FloorGearCollectorControlMode controlMode = FloorGearCollectorControlMode.kIntake;
 	
 	public FloorGearCollect() {
-        requires(Robot.floorGearLoader);
     }
 	
     public FloorGearCollect(FloorGearCollectorControlMode controlMode) {
-        requires(Robot.floorGearLoader);
         this.controlMode = controlMode;
     }
 

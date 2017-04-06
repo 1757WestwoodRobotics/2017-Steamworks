@@ -104,11 +104,13 @@ public class OI {
 		xboxButtonStart = new JoystickButton(xbox360, xboxButtonStartPort);
 
 		// Bind Commands to Xbox Controller
-		xboxButtonX.whenPressed(new DropGearRun(DropGearControlMode.kReceive));
-		xboxButtonB.whenPressed(new DropGearRun(DropGearControlMode.kScore));
-		xboxButtonY.whenPressed(new DriveSetDirection(DirectionControlMode.kToggle));
-//		xboxButtonA.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kIntake));
-//		xboxButtonB.whileHeld(new FloorGearCollect(FloorGearCollectorControlMode.kDump));
+		xboxButtonX.whenPressed(new FloorGearRun(FloorGearPivotControlMode.kReceive));
+		xboxButtonY.whenPressed(new FloorGearRun(FloorGearPivotControlMode.kCarry));
+		xboxButtonB.whenPressed(new FloorGearRun(FloorGearPivotControlMode.kScore));
+		xboxButtonA.toggleWhenPressed(new FloorGearCollect(FloorGearCollectorControlMode.kIntake));
+		
+		xboxButtonStart.whenPressed(new DriveSetDirection(DirectionControlMode.kToggle));
+		
 		xboxButtonLB.toggleWhenPressed(new Lift(LifterControlMode.kUp));
 		xboxButtonRB.whileHeld(new Lift(LifterControlMode.kUp));
 
@@ -127,7 +129,6 @@ public class OI {
 		buttonBoxButton4.whenPressed(new TriggerSetEnabledStatus(true));
 		buttonBoxButton5.whenPressed(new TriggerSetEnabledStatus(false));
 		buttonBoxButton6.toggleWhenPressed(new CGShootandIndex());
-		//buttonBoxButton6.whenPressed(new VisionToggleCamera());
 
 		// Initialize Triggers
 		bumperPlateTrigger = new BumperPlate();
@@ -170,11 +171,13 @@ public class OI {
 		SmartDashboard.putData("Drop GearRun Hug", new DropGearRun(DropGearControlMode.kHug));
 		SmartDashboard.putData("Drop GearRun Score", new DropGearRun(DropGearControlMode.kScore));
 
-	/*	// Floor GearLoader Commands
+		// Floor GearLoader Commands
 		SmartDashboard.putData("Floor GearRun Manual", new FloorGearRun(FloorGearPivotControlMode.kManual));
 		SmartDashboard.putData("Floor GearRun Receive", new FloorGearRun(FloorGearPivotControlMode.kReceive));
 		SmartDashboard.putData("Floor GearRun Carry", new FloorGearRun(FloorGearPivotControlMode.kCarry));
-		SmartDashboard.putData("Floor GearRun Score", new FloorGearRun(FloorGearPivotControlMode.kScore));*/
+		SmartDashboard.putData("Floor GearRun Score", new FloorGearRun(FloorGearPivotControlMode.kScore));
+		SmartDashboard.putData("Floor Collector Intake", new FloorGearCollect(FloorGearCollectorControlMode.kIntake));
+		SmartDashboard.putData("Floor Collector Output", new FloorGearCollect(FloorGearCollectorControlMode.kDump));
 
 		// Lifter Commands
 		SmartDashboard.putData("Lift Up", new Lift(LifterControlMode.kUp));

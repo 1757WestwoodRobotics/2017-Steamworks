@@ -119,6 +119,10 @@ public class RobotMap {
 
 		// Configure Talons
 		
+		// Set floor 
+		floorGearLoaderTalon.enableBrakeMode(false);
+		floorGearLoaderTalon.setInverted(true);
+		
 		//Invert lifter talon #2, which should rotate in the opposite direction as #1
 		lift2Talon.setInverted(true);
 

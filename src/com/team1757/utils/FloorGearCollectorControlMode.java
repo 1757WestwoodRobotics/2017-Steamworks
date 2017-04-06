@@ -9,7 +9,7 @@ import com.ctre.CANTalon.TalonControlMode;
  */
 
 public enum FloorGearCollectorControlMode {
-	kIntake(0.5, TalonControlMode.PercentVbus), kDump(-0.8, TalonControlMode.PercentVbus),
+	kIntake(1.0, TalonControlMode.PercentVbus), kDump(-0.5, TalonControlMode.PercentVbus),
 	kStop(0.0);
 	
 	
