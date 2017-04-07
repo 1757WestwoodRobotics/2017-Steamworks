@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Camera extends Subsystem {
-	private final UsbCamera gearCam = RobotMap.gearCam;
-	private final UsbCamera shooterCam = RobotMap.shooterCam;
+	private final UsbCamera dropGearCam = RobotMap.dropGearCam;
+	private final UsbCamera floorGearCam = RobotMap.floorGearCam;
 	private boolean isGearCamActive = true;
 	public int xResolution = 160;
 	public int yResolution = 120;
@@ -28,20 +28,14 @@ public class Camera extends Subsystem {
 	 */
 	public void init() {
 		
-//		gearCam.setFPS(fps);
-//		gearCam.setResolution(xResolution, yResolution);
-//		gearCam.setExposureAuto();
-//		
-//		shooterCam.setFPS(fps);
-//		shooterCam.setResolution(xResolution, yResolution);
-//		shooterCam.setExposureAuto();
-//		
-//		CameraServer.getInstance().addCamera(gearCam);
-//		Timer.delay(.5);
-//		CameraServer.getInstance().addCamera(shooterCam);
-//
-//		CameraServer.getInstance().startAutomaticCapture(gearCam);
-//		CameraServer.getInstance().startAutomaticCapture(shooterCam);
+		dropGearCam.setFPS(fps);
+		dropGearCam.setResolution(xResolution, yResolution);
+		dropGearCam.setExposureAuto();
+		
+		floorGearCam.setFPS(fps);
+		floorGearCam.setResolution(xResolution, yResolution);
+		floorGearCam.setExposureAuto();
+		
 	}
 
 	/**
@@ -55,8 +49,8 @@ public class Camera extends Subsystem {
 	public void camerasSetResolution(int x, int y) {
 		xResolution = x;
 		yResolution = y;
-		gearCam.setResolution(x, y);
-		shooterCam.setResolution(x, y);
+		dropGearCam.setResolution(x, y);
+		floorGearCam.setResolution(x, y);
 	}
 
 	/**
@@ -85,8 +79,8 @@ public class Camera extends Subsystem {
 	 */
 	public void camerasSetFPS(int fps) {
 		this.fps = fps;
-		gearCam.setFPS(fps);
-		shooterCam.setFPS(fps);
+		dropGearCam.setFPS(fps);
+		floorGearCam.setFPS(fps);
 	}
 
 	/**
@@ -102,16 +96,16 @@ public class Camera extends Subsystem {
 	 * Set low exposure for accurate vision processing
 	 */
 	public void setExposureLow() {
-		gearCam.setExposureManual(EXPOSURE_LOW);
-		shooterCam.setExposureManual(EXPOSURE_LOW);
+		dropGearCam.setExposureManual(EXPOSURE_LOW);
+		floorGearCam.setExposureManual(EXPOSURE_LOW);
 	}
 	
 	/**
 	 * Set auto exposure for driver viewing
 	 */
 	public void setExposureAuto() {
-		gearCam.setExposureAuto();
-		shooterCam.setExposureAuto();
+		dropGearCam.setExposureAuto();
+		floorGearCam.setExposureAuto();
 	}
 
 	/**
@@ -120,10 +114,10 @@ public class Camera extends Subsystem {
 	 */
 	public void toggleVisionCamera() {
 		if (isGearCamActive) {
-			CameraServer.getInstance().getServer().setSource(shooterCam);
+			CameraServer.getInstance().getServer().setSource(floorGearCam);
 			isGearCamActive = false;
 		} else {
-			CameraServer.getInstance().getServer().setSource(gearCam);
+			CameraServer.getInstance().getServer().setSource(dropGearCam);
 			isGearCamActive = true;
 		}
 	}
