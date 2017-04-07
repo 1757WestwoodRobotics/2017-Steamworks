@@ -271,7 +271,7 @@ public class OI {
 	 *         range [-1, 1]
 	 */
 	public double getRotate() {
-		return inputControlX(xbox360.getRawAxis(xboxRightStickX));
+		return inputControlR(xbox360.getRawAxis(xboxRightStickX));
 	}
 
 	/**
@@ -337,6 +337,27 @@ public class OI {
 	 * @return Normalized output in range [-1, 1]
 	 */
 	public static double inputControlX(double axis) {
+		// Modeled by y=0.9x^2 + 0.1
+		double output = 0.0;
+		if (axis > DEADBAND) {
+			output = (Math.pow(axis, 2) * GAIN) + DEADBAND;
+		} else if (axis < -DEADBAND) {
+			axis = -axis;
+			output = -(Math.pow(axis, 2) * GAIN) - DEADBAND;
+		} else {
+			output = 0.0;
+		}
+		return -output;
+	}
+	
+	/**
+	 * Rotation axis input normalization modeled by y=0.9x^2 + 0.1
+	 * 
+	 * @param axis
+	 *            Raw operator input from X axis in range [-1, 1]
+	 * @return Normalized output in range [-1, 1]
+	 */
+	public static double inputControlR(double axis) {
 		// Modeled by y=0.9x^2 + 0.1
 		double output = 0.0;
 		if (axis > DEADBAND) {

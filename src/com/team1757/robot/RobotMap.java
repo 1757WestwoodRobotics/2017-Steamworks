@@ -160,6 +160,8 @@ public class RobotMap {
 		dropGearLoaderTalon.configMaxOutputVoltage(4.2);
 		dropGearLoaderTalon.configNominalOutputVoltage(4.2, 4.2);
 		
+		floorGearPivotTalon.setCurrentLimit(5);
+		floorGearPivotTalon.EnableCurrentLimit(true);
 		floorGearPivotTalon.configMaxOutputVoltage(4.2);
 		floorGearPivotTalon.configNominalOutputVoltage(4.2, 4.2);
 

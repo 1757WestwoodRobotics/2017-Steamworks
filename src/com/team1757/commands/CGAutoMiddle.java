@@ -34,7 +34,7 @@ public class CGAutoMiddle extends CommandGroup {
 		// Close gear
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Translate right
-		addSequential(new DriveStraight(Axis.axisX, 2.0));
+		addSequential(new DriveStraight(Axis.axisX, 2.0, 1.0));
 		// Cross line
 		addSequential(new DriveStraight(Axis.axisY, 1.65, .35));
 		addSequential(new TriggerSetEnabledStatus(true));

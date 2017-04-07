@@ -7,7 +7,8 @@ package com.team1757.utils;
  */
 
 public enum FloorGearPivotControlMode {
-	kCurrent(0), kManual(0), kReceive(3200), kScore(2500), kCarry(2000);
+	kCurrent(0), kManual(0), kReceive(3140), kScore(2440), kCarry(1940);
+	//TODO: gear slipped - need new position values
 	private double target;
 	
 	FloorGearPivotControlMode(double target) {
