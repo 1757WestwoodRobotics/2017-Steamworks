@@ -4,6 +4,7 @@ import com.team1757.utils.Axis;
 import com.team1757.utils.DirectionControlMode;
 import com.team1757.utils.DropGearControlMode;
 
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -12,11 +13,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CGAutoCrossLine extends CommandGroup {
 
 	public CGAutoCrossLine() {
+		//Disable Trigger
+		addSequential(new TriggerSetEnabledStatus(false));
 		// Forward direction
 		addSequential(new DriveSetDirection(DirectionControlMode.kDropGear));
 		// Drop gear to receive
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Drive straight ~100"
 		addSequential(new DriveStraight(Axis.axisY, 2.0, .35));
+		//Enable Trigger
+		addSequential(new TriggerSetEnabledStatus(true));
 	}
 }

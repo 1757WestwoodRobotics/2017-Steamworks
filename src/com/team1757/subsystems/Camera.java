@@ -13,7 +13,7 @@ public class Camera extends Subsystem {
 	private boolean isGearCamActive = true;
 	public int xResolution = 160;
 	public int yResolution = 120;
-	private int fps = 30;
+	private int fps = 20;
 	
 	private final int EXPOSURE_LOW = 0;
 
