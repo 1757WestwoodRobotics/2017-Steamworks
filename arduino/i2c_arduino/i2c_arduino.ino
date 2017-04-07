@@ -22,8 +22,8 @@ CRGB leds[NUM_LEDS];
 
 int led1_hue = 100;
 int led1_sat = 255;
-int led1_val = 255;
-int led2_hue = 0;
+int led1_val = 0;
+int led2_hue = 255;
 int led2_sat = 255;
 int led2_val = 255;
 
@@ -56,7 +56,8 @@ uint8_t arr[4];
 
 void setup() {
   Wire.begin(SLAVE_ADDRESS);                // join i2c bus with address #8
-  
+  Wire.onReceive(receiveEvent); // register event
+  Wire.onRequest(requestEvent);
   Serial.begin(9600);           // start serial for output
 
   delay(100);
@@ -106,32 +107,9 @@ void loop() {
 //  Serial.println(receivedCommands[0]);
 //  Serial.print("Data: ");
 //  Serial.println(receivedCommands[1]);
-Wire.onReceive(receiveEvent); // register event
-  Wire.onRequest(requestEvent);
 }
 
 void requestEvent() {
-  Serial.println("Request Event interrupted");
-  switch (receivedCommands[0]) {
-    case 0:
-      // null
-      break;
-    case 5:
-      // led1_val_set
-//      Serial.print("Led 1 being set to: ");
-//      Serial.println(receivedCommands[1]);
-      setRingLightValue(1, receivedCommands[1]);
-      break;
-    case 8:
-      // led2_val_set
-      setRingLightValue(2, receivedCommands[1]);
-      break;
-    case 9:
-      storeData(arr, 151192065); // 0x01020309
-      Wire.write(arr, 4);
-      break;
-  }
-  
   // Wire.write(registerMap, REG_MAP_SIZE); 
 }
 
@@ -152,16 +130,21 @@ void receiveEvent(int bytesReceived) {
     case 0:
       // null
       break;
+    case 3:
+      // led1_hue_set
+      Serial.println("Setting LED1, addr 3 hue");
+      setRingLightHue(1, receivedCommands[1]);
+      break;
     case 5:
       // led1_val_set
-      Serial.print("Led 1 being set to: ");
-      Serial.println(receivedCommands[1]);
       setRingLightValue(1, receivedCommands[1]);
+      break;
+    case 6:
+      // led2_hue_set
+      setRingLightHue(2, receivedCommands[1]);
       break;
     case 8:
       // led2_val_set
-      Serial.print("Led 2 being set to: ");
-      Serial.println(receivedCommands[1]);
       setRingLightValue(2, receivedCommands[1]);
       break;
     default:
@@ -178,6 +161,29 @@ uint8_t getUltrasonicDistance() {
 
 // Ring Light Functions
 
+void setRingLightHue(int whichLED, int hue) {
+  switch (whichLED) {
+    case 1: 
+      for (int i = 24; i < 48; i++) {
+        leds[i] = CHSV(hue, led1_sat, led1_val);
+      }
+      FastLED.show();
+      led1_hue = hue;
+      delay(100);
+      break;
+    case 2:
+      for (int i = 0; i < 24; i++) {
+        leds[i] = CHSV(hue, led2_sat, led2_val);
+      }
+      FastLED.show();
+      led2_hue = hue;
+      delay(100);
+      break;
+    default:
+      break;
+  }
+}
+
 void setRingLightValue(int whichLED, int value) {
   switch (whichLED) {
     case 1:
@@ -185,6 +191,7 @@ void setRingLightValue(int whichLED, int value) {
         leds[i] = CHSV(led1_hue, led1_sat, value);
       }
       FastLED.show();
+      led1_val = value;
       delay(100);
       break;
     case 2:
@@ -192,6 +199,7 @@ void setRingLightValue(int whichLED, int value) {
         leds[i] = CHSV(led2_hue, led2_sat, value);
       }
       FastLED.show();
+      led2_val = value;
       delay(100);
       break;
     default:
