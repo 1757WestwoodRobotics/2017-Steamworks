@@ -4,6 +4,7 @@ import com.team1757.robot.RobotMap;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Camera extends Subsystem {
@@ -26,15 +27,18 @@ public class Camera extends Subsystem {
 	 * SmartDashboard
 	 */
 	public void init() {
-		gearCam.setFPS(fps);
-		gearCam.setResolution(xResolution, yResolution);
-		gearCam.setExposureAuto();
+//		CameraServer.getInstance().startAutomaticCapture();
 		
-		shooterCam.setFPS(fps);
-		shooterCam.setResolution(xResolution, yResolution);
-		shooterCam.setExposureAuto();
+//		gearCam.setFPS(fps);
+//		gearCam.setResolution(xResolution, yResolution);
+//		gearCam.setExposureAuto();
+//		
+//		shooterCam.setFPS(fps);
+//		shooterCam.setResolution(xResolution, yResolution);
+//		shooterCam.setExposureAuto();
 		
 		CameraServer.getInstance().addCamera(gearCam);
+		Timer.delay(.5);
 		CameraServer.getInstance().addCamera(shooterCam);
 
 		CameraServer.getInstance().startAutomaticCapture(gearCam);

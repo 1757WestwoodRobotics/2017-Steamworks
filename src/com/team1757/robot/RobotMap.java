@@ -73,13 +73,18 @@ public class RobotMap {
 
 	private static NavXGyroWrapper gyroInput;
 
-	public static UsbCamera gearCam = new UsbCamera("gearCam", 0);
-	public static UsbCamera shooterCam = new UsbCamera("shooterCam", 1);
+	public static UsbCamera gearCam;
+	public static UsbCamera shooterCam;
 	
-	public static DigitalInput dropGearReedSwitch = new DigitalInput(0);
+	public static DigitalInput dropGearReedSwitch;
 
 	public static void init() {
 
+		gearCam = new UsbCamera("gearCam", 0);
+		shooterCam = new UsbCamera("shooterCam", 1);
+		
+		dropGearReedSwitch = new DigitalInput(0);
+		
 		// Initialize Talons
 		driveTrainLeftFront = new CANTalon(driveTrainLeftFrontPort);
 		LiveWindow.addActuator("Drive Train", "Left Front", driveTrainLeftFront);
