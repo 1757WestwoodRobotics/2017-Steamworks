@@ -18,7 +18,7 @@ public class CGAutoMiddleWithTrigger extends CommandGroup {
 		// Drop gear to receive
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Drive straight ~100" (changed from 2.0 for district champs)
-		addSequential(new DriveStraight(Axis.axisY, 2.3, .27));
+		addSequential(new DriveStraight(Axis.axisY, 2.6, .27));
 /*		// Instead of driving straight a certain distance, it will drive
 		// straight for a little longer (1 instead of .7 seconds) at .2 speed
 		// and if it bumper plate is triggered, then it deploys, if not it holds on to the gear

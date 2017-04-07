@@ -102,5 +102,6 @@
 </dashboard>
 <live-window>
 </live-window>
+	<hidden field="VisionToggleCamera"/>
 	<hidden field="Gear Manual Target"/>
 </xml>

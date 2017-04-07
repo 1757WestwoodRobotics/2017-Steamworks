@@ -26,7 +26,7 @@ public class CGDropGearOverrideScore extends CommandGroup {
 		addSequential(new DriveSetDirection(DirectionControlMode.kDropGear));
 		addSequential(new DropGearRun(DropGearControlMode.kScore));
 		// Go backwards
-		addSequential(new DriveStraight(Axis.axisY, .5, -.3));
+		addSequential(new DriveStraight(Axis.axisY, .8, -.3));
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 	}
 }
