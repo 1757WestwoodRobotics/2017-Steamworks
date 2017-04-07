@@ -3,7 +3,7 @@ package com.team1757.commands;
 import com.team1757.robot.Robot;
 import com.team1757.utils.DropGearControlMode;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -12,11 +12,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 
  * @author ACabey 
  */
-public class DropGearRun extends Command {
+public class DropGearRun extends TimedCommand {
 
 	private DropGearControlMode controlMode;
+	private static final double TIMEOUT =  .7;
 
 	public DropGearRun(DropGearControlMode controlMode) {
+		super(TIMEOUT);
 		requires(Robot.dropGearLoader);
 		this.controlMode = controlMode;
 	}
@@ -31,7 +33,7 @@ public class DropGearRun extends Command {
 		if (controlMode == DropGearControlMode.kCurrent) {
 			Robot.dropGearLoader.setTargetPosition(Robot.dropGearLoader.getPulseWidthPosition());
 		} else if (controlMode == DropGearControlMode.kManual) {
-			Robot.dropGearLoader.setTargetPosition(SmartDashboard.getNumber("Gear Manual Target Position", DropGearControlMode.kReceive.getOutput()));
+			Robot.dropGearLoader.setTargetPosition(SmartDashboard.getNumber("Drop Gear Manual Target Position", DropGearControlMode.kReceive.getOutput()));
 		} else {
 			Robot.dropGearLoader.setTargetPosition(controlMode.getOutput());
 		}
@@ -45,7 +47,7 @@ public class DropGearRun extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		if (controlMode != DropGearControlMode.kCurrent) {
-			return Robot.dropGearLoader.reachedSetpoint();
+			return Robot.dropGearLoader.reachedSetpoint() || isTimedOut();
 		}
 		return false;
 	}

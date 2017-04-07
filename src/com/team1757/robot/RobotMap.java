@@ -10,6 +10,7 @@ import com.team1757.utils.NavXGyroWrapper;
 import com.team1757.utils.VariablePIDOutput;
 
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
@@ -73,15 +74,21 @@ public class RobotMap {
 
 	private static NavXGyroWrapper gyroInput;
 
+	// Vision
 	public static UsbCamera gearCam;
 	public static UsbCamera shooterCam;
+	public static CameraServer server;
 	
 	public static DigitalInput dropGearReedSwitch;
 
 	public static void init() {
 
-		gearCam = new UsbCamera("gearCam", 0);
-		shooterCam = new UsbCamera("shooterCam", 1);
+//		gearCam = new UsbCamera("gearCam", 0);
+//		shooterCam = new UsbCamera("shooterCam", 1);
+		
+		server = CameraServer.getInstance();
+		server.startAutomaticCapture(0);
+		server.startAutomaticCapture(1);
 		
 		dropGearReedSwitch = new DigitalInput(0);
 		

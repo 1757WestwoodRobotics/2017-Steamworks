@@ -139,9 +139,9 @@ public class OI {
 		// Put Commands on SmartDashboard
 		// Drive functions
 		SmartDashboard.putData("Drive Toggle", new DriveSetDirection(DirectionControlMode.kToggle));
-		SmartDashboard.putData("DriveStraight axisY", new DriveStraight(Axis.axisY, 1.65));
-		SmartDashboard.putData(new DriveGyroAssisted());
-		SmartDashboard.putData(new DriveStraightToRange(60, Unit.kInches));
+//		SmartDashboard.putData("DriveStraight axisY", new DriveStraight(Axis.axisY, 1.65));
+//		SmartDashboard.putData(new DriveGyroAssisted());
+//		SmartDashboard.putData(new DriveStraightToRange(60, Unit.kInches));
 
 		// Gyro Systems
 		SmartDashboard.putData(new DriveResetGyro());
@@ -151,17 +151,17 @@ public class OI {
 		SmartDashboard.putData(new RotateDegrees());
 
 		// Shooter Commands
-		SmartDashboard.putData("Shoot SpeedForward", new Shoot(ShooterControlMode.kSpeedForward));
-		SmartDashboard.putData("Shoot PercentForward", new Shoot(ShooterControlMode.kPercentForward));
-		SmartDashboard.putData("Shoot VoltageForward", new Shoot(ShooterControlMode.kVoltageForward));
+//		SmartDashboard.putData("Shoot SpeedForward", new Shoot(ShooterControlMode.kSpeedForward));
+//		SmartDashboard.putData("Shoot PercentForward", new Shoot(ShooterControlMode.kPercentForward));
+//		SmartDashboard.putData("Shoot VoltageForward", new Shoot(ShooterControlMode.kVoltageForward));
 
 		// Indexer Commands
-		SmartDashboard.putData("Index PercentForward", new Index(IndexerControlMode.kPercentForward));
-		SmartDashboard.putData("Index PercentReverse", new Index(IndexerControlMode.kPercentReverse));
+//		SmartDashboard.putData("Index PercentForward", new Index(IndexerControlMode.kPercentForward));
+//		SmartDashboard.putData("Index PercentReverse", new Index(IndexerControlMode.kPercentReverse));
 
 		// Collector Commands
-		SmartDashboard.putData("Collect PercentForward", new Collect(CollectorControlMode.kPercentForward));
-		SmartDashboard.putData("Collect PercentReverse", new Collect(CollectorControlMode.kPercentReverse));
+//		SmartDashboard.putData("Collect PercentForward", new Collect(CollectorControlMode.kPercentForward));
+//		SmartDashboard.putData("Collect PercentReverse", new Collect(CollectorControlMode.kPercentReverse));
 
 		// Drop GearLoader Commands
 
@@ -183,28 +183,28 @@ public class OI {
 		SmartDashboard.putData("Lift Up", new Lift(LifterControlMode.kUp));
 
 		// Vision Commands
-		SmartDashboard.putData(new VisionToggleCamera());
-		SmartDashboard.putData("Test Target Rotation",
-				new VisionCenterTargetRotation(VisionDetectionTarget.TestSingleTarget));
-		SmartDashboard.putData("Gear Target Rotation",
-				new VisionCenterTargetRotation(VisionDetectionTarget.GearAirship));
-		SmartDashboard.putData("Test Target Translation",
-				new VisionCenterTargetTranslation(VisionDetectionTarget.TestSingleTarget));
-		SmartDashboard.putData("Gear Target Translation",
-				new VisionCenterTargetRotation(VisionDetectionTarget.GearAirship));
-		SmartDashboard.putData("Get Ready to Score Gear",
-				new VisionAlignTargetPerpendicular(VisionDetectionTarget.GearAirship));
+//		SmartDashboard.putData(new VisionToggleCamera());
+//		SmartDashboard.putData("Test Target Rotation",
+//				new VisionCenterTargetRotation(VisionDetectionTarget.TestSingleTarget));
+//		SmartDashboard.putData("Gear Target Rotation",
+//				new VisionCenterTargetRotation(VisionDetectionTarget.GearAirship));
+//		SmartDashboard.putData("Test Target Translation",
+//				new VisionCenterTargetTranslation(VisionDetectionTarget.TestSingleTarget));
+//		SmartDashboard.putData("Gear Target Translation",
+//				new VisionCenterTargetRotation(VisionDetectionTarget.GearAirship));
+//		SmartDashboard.putData("Get Ready to Score Gear",
+//				new VisionAlignTargetPerpendicular(VisionDetectionTarget.GearAirship));
 
 		// RingLight Commands
-		SmartDashboard.putData("RingLight GearOn", new VisionRingLight(RingLightControlMode.kGearOn));
-		SmartDashboard.putData("RingLight GearOff", new VisionRingLight(RingLightControlMode.kGearOff));
+//		SmartDashboard.putData("RingLight GearOn", new VisionRingLight(RingLightControlMode.kGearOn));
+//		SmartDashboard.putData("RingLight GearOff", new VisionRingLight(RingLightControlMode.kGearOff));
 
 		// CommandGroup Functions
-		SmartDashboard.putData(new CGShootandIndex());
-		SmartDashboard.putData(new CGAutoMiddle());
-		SmartDashboard.putData(new CGAutoRight());
-		SmartDashboard.putData(new CGAutoLeft());
-		SmartDashboard.putData(new CGAutoCrossLine());
+//		SmartDashboard.putData(new CGShootandIndex());
+//		SmartDashboard.putData(new CGAutoMiddle());
+//		SmartDashboard.putData(new CGAutoRight());
+//		SmartDashboard.putData(new CGAutoLeft());
+//		SmartDashboard.putData(new CGAutoCrossLine());
 
 		// Configure LiveWindow
 		SmartDashboard.putNumber("targetAngle", 0.0);

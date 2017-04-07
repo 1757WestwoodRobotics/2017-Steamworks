@@ -27,7 +27,6 @@ public class Camera extends Subsystem {
 	 * SmartDashboard
 	 */
 	public void init() {
-//		CameraServer.getInstance().startAutomaticCapture();
 		
 //		gearCam.setFPS(fps);
 //		gearCam.setResolution(xResolution, yResolution);
@@ -36,13 +35,13 @@ public class Camera extends Subsystem {
 //		shooterCam.setFPS(fps);
 //		shooterCam.setResolution(xResolution, yResolution);
 //		shooterCam.setExposureAuto();
-		
-		CameraServer.getInstance().addCamera(gearCam);
-		Timer.delay(.5);
-		CameraServer.getInstance().addCamera(shooterCam);
-
-		CameraServer.getInstance().startAutomaticCapture(gearCam);
-		CameraServer.getInstance().startAutomaticCapture(shooterCam);
+//		
+//		CameraServer.getInstance().addCamera(gearCam);
+//		Timer.delay(.5);
+//		CameraServer.getInstance().addCamera(shooterCam);
+//
+//		CameraServer.getInstance().startAutomaticCapture(gearCam);
+//		CameraServer.getInstance().startAutomaticCapture(shooterCam);
 	}
 
 	/**

@@ -12,15 +12,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CGAutoMiddleWithTrigger extends CommandGroup {
 
 	public CGAutoMiddleWithTrigger() {
+		addSequential(new TriggerSetEnabledStatus(true));
 		// Forward direction
 		addSequential(new DriveSetDirection(DirectionControlMode.kDropGear));
 		// Drop gear to receive
 		addSequential(new DropGearRun(DropGearControlMode.kReceive));
 		// Drive straight ~100" (changed from 2.0 for district champs)
-		addSequential(new DriveStraight(Axis.axisY, 2.2, .27));
-		// Instead of driving straight a certain distance, it will drive
+		addSequential(new DriveStraight(Axis.axisY, 2.3, .27));
+/*		// Instead of driving straight a certain distance, it will drive
 		// straight for a little longer (1 instead of .7 seconds) at .2 speed
-		// and if it bumper plate is triggered, then it ends driving straight
+		// and if it bumper plate is triggered, then it deploys, if not it holds on to the gear
 		addSequential(new DriveStraight(Axis.axisY, .7, .2));
 		// "Wait a beat"
 		addSequential(new Delay(.5));
@@ -35,6 +36,6 @@ public class CGAutoMiddleWithTrigger extends CommandGroup {
 		// Translate right
 		addSequential(new DriveStraight(Axis.axisX, 2.0));
 		// Cross line
-		addSequential(new DriveStraight(Axis.axisY, 1.65, .35));
+		addSequential(new DriveStraight(Axis.axisY, 1.65, .35));*/
 	}
 }

@@ -1,0 +1,106 @@
+<xml version="1.0">
+<dashboard>
+	<widget field="isShooting" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1099" y="533"/>
+	</widget>
+	<widget field="Pivot - ActualPosition" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1046" y="459"/>
+	</widget>
+	<widget field="Gear - ActualPosition" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1047" y="484"/>
+	</widget>
+	<widget field="reed switch open" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="1064" y="508"/>
+	</widget>
+	<widget field="BoundedGyroAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="846" y="483"/>
+	</widget>
+	<widget field="GyroAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="887" y="459"/>
+	</widget>
+	<widget field="Drop Gear Manual Target Position" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="521" y="458"/>
+	</widget>
+	<widget field="Floor Gear Manual Target Position" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="522" y="488"/>
+		<height>20</height>
+	</widget>
+	<widget field="angularDelta" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="622" y="518"/>
+	</widget>
+	<widget field="targetAngle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="627" y="550"/>
+	</widget>
+	<widget field="Drop GearRun Receive" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="23" y="386"/>
+	</widget>
+	<widget field="Drop GearRun Hug" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="42" y="327"/>
+	</widget>
+	<widget field="Floor GearRun Manual" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="331" y="482"/>
+	</widget>
+	<widget field="Floor Collector Output" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="3" y="189"/>
+	</widget>
+	<widget field="RotateToAngle" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="364" y="548"/>
+	</widget>
+	<widget field="Drop GearRun MatchStart" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="7" y="297"/>
+	</widget>
+	<widget field="Drop GearRun Score" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="34" y="359"/>
+	</widget>
+	<widget field="Auto mode" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="203" y="1"/>
+	</widget>
+	<widget field="Lift Up" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="35" y="241"/>
+	</widget>
+	<widget field="Floor GearRun Carry" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="11" y="127"/>
+	</widget>
+	<widget field="RotateDegrees" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="363" y="515"/>
+	</widget>
+	<widget field="Drive Toggle" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="16" y="28"/>
+	</widget>
+	<widget field="Floor Collector Intake" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="7" y="157"/>
+	</widget>
+	<widget field="Drop GearRun Manual" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="332" y="451"/>
+	</widget>
+	<widget field="Floor GearRun Receive" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="68"/>
+	</widget>
+	<widget field="Floor GearRun Score" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="11" y="98"/>
+	</widget>
+	<widget field="DriveResetGyro" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="0"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.ConnectionIndicator">
+		<location x="334" y="385"/>
+		<width>1000</width>
+		<property name="Graphics" value="Rounded"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="332" y="3"/>
+		<width>500</width>
+		<height>377</height>
+		<property name="Camera Choice" value="USB Camera 1"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="836" y="2"/>
+		<width>499</width>
+		<height>379</height>
+		<property name="Camera Choice" value=""/>
+	</static-widget>
+</dashboard>
+<live-window>
+</live-window>
+	<hidden field="Gear Manual Target"/>
+</xml>

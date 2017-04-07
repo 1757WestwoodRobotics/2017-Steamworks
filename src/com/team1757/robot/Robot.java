@@ -1,5 +1,6 @@
 package com.team1757.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -11,6 +12,7 @@ import com.team1757.commands.CGAutoRight;
 import com.team1757.commands.CGAutoCrossLine;
 import com.team1757.commands.CGAutoLeft;
 import com.team1757.commands.CGAutoMiddle;
+import com.team1757.commands.CGAutoMiddleWithTrigger;
 import com.team1757.commands.GetStatus;
 import com.team1757.subsystems.BallCollector;
 import com.team1757.subsystems.Camera;
@@ -41,7 +43,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Vision vision;
 	public static Camera camera;
-		
+
 	Command autonomousCommand;
 	Command getStatus;
 	SendableChooser<Command> chooser;
@@ -52,7 +54,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		
+
 		// Initialize hardware
 		RobotMap.init();
 
@@ -67,7 +69,7 @@ public class Robot extends IterativeRobot {
 		dropGearLoader = new DropGearLoader();
 		floorGearLoader = new FloorGearLoader();
 		lifter = new Lifter();
-		
+
 		// Initialize OI
 		oi = new OI();
 		getStatus = new GetStatus();
@@ -77,9 +79,17 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Cross Line (L/R)", new CGAutoCrossLine());
 		chooser.addObject("Right", new CGAutoRight());
 		chooser.addObject("Middle", new CGAutoMiddle());
+		chooser.addObject("Middle With Trigger", new CGAutoMiddleWithTrigger());
 		chooser.addObject("Left", new CGAutoLeft());
-		
+
 		SmartDashboard.putData("Auto mode", chooser);
+
+		// Fall back code for vision that will always work
+//		CameraServer server;
+//		server = CameraServer.getInstance();
+//		server.startAutomaticCapture(0);
+//		server.startAutomaticCapture(1);
+
 	}
 
 	/**

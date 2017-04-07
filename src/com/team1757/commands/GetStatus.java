@@ -18,7 +18,7 @@ public class GetStatus extends Command {
 		// Floor Gear Pivot Manual - FloorGearRun.java
 		SmartDashboard.putNumber("Floor Gear Manual Target Position", 0.0);
 		// Drop Gear Manual - DropGearRun.java
-		SmartDashboard.putNumber("Gear Manual Target Position", 0.0);
+		SmartDashboard.putNumber("Drop Gear Manual Target Position", 0.0);
 		//RotateDegrees
 		SmartDashboard.putNumber("angularDelta", 0.0);
 		//RotateToAngle
@@ -32,7 +32,7 @@ public class GetStatus extends Command {
 //		SmartDashboard.putNumber("Analog Ultrasonic Distance", Robot.driveTrain.getRangeAnalogInches());
 //		SmartDashboard.putNumber("Analog Ultrasonic Distance MM", Robot.driveTrain.getRangeAnalogMM());
 //		SmartDashboard.putNumber("Serial Ultrasonic Distance", Robot.driveTrain.getRangeSerialInches());
-		SmartDashboard.putNumber("targetLifterPVbus", Robot.lifter.getLiftTarget());
+//		SmartDashboard.putNumber("targetLifterPVbus", Robot.lifter.getLiftTarget());
 		SmartDashboard.putBoolean("isShooting", Robot.shooter.getIsShooting());
 		SmartDashboard.putBoolean("reed switch open", Robot.dropGearLoader.isReedSwitchSeperated());
 
