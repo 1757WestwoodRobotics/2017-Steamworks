@@ -16,9 +16,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DropGearLoader extends Subsystem {
 
-	private static CANTalon gearTalon = RobotMap.dropGearLoaderTalon;
+	private final CANTalon gearTalon = RobotMap.dropGearLoaderTalon;
 	private final double GEAR_PID_TOLERANCE = 80;
-	private DigitalInput reedSwitch = RobotMap.dropGearReedSwitch;
+	private final DigitalInput reedSwitch = RobotMap.dropGearReedSwitch;
+	
 	private boolean isTriggerEnabled = true;
 
 	FeedbackDeviceStatus gearEncoderStatus = gearTalon.isSensorPresent(FeedbackDevice.CtreMagEncoder_Absolute);

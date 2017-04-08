@@ -2,6 +2,7 @@ package com.team1757.robot;
 
 import com.team1757.commands.*;
 import com.team1757.triggers.BumperPlate;
+import com.team1757.triggers.CollectorSwitch;
 import com.team1757.utils.Axis;
 import com.team1757.utils.CollectorControlMode;
 import com.team1757.utils.DirectionControlMode;
@@ -51,6 +52,7 @@ public class OI {
 
 	// Triggers
 	private final Trigger bumperPlateTrigger;
+	private final Trigger collectorTrigger;
 
 	// Joystick Ports
 	private final int xbox360Port = 0;
@@ -126,15 +128,17 @@ public class OI {
 		buttonBoxButton1.whenPressed(new DropGearRun(DropGearControlMode.kScore));
 		buttonBoxButton2.whenPressed(new DropGearRun(DropGearControlMode.kReceive));
 		buttonBoxButton3.whenPressed(new DropGearRun(DropGearControlMode.kHug));
-		buttonBoxButton4.whenPressed(new TriggerSetEnabledStatus(true));
-		buttonBoxButton5.whenPressed(new TriggerSetEnabledStatus(false));
-		buttonBoxButton6.toggleWhenPressed(new CGShootandIndex());
+		buttonBoxButton4.whenPressed(new DropGearSetTriggerStatus(true));
+		buttonBoxButton5.whenPressed(new DropGearSetTriggerStatus(false));
+		buttonBoxButton6.whenPressed(new FloorGearSetTriggerStatus(false));
 
 		// Initialize Triggers
 		bumperPlateTrigger = new BumperPlate();
+		collectorTrigger = new CollectorSwitch();
 
 		// Bind Commands to Triggers
 		bumperPlateTrigger.whenActive(new CGDropGearOverrideScore());
+		collectorTrigger.whenActive(new CGFloorGearOverridePickup());
 
 		// Put Commands on SmartDashboard
 		// Drive functions

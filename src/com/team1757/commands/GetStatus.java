@@ -1,7 +1,6 @@
 package com.team1757.commands;
 
 import com.team1757.robot.Robot;
-import com.team1757.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,7 +34,8 @@ public class GetStatus extends Command {
 //		SmartDashboard.putNumber("Serial Ultrasonic Distance", Robot.driveTrain.getRangeSerialInches());
 //		SmartDashboard.putNumber("targetLifterPVbus", Robot.lifter.getLiftTarget());
 		SmartDashboard.putBoolean("isShooting", Robot.shooter.getIsShooting());
-		SmartDashboard.putBoolean("reed switch open", Robot.dropGearLoader.isReedSwitchSeperated());
+		SmartDashboard.putBoolean("Reed-switch open", Robot.dropGearLoader.isReedSwitchSeperated());
+		SmartDashboard.putBoolean("Collector Switch Active", Robot.floorGearLoader.isSwitchActive());
 
 		try {
 			if (Robot.dropGearLoader.isSensorPresent()) {

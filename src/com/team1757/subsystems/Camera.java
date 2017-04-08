@@ -4,7 +4,6 @@ import com.team1757.robot.RobotMap;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Camera extends Subsystem {

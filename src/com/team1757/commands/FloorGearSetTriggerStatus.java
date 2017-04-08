@@ -7,20 +7,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TriggerSetEnabledStatus extends Command {
+public class FloorGearSetTriggerStatus extends Command {
 	
 	private boolean isEnabled;
 
-    public TriggerSetEnabledStatus(boolean isEnabled) {
+    public FloorGearSetTriggerStatus(boolean isEnabled) {
     	this.isEnabled = isEnabled;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(isEnabled){
-    		Robot.dropGearLoader.enableTrigger();
-    	}else{
-    		Robot.dropGearLoader.disableTrigger();
+    		Robot.floorGearLoader.enableTrigger();
+    	} else{
+    		Robot.floorGearLoader.disableTrigger();
     	}
     }
 

@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CGAutoMiddleWithTrigger extends CommandGroup {
 
 	public CGAutoMiddleWithTrigger() {
-		addSequential(new TriggerSetEnabledStatus(true));
+		addSequential(new DropGearSetTriggerStatus(true));
 		// Forward direction
 		addSequential(new DriveSetDirection(DirectionControlMode.kDropGear));
 		// Drop gear to receive

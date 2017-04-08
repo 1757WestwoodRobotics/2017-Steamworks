@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -79,8 +78,11 @@ public class RobotMap {
 	public static UsbCamera floorGearCam;
 	public static CameraServer server;
 	
+	// Trigger switches
 	public static DigitalInput dropGearReedSwitch;
-
+	public static DigitalInput floorGearLimitSwitch;
+	public static DigitalInput floorGearLimitSwitch2;
+	
 	public static void init() {
 
 		
@@ -89,6 +91,8 @@ public class RobotMap {
 		floorGearCam = server.startAutomaticCapture(1);
 		
 		dropGearReedSwitch = new DigitalInput(0);
+		floorGearLimitSwitch = new DigitalInput(1);
+		floorGearLimitSwitch2= new DigitalInput(2);
 		
 		// Initialize Talons
 		driveTrainLeftFront = new CANTalon(driveTrainLeftFrontPort);

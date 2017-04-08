@@ -9,6 +9,7 @@ import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.FeedbackDeviceStatus;
 import com.ctre.CANTalon.TalonControlMode;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -16,8 +17,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class FloorGearLoader extends Subsystem {
 
-	private static CANTalon pivotTalon = RobotMap.floorGearPivotTalon;
-	private static CANTalon gearTalon = RobotMap.floorGearLoaderTalon;
+	private final CANTalon pivotTalon = RobotMap.floorGearPivotTalon;
+	private final CANTalon gearTalon = RobotMap.floorGearLoaderTalon;
+	
+	private final DigitalInput limitSwitch1 = RobotMap.floorGearLimitSwitch;
+	private final DigitalInput limitSwitch2 = RobotMap.floorGearLimitSwitch2;
+	
+	private boolean isTriggerEnabled = false;
 	
 	private final double GEAR_PID_TOLERANCE = 0;
 	// TODO Tolerance adjustment
@@ -188,6 +194,22 @@ public class FloorGearLoader extends Subsystem {
 	public void stopCollector() {
 		gearTalon.set(0);
 		
+	}
+	
+	public boolean isTriggerEnabled(){
+		return isTriggerEnabled;
+	}
+	
+	public void disableTrigger(){
+		isTriggerEnabled = false;
+	}
+
+	public void enableTrigger(){
+		isTriggerEnabled = true;
+	}
+	
+	public boolean isSwitchActive(){
+		return !(limitSwitch1.get() || limitSwitch2.get());
 	}
 
 }
